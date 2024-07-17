@@ -8,4 +8,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\Images\" />
+    <Folder Include="Common\ResourceStyle\" />
+    <Folder Include="Common\Converters\" />
+    <Folder Include="Modules\Settings\" />
+    <Folder Include="Modules\Login\" />
+  </ItemGroup>
+
 </Project>
