@@ -10,10 +10,12 @@
 
   <ItemGroup>
     <Folder Include="Common\Images\" />
-    <Folder Include="Common\ResourceStyle\" />
     <Folder Include="Common\Converters\" />
     <Folder Include="Modules\Settings\" />
-    <Folder Include="Modules\Login\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\OneDrive\Desktop\Raketa\Raketa\Raketa.csproj" />
   </ItemGroup>
 
 </Project>

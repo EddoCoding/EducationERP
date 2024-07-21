@@ -1,0 +1,30 @@
+﻿<Window x:Class="EducationERP.Modules.Login.View.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EducationERP.Modules.Login.View"
+        mc:Ignorable="d" Title="Вход" Height="250" Width="500" Background="WhiteSmoke">
+
+    <Grid VerticalAlignment="Center">
+
+        <StackPanel Margin="20,0">
+            <Label Content="Идентификатор" Style="{StaticResource defaultLabel}" 
+                   VerticalAlignment="Center" FontSize="15"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBox Text="{Binding .}" Style="{StaticResource defaultTextBox}"/>
+                <Button Grid.Column="1" Content="Нажми" Margin="10,0,0,0" Style="{StaticResource defaultButton}"/>
+
+            </Grid>
+            
+        </StackPanel>
+        
+
+    </Grid>
+
+</Window>

@@ -3,6 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:EducationERP">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Common/ResourceStyle/LabelStyles.xaml"/>
+                <ResourceDictionary Source="Common/ResourceStyle/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="Common/ResourceStyle/ButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
