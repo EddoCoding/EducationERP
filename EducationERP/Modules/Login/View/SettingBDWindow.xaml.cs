@@ -3,9 +3,9 @@ using System.Windows.Input;
 
 namespace EducationERP.Modules.Login.View
 {
-    public partial class LoginWindow : Window
+    public partial class SettingBDWindow : Window
     {
-        public LoginWindow()
+        public SettingBDWindow()
         {
             InitializeComponent();
         }

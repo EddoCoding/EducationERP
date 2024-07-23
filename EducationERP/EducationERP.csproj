@@ -9,13 +9,29 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Common\Images\" />
+    <None Remove="Common\Images\exit.png" />
+    <None Remove="Common\Images\login.png" />
+    <None Remove="Common\Images\settingBD.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Common\Converters\" />
-    <Folder Include="Modules\Settings\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\OneDrive\Desktop\Raketa\Raketa\Raketa.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Common\Images\exit.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Images\login.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Images\settingBD.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

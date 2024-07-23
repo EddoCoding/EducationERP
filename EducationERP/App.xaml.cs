@@ -12,10 +12,14 @@ namespace EducationERP
             base.OnStartup(e);
 
             IContainer container = new Container();
-            
+
             IServiceView serviceView = new ServiceView(container);
             serviceView.RegisterView<LoginWindow, LoginViewModel>();
-            
+            serviceView.RegisterView<SettingBDWindow, SettingBDViewModel>();
+
+            container.SingleRegister<IServiceView>(serviceView);
+
+
             serviceView.ShowView<LoginViewModel>();
 
             #region MyRegion
