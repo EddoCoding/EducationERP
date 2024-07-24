@@ -1,4 +1,6 @@
-﻿using EducationERP.Modules.Login.View;
+﻿using EducationERP.Modules.Components.Notification.View;
+using EducationERP.Modules.Components.Notification.VM;
+using EducationERP.Modules.Login.View;
 using EducationERP.Modules.Login.VM;
 using Raketa.IoC;
 using System.Windows;
@@ -7,50 +9,32 @@ namespace EducationERP
 {
     public partial class App : Application
     {
+        IContainer _container;
+        IServiceView _serviceView;
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            IContainer container = new Container();
+            _container = new Container();
+            _serviceView = new ServiceView(_container);
 
-            IServiceView serviceView = new ServiceView(container);
-            serviceView.RegisterView<LoginWindow, LoginViewModel>();
-            serviceView.RegisterView<SettingBDWindow, SettingBDViewModel>();
+            RegisterView();
+            RegisterDependency();
 
-            container.SingleRegister<IServiceView>(serviceView);
+            _serviceView.ShowView<LoginViewModel>();
+        }
 
+        void RegisterView()
+        {
+            _serviceView.RegisterView<LoginWindow, LoginViewModel>();
+            _serviceView.RegisterView<SettingBDWindow, SettingBDViewModel>();
+            _serviceView.RegisterView<Note, NoteViewModel>();
+        }
 
-            serviceView.ShowView<LoginViewModel>();
-
-            #region MyRegion
-
-            //var server = "й";
-            //var database = "w";
-            //var userId = "e";
-            //var password = "r";
-            //
-            //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            //
-            //if (config.ConnectionStrings.ConnectionStrings["ssss"] != null)
-            //{
-            //    config.ConnectionStrings.ConnectionStrings["ssss"].ConnectionString =
-            //        $"Data Source={server};Initial Catalog={database};User ID={userId};Password={password}";
-            //}
-            //else
-            //{
-            //    config.ConnectionStrings.ConnectionStrings.Add(new ConnectionStringSettings
-            //    {
-            //        Name = "ssss",
-            //        ConnectionString = $"Data Source={server};Initial Catalog={database};User ID={userId};Password={password}",
-            //        ProviderName = "System.Data.SqlClient"
-            //    });
-            //}
-            //
-            //config.Save(ConfigurationSaveMode.Modified);
-            //ConfigurationManager.RefreshSection("connectionStrings");
-            //
-            //MessageBox.Show("Данные успешно сохранены в конфигурацию.");
-            #endregion
+        void RegisterDependency()
+        {
+            _container.SingleRegister<IServiceView>(_serviceView);
         }
     }
 }

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationERP.Modules.Login.View"
         mc:Ignorable="d" Title="Настройки соединения" Height="280" Width="600" MouseDown="MoveWindow"
-        Background="WhiteSmoke" FontFamily="Calibri" WindowStyle="None" ResizeMode="NoResize">
+        Background="WhiteSmoke" FontFamily="Calibri" WindowStyle="None" 
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
     <Grid>
         <Grid.ColumnDefinitions>

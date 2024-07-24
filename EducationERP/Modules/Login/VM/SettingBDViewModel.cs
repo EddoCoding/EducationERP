@@ -1,5 +1,7 @@
-﻿using Raketa;
+﻿using EducationERP.Modules.Components.Notification.VM;
+using Raketa;
 using Raketa.Commands;
+using Raketa.IoC;
 using System.Configuration;
 using System.Windows;
 
@@ -31,8 +33,11 @@ namespace EducationERP.Modules.Login.VM
         public RaketaCommand DeleteSettingBDCommand { get; }
         public RaketaCommand ExitCommand { get; }
 
-        public SettingBDViewModel(Action exitWindow)
+        IServiceView _serviceView;
+        public SettingBDViewModel(IServiceView serviceView, Action exitWindow)
         {
+            _serviceView = serviceView;
+
             Host = ConfigurationManager.AppSettings["Host"];
             Port = ConfigurationManager.AppSettings["Port"];
             Database = ConfigurationManager.AppSettings["Database"];
@@ -45,7 +50,7 @@ namespace EducationERP.Modules.Login.VM
         void SaveSettingBD()
         {
             if (String.IsNullOrWhiteSpace(Host) || String.IsNullOrWhiteSpace(Port) || String.IsNullOrWhiteSpace(Database))
-                MessageBox.Show("Не все данные заполнены!");
+                _serviceView.ShowView<NoteViewModel>("Заполните все поля!");
             else
             {
                 Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -56,7 +61,7 @@ namespace EducationERP.Modules.Login.VM
                 config.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection("appSettings");
 
-                MessageBox.Show("Настройки сохранены");
+                _serviceView.ShowView<NoteViewModel>("Настройки сохранены!");
             }
         }
         void DeleteSettingBD()
@@ -73,7 +78,7 @@ namespace EducationERP.Modules.Login.VM
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
 
-            MessageBox.Show("Настройки удалены из файла конфигурации");
+            _serviceView.ShowView<NoteViewModel>("Настройки удалены из файла конфигурации!");
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Raketa;
+﻿using EducationERP.Common.ToolsDev;
+using EducationERP.Modules.Components.Notification.VM;
+using Raketa;
 using Raketa.Commands;
 using Raketa.IoC;
 using System.Windows;
@@ -15,16 +17,24 @@ namespace EducationERP.Modules.Login.VM
         public RaketaCommand ExitCommand { get; }
 
         IServiceView _serviceView;
-        public LoginViewModel(IServiceView service, Action exitWindow)
+        public LoginViewModel(IServiceView serviceView, Action exitWindow)
         {
-            _serviceView = service;
+            _serviceView = serviceView;
 
             LoginCommand = RaketaCommand.Launch(Login);
             SettingBDCommand = RaketaCommand.Launch(OpenSettingBD);
             ExitCommand = RaketaCommand.Launch(exitWindow);
         }
 
-        void Login() => MessageBox.Show("Вход");
+        void Login()
+        {
+            if (String.IsNullOrWhiteSpace(Identifier) || String.IsNullOrWhiteSpace(Password))
+                _serviceView.ShowView<NoteViewModel>("Не все поля заполнены!");
+            else
+            {
+
+            }
+        }
         void OpenSettingBD() => _serviceView.ShowView<SettingBDViewModel>();
     }
 }

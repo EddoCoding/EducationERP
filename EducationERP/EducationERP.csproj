@@ -16,6 +16,12 @@
 
   <ItemGroup>
     <Folder Include="Common\Converters\" />
+    <Folder Include="Modules\Components\Confirmation\View\" />
+    <Folder Include="Modules\Components\Confirmation\VM\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
   </ItemGroup>
 
   <ItemGroup>
