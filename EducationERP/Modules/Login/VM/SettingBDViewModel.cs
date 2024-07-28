@@ -3,7 +3,6 @@ using Raketa;
 using Raketa.Commands;
 using Raketa.IoC;
 using System.Configuration;
-using System.Windows;
 
 namespace EducationERP.Modules.Login.VM
 {
@@ -12,6 +11,7 @@ namespace EducationERP.Modules.Login.VM
         string host = string.Empty;
         string port = string.Empty;
         string database = string.Empty;
+        string pathTemporaryData = string.Empty;
 
         public string Host
         {
@@ -28,6 +28,11 @@ namespace EducationERP.Modules.Login.VM
             get => database;
             set => SetValue(ref database, value);
         }
+        public string PathTemporaryData
+        {
+            get => pathTemporaryData;
+            set => SetValue(ref pathTemporaryData, value);
+        }
 
         public RaketaCommand SaveSettingBDCommand { get; }
         public RaketaCommand DeleteSettingBDCommand { get; }
@@ -41,6 +46,7 @@ namespace EducationERP.Modules.Login.VM
             Host = ConfigurationManager.AppSettings["Host"];
             Port = ConfigurationManager.AppSettings["Port"];
             Database = ConfigurationManager.AppSettings["Database"];
+            PathTemporaryData = ConfigurationManager.AppSettings["PathTemporaryData"];
 
             SaveSettingBDCommand = RaketaCommand.Launch(SaveSettingBD);
             DeleteSettingBDCommand = RaketaCommand.Launch(DeleteSettingBD);
@@ -57,6 +63,7 @@ namespace EducationERP.Modules.Login.VM
                 config.AppSettings.Settings["Host"].Value = Host;
                 config.AppSettings.Settings["Port"].Value = Port;
                 config.AppSettings.Settings["Database"].Value = Database;
+                config.AppSettings.Settings["PathTemporaryData"].Value = PathTemporaryData;
 
                 config.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection("appSettings");
@@ -74,11 +81,12 @@ namespace EducationERP.Modules.Login.VM
             config.AppSettings.Settings["Host"].Value = Host;
             config.AppSettings.Settings["Port"].Value = Port;
             config.AppSettings.Settings["Database"].Value = Database;
+            config.AppSettings.Settings["PathTemporaryData"].Value = PathTemporaryData;
 
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
 
-            _serviceView.ShowView<NoteViewModel>("Настройки удалены из файла конфигурации!");
+            _serviceView.ShowView<NoteViewModel>("Настройки удалены!");
         }
     }
 }

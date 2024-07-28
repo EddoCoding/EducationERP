@@ -1,8 +1,10 @@
-﻿using EducationERP.Common.ToolsDev;
-using EducationERP.Modules.Components.Notification.VM;
+﻿using EducationERP.Modules.Components.Notification.VM;
+using Npgsql;
 using Raketa;
 using Raketa.Commands;
 using Raketa.IoC;
+using System.Configuration;
+using System.Data;
 using System.Windows;
 
 namespace EducationERP.Modules.Login.VM
@@ -32,7 +34,20 @@ namespace EducationERP.Modules.Login.VM
                 _serviceView.ShowView<NoteViewModel>("Не все поля заполнены!");
             else
             {
+                try
+                {
+                    var stringConnection = $"Host={ConfigurationManager.AppSettings["Host"]};" +
+                                           $"Port={ConfigurationManager.AppSettings["Port"]};" +
+                                           $"Username={Identifier};" +
+                                           $"Password={Password};" +
+                                           $"Database={ConfigurationManager.AppSettings["Database"]};";
 
+                    using (var connection = new NpgsqlConnection(stringConnection)) connection.Open();
+                    _serviceView.ShowView<NoteViewModel>("Подключение");
+
+
+                }
+                catch { _serviceView.ShowView<NoteViewModel>("Ошибка подключения"); }
             }
         }
         void OpenSettingBD() => _serviceView.ShowView<SettingBDViewModel>();
