@@ -1,12 +1,10 @@
-﻿using EducationERP.Modules.Components.Notification.VM;
-using Raketa;
-using Raketa.Commands;
-using Raketa.IoC;
+﻿using Raketa;
 using System.Configuration;
+using System.Windows;
 
-namespace EducationERP.Modules.Login.VM
+namespace EducationERP.ViewModels
 {
-    public class SettingBDViewModel : ViewModel
+    public class SettingBDViewModel : RaketaViewModel
     {
         string host = string.Empty;
         string port = string.Empty;
@@ -39,7 +37,7 @@ namespace EducationERP.Modules.Login.VM
         public RaketaCommand ExitCommand { get; }
 
         IServiceView _serviceView;
-        public SettingBDViewModel(IServiceView serviceView, Action exitWindow)
+        public SettingBDViewModel(IServiceView serviceView)
         {
             _serviceView = serviceView;
 
@@ -50,13 +48,16 @@ namespace EducationERP.Modules.Login.VM
 
             SaveSettingBDCommand = RaketaCommand.Launch(SaveSettingBD);
             DeleteSettingBDCommand = RaketaCommand.Launch(DeleteSettingBD);
-            ExitCommand = RaketaCommand.Launch(exitWindow);
+            ExitCommand = RaketaCommand.Launch(() =>
+            {
+                _serviceView.Close<SettingBDViewModel>();
+            });
         }
 
         void SaveSettingBD()
         {
-            if (String.IsNullOrWhiteSpace(Host) || String.IsNullOrWhiteSpace(Port) || String.IsNullOrWhiteSpace(Database))
-                _serviceView.ShowView<NoteViewModel>("Заполните все поля!");
+            if (string.IsNullOrWhiteSpace(Host) || string.IsNullOrWhiteSpace(Port) || string.IsNullOrWhiteSpace(Database))
+                MessageBox.Show("Заполните все поля!");
             else
             {
                 Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -68,7 +69,7 @@ namespace EducationERP.Modules.Login.VM
                 config.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection("appSettings");
 
-                _serviceView.ShowView<NoteViewModel>("Настройки сохранены!");
+                MessageBox.Show("Настройки сохранены!");
             }
         }
         void DeleteSettingBD()
@@ -86,7 +87,7 @@ namespace EducationERP.Modules.Login.VM
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
 
-            _serviceView.ShowView<NoteViewModel>("Настройки удалены!");
+            MessageBox.Show("Настройки удалены!");
         }
     }
 }

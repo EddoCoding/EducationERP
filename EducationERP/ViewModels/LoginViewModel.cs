@@ -1,15 +1,12 @@
-﻿using EducationERP.Modules.Components.Notification.VM;
+﻿using EducationERP.Common.Components;
 using Npgsql;
 using Raketa;
-using Raketa.Commands;
-using Raketa.IoC;
 using System.Configuration;
-using System.Data;
 using System.Windows;
 
-namespace EducationERP.Modules.Login.VM
+namespace EducationERP.ViewModels
 {
-    public class LoginViewModel : ViewModel
+    public class LoginViewModel : RaketaViewModel
     {
         public string Identifier { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
@@ -19,19 +16,20 @@ namespace EducationERP.Modules.Login.VM
         public RaketaCommand ExitCommand { get; }
 
         IServiceView _serviceView;
-        public LoginViewModel(IServiceView serviceView, Action exitWindow)
+        DataContext _dataContext;
+        public LoginViewModel(IServiceView serviceView)
         {
             _serviceView = serviceView;
 
             LoginCommand = RaketaCommand.Launch(Login);
             SettingBDCommand = RaketaCommand.Launch(OpenSettingBD);
-            ExitCommand = RaketaCommand.Launch(exitWindow);
+            ExitCommand = RaketaCommand.Launch(ExitSettingBD);
         }
 
         void Login()
         {
-            if (String.IsNullOrWhiteSpace(Identifier) || String.IsNullOrWhiteSpace(Password))
-                _serviceView.ShowView<NoteViewModel>("Не все поля заполнены!");
+            if (string.IsNullOrWhiteSpace(Identifier) || string.IsNullOrWhiteSpace(Password))
+                MessageBox.Show("Не все поля заполнены!");
             else
             {
                 try
@@ -43,13 +41,17 @@ namespace EducationERP.Modules.Login.VM
                                            $"Database={ConfigurationManager.AppSettings["Database"]};";
 
                     using (var connection = new NpgsqlConnection(stringConnection)) connection.Open();
-                    _serviceView.ShowView<NoteViewModel>("Подключение");
 
+                    MessageBox.Show("Подключено");              // -- ДЛЯ ПРОВЕРКИ, ПОТОМ УБРАТЬ --
+                    
+                    ConnectionProvider.StrConnection = stringConnection;
 
+                    using (var context = new DataContext()) context.Database.EnsureCreated();
                 }
-                catch { _serviceView.ShowView<NoteViewModel>("Ошибка подключения"); }
+                catch { MessageBox.Show("Ошибка подключения"); }
             }
         }
-        void OpenSettingBD() => _serviceView.ShowView<SettingBDViewModel>();
+        void OpenSettingBD() => _serviceView.Window<SettingBDViewModel>().Modal();
+        void ExitSettingBD() => _serviceView.Close<LoginViewModel>();
     }
 }

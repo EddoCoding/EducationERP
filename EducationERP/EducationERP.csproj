@@ -16,8 +16,7 @@
 
   <ItemGroup>
     <Folder Include="Common\Converters\" />
-    <Folder Include="Modules\Components\Confirmation\View\" />
-    <Folder Include="Modules\Components\Confirmation\VM\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,40 +1,38 @@
-﻿using EducationERP.Modules.Components.Notification.View;
-using EducationERP.Modules.Components.Notification.VM;
+﻿using EducationERP.Common.Components;
 using EducationERP.Modules.Login.View;
-using EducationERP.Modules.Login.VM;
-using Raketa.IoC;
+using EducationERP.ViewModels;
+using Microsoft.EntityFrameworkCore;
+using Raketa;
 using System.Windows;
 
 namespace EducationERP
 {
     public partial class App : Application
     {
-        IContainer _container;
+        IContainerDi _container = new Container();
         IServiceView _serviceView;
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            _container = new Container();
-            _serviceView = new ServiceView(_container);
+            _serviceView = _container.GetDependency<IServiceView>();
 
             RegisterView();
             RegisterDependency();
 
-            _serviceView.ShowView<LoginViewModel>();
+            _serviceView.Window<LoginViewModel>().NonModal();
         }
 
         void RegisterView()
         {
-            _serviceView.RegisterView<LoginWindow, LoginViewModel>();
-            _serviceView.RegisterView<SettingBDWindow, SettingBDViewModel>();
-            _serviceView.RegisterView<Note, NoteViewModel>();
+            _serviceView.RegisterTypeView<LoginViewModel, LoginWindow>();
+            _serviceView.RegisterTypeView<SettingBDViewModel, SettingBDWindow>();
         }
 
         void RegisterDependency()
         {
-            _container.SingleRegister<IServiceView>(_serviceView);
+            _container.RegisterSingleton<DbContext>(new DataContext());
         }
     }
 }
