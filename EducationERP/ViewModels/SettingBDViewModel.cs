@@ -1,4 +1,6 @@
-﻿using Raketa;
+﻿using EducationERP.Common.Components;
+using EducationERP.Common.ToolsDev;
+using Raketa;
 using System.Configuration;
 using System.Windows;
 
@@ -32,62 +34,48 @@ namespace EducationERP.ViewModels
             set => SetValue(ref pathTemporaryData, value);
         }
 
-        public RaketaCommand SaveSettingBDCommand { get; }
-        public RaketaCommand DeleteSettingBDCommand { get; }
+        public RaketaCommand SaveConfigCommand { get; }
+        public RaketaCommand RemoveConfigCommand { get; }
         public RaketaCommand ExitCommand { get; }
 
         IServiceView _serviceView;
-        public SettingBDViewModel(IServiceView serviceView)
+        IConfig _config;
+        public SettingBDViewModel(IServiceView serviceView, IConfig config)
         {
             _serviceView = serviceView;
+            _config = config;
 
-            Host = ConfigurationManager.AppSettings["Host"];
-            Port = ConfigurationManager.AppSettings["Port"];
-            Database = ConfigurationManager.AppSettings["Database"];
-            PathTemporaryData = ConfigurationManager.AppSettings["PathTemporaryData"];
+            GetConfigValues();
 
-            SaveSettingBDCommand = RaketaCommand.Launch(SaveSettingBD);
-            DeleteSettingBDCommand = RaketaCommand.Launch(DeleteSettingBD);
-            ExitCommand = RaketaCommand.Launch(() =>
-            {
-                _serviceView.Close<SettingBDViewModel>();
-            });
+            SaveConfigCommand = RaketaCommand.Launch(SaveSettingBD);
+            RemoveConfigCommand = RaketaCommand.Launch(RemoveSettingBD);
+            ExitCommand = RaketaCommand.Launch(ExitSettingBD);
         }
 
         void SaveSettingBD()
         {
             if (string.IsNullOrWhiteSpace(Host) || string.IsNullOrWhiteSpace(Port) || string.IsNullOrWhiteSpace(Database))
                 MessageBox.Show("Заполните все поля!");
-            else
-            {
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                config.AppSettings.Settings["Host"].Value = Host;
-                config.AppSettings.Settings["Port"].Value = Port;
-                config.AppSettings.Settings["Database"].Value = Database;
-                config.AppSettings.Settings["PathTemporaryData"].Value = PathTemporaryData;
-
-                config.Save(ConfigurationSaveMode.Modified);
-                ConfigurationManager.RefreshSection("appSettings");
-
-                MessageBox.Show("Настройки сохранены!");
-            }
+            else _config.SaveConfig(Host, Port, Database, PathTemporaryData);
         }
-        void DeleteSettingBD()
+        void RemoveSettingBD()
         {
+            if (Host == string.Empty && Port == string.Empty && Database == string.Empty && PathTemporaryData == string.Empty) return;
+
             Host = string.Empty;
             Port = string.Empty;
             Database = string.Empty;
+            PathTemporaryData = string.Empty;
 
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings["Host"].Value = Host;
-            config.AppSettings.Settings["Port"].Value = Port;
-            config.AppSettings.Settings["Database"].Value = Database;
-            config.AppSettings.Settings["PathTemporaryData"].Value = PathTemporaryData;
-
-            config.Save(ConfigurationSaveMode.Modified);
-            ConfigurationManager.RefreshSection("appSettings");
-
-            MessageBox.Show("Настройки удалены!");
+            _config.RemoveConfig();
         }
+        void GetConfigValues()
+        {
+            Host = _config.GetValueConfig("Host");
+            Port = _config.GetValueConfig("Port");
+            Database = _config.GetValueConfig("Database");
+            PathTemporaryData = _config.GetValueConfig("PathTemporaryData");
+        }
+        void ExitSettingBD() => _serviceView.Close<SettingBDViewModel>();
     }
 }

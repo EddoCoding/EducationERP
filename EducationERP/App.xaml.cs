@@ -1,6 +1,7 @@
 ﻿using EducationERP.Common.Components;
 using EducationERP.Modules.Login.View;
 using EducationERP.ViewModels;
+using EducationERP.Views;
 using Microsoft.EntityFrameworkCore;
 using Raketa;
 using System.Windows;
@@ -28,11 +29,13 @@ namespace EducationERP
         {
             _serviceView.RegisterTypeView<LoginViewModel, LoginWindow>();
             _serviceView.RegisterTypeView<SettingBDViewModel, SettingBDWindow>();
+            _serviceView.RegisterTypeView<EducationViewModel, EducationWindow>();
         }
 
         void RegisterDependency()
         {
-            _container.RegisterSingleton<DbContext>(new DataContext());
+            _container.RegisterSingleton<DataContext>(new DataContext());
+            _container.RegisterTransient<Config, IConfig>();
         }
     }
 }

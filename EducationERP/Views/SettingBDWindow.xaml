@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationERP.Modules.Login.View"
-        mc:Ignorable="d" Title="Настройки соединения" Height="330" Width="600" MouseDown="MoveWindow"
+        mc:Ignorable="d" Title="Настройки соединения" Height="290" Width="600" MouseDown="MoveWindow"
         Background="WhiteSmoke" FontFamily="Calibri" WindowStyle="None" 
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
@@ -51,21 +51,27 @@
 
                 <TextBox Text="{Binding PathTemporaryData}" Style="{StaticResource defaultTextBox}" Margin="10"/>
             </Grid>
-
-            <Button Content="Сохранить настройки" Style="{StaticResource defaultButton}" 
-                    HorizontalAlignment="Left" Margin="0,5,0,0" FontSize="16" Command="{Binding SaveSettingBDCommand}"/>
-            <Button Content="Удалить настройки" Style="{StaticResource defaultButton}" 
-                    HorizontalAlignment="Left" Margin="0,5,0,0" FontSize="16" Command="{Binding DeleteSettingBDCommand}"/>
             
         </StackPanel>
 
         <Grid Grid.Column="1" Background="White" Width="35" Margin="0,10,10,10">
-
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
             <Grid.Effect>
                 <DropShadowEffect Opacity="0.3" ShadowDepth="2" BlurRadius="10" />
             </Grid.Effect>
 
-            <Button Content="/Common/Images/exit.png" Style="{StaticResource ImageButton}" Command="{Binding ExitCommand}"
+            <Button Grid.Row="0" Content="/Common/Images/saveConfig.png" Style="{StaticResource ImageButton}" Command="{Binding SaveConfigCommand}"
+                    Height="23" Width="23" VerticalAlignment="Top" Margin="0,10,0,5" ToolTip="Сохранить настройки конфигурации"/>
+            
+            <Button Grid.Row="1" Content="/Common/Images/removeConfig.png" Style="{StaticResource ImageButton}" Command="{Binding RemoveConfigCommand}"
+                    Height="23" Width="23" VerticalAlignment="Top" Margin="0,10,0,5" ToolTip="Удалить настройки конфигурации"/>
+            
+            <Button Grid.Row="2" Content="/Common/Images/exit.png" Style="{StaticResource ImageButton}" Command="{Binding ExitCommand}"
                     Height="23" Width="23" VerticalAlignment="Bottom" Margin="0,10" ToolTip="Закрыть окно"/>
 
         </Grid>
