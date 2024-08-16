@@ -1,8 +1,9 @@
 ﻿using EducationERP.Common.Components;
 using EducationERP.Modules.Login.View;
 using EducationERP.ViewModels;
+using EducationERP.ViewModels.Login;
+using EducationERP.ViewModels.LoginSetting;
 using EducationERP.Views;
-using Microsoft.EntityFrameworkCore;
 using Raketa;
 using System.Windows;
 

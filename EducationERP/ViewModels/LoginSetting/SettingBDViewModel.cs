@@ -4,7 +4,7 @@ using Raketa;
 using System.Configuration;
 using System.Windows;
 
-namespace EducationERP.ViewModels
+namespace EducationERP.ViewModels.LoginSetting
 {
     public class SettingBDViewModel : RaketaViewModel
     {

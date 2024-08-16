@@ -1,9 +1,10 @@
 ﻿using EducationERP.Common.Components;
+using EducationERP.ViewModels.LoginSetting;
 using Microsoft.EntityFrameworkCore;
 using Raketa;
 using System.Windows;
 
-namespace EducationERP.ViewModels
+namespace EducationERP.ViewModels.Login
 {
     public class LoginViewModel : RaketaViewModel
     {
@@ -37,26 +38,22 @@ namespace EducationERP.ViewModels
             else
             {
                 var isConnected = _config.Login(Identifier, Password);
-                if(isConnected)
+                if (isConnected)
                 {
-                    _serviceView.Window<EducationViewModel>().NonModal();
-                    _serviceView.Close<LoginViewModel>();
+                    if (_context.Database.GetPendingMigrations().Any())
+                        MessageBox.Show("Информационная система отсутствует!");
+                    else
+                    {
+                        _serviceView.Window<EducationViewModel>().NonModal();
+                        _serviceView.Close<LoginViewModel>();
+                    }
                 }
             }
         }
         void CreateIS()
         {
             _context.Database.GetDbConnection().ConnectionString = _config.GetStrConnection(Identifier, Password);
-            var isConnection = _context.IsConnection();
-            if (isConnection)
-            {
-                if (_context.Database.GetPendingMigrations().Any())
-                {
-                    _context.Database.Migrate();
-                    MessageBox.Show("Информационная система сформирована!");
-                }
-                else MessageBox.Show("Информационная система уже есть!");
-            }
+            _context.ApplyMigrate();
         }
         void OpenSettingBD() => _serviceView.Window<SettingBDViewModel>().Modal();
         void ExitLogin() => _serviceView.Close<LoginViewModel>();

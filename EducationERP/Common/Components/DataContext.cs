@@ -10,13 +10,21 @@ namespace EducationERP.Common.Components
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder.UseNpgsql(string.Empty);
 
-        public bool IsConnection()
+        public void ApplyMigrate()
         {
-            if (Database.CanConnect()) return true;
-            else 
+            if (Database.CanConnect()) 
+            {
+                if (Database.GetPendingMigrations().Any())
+                {
+                    Database.Migrate();
+                    MessageBox.Show("Информационная система сформирована!");
+                }
+                else MessageBox.Show("Информационная система уже имеется!");
+            }
+            else
             {
                 MessageBox.Show("Ошибка соединения!");
-                return false;
+                return;
             }
         }
     }
