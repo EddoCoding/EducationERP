@@ -8,8 +8,8 @@ namespace EducationERP.ViewModels.Login
 {
     public class LoginViewModel : RaketaViewModel
     {
-        public string Identifier { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
+        public string Identifier { get; set; } = "postgres";
+        public string Password { get; set; } = "qwerty";
 
         public RaketaCommand LoginCommand { get; }
         public RaketaCommand CreateISCommand { get; }

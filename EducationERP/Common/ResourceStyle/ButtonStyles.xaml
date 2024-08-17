@@ -15,8 +15,8 @@
             </Setter.Value>
         </Setter>    
     </Style>
-    
-    <Style x:Key="ImageButton" TargetType="Button">
+
+    <Style x:Key="ButtonImage" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -25,8 +25,8 @@
                         <ContentPresenter>
                             <ContentPresenter.Content>
                                 <Image Height="{Binding Height, RelativeSource={RelativeSource AncestorType=Button}}" 
-                                       Width="{Binding Width, RelativeSource={RelativeSource AncestorType=Button}}"
-                                       Source="{Binding Content, RelativeSource={RelativeSource AncestorType=Button}}"/>
+                                           Width="{Binding Width, RelativeSource={RelativeSource AncestorType=Button}}"
+                                           Source="{Binding Content, RelativeSource={RelativeSource AncestorType=Button}}"/>
                             </ContentPresenter.Content>
                         </ContentPresenter>
                     </Border>
@@ -39,5 +39,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
 </ResourceDictionary>

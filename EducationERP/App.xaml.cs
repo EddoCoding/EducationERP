@@ -1,4 +1,5 @@
 ﻿using EducationERP.Common.Components;
+using EducationERP.Common.Components.Services;
 using EducationERP.Modules.Login.View;
 using EducationERP.ViewModels;
 using EducationERP.ViewModels.Login;
@@ -31,12 +32,14 @@ namespace EducationERP
             _serviceView.RegisterTypeView<LoginViewModel, LoginWindow>();
             _serviceView.RegisterTypeView<SettingBDViewModel, SettingBDWindow>();
             _serviceView.RegisterTypeView<EducationViewModel, EducationWindow>();
+            _serviceView.RegisterTypeView<UserControlViewModel, UserControl1>();
         }
 
         void RegisterDependency()
         {
-            _container.RegisterSingleton<DataContext>(new DataContext());
+            _container.RegisterSingleton<DataContext, DataContext>();
             _container.RegisterTransient<Config, IConfig>();
+            _container.RegisterSingleton<MainTabControl, ITabControl>();
         }
     }
 }

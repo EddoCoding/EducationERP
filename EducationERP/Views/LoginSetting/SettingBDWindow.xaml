@@ -65,13 +65,13 @@
                 <DropShadowEffect Opacity="0.3" ShadowDepth="2" BlurRadius="10" />
             </Grid.Effect>
 
-            <Button Grid.Row="0" Content="/Common/Images/saveConfig.png" Style="{StaticResource ImageButton}" Command="{Binding SaveConfigCommand}"
+            <Button Grid.Row="0" Content="/Common/Images/saveConfig.png" Style="{StaticResource ButtonImage}" Command="{Binding SaveConfigCommand}"
                     Height="23" Width="23" VerticalAlignment="Top" Margin="0,10,0,5" ToolTip="Сохранить настройки конфигурации"/>
-            
-            <Button Grid.Row="1" Content="/Common/Images/removeConfig.png" Style="{StaticResource ImageButton}" Command="{Binding RemoveConfigCommand}"
+
+            <Button Grid.Row="1" Content="/Common/Images/removeConfig.png" Style="{StaticResource ButtonImage}" Command="{Binding RemoveConfigCommand}"
                     Height="23" Width="23" VerticalAlignment="Top" Margin="0,10,0,5" ToolTip="Удалить настройки конфигурации"/>
-            
-            <Button Grid.Row="2" Content="/Common/Images/exit.png" Style="{StaticResource ImageButton}" Command="{Binding ExitCommand}"
+
+            <Button Grid.Row="2" Content="/Common/Images/exit.png" Style="{StaticResource ButtonImage}" Command="{Binding ExitCommand}"
                     Height="23" Width="23" VerticalAlignment="Bottom" Margin="0,10" ToolTip="Закрыть окно"/>
 
         </Grid>

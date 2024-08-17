@@ -61,13 +61,13 @@
                 <DropShadowEffect Opacity="0.3" ShadowDepth="2" BlurRadius="10" />
             </Grid.Effect>
 
-            <Button Grid.Row="0" Content="/Common/Images/login.png" Style="{StaticResource ImageButton}" Command="{Binding LoginCommand}"
+            <Button Grid.Row="0" Content="/Common/Images/login.png" Style="{StaticResource ButtonImage}" Command="{Binding LoginCommand}"
                     Height="25" Width="25" VerticalAlignment="Top" Margin="0,10,0,5" ToolTip="Вход"/>
-            <Button Grid.Row="1" Content="/Common/Images/createBaseData.png" Style="{StaticResource ImageButton}" Command="{Binding CreateISCommand}"
+            <Button Grid.Row="1" Content="/Common/Images/createBaseData.png" Style="{StaticResource ButtonImage}" Command="{Binding CreateISCommand}"
                     Height="23" Width="23" VerticalAlignment="Top" Margin="0,10,0,5" ToolTip="Создать информационную систему"/>
-            <Button Grid.Row="2" Content="/Common/Images/settingBD.png" Style="{StaticResource ImageButton}" Command="{Binding SettingBDCommand}"              
+            <Button Grid.Row="2" Content="/Common/Images/settingBD.png" Style="{StaticResource ButtonImage}" Command="{Binding SettingBDCommand}"              
                     Height="25" Width="25" VerticalAlignment="Top" Margin="0,10,0,0" ToolTip="Настройка входа"/>
-            <Button Grid.Row="3" Content="/Common/Images/exit.png" Style="{StaticResource ImageButton}" Command="{Binding ExitCommand}"
+            <Button Grid.Row="3" Content="/Common/Images/exit.png" Style="{StaticResource ButtonImage}" Command="{Binding ExitCommand}"
                     Height="23" Width="23" VerticalAlignment="Bottom" Margin="0,0,0,10" ToolTip="Закрыть окно"/>
 
         </Grid>

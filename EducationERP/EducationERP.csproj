@@ -9,15 +9,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Common\Images\changeSize.png" />
     <None Remove="Common\Images\createBaseData.png" />
     <None Remove="Common\Images\exit.png" />
     <None Remove="Common\Images\login.png" />
     <None Remove="Common\Images\removeConfig.png" />
     <None Remove="Common\Images\saveConfig.png" />
     <None Remove="Common\Images\settingBD.png" />
+    <None Remove="Common\Images\settingModule.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Common\Images\changeSize.png" />
     <Resource Include="Common\Images\removeConfig.png" />
   </ItemGroup>
 
@@ -51,6 +54,7 @@
     <Resource Include="Common\Images\settingBD.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Common\Images\settingModule.png" />
   </ItemGroup>
 
 </Project>
