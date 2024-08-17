@@ -1,14 +1,14 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Controls;
+﻿using EducationERP.Common.Components.Services.TabControl;
+using System.Collections.ObjectModel;
 
 namespace EducationERP.Common.Components.Services
 {
     public interface ITabControl
     {
-        ObservableCollection<TabItem> TabItems { get; set; }
+        ObservableCollection<TabItemViewModel> TabItems { get; set; }
 
-        void AddItem(object viewModel);
-        void AddItem<ViewModel>();
-        void RemoveItem();
+        void AddItem(object viewModel, string title);
+        void AddItem<ViewModel>(string title);
+        void CloseTab(TabItemViewModel tab);
     }
 }

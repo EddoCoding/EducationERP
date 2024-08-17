@@ -4,42 +4,127 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationERP.Views"
-        mc:Ignorable="d" Title="EducationWindow" Height="450" Width="800" 
+        mc:Ignorable="d" Title="EducationWindow" Height="450" Width="800" MinWidth="800" MinHeight="450"
         Background="WhiteSmoke" FontFamily="Calibri">
     <Window.Resources>
-        <Style x:Key="ButtonModule" TargetType="Button">
+        <Style x:Key="ButtonModuleSize" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-
                         <Border x:Name="Proverka" Background="{TemplateBinding Background}" Padding="10">
                             <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-
-                                <Image Grid.Column="0" Source="{Binding Tag, RelativeSource={RelativeSource AncestorType=Button}}" 
-                                       Height="20" Width="20"/>
-                                <ContentPresenter Grid.Column="1" Visibility="{Binding DataContext.Visual.VisibilityButtonText, 
-                                    RelativeSource={RelativeSource AncestorType=Grid}}"/>
+                                <Image Grid.Column="0" Source="{Binding Tag, RelativeSource={RelativeSource AncestorType=Button}}" Height="20" Width="20"/>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="WhiteSmoke"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="LightGray" ShadowDepth="2"/>
+                                    </Setter.Value>
+                                </Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonModule" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Proverka" Background="{TemplateBinding Background}" Padding="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
 
+                                <Image Grid.Column="0" Source="{Binding Tag, RelativeSource={RelativeSource AncestorType=Button}}" 
+                                       Height="20" Width="20"/>
+                                <ContentPresenter Grid.Column="1" Visibility="{Binding DataContext.Visual.VisibilityButtonText, RelativeSource={RelativeSource AncestorType=Grid}}" 
+                                                  Margin="10,0,0,0" TextOptions.TextFormattingMode="Display"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="WhiteSmoke"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="LightGray" ShadowDepth="2"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Background" Value="WhiteSmoke"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="LightGray" ShadowDepth="2"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
         <Style x:Key="TabItem" TargetType="TabItem">
-            <Setter Property="Height" Value="20"/>
-            <Setter Property="Header" Value="Вкладка"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border BorderThickness="1" BorderBrush="LightGray" Margin="0,0,0,0" Background="{TemplateBinding Background}">
+                            <Grid Margin="5,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <ContentPresenter Grid.Column="0" Content="{Binding Title}" VerticalAlignment="Center"/>
+                                <Button Grid.Column="1" Height="10" Width="10" Margin="10,0,0,0" Command="{Binding CloseCommand}"/>
+
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FFD700"/>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Background" Value="#FFD700"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonMenu" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" Padding="5" Margin="5,0,10,0" RenderOptions.BitmapScalingMode="NearestNeighbor">
+                            <Image Source="/Common/Images/menuEducation.png" Height="24" Width="24"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FFD700"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Gray" ShadowDepth="1"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Window.Resources>
     
@@ -53,10 +138,11 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10">
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#FFD700" Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -70,11 +156,12 @@
             <TextBlock Grid.Column="0" Grid.Row="0" Text="ERP" FontSize="16" Margin="10,10,0,0" Padding="0" FontWeight="Bold"/>
             <TextBlock Grid.Column="1" Grid.Row="0" Text="Образование" FontSize="16" Margin="10,10,0,0" Padding="0"/>
             <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="Enterprise Resource Planning" FontSize="14" Margin="10,0,0,10" Padding="0"/>
-            <TextBlock Grid.Column="2" Grid.RowSpan="2" Text="Фамилия И.О." Margin="10,0,15,0" FontSize="16" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="2" Grid.RowSpan="2" Text="Фамилия И.О." Margin="10,0,5,0" FontSize="16" VerticalAlignment="Center"/>
+            <Button Grid.RowSpan="2" Grid.Column="3" Style="{StaticResource ButtonMenu}" VerticalAlignment="Center" Command="{Binding CommandMessage}"/>
 
         </Grid> <!-- ШАПКА -->
 
-        <Grid Grid.Column="0" Grid.Row="1" Background="White" Margin="10,0,10,10" Width="{Binding Visual.WidthButtonPanel}">
+        <Grid Grid.Column="0" Grid.Row="1" Background="#FFD700" Margin="10,0,10,10" Width="{Binding Visual.WidthButtonPanel}" RenderOptions.BitmapScalingMode="NearestNeighbor">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -90,19 +177,21 @@
                 <DropShadowEffect Color="LightGray" ShadowDepth="2"/>
             </Grid.Effect>
 
-            <Button Grid.Row="0" Style="{StaticResource ButtonModule}" Tag="/Common/Images/changeSize.png" ToolTip="{Binding Visual.ToolTipChangeSize}"
+            <Button Grid.Row="0" Style="{StaticResource ButtonModuleSize}" Tag="/Common/Images/changeSize.png" ToolTip="{Binding Visual.ToolTipChangeSize}"
                     Command="{Binding Visual.ChangeWidthButtonPanelCommand}" CommandParameter="{Binding Visual.WidthButtonPanel}"/>
-            <Line Grid.Row="1" X1="0" Y1="0" X2="150" Y2="0" StrokeThickness="0.3"  Stroke="Black" HorizontalAlignment="Center"/>
 
 
-            <Button Grid.Row="2" Content="Администрирование" Style="{StaticResource ButtonModule}" Command="{Binding AddTabItemCommand}"/>
+            <Line Grid.Row="1" X1="0" Y1="0" X2="135" Y2="0" StrokeThickness="0.3"  Stroke="Black" HorizontalAlignment="Center"/>
+            <Button Grid.Row="2" Content="Ректор" Style="{StaticResource ButtonModule}" Command="{Binding AddTabItemCommand1}"/>
             
             
-            <Line Grid.Row="3" X1="0" Y1="0" X2="150" Y2="0" StrokeThickness="0.3"  Stroke="Black" HorizontalAlignment="Center"/>
-            <Button Grid.Row="4" Content="Администрирование" Style="{StaticResource ButtonModule}"/>
-            <Line Grid.Row="5" X1="0" Y1="0" X2="150" Y2="0" StrokeThickness="0.3"  Stroke="Black" HorizontalAlignment="Center"/>
-            <Button Grid.Row="6" Content="Администрирование" Style="{StaticResource ButtonModule}"/>
-            <Line Grid.Row="7" X1="0" Y1="0" X2="150" Y2="0" StrokeThickness="0.3"  Stroke="Black" HorizontalAlignment="Center"/>
+            <Line Grid.Row="3" X1="0" Y1="0" X2="135" Y2="0" StrokeThickness="0.3"  Stroke="Black" HorizontalAlignment="Center"/>
+            <Button Grid.Row="4" Content="Приёмная кампания" Style="{StaticResource ButtonModule}" Command="{Binding AddTabItemCommand2}"/>
+            
+            
+            <Line Grid.Row="5" X1="0" Y1="0" X2="135" Y2="0" StrokeThickness="0.3"  Stroke="Black" HorizontalAlignment="Center"/>
+            <Button Grid.Row="6" Content="Деканат" Style="{StaticResource ButtonModule}"/>
+            <Line Grid.Row="7" X1="0" Y1="0" X2="135" Y2="0" StrokeThickness="0.3"  Stroke="Black" HorizontalAlignment="Center"/>
 
             <Button Grid.Row="8" Style="{StaticResource ButtonModule}" Content="Администрирование" ToolTip="Администрирование"
                     Tag="/Common/Images/settingModule.png" Command="{Binding SettingCommand}"/>
@@ -114,9 +203,11 @@
             <TabControl.Effect>
                 <DropShadowEffect Color="LightGray" ShadowDepth="2"/>
             </TabControl.Effect>
-            
-            
-            
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <ContentPresenter Content="{Binding Content}"/>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
         </TabControl> <!-- ТЕЛО -->
 
     </Grid>

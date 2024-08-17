@@ -1,33 +1,47 @@
-﻿using Raketa;
+﻿using EducationERP.Common.Components.Services.TabControl;
+using Raketa;
 using System.Collections.ObjectModel;
-using System.Windows.Controls;
+using System.Collections.Specialized;
 
 namespace EducationERP.Common.Components.Services
 {
-    public class MainTabControl(IServiceView serviceView) : ITabControl
+    public class MainTabControl : ITabControl
     {
-        public ObservableCollection<TabItem> TabItems { get; set; } = new();
+        public ObservableCollection<TabItemViewModel> TabItems { get; set; } = new();
 
-        public void AddItem(object viewModel)
+        IServiceView _serviceView;
+        public MainTabControl(IServiceView serviceView)
         {
-            if(viewModel != null) 
-                TabItems.Add(new TabItem()
-                {
-                    Content = viewModel
-                });
+            _serviceView = serviceView;
+
+            TabItems.CollectionChanged += OnTabsChanged;
         }
-        public void AddItem<ViewModel>()
+        
+        public void AddItem(object viewModel, string title)
         {
-            var uc = serviceView.UserControl<ViewModel>();
-            if (uc != null) TabItems.Add(new TabItem()
+            if (viewModel != null)
+                TabItems.Add(new TabItemViewModel(title, viewModel));
+        }
+        public void AddItem<ViewModel>(string title)
+        {
+            var uc = _serviceView.UserControl<ViewModel>();
+            if (uc != null) TabItems.Add(new TabItemViewModel(title, uc));
+        }
+
+        void OnTabsChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.OldItems != null)
             {
-                Content = uc
-            });
+                foreach (TabItemViewModel item in e.OldItems)
+                    item.OnClose -= CloseTab;
+            }
+            if (e.NewItems != null)
+            {
+                foreach (TabItemViewModel item in e.NewItems)
+                    item.OnClose += CloseTab;
+            }
         }
 
-        public void RemoveItem()
-        {
-            throw new NotImplementedException();
-        }
+        public void CloseTab(TabItemViewModel tab) => TabItems.Remove(tab);
     }
 }

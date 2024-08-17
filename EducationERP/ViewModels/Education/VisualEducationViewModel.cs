@@ -5,7 +5,7 @@ namespace EducationERP.ViewModels.Education
 {
     public class VisualEducationViewModel : RaketaViewModel
     {
-        double widthButtonPanel = 196;
+        double widthButtonPanel = 175;
         public double WidthButtonPanel
         {
             get => widthButtonPanel;
@@ -32,7 +32,7 @@ namespace EducationERP.ViewModels.Education
 
         void ChangeWidth(double width)
         {
-            if (width == 196)
+            if (width == 175)
             {
                 WidthButtonPanel = 40;
                 VisibilityButtonText = Visibility.Collapsed;
@@ -40,7 +40,7 @@ namespace EducationERP.ViewModels.Education
             }
             else if (width == 40)
             {
-                WidthButtonPanel = 196;
+                WidthButtonPanel = 175;
                 VisibilityButtonText = Visibility.Visible;
                 ToolTipChangeSize = "Свернуть";
             }
