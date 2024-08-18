@@ -7,41 +7,31 @@ namespace EducationERP.Common.Components.Services
 {
     public class MainTabControl : ITabControl
     {
-        public ObservableCollection<TabItemViewModel> TabItems { get; set; } = new();
+        public ObservableCollection<TabItemViewModel> Tabs { get; set; } = new();
 
         IServiceView _serviceView;
         public MainTabControl(IServiceView serviceView)
         {
             _serviceView = serviceView;
-
-            TabItems.CollectionChanged += OnTabsChanged;
+            Tabs.CollectionChanged += OnTabsChanged;
         }
-        
-        public void AddItem(object viewModel, string title)
-        {
-            if (viewModel != null)
-                TabItems.Add(new TabItemViewModel(title, viewModel));
-        }
-        public void AddItem<ViewModel>(string title)
+        public void CreateTab<ViewModel>(string title)
         {
             var uc = _serviceView.UserControl<ViewModel>();
-            if (uc != null) TabItems.Add(new TabItemViewModel(title, uc));
+            if (uc != null) Tabs.Add(new TabItemViewModel(title, uc));
         }
+        public void RemoveTab(TabItemViewModel tab) => Tabs.Remove(tab);
 
         void OnTabsChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.OldItems != null)
             {
-                foreach (TabItemViewModel item in e.OldItems)
-                    item.OnClose -= CloseTab;
+                foreach (TabItemViewModel item in e.OldItems) item.OnClose -= RemoveTab;
             }
             if (e.NewItems != null)
             {
-                foreach (TabItemViewModel item in e.NewItems)
-                    item.OnClose += CloseTab;
+                foreach (TabItemViewModel item in e.NewItems) item.OnClose += RemoveTab;
             }
         }
-
-        public void CloseTab(TabItemViewModel tab) => TabItems.Remove(tab);
     }
 }

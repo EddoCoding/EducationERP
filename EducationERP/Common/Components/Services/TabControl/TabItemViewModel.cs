@@ -4,19 +4,18 @@ namespace EducationERP.Common.Components.Services.TabControl
 {
     public class TabItemViewModel
     {
-        public string Title { get; set; }
-        public object Content { get; set; }
+        public string TitleTab { get; set; }
+        public object ContentTab { get; set; }
 
         public RaketaCommand CloseCommand { get; set; }
 
-        public TabItemViewModel(string title, object content)
+        public TabItemViewModel(string titleTab, object contentTab)
         {
-            (Title, Content) = (title, content);
-
-            CloseCommand = RaketaCommand.Launch(Close);
+            (TitleTab, ContentTab) = (titleTab, contentTab);
+            CloseCommand = RaketaCommand.Launch(CloseTab);
         }
             
         public event Action<TabItemViewModel> OnClose;
-        void Close() => OnClose?.Invoke(this);
+        void CloseTab() => OnClose?.Invoke(this);
     }
 }
