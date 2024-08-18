@@ -8,6 +8,7 @@ namespace EducationERP.ViewModels
     {
         public VisualEducationViewModel Visual { get; set; } = new();
         public RaketaCommand OpenEducationMenuCommand { get; set; }
+        public RaketaCommand AddCommand { get; set; }
 
         IServiceView _serviceView;
         public ITabControl TabControl { get; set; }
@@ -17,6 +18,11 @@ namespace EducationERP.ViewModels
             TabControl = tabControl;
 
             OpenEducationMenuCommand = RaketaCommand.Launch(CloseEducationWindow);
+
+            AddCommand = RaketaCommand.Launch(() =>
+            {
+                tabControl.CreateTab<UCVM>("Вкладка");
+            });
         }
 
         void CloseEducationWindow() => _serviceView.Close<EducationViewModel>();

@@ -8,6 +8,7 @@ namespace EducationERP.Common.Components.Services
     public class MainTabControl : ITabControl
     {
         public ObservableCollection<TabItemViewModel> Tabs { get; set; } = new();
+        public TabItemViewModel SeletedTab { get; set; }
 
         IServiceView _serviceView;
         public MainTabControl(IServiceView serviceView)
@@ -19,8 +20,10 @@ namespace EducationERP.Common.Components.Services
         {
             var uc = _serviceView.UserControl<ViewModel>();
             if (uc != null) Tabs.Add(new TabItemViewModel(title, uc));
+            else Tabs.Add(new TabItemViewModel(title, uc));
         }
         public void RemoveTab(TabItemViewModel tab) => Tabs.Remove(tab);
+        public void RemoveTab() => Tabs.Remove(SeletedTab);
 
         void OnTabsChanged(object sender, NotifyCollectionChangedEventArgs e)
         {

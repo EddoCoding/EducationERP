@@ -9,5 +9,6 @@ namespace EducationERP.Common.Components.Services
 
         void CreateTab<ViewModel>(string title);
         void RemoveTab(TabItemViewModel tab);
+        void RemoveTab();
     }
 }

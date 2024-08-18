@@ -104,7 +104,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <ContentPresenter Grid.Column="0" Content="{Binding Title}" VerticalAlignment="Center"/>
+                                <ContentPresenter Grid.Column="0" Content="{Binding TitleTab}" VerticalAlignment="Center"/>
                                 <Button Grid.Column="1" Content="X" Style="{StaticResource ButtonTab}"
                                         Margin="10,0,0,0" VerticalAlignment="Center" Command="{Binding CloseCommand}"/>
 
@@ -200,11 +200,11 @@
 
 
             <Line Grid.Row="1" X1="0" Y1="0" X2="135" Y2="0" StrokeThickness="0.3"  Stroke="Black" HorizontalAlignment="Center"/>
-            <Button Grid.Row="2" Content="Ректор" Style="{StaticResource ButtonModule}" Command="{Binding AddTabItemCommand1}"/>
+            <Button Grid.Row="2" Content="Ректор" Style="{StaticResource ButtonModule}" Command="{Binding AddCommand}"/>
             
             
             <Line Grid.Row="3" X1="0" Y1="0" X2="135" Y2="0" StrokeThickness="0.3"  Stroke="Black" HorizontalAlignment="Center"/>
-            <Button Grid.Row="4" Content="Приёмная кампания" Style="{StaticResource ButtonModule}" Command="{Binding AddTabItemCommand2}"/>
+            <Button Grid.Row="4" Content="Приёмная кампания" Style="{StaticResource ButtonModule}"/>
             
             
             <Line Grid.Row="5" X1="0" Y1="0" X2="135" Y2="0" StrokeThickness="0.3"  Stroke="Black" HorizontalAlignment="Center"/>
@@ -217,13 +217,14 @@
         </Grid> <!-- КНОПКИ -->
 
         <TabControl Background="White" Grid.Row="1" Grid.Column="1" Margin="0,0,10,10" BorderThickness="0" TabStripPlacement="Bottom"
-                    ItemsSource="{Binding TabControl.Tabs}" ItemContainerStyle="{StaticResource TabItem}">
+                    ItemsSource="{Binding TabControl.Tabs}" ItemContainerStyle="{StaticResource TabItem}" 
+                    SelectedItem="{Binding TabControl.SeletedTab}">
             <TabControl.Effect>
                 <DropShadowEffect Color="LightGray" ShadowDepth="2"/>
             </TabControl.Effect>
             <TabControl.ContentTemplate>
                 <DataTemplate>
-                    <ContentPresenter Content="{Binding Content}"/>
+                    <ContentPresenter Content="{Binding ContentTab}"/>
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl> <!-- ТЕЛО -->

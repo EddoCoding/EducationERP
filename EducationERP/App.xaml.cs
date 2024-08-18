@@ -32,6 +32,9 @@ namespace EducationERP
             _serviceView.RegisterTypeView<LoginViewModel, LoginWindow>();
             _serviceView.RegisterTypeView<SettingBDViewModel, SettingBDWindow>();
             _serviceView.RegisterTypeView<EducationViewModel, EducationWindow>();
+
+
+            _serviceView.RegisterTypeView<UCVM, UC>();
         }
 
         void RegisterDependency()
