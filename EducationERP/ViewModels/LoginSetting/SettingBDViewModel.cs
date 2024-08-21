@@ -1,7 +1,8 @@
 ﻿using EducationERP.Common.Components;
-using Microsoft.EntityFrameworkCore;
+using EducationERP.Common.ToolsDev;
 using Raketa;
-using System.Collections.ObjectModel;
+using System.Configuration;
+using System.Windows;
 
 namespace EducationERP.ViewModels.LoginSetting
 {
@@ -9,8 +10,6 @@ namespace EducationERP.ViewModels.LoginSetting
     {
         string host = string.Empty;
         string port = string.Empty;
-        string username = string.Empty;
-        string password = string.Empty;
         string database = string.Empty;
         string pathTemporaryData = string.Empty;
 
@@ -23,16 +22,6 @@ namespace EducationERP.ViewModels.LoginSetting
         {
             get => port;
             set => SetValue(ref port, value);
-        }
-        public string Username
-        {
-            get => username;
-            set => SetValue(ref username, value);
-        }
-        public string Password
-        {
-            get => password;
-            set => SetValue(ref password, value);
         }
         public string Database
         {
@@ -47,46 +36,44 @@ namespace EducationERP.ViewModels.LoginSetting
 
         public RaketaCommand SaveConfigCommand { get; }
         public RaketaCommand RemoveConfigCommand { get; }
-        public RaketaCommand CreateISCommand { get; }
         public RaketaCommand ExitCommand { get; }
 
         IServiceView _serviceView;
         IConfig _config;
-        DataContext _context;
-        public SettingBDViewModel(IServiceView serviceView, IConfig config, DataContext context)
+        public SettingBDViewModel(IServiceView serviceView, IConfig config)
         {
             _serviceView = serviceView;
             _config = config;
-            _context = context;
 
             GetConfigValues();
 
-            SaveConfigCommand = RaketaCommand.Launch(SaveConfig);
-            RemoveConfigCommand = RaketaCommand.Launch(RemoveConfig);
-            CreateISCommand = RaketaCommand.Launch(CreateIS);
+            SaveConfigCommand = RaketaCommand.Launch(SaveSettingBD);
+            RemoveConfigCommand = RaketaCommand.Launch(RemoveSettingBD);
             ExitCommand = RaketaCommand.Launch(ExitSettingBD);
         }
 
-        void SaveConfig() => _config.SaveConfig(host, port, username, password, database, pathTemporaryData);
-        void RemoveConfig()
+        void SaveSettingBD()
         {
+            if (string.IsNullOrWhiteSpace(Host) || string.IsNullOrWhiteSpace(Port) || string.IsNullOrWhiteSpace(Database))
+                MessageBox.Show("Заполните все поля!");
+            else _config.SaveConfig(Host, Port, Database, PathTemporaryData);
+        }
+        void RemoveSettingBD()
+        {
+            if (Host == string.Empty && Port == string.Empty && Database == string.Empty && PathTemporaryData == string.Empty) return;
+
             Host = string.Empty;
             Port = string.Empty;
-            Username = string.Empty;
-            Password = string.Empty;
             Database = string.Empty;
             PathTemporaryData = string.Empty;
 
             _config.RemoveConfig();
         }
-        void CreateIS() => _context.ApplyMigrate();
         void GetConfigValues()
         {
-            Host = _config.GetValueConnection("Host");
-            Port = _config.GetValueConnection("Port");
-            Username = _config.GetValueConnection("Username");
-            Password = _config.GetValueConnection("Password");
-            Database = _config.GetValueConnection("Database");
+            Host = _config.GetValueConfig("Host");
+            Port = _config.GetValueConfig("Port");
+            Database = _config.GetValueConfig("Database");
             PathTemporaryData = _config.GetValueConfig("PathTemporaryData");
         }
         void ExitSettingBD() => _serviceView.Close<SettingBDViewModel>();

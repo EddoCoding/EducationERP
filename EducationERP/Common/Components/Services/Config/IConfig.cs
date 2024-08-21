@@ -2,12 +2,11 @@
 {
     public interface IConfig
     {
-        string GetValueConnection(string connectionName);
+        string StrConnection { get; set; }
+        bool Login(string identifier, string password);
         string GetValueConfig(string configName);
-
-        void SaveConfig(string host, string port, string username, string password, string database, string pathTemporaryData);
+        string GetStrConnection(string identifier, string password);
+        void SaveConfig(string host, string port, string dataBase, string pathTemporaryData);
         void RemoveConfig();
-
-        bool CheckIsConfigured();
     }
 }

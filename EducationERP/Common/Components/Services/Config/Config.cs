@@ -1,83 +1,63 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Raketa;
 using System.Configuration;
-using System.Data.Common;
 using System.Windows;
 
 namespace EducationERP.Common.Components
 {
-    public class Config : RaketaViewModel, IConfig
+    public class Config(DataContext context) : IConfig
     {
-        string _strConnection = string.Empty;
-        string _isConfigured;
-        DbConnectionStringBuilder _builder;
-
-        public Config()
+        public string StrConnection { get; set; } = string.Empty;
+        public bool Login(string identifier, string password)
         {
-            _isConfigured = ConfigurationManager.AppSettings["isConfigured"];
-            _strConnection = ConfigurationManager.ConnectionStrings["StrConnection"].ConnectionString;
-            _builder = new DbConnectionStringBuilder { ConnectionString = _strConnection };
-        }
+            context.Database.GetDbConnection().ConnectionString = $"Host={GetValueConfig("Host")};" +
+                                                                  $"Port={GetValueConfig("Port")};" +
+                                                                  $"Username={identifier};" +
+                                                                  $"Password={password};" +
+                                                                  $"Database={GetValueConfig("Database")};";
 
-        public string GetValueConnection(string connectionName)
-        {
-            if (_builder.ContainsKey(connectionName)) return _builder[connectionName].ToString();
-            else return default;
+            if (context.Database.CanConnect()) return true;
+            else
+            {
+                MessageBox.Show("Ошибка подключения!");
+                return false;
+            }
         }
         public string GetValueConfig(string configName) => ConfigurationManager.AppSettings[configName];
-
-        public void SaveConfig(string host, string port, string username, string password, string database, string pathTemporaryData)
+        public string GetStrConnection(string identifier, string password)
         {
-            if (String.IsNullOrWhiteSpace(host)) return;
+            StrConnection = $"Host={GetValueConfig("Host")};" +
+                            $"Port={GetValueConfig("Port")};" +
+                            $"Username={identifier};" +
+                            $"Password={password};" +
+                            $"Database={GetValueConfig("Database")};";
 
-            using(var context = new DataContext())
-            {
-                try
-                {
-                    context.Database.GetDbConnection().ConnectionString = $"Host={host};Port={port};Username={username};Password={password};Database={database};";
-                }
-                catch
-                {
-                    MessageBox.Show("Некорректный ввод!");
-                    return;
-                }
+            return StrConnection;
+        }
+        public void SaveConfig(string host, string port, string dataBase, string pathTemporaryData)
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings["Host"].Value = host;
+            config.AppSettings.Settings["Port"].Value = port;
+            config.AppSettings.Settings["Database"].Value = dataBase;
+            config.AppSettings.Settings["PathTemporaryData"].Value = pathTemporaryData;
 
-                if (context.Database.CanConnect())
-                {
-                    Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("appSettings");
 
-                    config.ConnectionStrings.ConnectionStrings["StrConnection"].ConnectionString =
-                        $"Host={host};Port={port};Username={username};Password={password};Database={database};";
-                    config.AppSettings.Settings["PathTemporaryData"].Value = pathTemporaryData;
-
-                    config.Save(ConfigurationSaveMode.Modified);
-                    ConfigurationManager.RefreshSection("connectionStrings");
-                    ConfigurationManager.RefreshSection("appSettings");
-
-                    MessageBox.Show("Настройки конфигурации сохранены!");
-                }
-                else
-                {
-                    MessageBox.Show("Невозможно сохранить! Ошибка подключения!");
-                    return;
-                }
-            }
+            MessageBox.Show("Настройки сохранены!");
         }
         public void RemoveConfig()
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-            config.ConnectionStrings.ConnectionStrings["StrConnection"].ConnectionString = string.Empty;
+            config.AppSettings.Settings["Host"].Value = string.Empty;
+            config.AppSettings.Settings["Port"].Value = string.Empty;
+            config.AppSettings.Settings["Database"].Value = string.Empty;
             config.AppSettings.Settings["PathTemporaryData"].Value = string.Empty;
-            config.AppSettings.Settings["isConfigured"].Value = "False";
 
             config.Save(ConfigurationSaveMode.Modified);
-            ConfigurationManager.RefreshSection("connectionStrings");
             ConfigurationManager.RefreshSection("appSettings");
-            
+
             MessageBox.Show("Настройки удалены!");
         }
-
-        public bool CheckIsConfigured() => bool.TryParse(_isConfigured, out var isConfigured) && isConfigured;
     }
 }
