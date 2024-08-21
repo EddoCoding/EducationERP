@@ -1,11 +1,11 @@
 ﻿using Raketa;
 using System.Windows.Controls;
 
-namespace EducationERP
+namespace EducationERP.Views.Modules.Administration
 {
-    public partial class UC : UserControl, IView
+    public partial class AdministrationView : UserControl, IView
     {
-        public UC()
+        public AdministrationView()
         {
             InitializeComponent();
         }

@@ -1,5 +1,6 @@
 ﻿using EducationERP.Common.Components.Services;
 using EducationERP.ViewModels.Education;
+using EducationERP.ViewModels.Modules.Administration;
 using Raketa;
 
 namespace EducationERP.ViewModels
@@ -8,7 +9,7 @@ namespace EducationERP.ViewModels
     {
         public VisualEducationViewModel Visual { get; set; } = new();
         public RaketaCommand OpenEducationMenuCommand { get; set; }
-        public RaketaCommand AddCommand { get; set; }
+        public RaketaCommand AdministrationCommand { get; set; }
 
         IServiceView _serviceView;
         public ITabControl TabControl { get; set; }
@@ -18,13 +19,10 @@ namespace EducationERP.ViewModels
             TabControl = tabControl;
 
             OpenEducationMenuCommand = RaketaCommand.Launch(CloseEducationWindow);
-
-            AddCommand = RaketaCommand.Launch(() =>
-            {
-                tabControl.CreateTab<UCVM>("Вкладка");
-            });
+            AdministrationCommand = RaketaCommand.Launch(OpenAdministration);
         }
 
         void CloseEducationWindow() => _serviceView.Close<EducationViewModel>();
+        void OpenAdministration() => TabControl.CreateTab<AdministrationViewModel>("Администрирование");
     }
 }

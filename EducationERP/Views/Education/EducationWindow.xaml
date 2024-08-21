@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EducationERP.Views"
         mc:Ignorable="d" Title="EducationWindow" Height="450" Width="800" MinWidth="800" MinHeight="450"
         Background="WhiteSmoke" FontFamily="Calibri" WindowStyle="None" 
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" MouseDown="MoveWindow">
+        WindowStartupLocation="CenterScreen" MouseDown="MoveWindow">
     <Window.Resources>
         <Style x:Key="ButtonModuleSize" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
@@ -209,10 +209,11 @@
             
             <Line Grid.Row="5" X1="0" Y1="0" X2="135" Y2="0" StrokeThickness="0.3"  Stroke="Black" HorizontalAlignment="Center"/>
             <Button Grid.Row="6" Content="Деканат" Style="{StaticResource ButtonModule}"/>
+            
+            
             <Line Grid.Row="7" X1="0" Y1="0" X2="135" Y2="0" StrokeThickness="0.3"  Stroke="Black" HorizontalAlignment="Center"/>
-
             <Button Grid.Row="8" Style="{StaticResource ButtonModule}" Content="Администрирование" ToolTip="Администрирование"
-                    Tag="/Common/Images/settingModule.png" Command="{Binding SettingCommand}"/>
+                    Tag="/Common/Images/settingModule.png" Command="{Binding AdministrationCommand}"/>
             
         </Grid> <!-- КНОПКИ -->
 
