@@ -85,20 +85,27 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Expander Grid.Row="1" FontSize="16" Style="{StaticResource ExpanderUserManagement}" Header="Управление пользователями" Margin="10,5,10,0" Padding="2,0"/>
+                <Expander Grid.Row="1" FontSize="16" Style="{StaticResource ExpanderUserManagement}" Header="Управление пользователями" Margin="10,5,10,0" Padding="2,0"
+                          TextOptions.TextFormattingMode="Display"/>
 
-                <Expander Grid.Row="2" FontSize="16" Style="{StaticResource ExpanderUserManagement}" Header="Настройка модуля - Учебный отдел" Margin="10,5,10,0" Padding="2,0"/>
+                <Expander Grid.Row="2" FontSize="16" Style="{StaticResource ExpanderUserManagement}" Header="Настройка модуля - Учебный отдел" Margin="10,5,10,0" Padding="2,0"
+                          TextOptions.TextFormattingMode="Display"/>
 
-                <Expander Grid.Row="3" FontSize="16" Style="{StaticResource ExpanderUserManagement}" Header="Настройка модуля - Приёмная кампания" Margin="10,5,10,0" Padding="2,0"/>
+                <Expander Grid.Row="3" FontSize="16" Style="{StaticResource ExpanderUserManagement}" Header="Настройка модуля - Приёмная кампания" Margin="10,5,10,0" Padding="2,0"
+                          TextOptions.TextFormattingMode="Display"/>
 
-                <Expander Grid.Row="4" FontSize="16" Style="{StaticResource ExpanderUserManagement}" Header="Настройка модуля - Деканат" Margin="10,5,10,0" Padding="2,0"/>
+                <Expander Grid.Row="4" FontSize="16" Style="{StaticResource ExpanderUserManagement}" Header="Настройка модуля - Деканат" Margin="10,5,10,0" Padding="2,0"
+                          TextOptions.TextFormattingMode="Display"/>
 
-                <Expander Grid.Row="5" FontSize="16" Style="{StaticResource ExpanderUserManagement}" Header="Настройка базы данны" Margin="10,5,10,0" Padding="2,0">
+                <Expander Grid.Row="5" FontSize="16" Style="{StaticResource ExpanderUserManagement}" Header="Настройка базы данны" Margin="10,5,10,10" Padding="2,0" 
+                          TextOptions.TextFormattingMode="Display">
                     <Grid Background="White">
                         <Grid.Effect>
                             <DropShadowEffect Color="LightGray" ShadowDepth="0"/>
                         </Grid.Effect>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -141,11 +148,37 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
+                            <Label Grid.Row="0" Content="Username" Style="{StaticResource defaultLabel}" Foreground="Gray" FontSize="14" Margin="10,0,0,0"/>
+                            <TextBox Grid.Row="1" Text="{Binding SettingBDViewModel.Username}" Style="{StaticResource defaultTextBox}" Margin="10,0,10,10"/>
+                        </Grid>
+
+                        <Grid Grid.Row="3" Background="White" Margin="10,10,10,0">
+                            <Grid.Effect>
+                                <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                            </Grid.Effect>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="Password" Style="{StaticResource defaultLabel}" Foreground="Gray" FontSize="14" Margin="10,0,0,0"/>
+                            <TextBox Grid.Row="1" Text="{Binding SettingBDViewModel.Password}" Style="{StaticResource defaultTextBox}" Margin="10,0,10,10"/>
+                        </Grid>
+
+                        <Grid Grid.Row="4" Background="White" Margin="10,10,10,0">
+                            <Grid.Effect>
+                                <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                            </Grid.Effect>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
                             <Label Grid.Row="0" Content="Database" Style="{StaticResource defaultLabel}" Foreground="Gray" FontSize="14" Margin="10,0,0,0"/>
                             <TextBox Grid.Row="1" Text="{Binding SettingBDViewModel.Database}" Style="{StaticResource defaultTextBox}" Margin="10,0,10,10"/>
                         </Grid>
 
-                        <Grid Grid.Row="3" Background="White" Margin="10,10,10,0">
+                        <Grid Grid.Row="5" Background="White" Margin="10,10,10,0">
                             <Grid.Effect>
                                 <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
                             </Grid.Effect>
@@ -158,16 +191,19 @@
                             <TextBox Grid.Row="1" Text="{Binding SettingBDViewModel.PathTemporaryData}" Style="{StaticResource defaultTextBox}" Margin="10,0,10,10"/>
                         </Grid>
 
-                        <StackPanel Grid.Row="4" Background="White" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <StackPanel Grid.Row="6" Background="White" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
                             <StackPanel.Effect>
                                 <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
                             </StackPanel.Effect>
 
                             <Button Content="/Common/Images/saveConfig.png" Style="{StaticResource ButtonImage}" Command="{Binding SettingBDViewModel.SaveConfigCommand}"
-                            Height="23" Width="23" VerticalAlignment="Top" Margin="10" ToolTip="Сохранить настройки конфигурации"/>
+                                    Height="23" Width="23" VerticalAlignment="Top" Margin="10" ToolTip="Сохранить настройки конфигурации"/>
 
                             <Button Content="/Common/Images/removeConfig.png" Style="{StaticResource ButtonImage}" Command="{Binding SettingBDViewModel.RemoveConfigCommand}"
-                            Height="23" Width="23" VerticalAlignment="Top" Margin="10" ToolTip="Удалить настройки конфигурации"/>
+                                    Height="23" Width="23" VerticalAlignment="Top" Margin="10" ToolTip="Удалить настройки конфигурации"/>
+
+                            <Button Content="/Common/Images/createBaseData.png" Style="{StaticResource ButtonImage}" Command="{Binding SettingBDViewModel.CreateISCommand}"
+                                    Height="23" Width="23" VerticalAlignment="Top" Margin="10" ToolTip="Сформировать информационную систему"/>
 
                         </StackPanel>
 

@@ -8,9 +8,9 @@ namespace EducationERP.ViewModels.Modules.Administration
     {
         public SettingBDViewModel SettingBDViewModel { get; set; }
 
-        public AdministrationViewModel(IServiceView serviceView, IConfig config)
+        public AdministrationViewModel(IServiceView serviceView, IConfig config, DataContext dataContext)
         {
-            SettingBDViewModel = new(serviceView, config);
+            SettingBDViewModel = new(serviceView, config, dataContext);
         }
     }
 }
