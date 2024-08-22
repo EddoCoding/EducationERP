@@ -22,7 +22,7 @@ namespace EducationERP.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("EducationERP.Product", b =>
+            modelBuilder.Entity("EducationERP.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,12 +32,13 @@ namespace EducationERP.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("integer");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }

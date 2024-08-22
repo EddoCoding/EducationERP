@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EducationERP.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240816141103_FirstMigration")]
+    [Migration("20240822172758_FirstMigration")]
     partial class FirstMigration
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace EducationERP.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("EducationERP.Product", b =>
+            modelBuilder.Entity("EducationERP.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -35,12 +35,13 @@ namespace EducationERP.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("integer");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }

@@ -28,7 +28,6 @@
 
   <ItemGroup>
     <Folder Include="Common\Converters\" />
-    <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -12,16 +12,16 @@ namespace EducationERP.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    Price = table.Column<int>(type: "integer", nullable: false)
+                    Status = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
         }
 
@@ -29,7 +29,7 @@ namespace EducationERP.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Users");
         }
     }
 }
