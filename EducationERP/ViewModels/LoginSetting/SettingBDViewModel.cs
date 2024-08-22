@@ -77,7 +77,7 @@ namespace EducationERP.ViewModels.LoginSetting
             Database = string.Empty;
             PathTemporaryData = string.Empty;
 
-            //_config.RemoveConfig(); // Переделать внутри
+            _config.RemoveConfig();
         }
         void GetConfigValues()
         {

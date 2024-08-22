@@ -17,7 +17,23 @@ namespace EducationERP.Common.Components
             builder.ConnectionString = strConnection;
         }
 
-        public string GetValueConnect(string connectName) => builder[connectName]?.ToString();
+        public void RemoveConfig()
+        {
+            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var strConnection = config.ConnectionStrings.ConnectionStrings["StrConnection"];
+            strConnection.ConnectionString = string.Empty;
+            config.AppSettings.Settings["PathTemporaryData"].Value = string.Empty;
+
+            config.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("appSettings");
+            ConfigurationManager.RefreshSection("connectionStrings");
+        }
+
+        public string GetValueConnect(string connectName)
+        {
+            try { return builder[connectName]?.ToString(); }
+            catch { return string.Empty; }
+        }
         public string GetValueConfig(string configName) => ConfigurationManager.AppSettings[configName];
     }
 }
