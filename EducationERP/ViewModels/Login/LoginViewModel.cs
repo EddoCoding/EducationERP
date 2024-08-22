@@ -30,23 +30,12 @@ namespace EducationERP.ViewModels.Login
 
         void Login()
         {
-            Dev.NotReady();
-            //if (string.IsNullOrWhiteSpace(Identifier) || string.IsNullOrWhiteSpace(Password))
-            //    MessageBox.Show("Заполните все поля!");
-            //else
-            //{
-            //    var isConnected = _config.Login(Identifier, Password);
-            //    if (isConnected)
-            //    {
-            //        if (_context.Database.GetPendingMigrations().Any())
-            //            MessageBox.Show("Информационная система отсутствует!");
-            //        else
-            //        {
-            //            _serviceView.Window<EducationViewModel>().NonModal();
-            //            _serviceView.Close<LoginViewModel>();
-            //        }
-            //    }
-            //}
+
+            bool user = _context.Users.Any(u => u.Username == "postgres" && 
+                                                 u.Password == "qwerty");
+
+            if (user) _serviceView.Window<EducationViewModel>().NonModal();
+            else MessageBox.Show("Вход не возможен");
         }
         void ExitLogin() => _serviceView.Close<LoginViewModel>();
     }

@@ -10,7 +10,7 @@ namespace EducationERP.Common.Components
         public DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-            optionsBuilder.UseNpgsql(string.Empty);
+            optionsBuilder.UseNpgsql(ConfigurationManager.ConnectionStrings["StrConnection"].ToString());
 
         public bool CanConnect(string host, string port, string username, string password, string database)
         {
