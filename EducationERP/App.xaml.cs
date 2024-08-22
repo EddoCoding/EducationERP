@@ -16,17 +16,19 @@ namespace EducationERP
     {
         IContainerDi _container = new Container();
         IServiceView _serviceView;
+        IConfig _config;
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
             _serviceView = _container.GetDependency<IServiceView>();
-
             RegisterView();
             RegisterDependency();
 
-            _serviceView.Window<EducationViewModel>().NonModal();
+            _config = _container.GetDependency<IConfig>();
+
+            if(_config.GetIsConfigured()) _serviceView.Window<LoginViewModel>().NonModal();
+            else _serviceView.Window<EducationViewModel>().NonModal();
         }
 
         void RegisterView()

@@ -9,5 +9,7 @@ namespace EducationERP.Common.Components
 
         string GetValueConnect(string connectName);
         string GetValueConfig(string configName);
+
+        bool GetIsConfigured();
     }
 }

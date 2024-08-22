@@ -60,5 +60,12 @@ namespace EducationERP.Common.Components
             catch { return string.Empty; }
         }
         public string GetValueConfig(string configName) => ConfigurationManager.AppSettings[configName];
+
+        public bool GetIsConfigured()
+        {
+            string IsConfigured = ConfigurationManager.AppSettings["IsConfigured"];
+            if (bool.TryParse(IsConfigured, out var isConfigured)) return isConfigured;
+            else return false;
+        }
     }
 }
