@@ -1,7 +1,5 @@
 ﻿using EducationERP.Common.Components;
-using EducationERP.Common.ToolsDev;
 using Raketa;
-using System.Configuration;
 using System.Windows;
 
 namespace EducationERP.ViewModels.LoginSetting
@@ -10,6 +8,8 @@ namespace EducationERP.ViewModels.LoginSetting
     {
         string host = string.Empty;
         string port = string.Empty;
+        string username = string.Empty;
+        string password = string.Empty;
         string database = string.Empty;
         string pathTemporaryData = string.Empty;
 
@@ -22,6 +22,16 @@ namespace EducationERP.ViewModels.LoginSetting
         {
             get => port;
             set => SetValue(ref port, value);
+        }
+        public string Username
+        {
+            get => username;
+            set => SetValue(ref username, value);
+        }
+        public string Password
+        {
+            get => password;
+            set => SetValue(ref password, value);
         }
         public string Database
         {
@@ -54,26 +64,28 @@ namespace EducationERP.ViewModels.LoginSetting
 
         void SaveSettingBD()
         {
-            if (string.IsNullOrWhiteSpace(Host) || string.IsNullOrWhiteSpace(Port) || string.IsNullOrWhiteSpace(Database))
-                MessageBox.Show("Заполните все поля!");
-            else _config.SaveConfig(Host, Port, Database, PathTemporaryData);
+            //if (string.IsNullOrWhiteSpace(Host) || string.IsNullOrWhiteSpace(Port) || string.IsNullOrWhiteSpace(Database))
+            //    MessageBox.Show("Заполните все поля!");
+            //else _config.SaveConfig(Host, Port, Database, PathTemporaryData);
         }
         void RemoveSettingBD()
         {
-            if (Host == string.Empty && Port == string.Empty && Database == string.Empty && PathTemporaryData == string.Empty) return;
-
             Host = string.Empty;
             Port = string.Empty;
+            Username = string.Empty;
+            Password = string.Empty;
             Database = string.Empty;
             PathTemporaryData = string.Empty;
 
-            _config.RemoveConfig();
+            //_config.RemoveConfig(); // Переделать внутри
         }
         void GetConfigValues()
         {
-            Host = _config.GetValueConfig("Host");
-            Port = _config.GetValueConfig("Port");
-            Database = _config.GetValueConfig("Database");
+            Host = _config.GetValueConnect("Host");
+            Port = _config.GetValueConnect("Port");
+            Username = _config.GetValueConnect("Username");
+            Password = _config.GetValueConnect("Password");
+            Database = _config.GetValueConnect("Database");
             PathTemporaryData = _config.GetValueConfig("PathTemporaryData");
         }
         void ExitSettingBD() => _serviceView.Close<SettingBDViewModel>();

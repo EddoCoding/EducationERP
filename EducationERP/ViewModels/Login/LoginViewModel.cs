@@ -33,27 +33,27 @@ namespace EducationERP.ViewModels.Login
 
         void Login()
         {
-            if (string.IsNullOrWhiteSpace(Identifier) || string.IsNullOrWhiteSpace(Password))
-                MessageBox.Show("Заполните все поля!");
-            else
-            {
-                var isConnected = _config.Login(Identifier, Password);
-                if (isConnected)
-                {
-                    if (_context.Database.GetPendingMigrations().Any())
-                        MessageBox.Show("Информационная система отсутствует!");
-                    else
-                    {
-                        _serviceView.Window<EducationViewModel>().NonModal();
-                        _serviceView.Close<LoginViewModel>();
-                    }
-                }
-            }
+            //if (string.IsNullOrWhiteSpace(Identifier) || string.IsNullOrWhiteSpace(Password))
+            //    MessageBox.Show("Заполните все поля!");
+            //else
+            //{
+            //    var isConnected = _config.Login(Identifier, Password);
+            //    if (isConnected)
+            //    {
+            //        if (_context.Database.GetPendingMigrations().Any())
+            //            MessageBox.Show("Информационная система отсутствует!");
+            //        else
+            //        {
+            //            _serviceView.Window<EducationViewModel>().NonModal();
+            //            _serviceView.Close<LoginViewModel>();
+            //        }
+            //    }
+            //}
         }
         void CreateIS()
         {
-            _context.Database.GetDbConnection().ConnectionString = _config.GetStrConnection(Identifier, Password);
-            _context.ApplyMigrate();
+            //_context.Database.GetDbConnection().ConnectionString = _config.GetStrConnection(Identifier, Password);
+            //_context.ApplyMigrate();
         }
         void OpenSettingBD() => _serviceView.Window<SettingBDViewModel>().Modal();
         void ExitLogin() => _serviceView.Close<LoginViewModel>();

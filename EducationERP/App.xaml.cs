@@ -26,7 +26,7 @@ namespace EducationERP
             RegisterView();
             RegisterDependency();
 
-            _serviceView.Window<LoginViewModel>().NonModal();
+            _serviceView.Window<EducationViewModel>().NonModal();
         }
 
         void RegisterView()
