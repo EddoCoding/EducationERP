@@ -1,6 +1,5 @@
 ﻿using EducationERP.Common.Components;
 using Raketa;
-using System.Windows;
 
 namespace EducationERP.ViewModels.LoginSetting
 {

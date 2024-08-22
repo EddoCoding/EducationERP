@@ -1,4 +1,5 @@
 ﻿using EducationERP.Common.Components;
+using EducationERP.Common.ToolsDev;
 using EducationERP.ViewModels.LoginSetting;
 using Microsoft.EntityFrameworkCore;
 using Raketa;
@@ -8,12 +9,10 @@ namespace EducationERP.ViewModels.Login
 {
     public class LoginViewModel : RaketaViewModel
     {
-        public string Identifier { get; set; } = "postgres";
-        public string Password { get; set; } = "qwerty";
+        public string Identifier { get; set; }
+        public string Password { get; set; }
 
         public RaketaCommand LoginCommand { get; }
-        public RaketaCommand CreateISCommand { get; }
-        public RaketaCommand SettingBDCommand { get; }
         public RaketaCommand ExitCommand { get; }
 
         IServiceView _serviceView;
@@ -26,13 +25,12 @@ namespace EducationERP.ViewModels.Login
             _context = context;
 
             LoginCommand = RaketaCommand.Launch(Login);
-            CreateISCommand = RaketaCommand.Launch(CreateIS);
-            SettingBDCommand = RaketaCommand.Launch(OpenSettingBD);
             ExitCommand = RaketaCommand.Launch(ExitLogin);
         }
 
         void Login()
         {
+            Dev.NotReady();
             //if (string.IsNullOrWhiteSpace(Identifier) || string.IsNullOrWhiteSpace(Password))
             //    MessageBox.Show("Заполните все поля!");
             //else
@@ -50,12 +48,6 @@ namespace EducationERP.ViewModels.Login
             //    }
             //}
         }
-        void CreateIS()
-        {
-            //_context.Database.GetDbConnection().ConnectionString = _config.GetStrConnection(Identifier, Password);
-            //_context.ApplyMigrate();
-        }
-        void OpenSettingBD() => _serviceView.Window<SettingBDViewModel>().Modal();
         void ExitLogin() => _serviceView.Close<LoginViewModel>();
     }
 }
