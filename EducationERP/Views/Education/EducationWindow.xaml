@@ -174,7 +174,7 @@
             <TextBlock Grid.Column="0" Grid.Row="0" Text="ERP" FontSize="16" Margin="10,10,0,0" Padding="0" FontWeight="Bold"/>
             <TextBlock Grid.Column="1" Grid.Row="0" Text="Образование" FontSize="16" Margin="10,10,0,0" Padding="0"/>
             <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="Enterprise Resource Planning" FontSize="14" Margin="10,0,0,10" Padding="0"/>
-            <TextBlock Grid.Column="2" Grid.RowSpan="2" Text="Фамилия И.О." Margin="10,0,5,0" FontSize="16" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="2" Grid.RowSpan="2" Text="{Binding FullName}" Margin="10,0,5,0" FontSize="16" VerticalAlignment="Center"/>
             <Button Grid.RowSpan="2" Grid.Column="3" Style="{StaticResource ButtonMenu}" VerticalAlignment="Center" Command="{Binding OpenEducationMenuCommand}"/>
 
         </Grid> <!-- ШАПКА -->

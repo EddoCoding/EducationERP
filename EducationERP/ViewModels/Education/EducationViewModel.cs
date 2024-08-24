@@ -7,14 +7,18 @@ namespace EducationERP.ViewModels
 {
     public class EducationViewModel : RaketaViewModel
     {
+        public string FullName { get; set; } = string.Empty;
+
         public VisualEducationViewModel Visual { get; set; } = new();
         public RaketaCommand OpenEducationMenuCommand { get; set; }
         public RaketaCommand AdministrationCommand { get; set; }
 
         IServiceView _serviceView;
         public ITabControl TabControl { get; set; }
-        public EducationViewModel(IServiceView serviceView, ITabControl tabControl)
+        public EducationViewModel(IServiceView serviceView, ITabControl tabControl, string fullName)
         {
+            FullName = fullName;
+
             _serviceView = serviceView;
             TabControl = tabControl;
 

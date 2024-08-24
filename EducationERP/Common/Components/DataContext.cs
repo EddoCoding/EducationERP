@@ -27,6 +27,20 @@ namespace EducationERP.Common.Components
             }
             
         }
+        public bool CanConnect()
+        {
+            try
+            {
+                if (Database.CanConnect()) return true;
+                else return false;
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка соединения!");
+                return false;
+            }
+
+        }
 
         public bool ApplyMigrate()
         {

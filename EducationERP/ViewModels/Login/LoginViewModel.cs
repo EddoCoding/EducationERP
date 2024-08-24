@@ -1,7 +1,4 @@
 ﻿using EducationERP.Common.Components;
-using EducationERP.Common.ToolsDev;
-using EducationERP.ViewModels.LoginSetting;
-using Microsoft.EntityFrameworkCore;
 using Raketa;
 using System.Windows;
 
@@ -30,12 +27,18 @@ namespace EducationERP.ViewModels.Login
 
         void Login()
         {
+            if (!_context.CanConnect()) return;
 
-            bool user = _context.Users.Any(u => u.Username == "postgres" && 
-                                                 u.Password == "qwerty");
+            var user = _context.Users.FirstOrDefault(u => u.Identifier == Identifier && u.Password == Password);
 
-            if (user) _serviceView.Window<EducationViewModel>().NonModal();
-            else MessageBox.Show("Вход не возможен");
+            if (user != null)
+            {
+                var fullName = $"{user.SurName} {user.Name} {user.MiddleName}";
+                _serviceView.Window<EducationViewModel>(default, fullName).NonModal();
+                _serviceView.Close<LoginViewModel>();
+            }
+            else MessageBox.Show("Ошибка соединения!");
+
         }
         void ExitLogin() => _serviceView.Close<LoginViewModel>();
     }

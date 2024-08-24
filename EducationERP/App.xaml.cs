@@ -28,7 +28,7 @@ namespace EducationERP
             _config = _container.GetDependency<IConfig>();
 
             if(_config.GetIsConfigured()) _serviceView.Window<LoginViewModel>().NonModal();
-            else _serviceView.Window<EducationViewModel>().NonModal();
+            else _serviceView.Window<EducationViewModel>(default, "").NonModal();
         }
 
         void RegisterView()

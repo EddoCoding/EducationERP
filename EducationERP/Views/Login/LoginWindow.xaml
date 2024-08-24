@@ -25,7 +25,7 @@
 
             <StackPanel Grid.Row="1" Margin="10,0">
 
-                <Label Content="Логин" Style="{StaticResource defaultLabel}" VerticalAlignment="Center" FontSize="16"/>
+                <Label Content="Идентификатор" Style="{StaticResource defaultLabel}" VerticalAlignment="Center" FontSize="16"/>
                 <Grid Background="White">
                     <Grid.Effect>
                         <DropShadowEffect Opacity="0.3" ShadowDepth="2" BlurRadius="10" />
