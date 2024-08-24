@@ -45,7 +45,11 @@ namespace EducationERP.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("SrnameName")
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SurName")
                         .IsRequired()
                         .HasColumnType("text");
 

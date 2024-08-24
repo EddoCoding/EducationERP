@@ -1,4 +1,5 @@
 ﻿using EducationERP.Common.Components;
+using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
 using EducationERP.Modules.Login.View;
 using EducationERP.ViewModels;
@@ -28,7 +29,7 @@ namespace EducationERP
             _config = _container.GetDependency<IConfig>();
 
             if(_config.GetIsConfigured()) _serviceView.Window<LoginViewModel>().NonModal();
-            else _serviceView.Window<EducationViewModel>(default, "").NonModal();
+            else _serviceView.Window<EducationViewModel>(default, "", "").NonModal();
         }
 
         void RegisterView()
@@ -43,6 +44,7 @@ namespace EducationERP
             _container.RegisterSingleton<DataContext, DataContext>();
             _container.RegisterTransient<Config, IConfig>();
             _container.RegisterSingleton<MainTabControl, ITabControl>();
+            _container.RegisterTransient<UserRepository, IUserRepository>();
         }
     }
 }
