@@ -36,8 +36,8 @@ namespace EducationERP.ViewModels.Login
                 _serviceView.Close<LoginViewModel>();
             }
             else MessageBox.Show("Ошибка соединения!");
-
         }
+
         void ExitLogin() => _serviceView.Close<LoginViewModel>();
     }
 }

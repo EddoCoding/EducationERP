@@ -32,7 +32,11 @@ namespace EducationERP.Common.Components
             try
             {
                 if (Database.CanConnect()) return true;
-                else return false;
+                else
+                {
+                    MessageBox.Show("Ошибка соединения!");
+                    return false;
+                }
             }
             catch
             {
