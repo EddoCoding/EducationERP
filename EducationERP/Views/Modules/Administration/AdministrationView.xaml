@@ -65,6 +65,70 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="ColumnHeaderUsers" TargetType="DataGridColumnHeader">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridColumnHeader">
+                        <Border BorderThickness="1" BorderBrush="Gray" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ToggleButton" TargetType="ToggleButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="{Binding FullName}" VerticalAlignment="Center" Margin="10,5"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Identifier}" VerticalAlignment="Center" Margin="10,5"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Password}" VerticalAlignment="Center" Margin="10,5"/>
+                            <TextBlock Grid.Column="3" Text="{Binding Role}" VerticalAlignment="Center" Margin="10,5"/>
+                            <TextBlock Grid.Column="4" Text="{Binding SubRole}" VerticalAlignment="Center" Margin="10,5"/>
+
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="UserRowStyle" TargetType="DataGridRow">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridRow">
+                        <Border Margin="0,1" BorderThickness="0,0,0,1" BorderBrush="LightGray" Background="{TemplateBinding Background}">
+                            <Grid>
+                                <ToggleButton IsChecked="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected, Mode=TwoWay}"
+                                  HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Style="{StaticResource ToggleButton}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="LightGray" ShadowDepth="2"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="WhiteSmoke"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
 
     <Grid Background="White">
@@ -107,17 +171,20 @@
                                      Foreground="Gray" FontSize="14" VerticalContentAlignment="Center"/>
                         </Grid>
 
-                        <DataGrid Grid.Row="1" Margin="10,0" Height="300" Background="WhiteSmoke" ItemsSource="{Binding UserViewModel.Users}" AutoGenerateColumns="False"
-                                  SelectedItem="{Binding UserViewModel.SelectedUser}">
+                        <DataGrid Grid.Row="1" Margin="10,0" Height="350" Background="White" ItemsSource="{Binding UserViewModel.Users}" AutoGenerateColumns="False"
+                                  SelectedItem="{Binding UserViewModel.SelectedUser}" ColumnHeaderStyle="{StaticResource ColumnHeaderUsers}" CanUserAddRows="False"
+                                  CanUserDeleteRows="False" CanUserResizeRows="False" RowHeaderWidth="0" BorderBrush="Gray" BorderThickness="1,0,1,1" SelectionMode="Single" 
+                                  CanUserReorderColumns="False" CanUserResizeColumns="False" RowStyle="{StaticResource UserRowStyle}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}" Width="*" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Идентификатор" Binding="{Binding Identifier}" Width="*" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Пароль" Binding="{Binding Password}" Width="*" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Роли" Binding="{Binding Role}" Width="*" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="ФИО" Width="*" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Идентификатор" Width="*" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Пароль" Width="*" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Роли" Width="*" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Под роли" Width="*" IsReadOnly="True"/>
                             </DataGrid.Columns>
                         </DataGrid>
 
-                        <StackPanel Grid.Row="2" Background="White" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <StackPanel Grid.Row="2" Background="White" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right" RenderOptions.BitmapScalingMode="NearestNeighbor">
                             <StackPanel.Effect>
                                 <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
                             </StackPanel.Effect>

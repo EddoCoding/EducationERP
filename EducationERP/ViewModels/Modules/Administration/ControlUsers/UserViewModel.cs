@@ -27,7 +27,7 @@ namespace EducationERP.ViewModels.Modules.Administration
             UpdateUserCommand = RaketaCommand.Launch(UpdateCollection);
         }
 
-        void AddUser() { }
+        void AddUser() => Users.Add(new UserVM());
         void ChangeUser() { }
         void DeleteUser() 
         {
