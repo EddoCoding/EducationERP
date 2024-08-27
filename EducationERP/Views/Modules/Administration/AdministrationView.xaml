@@ -189,7 +189,7 @@
                                 <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
                             </StackPanel.Effect>
 
-                            <Button Content="/Common/Images/addUser.png" Style="{StaticResource ButtonImage}" Command="{Binding UserViewModel.AddUserCommand}"
+                            <Button Content="/Common/Images/addUser.png" Style="{StaticResource ButtonImage}" Command="{Binding UserViewModel.OpenWindowAddUserCommand}"
                                     Height="23" Width="23" VerticalAlignment="Top" Margin="10" ToolTip="Добавить пользователя в систему"/>
 
                             <Button Content="/Common/Images/changeUser.png" Style="{StaticResource ButtonImage}" Command="{Binding UserViewModel.ChangeUserCommand}"

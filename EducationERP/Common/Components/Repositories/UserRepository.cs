@@ -1,10 +1,13 @@
 ﻿using EducationERP.Models;
 using EducationERP.ViewModels.Modules.Administration.ControlUsers;
+using System.Collections.ObjectModel;
 
 namespace EducationERP.Common.Components.Repositories
 {
     public class UserRepository(DataContext context) : IUserRepository
     {
+        public ObservableCollection<UserVM> Users { get; set; } = new();
+
         public UserVM[] GetUsers()
         {
             if (!context.CanConnect()) return null;

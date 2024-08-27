@@ -4,10 +4,11 @@ using EducationERP.Common.Components.Services;
 using EducationERP.Modules.Login.View;
 using EducationERP.ViewModels;
 using EducationERP.ViewModels.Login;
-using EducationERP.ViewModels.LoginSetting;
 using EducationERP.ViewModels.Modules.Administration;
+using EducationERP.ViewModels.Modules.Administration.ControlUsers;
 using EducationERP.Views;
 using EducationERP.Views.Modules.Administration;
+using EducationERP.Views.Modules.Administration.ControlUsers;
 using Raketa;
 using System.Windows;
 
@@ -36,6 +37,7 @@ namespace EducationERP
         {
             _serviceView.RegisterTypeView<LoginViewModel, LoginWindow>();
             _serviceView.RegisterTypeView<EducationViewModel, EducationWindow>();
+            _serviceView.RegisterTypeView<AddUserViewModel, WindowAddUser>();
             _serviceView.RegisterTypeView<AdministrationViewModel, AdministrationView>();
         }
 
@@ -44,7 +46,7 @@ namespace EducationERP
             _container.RegisterSingleton<DataContext, DataContext>();
             _container.RegisterTransient<Config, IConfig>();
             _container.RegisterSingleton<MainTabControl, ITabControl>();
-            _container.RegisterTransient<UserRepository, IUserRepository>();
+            _container.RegisterSingleton<UserRepository, IUserRepository>();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace EducationERP.ViewModels.Modules.Administration
             IUserRepository userRepository)
         {
             SettingBDViewModel = new(serviceView, config, context);
-            UserViewModel = new(userRepository);
+            UserViewModel = new(serviceView, userRepository);
         }
     }
 }
