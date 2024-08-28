@@ -10,5 +10,6 @@ namespace EducationERP.Common.Components.Repositories
 
         UserVM[] GetUsers();
         User GetUser(string identifier, string password);
+        void AddUser(User user);
     }
 }

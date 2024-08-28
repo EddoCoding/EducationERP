@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationERP.Views"
-        mc:Ignorable="d" Title="EducationWindow" Height="450" Width="800" MinWidth="800" MinHeight="450"
+        mc:Ignorable="d" Title="EducationWindow" Height="450" Width="1100" MinHeight="450" MinWidth="1100"
         Background="WhiteSmoke" FontFamily="Calibri" WindowStyle="None" 
         WindowStartupLocation="CenterScreen" MouseDown="MoveWindow">
     <Window.Resources>

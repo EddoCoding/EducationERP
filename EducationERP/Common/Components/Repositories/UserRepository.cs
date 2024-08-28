@@ -28,5 +28,10 @@ namespace EducationERP.Common.Components.Repositories
 
             return context.Users.FirstOrDefault(u => u.Identifier == identifier && u.Password == password);
         }
+        public void AddUser(User user)
+        {
+            context.Users.Add(user);
+            context.SaveChanges();
+        }
     }
 }

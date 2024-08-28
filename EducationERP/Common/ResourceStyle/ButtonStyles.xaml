@@ -14,7 +14,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>    
-    </Style>
+    </Style> <!-- УДАЛИТЬ ИЛИ ПЕРЕДЕЛАТЬ -->
 
     <Style x:Key="ButtonImage" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
@@ -33,6 +33,42 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="WhiteSmoke"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ButtonTextCreate" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Gray" CornerRadius="3">
+                        <ContentPresenter Margin="3"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FFD700"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ButtonTextCancel" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Gray" CornerRadius="3">
+                        <ContentPresenter Margin="3"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="LightGray"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

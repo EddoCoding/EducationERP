@@ -190,7 +190,7 @@
                             </StackPanel.Effect>
 
                             <Button Content="/Common/Images/addUser.png" Style="{StaticResource ButtonImage}" Command="{Binding UserViewModel.OpenWindowAddUserCommand}"
-                                    Height="23" Width="23" VerticalAlignment="Top" Margin="10" ToolTip="Добавить пользователя в систему"/>
+                                    Height="23" Width="23" VerticalAlignment="Top" Margin="10" ToolTip="Создать пользователя"/>
 
                             <Button Content="/Common/Images/changeUser.png" Style="{StaticResource ButtonImage}" Command="{Binding UserViewModel.ChangeUserCommand}"
                                     Height="23" Width="23" VerticalAlignment="Top" Margin="10" ToolTip="Изменить данные пользователя системы"/>
