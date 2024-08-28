@@ -167,8 +167,7 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="Список пользователей"/>
-                            <TextBox Grid.Column="1" Margin="10,0,0,0" Text="Поиск пользователей"
-                                     Foreground="Gray" FontSize="14" VerticalContentAlignment="Center"/>
+                            <TextBox Grid.Column="1" Text="Поиск пользователей" Margin="10,0,0,0" Foreground="Gray" FontSize="14" VerticalContentAlignment="Center"/>
                         </Grid>
 
                         <DataGrid Grid.Row="1" Margin="10,0" Height="350" Background="White" ItemsSource="{Binding UserViewModel.Users}" AutoGenerateColumns="False"
@@ -195,8 +194,9 @@
                             <Button Content="/Common/Images/changeUser.png" Style="{StaticResource ButtonImage}" Command="{Binding UserViewModel.ChangeUserCommand}"
                                     Height="23" Width="23" VerticalAlignment="Top" Margin="10" ToolTip="Изменить данные пользователя системы"/>
 
-                            <Button Content="/Common/Images/deleteUser.png" Style="{StaticResource ButtonImage}" Command="{Binding UserViewModel.DeleteUserCommand}"
-                                    Height="23" Width="23" VerticalAlignment="Top" Margin="10" ToolTip="Удалить пользователя из системы"/>
+                            <Button Content="/Common/Images/deleteUser.png" Style="{StaticResource ButtonImage}" Height="23" Width="23" 
+                                    VerticalAlignment="Top" Margin="10" ToolTip="Удалить пользователя из системы"
+                                    Command="{Binding UserViewModel.DeleteUserCommand}" CommandParameter="{Binding UserViewModel.SelectedUser}"/>
 
                             <Button Content="/Common/Images/update.png" Style="{StaticResource ButtonImage}" Command="{Binding UserViewModel.UpdateUserCommand}"
                                     Height="23" Width="23" VerticalAlignment="Top" Margin="10" ToolTip="Обновить список пользователей"/>

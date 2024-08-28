@@ -28,6 +28,7 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
             _userRepository.AddUser(user);
             _userRepository.Users.Add(new UserVM()
             {
+                Id = user.Id,
                 FullName = $"{user.SurName} {user.Name} {user.MiddleName}",
                 Identifier = user.Identifier,
                 Password = user.Password

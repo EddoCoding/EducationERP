@@ -9,11 +9,17 @@ namespace EducationERP.ViewModels.Modules.Administration
     {
         public string TextSearch { get; set; } = string.Empty;
         public ObservableCollection<UserVM> Users { get; set; } = new();
-        public UserVM SelectedUser { get; set; }
+
+        UserVM selectedUser;
+        public UserVM SelectedUser
+        {
+            get => selectedUser;
+            set => SetValue(ref selectedUser, value);
+        }
 
         public RaketaCommand OpenWindowAddUserCommand { get; set; }
         public RaketaCommand ChangeUserCommand { get; set; }
-        public RaketaCommand DeleteUserCommand { get; set; }
+        public RaketaTCommand<UserVM> DeleteUserCommand { get; set; }
         public RaketaCommand UpdateUserCommand { get; set; }
 
         IServiceView _serviceView;
@@ -31,15 +37,19 @@ namespace EducationERP.ViewModels.Modules.Administration
 
             OpenWindowAddUserCommand = RaketaCommand.Launch(OpenWindowAddUser);
             ChangeUserCommand = RaketaCommand.Launch(ChangeUser);
-            DeleteUserCommand = RaketaCommand.Launch(DeleteUser);
+            DeleteUserCommand = RaketaTCommand<UserVM>.Launch(DeleteUser);
             UpdateUserCommand = RaketaCommand.Launch(UpdateCollection);
         }
 
         void OpenWindowAddUser() => _serviceView.Window<AddUserViewModel>().Modal();
         void ChangeUser() { }
-        void DeleteUser() 
+        void DeleteUser(UserVM user) 
         {
-            if(SelectedUser != null) Users.Remove(SelectedUser);
+            if(user != null)
+            {
+                _userRepository.DeleteUser(user);
+                Users.Remove(user);
+            }
         }
         void UpdateCollection() 
         {
