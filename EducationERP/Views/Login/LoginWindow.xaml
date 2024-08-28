@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationERP.Modules.Login.View"
         mc:Ignorable="d" Title="Вход" Height="220" Width="450" MouseDown="MoveWindow"
-        Background="WhiteSmoke" FontFamily="Calibri" WindowStyle="None" 
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Background="WhiteSmoke" FontFamily="{StaticResource OpenSans}" WindowStyle="None" 
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" RenderOptions.BitmapScalingMode="NearestNeighbor">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,12 +20,11 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" Content="ERP.Education" Style="{StaticResource defaultLabel}"
-                   HorizontalAlignment="Center" FontSize="18" Margin="0,15"/>
+            <TextBlock Grid.Row="0" Text="ERP.Education" HorizontalAlignment="Center" FontSize="16" Margin="0,15"/>
 
-            <StackPanel Grid.Row="1" Margin="10,0">
+            <StackPanel Grid.Row="1" Margin="10,0" TextOptions.TextFormattingMode="Display">
 
-                <Label Content="Идентификатор" Style="{StaticResource defaultLabel}" VerticalAlignment="Center" FontSize="16"/>
+                <TextBlock Text="Идентификатор" VerticalAlignment="Center" FontSize="15"/>
                 <Grid Background="White">
                     <Grid.Effect>
                         <DropShadowEffect Opacity="0.3" ShadowDepth="2" BlurRadius="10" />
@@ -34,7 +33,7 @@
                     <TextBox Text="{Binding Identifier}" Style="{StaticResource defaultTextBox}" Margin="10"/>
                 </Grid>
 
-                <Label Content="Пароль" Style="{StaticResource defaultLabel}" VerticalAlignment="Center" FontSize="16" Margin="0,5,0,0"/>
+                <TextBlock Text="Пароль" VerticalAlignment="Center" FontSize="15" Margin="0,5,0,0"/>
                 <Grid Background="White">
                     <Grid.Effect>
                         <DropShadowEffect Opacity="0.3" ShadowDepth="2" BlurRadius="10" />
@@ -43,7 +42,7 @@
                     <TextBox Text="{Binding Password}" Style="{StaticResource defaultTextBox}" Margin="10"/>
                 </Grid>
 
-                <Label Content="Введите логин и пароль, нажмите кнопку вход" Style="{StaticResource defaultLabel}" Foreground="Gray" Margin="0,5"/>
+                <TextBlock Text="Введите логин и пароль, нажмите кнопку вход" Foreground="Gray" Margin="0,5"/>
                 
             </StackPanel>
 
@@ -61,9 +60,9 @@
                 <DropShadowEffect Opacity="0.3" ShadowDepth="2" BlurRadius="10" />
             </Grid.Effect>
 
-            <Button Grid.Row="0" Content="/Common/Images/login.png" Style="{StaticResource ButtonImage}" Command="{Binding LoginCommand}"
+            <Button Grid.Row="0" Content="/Common/Resources/Images/login.png" Style="{StaticResource ButtonImage}" Command="{Binding LoginCommand}"
                     Height="25" Width="25" VerticalAlignment="Top" Margin="0,10,0,5" ToolTip="Вход"/>
-            <Button Grid.Row="3" Content="/Common/Images/exit.png" Style="{StaticResource ButtonImage}" Command="{Binding ExitCommand}"
+            <Button Grid.Row="3" Content="/Common/Resources/Images/exit.png" Style="{StaticResource ButtonImage}" Command="{Binding ExitCommand}"
                     Height="23" Width="23" VerticalAlignment="Bottom" Margin="0,0,0,10" ToolTip="Закрыть окно"/>
 
         </Grid>

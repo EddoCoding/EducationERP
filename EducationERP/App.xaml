@@ -4,11 +4,14 @@
              xmlns:local="clr-namespace:EducationERP">
     <Application.Resources>
         <ResourceDictionary>
+
+            <FontFamily x:Key="OpenSans" x:Uid="pack://application:,,,Common/Resources/Fonts/OpenSans.ttf"/>
+
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Common/ResourceStyle/LabelStyles.xaml"/>
-                <ResourceDictionary Source="Common/ResourceStyle/TextBoxStyles.xaml"/>
-                <ResourceDictionary Source="Common/ResourceStyle/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="Common/Resources/Styles/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="Common/Resources/Styles/ButtonStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,6 +1,7 @@
 ﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Models;
 using Raketa;
+using System.Windows;
 
 namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
 {
@@ -25,6 +26,13 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
 
         void AddUser(User user)
         {
+            if (String.IsNullOrWhiteSpace(User.SurName) || String.IsNullOrWhiteSpace(User.Name)
+                 || String.IsNullOrWhiteSpace(User.Identifier) || String.IsNullOrWhiteSpace(User.Password))
+            {
+                MessageBox.Show("Есть незаполненные поля!");
+                return;
+            }
+                
             _userRepository.AddUser(user);
             _userRepository.Users.Add(new UserVM()
             {

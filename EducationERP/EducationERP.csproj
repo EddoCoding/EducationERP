@@ -9,30 +9,46 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Common\Images\addUser.png" />
-    <None Remove="Common\Images\changeDocument.png" />
-    <None Remove="Common\Images\changeSize.png" />
-    <None Remove="Common\Images\changeUser.png" />
-    <None Remove="Common\Images\createBaseData.png" />
-    <None Remove="Common\Images\deleteUser.png" />
-    <None Remove="Common\Images\exit.png" />
-    <None Remove="Common\Images\login.png" />
-    <None Remove="Common\Images\menuEducation.png" />
-    <None Remove="Common\Images\removeConfig.png" />
-    <None Remove="Common\Images\saveConfig.png" />
-    <None Remove="Common\Images\settingBD.png" />
-    <None Remove="Common\Images\settingModule.png" />
-    <None Remove="Common\Images\update.png" />
+    <None Remove="Common\Resources\Images\addUser.png" />
+    <None Remove="Common\Resources\Images\changeDocument.png" />
+    <None Remove="Common\Resources\Images\changeSize.png" />
+    <None Remove="Common\Resources\Images\changeUser.png" />
+    <None Remove="Common\Resources\Images\createBaseData.png" />
+    <None Remove="Common\Resources\Images\deleteUser.png" />
+    <None Remove="Common\Resources\Images\exit.png" />
+    <None Remove="Common\Resources\Images\login.png" />
+    <None Remove="Common\Resources\Images\menuEducation.png" />
+    <None Remove="Common\Resources\Images\removeConfig.png" />
+    <None Remove="Common\Resources\Images\saveConfig.png" />
+    <None Remove="Common\Resources\Images\settingBD.png" />
+    <None Remove="Common\Resources\Images\settingModule.png" />
+    <None Remove="Common\Resources\Images\update.png" />
+    <None Remove="Common\Resources\Fonts\OpenSans.ttf" />
+    <None Remove="Common\Resources\Fonts\OpenSansBold.ttf" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Common\Images\addUser.png" />
-    <Resource Include="Common\Images\changeDocument.png" />
-    <Resource Include="Common\Images\changeSize.png" />
-    <Resource Include="Common\Images\changeUser.png" />
-    <Resource Include="Common\Images\deleteUser.png" />
-    <Resource Include="Common\Images\menuEducation.png" />
-    <Resource Include="Common\Images\removeConfig.png" />
+    <Resource Include="Common\Resources\Images\addUser.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Resources\Images\changeDocument.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Resources\Images\changeSize.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Resources\Images\changeUser.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Resources\Images\deleteUser.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Resources\Images\menuEducation.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Resources\Images\removeConfig.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -53,19 +69,33 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Common\Images\createBaseData.png" />
-    <Resource Include="Common\Images\exit.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    <Resource Include="Common\Resources\Images\createBaseData.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Common\Images\login.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    <Resource Include="Common\Resources\Images\exit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Common\Images\saveConfig.png" />
-    <Resource Include="Common\Images\settingBD.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    <Resource Include="Common\Resources\Images\login.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Common\Images\settingModule.png" />
-    <Resource Include="Common\Images\update.png" />
+    <Resource Include="Common\Resources\Images\saveConfig.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Resources\Images\settingBD.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Resources\Images\settingModule.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Resources\Images\update.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Resources\Fonts\OpenSans.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Resources\Fonts\OpenSansBold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

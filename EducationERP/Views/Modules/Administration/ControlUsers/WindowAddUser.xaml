@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationERP.Views.Modules.Administration.ControlUsers"
         mc:Ignorable="d" Title="Добавление пользователя" Height="450" Width="600" MouseDown="MoveWindow"
-        Background="WhiteSmoke" FontFamily="Open Sans" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Background="WhiteSmoke" FontFamily="{StaticResource OpenSans}" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        RenderOptions.BitmapScalingMode="NearestNeighbor">
     <Window.Resources>
         <Style x:Key="UserDataTextBox" TargetType="TextBox">
             <Setter Property="FontSize" Value="15"/>
