@@ -8,6 +8,6 @@
         public string SurName { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
         public string MiddleName { get; set; } = string.Empty;
-        public string Role { get ; set; } = string.Empty;
+        public string RoleAndAccesses { get ; set; } = string.Empty;
     }
 }

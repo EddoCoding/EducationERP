@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EducationERP.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240828150234_FirstMigration")]
+    [Migration("20240829231859_FirstMigration")]
     partial class FirstMigration
     {
         /// <inheritdoc />
@@ -47,7 +47,7 @@ namespace EducationERP.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Role")
+                    b.Property<string>("RoleAndAccesses")
                         .IsRequired()
                         .HasColumnType("text");
 

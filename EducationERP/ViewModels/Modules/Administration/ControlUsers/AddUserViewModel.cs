@@ -8,10 +8,13 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
     public class AddUserViewModel : RaketaViewModel
     {
         public User User { get; set; } = new();
+        public UserVM UserVM { get; set; } = new();
+        public VisualAddUser Visual { get; set; } = new();
 
 
         public RaketaTCommand<User> AddUserCommand { get; set; }
         public RaketaCommand ExitCommand { get; set; }
+        public RaketaTCommand<string> Command { get; set; }
 
         IServiceView _serviceView;
         IUserRepository _userRepository;
@@ -22,6 +25,8 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
 
             AddUserCommand = RaketaTCommand<User>.Launch(AddUser);
             ExitCommand = RaketaCommand.Launch(Exit);
+
+            Command = RaketaTCommand<string>.Launch(Visible);
         }
 
         void AddUser(User user)
@@ -32,7 +37,9 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
                 MessageBox.Show("Есть незаполненные поля!");
                 return;
             }
-                
+
+            user.RoleAndAccesses = UserVM.RolesAndAccesses;
+
             _userRepository.AddUser(user);
             _userRepository.Users.Add(new UserVM()
             {
@@ -43,6 +50,23 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
             });
             _serviceView.Close<AddUserViewModel>();
         }
+
+        void Visible(string role)
+        {
+            switch(role)
+            {
+                case "Администрирование":
+                    if (Visual.AdministrationVisibility == Visibility.Collapsed)
+                        Visual.AdministrationVisibility = Visibility.Visible;
+                    else
+                    {
+                        Visual.AdministrationVisibility = Visibility.Collapsed;
+                        UserVM.AccessAdministration = false;
+                    }
+                    break;
+            }
+        }
+
         void Exit() => _serviceView.Close<AddUserViewModel>();
     }
 }

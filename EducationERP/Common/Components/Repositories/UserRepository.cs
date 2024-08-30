@@ -18,8 +18,8 @@ namespace EducationERP.Common.Components.Repositories
                 Id = x.Id,
                 Identifier = x.Identifier,
                 Password = x.Password,
-                FullName = $"{x.SurName} {x.Name} {x.MiddleName}",
-                Role = x.Role
+                FullName = $"{x.SurName} {x.Name} {x.MiddleName}"
+                //Здесь получить роли и доступы
             }));
 
             return users.ToArray();

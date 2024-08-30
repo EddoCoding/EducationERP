@@ -21,7 +21,7 @@ namespace EducationERP.Migrations
                     SurName = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     MiddleName = table.Column<string>(type: "text", nullable: false),
-                    Role = table.Column<string>(type: "text", nullable: false)
+                    RoleAndAccesses = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {

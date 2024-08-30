@@ -31,7 +31,7 @@ namespace EducationERP.ViewModels.Login
             if (user != null)
             {
                 var fullName = $"{user.SurName} {user.Name} {user.MiddleName}";
-                var role = user.Role;
+                var role = user.RoleAndAccesses;
                 _serviceView.Window<EducationViewModel>(default, fullName, role).NonModal();
                 _serviceView.Close<LoginViewModel>();
             }

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationERP.Views.Modules.Administration.ControlUsers"
-        mc:Ignorable="d" Title="Добавление пользователя" Height="450" Width="600" MouseDown="MoveWindow"
+        mc:Ignorable="d" Title="Добавление пользователя" Height="500" Width="600" MouseDown="MoveWindow"
         Background="WhiteSmoke" FontFamily="{StaticResource OpenSans}" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         RenderOptions.BitmapScalingMode="NearestNeighbor">
     <Window.Resources>
@@ -31,11 +31,46 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="AccessTextBlock" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="AccessLine" TargetType="Line">
+            <Setter Property="X1" Value="0"/>
+            <Setter Property="X2" Value="100"/>
+            <Setter Property="Y1" Value="0"/>
+            <Setter Property="Y2" Value="0"/>
+            <Setter Property="Stroke" Value="LightGray"/>
+            <Setter Property="Stretch" Value="Fill"/>
+            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="Opacity" Value="0.7"/>
+        </Style>
+        <Style x:Key="AccessToggleButton" TargetType="ToggleButton">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="Gray" BorderThickness="1" CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,2"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#FFD700"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="LightGray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
 
     <Grid>
         <Grid Margin="10">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -132,7 +167,95 @@
                 </Grid>
             </Border>
 
-            <StackPanel Grid.Row="6" Background="White" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" RenderOptions.BitmapScalingMode="NearestNeighbor">
+            <StackPanel Grid.Row="6" Background="White" Margin="0,10">
+                <StackPanel.Effect>
+                    <DropShadowEffect Color="LightGray" Opacity="1" ShadowDepth="2"/>
+                </StackPanel.Effect>
+
+                <!--<Grid Margin="10,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Модуль - Ректор" Style="{StaticResource AccessTextBlock}"/>
+                    <ToggleButton Grid.Column="1" Style="{StaticResource AccessToggleButton}" Margin="10,0" Content="Доступ"
+                                  Command="{Binding .}"/>
+
+                </Grid>
+                <Line Style="{StaticResource AccessLine}"/>
+                
+                <Grid Margin="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Модуль - Деканат" Style="{StaticResource AccessTextBlock}"/>
+                    <ToggleButton Grid.Column="1" Style="{StaticResource AccessToggleButton}" Margin="10,0" Content="Доступ"
+                                  Command="{Binding .}"/>
+
+                </Grid>
+                <Line Style="{StaticResource AccessLine}"/>
+                
+                <Grid Margin="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Модуль - Учебный отдел" Style="{StaticResource AccessTextBlock}"/>
+                    <ToggleButton Grid.Column="1" Style="{StaticResource AccessToggleButton}" Margin="10,0" Content="Доступ"
+                                  Command="{Binding .}"/>
+
+                </Grid>
+                <Line Style="{StaticResource AccessLine}"/>
+
+                <Grid Margin="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Модуль - Преподаватель" Style="{StaticResource AccessTextBlock}"/>
+                    <ToggleButton Grid.Column="1" Style="{StaticResource AccessToggleButton}" Margin="10,0" Content="Доступ"
+                                  Command="{Binding .}"/>
+
+                </Grid>
+                <Line Style="{StaticResource AccessLine}"/>
+
+                <Grid Margin="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Модуль - Приёмная кампания" Style="{StaticResource AccessTextBlock}"/>
+                    <ToggleButton Grid.Column="1" Style="{StaticResource AccessToggleButton}" Margin="10,0" Content="Доступ"
+                                  Command="{Binding .}"/>
+
+                </Grid>
+                <Line Style="{StaticResource AccessLine}"/>-->
+
+                <Grid Margin="10,5,0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Модуль - Администрирование" Style="{StaticResource AccessTextBlock}"/>
+                    <ToggleButton Grid.Column="1" Style="{StaticResource AccessToggleButton}" Margin="10,0" Content="Доступ"
+                                  Command="{Binding Command}" CommandParameter="Администрирование"
+                                  IsChecked="{Binding UserVM.RoleAdministration}"/>
+                    <ToggleButton Grid.Column="2" Style="{StaticResource AccessToggleButton}" Margin="0,0,10,0" Content="Ограниченный"
+                                  Command="{Binding .}" IsChecked="{Binding UserVM.AccessAdministration}" Visibility="{Binding Visual.AdministrationVisibility}"/>
+
+                </Grid>
+
+            </StackPanel>
+
+            <StackPanel Grid.Row="7" Background="White" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" RenderOptions.BitmapScalingMode="NearestNeighbor">
                 <StackPanel.Effect>
                     <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
                 </StackPanel.Effect>
