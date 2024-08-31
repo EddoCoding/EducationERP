@@ -1,7 +1,6 @@
 ﻿using EducationERP.Models;
 using EducationERP.ViewModels.Modules.Administration.ControlUsers;
 using System.Collections.ObjectModel;
-using System.Windows;
 
 namespace EducationERP.Common.Components.Repositories
 {
@@ -18,8 +17,8 @@ namespace EducationERP.Common.Components.Repositories
                 Id = x.Id,
                 Identifier = x.Identifier,
                 Password = x.Password,
-                FullName = $"{x.SurName} {x.Name} {x.MiddleName}"
-                //Здесь получить роли и доступы
+                FullName = $"{x.SurName} {x.Name} {x.MiddleName}",
+                ModuleAdministration = x.ModuleAdministration
             }));
 
             return users.ToArray();

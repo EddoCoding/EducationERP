@@ -16,10 +16,10 @@ namespace EducationERP.ViewModels
 
         IServiceView _serviceView;
         public ITabControl TabControl { get; set; }
-        public EducationViewModel(IServiceView serviceView, ITabControl tabControl, string fullName, string role)
+        public EducationViewModel(IServiceView serviceView, ITabControl tabControl)
         {
-            FullName = fullName;
-            Role = role;
+            //FullName = fullName;
+            //Role = role;
 
             _serviceView = serviceView;
             TabControl = tabControl;

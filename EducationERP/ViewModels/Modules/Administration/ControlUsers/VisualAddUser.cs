@@ -1,15 +1,14 @@
 ﻿using Raketa;
-using System.Windows;
 
 namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
 {
     public class VisualAddUser : RaketaViewModel
     {
-        Visibility administrationVisibility = Visibility.Collapsed;
-        public Visibility AdministrationVisibility
+        string roleAdministration = "Без доступа";
+        public string RoleAdministration
         {
-            get => administrationVisibility;
-            set => SetValue(ref administrationVisibility, value);
-        } 
+            get => roleAdministration;
+            set => SetValue(ref roleAdministration, value);
+        }
     }
 }

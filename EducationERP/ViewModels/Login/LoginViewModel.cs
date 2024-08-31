@@ -1,6 +1,4 @@
-﻿using EducationERP.Common.Components;
-using EducationERP.Common.Components.Repositories;
-using Microsoft.EntityFrameworkCore;
+﻿using EducationERP.Common.Components.Repositories;
 using Raketa;
 using System.Windows;
 
@@ -31,8 +29,7 @@ namespace EducationERP.ViewModels.Login
             if (user != null)
             {
                 var fullName = $"{user.SurName} {user.Name} {user.MiddleName}";
-                var role = user.RoleAndAccesses;
-                _serviceView.Window<EducationViewModel>(default, fullName, role).NonModal();
+                _serviceView.Window<EducationViewModel>().NonModal();
                 _serviceView.Close<LoginViewModel>();
             }
             else MessageBox.Show("Ошибка соединения!");

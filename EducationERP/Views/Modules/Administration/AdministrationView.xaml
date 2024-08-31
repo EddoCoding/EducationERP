@@ -4,8 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EducationERP.Views.Modules.Administration"
+             xmlns:converters="clr-namespace:EducationERP.Common.Converters"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800" FontFamily="{StaticResource OpenSans}">
     <UserControl.Resources>
+        <converters:BoolToStringAccessConverter x:Key="BoolToString"/>
+
         <Style x:Key="ExpanderDownHeader" TargetType="ToggleButton">
             <Setter Property="Template">
                 <Setter.Value>
@@ -88,14 +91,12 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding FullName}" VerticalAlignment="Center" Margin="10,5"/>
                             <TextBlock Grid.Column="1" Text="{Binding Identifier}" VerticalAlignment="Center" Margin="10,5"/>
                             <TextBlock Grid.Column="2" Text="{Binding Password}" VerticalAlignment="Center" Margin="10,5"/>
-                            <TextBlock Grid.Column="3" Text="{Binding Role}" VerticalAlignment="Center" Margin="10,5"/>
-                            <TextBlock Grid.Column="4" Text="{Binding SubRole}" VerticalAlignment="Center" Margin="10,5"/>
+                            <TextBlock Grid.Column="3" Text="{Binding ModuleAdministration, Converter={StaticResource BoolToString}}" VerticalAlignment="Center" Margin="10,5"/>
 
                         </Grid>
                     </ControlTemplate>
@@ -173,13 +174,13 @@
                         <DataGrid Grid.Row="1" Margin="10,0" Height="350" Background="White" ItemsSource="{Binding UserViewModel.Users}" AutoGenerateColumns="False"
                                   SelectedItem="{Binding UserViewModel.SelectedUser}" ColumnHeaderStyle="{StaticResource ColumnHeaderUsers}" CanUserAddRows="False"
                                   CanUserDeleteRows="False" CanUserResizeRows="False" RowHeaderWidth="0" BorderBrush="Gray" BorderThickness="1,0,1,1" SelectionMode="Single" 
-                                  CanUserReorderColumns="False" CanUserResizeColumns="False" RowStyle="{StaticResource UserRowStyle}" TextOptions.TextFormattingMode="Display">
+                                  CanUserReorderColumns="False" CanUserResizeColumns="False" RowStyle="{StaticResource UserRowStyle}" TextOptions.TextFormattingMode="Display"
+                                  HorizontalScrollBarVisibility="Disabled">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="ФИО" Width="*" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Идентификатор" Width="*" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Пароль" Width="*" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Роли" Width="*" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Под роли" Width="*" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Администрирование" Width="*" IsReadOnly="True"/>
                             </DataGrid.Columns>
                         </DataGrid>
 
@@ -188,18 +189,21 @@
                                 <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
                             </StackPanel.Effect>
 
-                            <Button Content="/Common/Resources/Images/addUser.png" Style="{StaticResource ButtonImage}" Command="{Binding UserViewModel.OpenWindowAddUserCommand}"
-                                    Height="23" Width="23" VerticalAlignment="Top" Margin="10" ToolTip="Создать пользователя"/>
+                            <Button Content="/Common/Resources/Images/addUser.png" Style="{StaticResource ButtonImage}" Height="23" Width="23" 
+                                    VerticalAlignment="Top" Margin="10" ToolTip="Создать пользователя"
+                                    Command="{Binding UserViewModel.OpenWindowAddUserCommand}"/>
 
-                            <Button Content="/Common/Resources/Images/changeUser.png" Style="{StaticResource ButtonImage}" Command="{Binding UserViewModel.ChangeUserCommand}"
-                                    Height="23" Width="23" VerticalAlignment="Top" Margin="10" ToolTip="Изменить данные пользователя системы"/>
+                            <Button Content="/Common/Resources/Images/changeUser.png" Style="{StaticResource ButtonImage}" Height="23" Width="23"
+                                    VerticalAlignment="Top" Margin="10" ToolTip="Изменить данные пользователя системы"
+                                    Command="{Binding UserViewModel.ChangeUserCommand}" CommandParameter="{Binding UserViewModel.SelectedUser}"/>
 
                             <Button Content="/Common/Resources/Images/deleteUser.png" Style="{StaticResource ButtonImage}" Height="23" Width="23" 
                                     VerticalAlignment="Top" Margin="10" ToolTip="Удалить пользователя из системы"
                                     Command="{Binding UserViewModel.DeleteUserCommand}" CommandParameter="{Binding UserViewModel.SelectedUser}"/>
 
-                            <Button Content="/Common/Resources/Images/update.png" Style="{StaticResource ButtonImage}" Command="{Binding UserViewModel.UpdateUserCommand}"
-                                    Height="23" Width="23" VerticalAlignment="Top" Margin="10" ToolTip="Обновить список пользователей"/>
+                            <Button Content="/Common/Resources/Images/update.png" Style="{StaticResource ButtonImage}" Height="23" Width="23" 
+                                    VerticalAlignment="Top" Margin="10" ToolTip="Обновить список пользователей"
+                                    Command="{Binding UserViewModel.UpdateUserCommand}"/>
 
                         </StackPanel>
 

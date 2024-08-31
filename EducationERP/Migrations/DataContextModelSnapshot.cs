@@ -36,15 +36,14 @@ namespace EducationERP.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<bool?>("ModuleAdministration")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("RoleAndAccesses")
                         .IsRequired()
                         .HasColumnType("text");
 

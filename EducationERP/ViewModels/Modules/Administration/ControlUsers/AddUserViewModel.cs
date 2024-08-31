@@ -11,10 +11,9 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
         public UserVM UserVM { get; set; } = new();
         public VisualAddUser Visual { get; set; } = new();
 
-
         public RaketaTCommand<User> AddUserCommand { get; set; }
         public RaketaCommand ExitCommand { get; set; }
-        public RaketaTCommand<string> Command { get; set; }
+        public RaketaTCommand<string> ChangeRoleAccessCommand { get; set; }
 
         IServiceView _serviceView;
         IUserRepository _userRepository;
@@ -26,7 +25,7 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
             AddUserCommand = RaketaTCommand<User>.Launch(AddUser);
             ExitCommand = RaketaCommand.Launch(Exit);
 
-            Command = RaketaTCommand<string>.Launch(Visible);
+            ChangeRoleAccessCommand = RaketaTCommand<string>.Launch(RoleAccess);
         }
 
         void AddUser(User user)
@@ -38,32 +37,33 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
                 return;
             }
 
-            user.RoleAndAccesses = UserVM.RolesAndAccesses;
-
             _userRepository.AddUser(user);
             _userRepository.Users.Add(new UserVM()
             {
                 Id = user.Id,
                 FullName = $"{user.SurName} {user.Name} {user.MiddleName}",
                 Identifier = user.Identifier,
-                Password = user.Password
+                Password = user.Password,
+                ModuleAdministration = user.ModuleAdministration
             });
             _serviceView.Close<AddUserViewModel>();
         }
-
-        void Visible(string role)
+        void RoleAccess(string roleAccess)
         {
-            switch(role)
+            if(roleAccess == "Без доступа")
             {
-                case "Администрирование":
-                    if (Visual.AdministrationVisibility == Visibility.Collapsed)
-                        Visual.AdministrationVisibility = Visibility.Visible;
-                    else
-                    {
-                        Visual.AdministrationVisibility = Visibility.Collapsed;
-                        UserVM.AccessAdministration = false;
-                    }
-                    break;
+                User.ModuleAdministration = false;
+                Visual.RoleAdministration = "Ограниченный";
+            }
+            else if(roleAccess == "Ограниченный")
+            {
+                User.ModuleAdministration = true;
+                Visual.RoleAdministration = "Полный";
+            }
+            else
+            {
+                User.ModuleAdministration = null;
+                Visual.RoleAdministration = "Без доступа";
             }
         }
 

@@ -23,6 +23,7 @@ namespace EducationERP
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
             _serviceView = _container.GetDependency<IServiceView>();
             RegisterView();
             RegisterDependency();
@@ -38,6 +39,7 @@ namespace EducationERP
             _serviceView.RegisterTypeView<LoginViewModel, LoginWindow>();
             _serviceView.RegisterTypeView<EducationViewModel, EducationWindow>();
             _serviceView.RegisterTypeView<AddUserViewModel, WindowAddUser>();
+            _serviceView.RegisterTypeView<ChangeUserViewModel, WindowChangeUser>();
             _serviceView.RegisterTypeView<AdministrationViewModel, AdministrationView>();
         }
 
