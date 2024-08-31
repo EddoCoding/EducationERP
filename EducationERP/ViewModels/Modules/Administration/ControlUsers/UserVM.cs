@@ -2,7 +2,7 @@
 
 namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
 {
-    public class UserVM : RaketaViewModel
+    public class UserVM
     {
         public Guid Id { get; set; }
         public string FullName { get; set; } = string.Empty;

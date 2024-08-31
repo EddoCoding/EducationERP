@@ -1,6 +1,8 @@
-﻿using EducationERP.Common.ToolsDev;
+﻿using EducationERP.Common.Components;
+using EducationERP.Common.ToolsDev;
 using EducationERP.Models;
 using Raketa;
+using System.Windows;
 
 namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
 {
@@ -14,9 +16,11 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
         public RaketaCommand ExitCommand { get; set; }
 
         IServiceView _serviceView;
-        public ChangeUserViewModel(IServiceView serviceView, UserVM user)
+        DataContext _context;
+        public ChangeUserViewModel(IServiceView serviceView, DataContext context, UserVM user)
         {
             _serviceView = serviceView;
+            _context = context;
 
             Mapp(user);
 
@@ -25,25 +29,44 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
             ExitCommand = RaketaCommand.Launch(Exit);
         }
 
-        void Mapp(UserVM user)
+        void Mapp(UserVM SelectedUser)
         {
-            string[] parts = user.FullName.Split(' ');
+            string[] parts = SelectedUser.FullName.Split(' ');
 
             User.SurName = parts[0];
             User.Name = parts[1];
             User.MiddleName = parts[2];
 
-            User.Id = user.Id;
-            User.Identifier = user.Identifier;
-            User.Password = user.Password;
-            User.ModuleAdministration = user.ModuleAdministration;
+            User.Id = SelectedUser.Id;
+            User.Identifier = SelectedUser.Identifier;
+            User.Password = SelectedUser.Password;
+            User.ModuleAdministration = SelectedUser.ModuleAdministration;
 
-            if (user.ModuleAdministration == true) Visual.RoleAdministration = "Полный";
-            else if (user.ModuleAdministration == false) Visual.RoleAdministration = "Ограниченный";
+            if (SelectedUser.ModuleAdministration == true) Visual.RoleAdministration = "Полный";
+            else if (SelectedUser.ModuleAdministration == false) Visual.RoleAdministration = "Ограниченный";
             else Visual.RoleAdministration = "Без доступа";
         }
 
-        void SaveUser(User user) => Dev.NotReady();
+        void SaveUser(User SelectedUser) 
+        {
+            var user = _context.Users.FirstOrDefault(x => x.Id == SelectedUser.Id);
+
+            if (user != null) 
+            {
+                user.SurName = User.SurName;
+                user.Name = User.Name;
+                user.MiddleName = User.MiddleName;
+
+                user.Identifier = User.Identifier;
+                user.Password = User.Password;
+                user.ModuleAdministration= User.ModuleAdministration;
+
+                _context.SaveChanges();
+
+                MessageBox.Show("Данные пользователя сохранены!");
+                _serviceView.Close<ChangeUserViewModel>();
+            }
+        }
         void RoleAccess(string roleAccess)
         {
             if (roleAccess == "Без доступа")
