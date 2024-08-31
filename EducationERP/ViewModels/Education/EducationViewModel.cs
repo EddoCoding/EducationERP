@@ -3,15 +3,15 @@ using EducationERP.Common.Components.Services;
 using EducationERP.ViewModels.Education;
 using EducationERP.ViewModels.Modules.Administration;
 using Raketa;
+using System.Windows.Media;
 
 namespace EducationERP.ViewModels
 {
     public class EducationViewModel : RaketaViewModel
     {
         public string FullName { get; set; } = string.Empty;
-        public string Role { get; set; } = string.Empty;
 
-        public VisualEducation Visual { get; set; } = new();
+        public VisualEducation Visual { get; set; }
         public RaketaCommand OpenEducationMenuCommand { get; set; }
         public RaketaCommand AdministrationCommand { get; set; }
 
@@ -21,6 +21,7 @@ namespace EducationERP.ViewModels
         {
             FullName = userSystem.FullName;
 
+            Visual = new(userSystem);
             _serviceView = serviceView;
             TabControl = tabControl;
 

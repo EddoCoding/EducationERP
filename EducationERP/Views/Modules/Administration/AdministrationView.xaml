@@ -150,7 +150,8 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Expander Grid.Row="1" FontSize="15" Style="{StaticResource ExpanderUserManagement}" Header="Управление пользователями" Margin="10,5,10,0" Padding="2,0">
+                <Expander Grid.Row="1" FontSize="15" Style="{StaticResource ExpanderUserManagement}" Header="Управление пользователями" Margin="10,5,10,0" Padding="2,0"
+                          IsEnabled="{Binding Visual.ControlUsers}">
                     <Grid Background="White">
                         <Grid.Effect>
                             <DropShadowEffect Color="LightGray" ShadowDepth="0"/>
@@ -216,7 +217,8 @@
 
                 <Expander Grid.Row="4" FontSize="15" Style="{StaticResource ExpanderUserManagement}" Header="Настройка модуля - Деканат" Margin="10,5,10,0" Padding="2,0"/>
 
-                <Expander Grid.Row="5" FontSize="15" Style="{StaticResource ExpanderUserManagement}" Header="Настройка базы данны" Margin="10,5,10,0" Padding="2,0">
+                <Expander Grid.Row="5" FontSize="15" Style="{StaticResource ExpanderUserManagement}" Header="Настройка базы данны" Margin="10,5,10,0" Padding="2,0"
+                          IsEnabled="{Binding Visual.SettingBD}">
                     <Grid Background="White">
                         <Grid.Effect>
                             <DropShadowEffect Color="LightGray" ShadowDepth="0"/>

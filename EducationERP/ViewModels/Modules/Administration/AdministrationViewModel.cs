@@ -7,14 +7,17 @@ namespace EducationERP.ViewModels.Modules.Administration
 {
     public class AdministrationViewModel : RaketaViewModel
     {
-        public SettingBDViewModel SettingBDViewModel { get; set; }
+        public VisualAdministration Visual { get; set; }
         public UserViewModel UserViewModel { get; set; }
+        public SettingBDViewModel SettingBDViewModel { get; set; }
 
-        public AdministrationViewModel(IServiceView serviceView, IConfig config, DataContext context,
-            IUserRepository userRepository)
+        public AdministrationViewModel(IServiceView serviceView, IConfig config, DataContext context, IUserRepository userRepository, 
+            UserSystem userSystem)
         {
-            SettingBDViewModel = new(serviceView, config, context);
+            Visual = new(userSystem);
+
             UserViewModel = new(serviceView, userRepository);
+            SettingBDViewModel = new(serviceView, config, context);
         }
     }
 }
