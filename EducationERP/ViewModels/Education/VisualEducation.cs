@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace EducationERP.ViewModels.Education
 {
-    public class VisualEducationViewModel : RaketaViewModel
+    public class VisualEducation : RaketaViewModel
     {
         double widthButtonPanel = 175;
         public double WidthButtonPanel
@@ -28,7 +28,7 @@ namespace EducationERP.ViewModels.Education
 
         public RaketaTCommand<double> ChangeWidthButtonPanelCommand { get; set; }
 
-        public VisualEducationViewModel() => ChangeWidthButtonPanelCommand = RaketaTCommand<double>.Launch(ChangeWidth);
+        public VisualEducation() => ChangeWidthButtonPanelCommand = RaketaTCommand<double>.Launch(ChangeWidth);
 
         void ChangeWidth(double width)
         {

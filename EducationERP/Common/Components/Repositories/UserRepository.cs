@@ -1,6 +1,7 @@
 ﻿using EducationERP.Models;
 using EducationERP.ViewModels.Modules.Administration.ControlUsers;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace EducationERP.Common.Components.Repositories
 {
@@ -12,16 +13,23 @@ namespace EducationERP.Common.Components.Repositories
         {
             if (!context.CanConnect()) return null;
 
-            IEnumerable<UserVM> users = new List<UserVM>(context.Users.Select(x => new UserVM()
+            try
             {
-                Id = x.Id,
-                Identifier = x.Identifier,
-                Password = x.Password,
-                FullName = $"{x.SurName} {x.Name} {x.MiddleName}",
-                ModuleAdministration = x.ModuleAdministration
-            }));
-
-            return users.ToArray();
+                IEnumerable<UserVM> users = new List<UserVM>(context.Users.Select(x => new UserVM()
+                {
+                    Id = x.Id,
+                    Identifier = x.Identifier,
+                    Password = x.Password,
+                    FullName = $"{x.SurName} {x.Name} {x.MiddleName}",
+                    ModuleAdministration = x.ModuleAdministration
+                }));
+                return users.ToArray();
+            }
+            catch 
+            {
+                MessageBox.Show("Ошибка получения данных");
+                return null;
+            }
         }
         public User GetUser(string identifier, string password)
         {

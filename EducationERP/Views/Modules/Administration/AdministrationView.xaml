@@ -24,7 +24,7 @@
                                                   SnapsToDevicePixels="True" VerticalAlignment="Center"/>
                                 <Path x:Name="arrow" Grid.Column="1" Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" Stroke="Black" 
                                       SnapsToDevicePixels="false" StrokeThickness="2" VerticalAlignment="Center"/>
-                            
+
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -93,10 +93,10 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" Text="{Binding FullName}" VerticalAlignment="Center" Margin="10,5"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Identifier}" VerticalAlignment="Center" Margin="10,5"/>
-                            <TextBlock Grid.Column="2" Text="{Binding Password}" VerticalAlignment="Center" Margin="10,5"/>
-                            <TextBlock Grid.Column="3" Text="{Binding ModuleAdministration, Converter={StaticResource BoolToString}}" VerticalAlignment="Center" Margin="10,5"/>
+                            <TextBlock Grid.Column="0" Text="{Binding FullName}" Padding="10,5"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Identifier}" Padding="10,5"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Password}" Padding="10,5"/>
+                            <TextBlock Grid.Column="3" Text="{Binding ModuleAdministration, Converter={StaticResource BoolToString}}" Padding="10,5"/>
 
                         </Grid>
                     </ControlTemplate>
@@ -184,7 +184,7 @@
                             </DataGrid.Columns>
                         </DataGrid>
 
-                        <StackPanel Grid.Row="2" Background="White" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right" RenderOptions.BitmapScalingMode="NearestNeighbor">
+                        <StackPanel Grid.Row="2" Background="White" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
                             <StackPanel.Effect>
                                 <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
                             </StackPanel.Effect>
@@ -321,16 +321,16 @@
                                     Height="23" Width="23" VerticalAlignment="Top" Margin="10" ToolTip="Удалить настройки конфигурации"/>
 
                             <Button Content="/Common/Resources/Images/createBaseData.png" Style="{StaticResource ButtonImage}" Command="{Binding SettingBDViewModel.CreateISCommand}"
-                                    Height="23" Width="23" VerticalAlignment="Top" Margin="10" ToolTip="Удалить настройки конфигурации"/>
-                            
+                                    Height="23" Width="23" VerticalAlignment="Top" Margin="10" ToolTip="Создать информационную систему"/>
+
                         </StackPanel>
 
                     </Grid>
                 </Expander>
-                
+
             </Grid>
         </ScrollViewer>
 
     </Grid>
-    
+
 </UserControl>

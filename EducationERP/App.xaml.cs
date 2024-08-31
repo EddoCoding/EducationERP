@@ -47,6 +47,7 @@ namespace EducationERP
         {
             _container.RegisterSingleton<DataContext, DataContext>();
             _container.RegisterTransient<Config, IConfig>();
+            _container.RegisterSingleton<UserSystem, UserSystem>();
             _container.RegisterSingleton<MainTabControl, ITabControl>();
             _container.RegisterSingleton<UserRepository, IUserRepository>();
         }

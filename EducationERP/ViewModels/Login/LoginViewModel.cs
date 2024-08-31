@@ -1,4 +1,5 @@
-﻿using EducationERP.Common.Components.Repositories;
+﻿using EducationERP.Common.Components;
+using EducationERP.Common.Components.Repositories;
 using Raketa;
 using System.Windows;
 
@@ -14,10 +15,12 @@ namespace EducationERP.ViewModels.Login
 
         IServiceView _serviceView;
         IUserRepository _userRepository;
-        public LoginViewModel(IServiceView serviceView, IUserRepository userRepository)
+        UserSystem _userSystem;
+        public LoginViewModel(IServiceView serviceView, IUserRepository userRepository, UserSystem userSystem)
         {
             _serviceView = serviceView;
             _userRepository = userRepository;
+            _userSystem = userSystem;
 
             LoginCommand = RaketaCommand.Launch(Login);
             ExitCommand = RaketaCommand.Launch(ExitLogin);
@@ -28,7 +31,9 @@ namespace EducationERP.ViewModels.Login
             var user = _userRepository.GetUser(Identifier, Password);
             if (user != null)
             {
-                var fullName = $"{user.SurName} {user.Name} {user.MiddleName}";
+                _userSystem.FullName = $"{user.SurName} {user.Name} {user.MiddleName}";
+                _userSystem.Administration = user.ModuleAdministration;
+
                 _serviceView.Window<EducationViewModel>().NonModal();
                 _serviceView.Close<LoginViewModel>();
             }

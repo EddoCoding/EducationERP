@@ -77,7 +77,20 @@ namespace EducationERP.ViewModels.LoginSetting
 
             _config.RemoveConfig();
         }
-        void CreateIS() => _context.ApplyMigrate();
+        void CreateIS()
+        {
+            if (_context.ApplyMigrate())
+            {
+                _context.Users.Add(new Models.User()
+                {
+                    SurName = "Администратор",
+                    Identifier = "qwe",
+                    Password = "rty",
+                    ModuleAdministration = true
+                });
+                _context.SaveChanges();
+            }
+        }
         void GetConfigValues()
         {
             Host = _config.GetValueConnect("Host");

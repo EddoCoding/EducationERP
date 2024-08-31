@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EducationERP.Views"
         mc:Ignorable="d" Title="EducationWindow" Height="800" Width="1100" MinHeight="800" MinWidth="1100"
         Background="WhiteSmoke" FontFamily="{StaticResource OpenSans}" WindowStyle="None" 
-        WindowStartupLocation="CenterScreen" MouseDown="MoveWindow">
+        WindowStartupLocation="CenterScreen" MouseDown="MoveWindow" RenderOptions.BitmapScalingMode="NearestNeighbor">
     <Window.Resources>
         <Style x:Key="ButtonModuleSize" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
@@ -144,7 +144,7 @@
         </Style>
     </Window.Resources>
     
-    <Grid RenderOptions.BitmapScalingMode="NearestNeighbor">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
