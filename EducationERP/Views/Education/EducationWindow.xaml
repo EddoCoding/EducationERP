@@ -45,7 +45,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Image Grid.Column="0" Source="{Binding Tag, RelativeSource={RelativeSource AncestorType=Button}}" Height="20" Width="20"/>
+                                <Image Grid.Column="0" Source="{Binding Tag, RelativeSource={RelativeSource AncestorType=Button}}" Height="24" Width="24"/>
                                 <ContentPresenter Grid.Column="1" Visibility="{Binding DataContext.Visual.VisibilityButtonText, RelativeSource={RelativeSource AncestorType=Grid}}" 
                                                   Margin="10,0,0,0" VerticalAlignment="Center" TextOptions.TextFormattingMode="Display"/>
                             </Grid>
@@ -197,7 +197,8 @@
                     Command="{Binding Visual.ChangeWidthButtonPanelCommand}" CommandParameter="{Binding Visual.WidthButtonPanel}"/>
 
             <Line Grid.Row="1" X1="0" Y1="0" X2="135" Y2="0" StrokeThickness="0.3"  Stroke="Black" HorizontalAlignment="Center"/>
-            <Button Grid.Row="2" Content="Приёмная кампания" Style="{StaticResource ButtonModule}" IsEnabled="{Binding Visual.ModuleAdmissionCampaign}"
+            <Button Grid.Row="2" Style="{StaticResource ButtonModule}" Content="Приёмная кампания" ToolTip="Приёмная кампания"
+                    Tag="/Common/Resources/Images/admissionCampaign.png" IsEnabled="{Binding Visual.ModuleAdmissionCampaign}"
                     Command="{Binding .}"/>
 
             <Line Grid.Row="7" X1="0" Y1="0" X2="135" Y2="0" StrokeThickness="0.3"  Stroke="Black" HorizontalAlignment="Center"/>

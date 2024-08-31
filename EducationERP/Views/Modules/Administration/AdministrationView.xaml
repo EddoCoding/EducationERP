@@ -243,7 +243,7 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0" Text="Host" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
-                            <TextBox Grid.Row="1" Text="{Binding SettingBDViewModel.Host}" Style="{StaticResource defaultTextBox}" Margin="10,0,10,10"/>
+                            <TextBox Grid.Row="1" Text="{Binding SettingBDViewModel.Host}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,10"/>
                         </Grid>
 
                         <Grid Grid.Row="1" Background="White" Margin="10,10,10,0">
@@ -256,7 +256,7 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0" Text="Port" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
-                            <TextBox Grid.Row="1" Text="{Binding SettingBDViewModel.Port}" Style="{StaticResource defaultTextBox}" Margin="10,0,10,10"/>
+                            <TextBox Grid.Row="1" Text="{Binding SettingBDViewModel.Port}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,10"/>
                         </Grid>
 
                         <Grid Grid.Row="2" Background="White" Margin="10,10,10,0">
@@ -269,7 +269,7 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0" Text="Username" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
-                            <TextBox Grid.Row="1" Text="{Binding SettingBDViewModel.Username}" Style="{StaticResource defaultTextBox}" Margin="10,0,10,10"/>
+                            <TextBox Grid.Row="1" Text="{Binding SettingBDViewModel.Username}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,10"/>
                         </Grid>
 
                         <Grid Grid.Row="3" Background="White" Margin="10,10,10,0">
@@ -282,7 +282,7 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0" Text="Password" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
-                            <TextBox Grid.Row="1" Text="{Binding SettingBDViewModel.Password}" Style="{StaticResource defaultTextBox}" Margin="10,0,10,10"/>
+                            <TextBox Grid.Row="1" Text="{Binding SettingBDViewModel.Password}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,10"/>
                         </Grid>
 
                         <Grid Grid.Row="4" Background="White" Margin="10,10,10,0">
@@ -295,7 +295,7 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0" Text="Database" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
-                            <TextBox Grid.Row="1" Text="{Binding SettingBDViewModel.Database}" Style="{StaticResource defaultTextBox}" Margin="10,0,10,10"/>
+                            <TextBox Grid.Row="1" Text="{Binding SettingBDViewModel.Database}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,10"/>
                         </Grid>
 
                         <Grid Grid.Row="5" Background="White" Margin="10,10,10,0">
@@ -308,7 +308,7 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0" Text="Путь до директории временного хранения данных" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
-                            <TextBox Grid.Row="1" Text="{Binding SettingBDViewModel.PathTemporaryData}" Style="{StaticResource defaultTextBox}" Margin="10,0,10,10"/>
+                            <TextBox Grid.Row="1" Text="{Binding SettingBDViewModel.PathTemporaryData}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,10"/>
                         </Grid>
 
                         <StackPanel Grid.Row="6" Background="White" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">

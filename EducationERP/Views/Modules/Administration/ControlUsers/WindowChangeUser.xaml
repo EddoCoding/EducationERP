@@ -8,29 +8,6 @@
         Background="WhiteSmoke" FontFamily="{StaticResource OpenSans}" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         RenderOptions.BitmapScalingMode="NearestNeighbor">
     <Window.Resources>
-        <Style x:Key="UserDataTextBox" TargetType="TextBox">
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="SelectionBrush" Value="LightGray"/>
-            <Setter Property="CaretBrush" Value="Gray"/>
-            <Setter Property="FontStyle" Value="Italic"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,1" SnapsToDevicePixels="True">
-                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="Black"/>
-                            </Trigger>
-                            <Trigger Property="IsFocused" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="Black"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
         <Style x:Key="AccessTextBlock" TargetType="TextBlock">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -96,7 +73,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="Фамилия:" FontSize="14" VerticalAlignment="Center" Margin="10,5,0,5"/>
-                    <TextBox Grid.Column="1" Style="{StaticResource UserDataTextBox}" Margin="0,0,10,0" VerticalAlignment="Center"
+                    <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="0,0,10,0" VerticalAlignment="Center"
                          Text="{Binding User.SurName}"/>
 
                 </Grid>
@@ -113,7 +90,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="Имя:" FontSize="14" VerticalAlignment="Center" Margin="10,5,0,5"/>
-                    <TextBox Grid.Column="1" Style="{StaticResource UserDataTextBox}" Margin="0,0,10,0" VerticalAlignment="Center"
+                    <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="0,0,10,0" VerticalAlignment="Center"
                          Text="{Binding User.Name}"/>
 
                 </Grid>
@@ -130,7 +107,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="Отчество:" FontSize="14" VerticalAlignment="Center" Margin="10,5,0,5"/>
-                    <TextBox Grid.Column="1" Style="{StaticResource UserDataTextBox}" Margin="0,0,10,0" VerticalAlignment="Center"
+                    <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="0,0,10,0" VerticalAlignment="Center"
                          Text="{Binding User.MiddleName}"/>
 
                 </Grid>
@@ -147,7 +124,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="Идентификатор:" FontSize="14" VerticalAlignment="Center" Margin="10,5,0,5"/>
-                    <TextBox Grid.Column="1" Style="{StaticResource UserDataTextBox}" Margin="0,0,10,0" VerticalAlignment="Center"
+                    <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="0,0,10,0" VerticalAlignment="Center"
                          Text="{Binding User.Identifier}"/>
 
                 </Grid>
@@ -164,7 +141,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="Пароль:" FontSize="14" VerticalAlignment="Center" Margin="10,5,0,5"/>
-                    <TextBox Grid.Column="1" Style="{StaticResource UserDataTextBox}" Margin="0,0,10,0" VerticalAlignment="Center"
+                    <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="0,0,10,0" VerticalAlignment="Center"
                          Text="{Binding User.Password}"/>
 
                 </Grid>

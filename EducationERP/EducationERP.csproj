@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="Common\Resources\Images\addUser.png" />
+    <None Remove="Common\Resources\Images\admissionCampaign.png" />
     <None Remove="Common\Resources\Images\changeDocument.png" />
     <None Remove="Common\Resources\Images\changeSize.png" />
     <None Remove="Common\Resources\Images\changeUser.png" />
@@ -29,6 +30,9 @@
 
   <ItemGroup>
     <Resource Include="Common\Resources\Images\addUser.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Resources\Images\admissionCampaign.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Common\Resources\Images\changeDocument.png">
