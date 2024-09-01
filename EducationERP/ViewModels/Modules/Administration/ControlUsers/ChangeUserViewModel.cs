@@ -55,6 +55,13 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
 
         void SaveUser(User SelectedUser) 
         {
+            if (String.IsNullOrWhiteSpace(User.SurName) || String.IsNullOrWhiteSpace(User.Name)
+                 || String.IsNullOrWhiteSpace(User.Identifier) || String.IsNullOrWhiteSpace(User.Password))
+            {
+                MessageBox.Show("Есть незаполненные поля!");
+                return;
+            }
+
             var user = _context.Users.FirstOrDefault(x => x.Id == SelectedUser.Id);
 
             if (user != null) 

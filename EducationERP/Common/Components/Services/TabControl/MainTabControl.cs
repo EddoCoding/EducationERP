@@ -5,10 +5,15 @@ using System.Collections.Specialized;
 
 namespace EducationERP.Common.Components.Services
 {
-    public class MainTabControl : ITabControl
+    public class MainTabControl : RaketaViewModel, ITabControl
     {
         public ObservableCollection<TabItemViewModel> Tabs { get; set; } = new();
-        public TabItemViewModel SeletedTab { get; set; }
+        TabItemViewModel seletedTab;
+        public TabItemViewModel SeletedTab
+        {
+            get => seletedTab;
+            set => SetValue(ref seletedTab, value);
+        }
 
         IServiceView _serviceView;
         public MainTabControl(IServiceView serviceView)
@@ -19,8 +24,9 @@ namespace EducationERP.Common.Components.Services
         public void CreateTab<ViewModel>(string title)
         {
             var uc = _serviceView.UserControl<ViewModel>();
-            if (uc != null) Tabs.Add(new TabItemViewModel(title, uc));
-            else Tabs.Add(new TabItemViewModel(title, uc));
+            var tab = new TabItemViewModel(title, uc);
+            Tabs.Add(tab);
+            SeletedTab = tab;
         }
         public void RemoveTab(TabItemViewModel tab) => Tabs.Remove(tab);
         public void RemoveTab() => Tabs.Remove(SeletedTab);
