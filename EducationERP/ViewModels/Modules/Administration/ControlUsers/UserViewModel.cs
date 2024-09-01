@@ -58,7 +58,7 @@ namespace EducationERP.ViewModels.Modules.Administration
         void OpenWindowAddUser() => _serviceView.Window<AddUserViewModel>().Modal();
         void ChangeUser(UserVM user)
         {
-            if(SelectedUser != null) _serviceView.Window<ChangeUserViewModel>(null, user).NonModal();
+            if(SelectedUser != null) _serviceView.Window<ChangeUserViewModel>(null, user).Modal();
         }
         void DeleteUser(UserVM user) 
         {

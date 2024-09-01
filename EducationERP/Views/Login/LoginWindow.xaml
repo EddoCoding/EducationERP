@@ -7,7 +7,11 @@
         mc:Ignorable="d" Title="Вход" Height="200" Width="450" MouseDown="MoveWindow"
         Background="WhiteSmoke" FontFamily="{StaticResource OpenSans}" WindowStyle="None" 
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" RenderOptions.BitmapScalingMode="NearestNeighbor">
-
+    <Window.InputBindings>
+        <KeyBinding Gesture="Esc" Command="{Binding ExitCommand}"/>
+        <KeyBinding Gesture="Ctrl + Enter" Command="{Binding LoginCommand}"/>
+    </Window.InputBindings>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -34,7 +38,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Text="Идентификатор" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
-                    <TextBox Grid.Row="1" Text="{Binding Identifier}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,10"/>
+                    <TextBox Grid.Row="1" Text="{Binding Identifier, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,10"/>
                 </Grid>
 
                 <Grid Grid.Row="0" Background="White">
@@ -47,7 +51,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Text="Пароль" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
-                    <TextBox Grid.Row="1" Text="{Binding Password}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,10"/>
+                    <TextBox Grid.Row="1" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,10"/>
                 </Grid>
 
                 <TextBlock Text="Введите логин и пароль, нажмите кнопку вход" Foreground="Gray" Margin="0,5"/>
@@ -71,7 +75,8 @@
             <Button Grid.Row="0" Content="/Common/Resources/Images/login.png" Style="{StaticResource ButtonImage}" Command="{Binding LoginCommand}"
                     Height="25" Width="25" VerticalAlignment="Top" Margin="0,10,0,5" ToolTip="Вход"/>
             <Button Grid.Row="3" Content="/Common/Resources/Images/exit.png" Style="{StaticResource ButtonImage}" Command="{Binding ExitCommand}"
-                    Height="23" Width="23" VerticalAlignment="Bottom" Margin="0,0,0,10" ToolTip="Закрыть окно"/>
+                    Height="23" Width="23" VerticalAlignment="Bottom" Margin="0,0,0,10" ToolTip="Закрыть окно"
+                    RenderOptions.BitmapScalingMode="Fant"/>
 
         </Grid>
 

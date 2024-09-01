@@ -62,6 +62,10 @@
             </Setter>
         </Style>
     </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Gesture="Ctrl + Enter" Command="{Binding AddUserCommand}" CommandParameter="{Binding User}"/>
+        <KeyBinding Gesture="Esc" Command="{Binding ExitCommand}"/>
+    </Window.InputBindings>
 
     <Grid>
         <Grid Margin="10">
