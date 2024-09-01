@@ -45,6 +45,22 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="ButtonGeneration" TargetType="Button">
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter VerticalAlignment="Center"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
 
     <Grid>
@@ -62,90 +78,78 @@
 
             <TextBlock Grid.Row="0" FontSize="16" Text="Данные пользователя" Foreground="Gray"/>
 
-            <Border Grid.Row="1" Background="White" CornerRadius="3" Margin="0,10,0,0">
-                <Border.Effect>
-                    <DropShadowEffect Color="LightGray" Opacity="1" ShadowDepth="2"/>
-                </Border.Effect>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="125"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+            <Grid Grid.Row="1" Background="White" Margin="0,10,0,0">
+                <Grid.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </Grid.Effect>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Column="0" Text="Фамилия:" FontSize="14" VerticalAlignment="Center" Margin="10,5,0,5"/>
-                    <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="0,0,10,0" VerticalAlignment="Center"
-                         Text="{Binding User.SurName}"/>
+                <TextBlock Grid.Row="0" Text="Фамилия" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
+                <TextBox Grid.Row="1" Text="{Binding User.SurName}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,10"/>
+            </Grid>
 
-                </Grid>
-            </Border>
+            <Grid Grid.Row="2" Background="White" Margin="0,10,0,0">
+                <Grid.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </Grid.Effect>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-            <Border Grid.Row="2" Background="White" CornerRadius="3" Margin="0,10,0,0">
-                <Border.Effect>
-                    <DropShadowEffect Color="LightGray" Opacity="1" ShadowDepth="2"/>
-                </Border.Effect>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="125"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Text="Имя" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
+                <TextBox Grid.Row="1" Text="{Binding User.Name}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,10"/>
+            </Grid>
 
-                    <TextBlock Grid.Column="0" Text="Имя:" FontSize="14" VerticalAlignment="Center" Margin="10,5,0,5"/>
-                    <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="0,0,10,0" VerticalAlignment="Center"
-                         Text="{Binding User.Name}"/>
+            <Grid Grid.Row="3" Background="White" Margin="0,10,0,0">
+                <Grid.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </Grid.Effect>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                </Grid>
-            </Border>
+                <TextBlock Grid.Row="0" Text="Отчество" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
+                <TextBox Grid.Row="1" Text="{Binding User.MiddleName}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,10"/>
+            </Grid>
 
-            <Border Grid.Row="3" Background="White" CornerRadius="3" Margin="0,10,0,0">
-                <Border.Effect>
-                    <DropShadowEffect Color="LightGray" Opacity="1" ShadowDepth="2"/>
-                </Border.Effect>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="125"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+            <Grid Grid.Row="4" Background="White" Margin="0,10,0,0">
+                <Grid.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </Grid.Effect>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Column="0" Text="Отчество:" FontSize="14" VerticalAlignment="Center" Margin="10,5,0,5"/>
-                    <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="0,0,10,0" VerticalAlignment="Center"
-                         Text="{Binding User.MiddleName}"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Grid.Row="0" Text="Идентификатор - " Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
+                    <Button Content="Сгенерировать" Style="{StaticResource ButtonGeneration}" ToolTip="Генерация идентификатора"
+                            Command="{Binding GenerationIdentifierCommand}"/>
+                </StackPanel>
+                <TextBox Grid.Row="1" Text="{Binding User.Identifier}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,10"/>
+            </Grid>
 
-                </Grid>
-            </Border>
+            <Grid Grid.Row="5" Background="White" Margin="0,10,0,0">
+                <Grid.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </Grid.Effect>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-            <Border Grid.Row="4" Background="White" CornerRadius="3" Margin="0,10,0,0">
-                <Border.Effect>
-                    <DropShadowEffect Color="LightGray" Opacity="1" ShadowDepth="2"/>
-                </Border.Effect>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="125"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Grid.Column="0" Text="Идентификатор:" FontSize="14" VerticalAlignment="Center" Margin="10,5,0,5"/>
-                    <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="0,0,10,0" VerticalAlignment="Center"
-                         Text="{Binding User.Identifier}"/>
-
-                </Grid>
-            </Border>
-
-            <Border Grid.Row="5" Background="White" CornerRadius="3" Margin="0,10,0,0">
-                <Border.Effect>
-                    <DropShadowEffect Color="LightGray" Opacity="1" ShadowDepth="2"/>
-                </Border.Effect>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="125"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Grid.Column="0" Text="Пароль:" FontSize="14" VerticalAlignment="Center" Margin="10,5,0,5"/>
-                    <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="0,0,10,0" VerticalAlignment="Center"
-                         Text="{Binding User.Password}"/>
-
-                </Grid>
-            </Border>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Grid.Row="0" Text="Пароль - " Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
+                    <Button Content="Сгенерировать" Style="{StaticResource ButtonGeneration}" ToolTip="Генерация пароля"
+                            Command="{Binding GenerationPasswordCommand}"/>
+                </StackPanel>
+                <TextBox Grid.Row="1" Text="{Binding User.Password}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,10"/>
+            </Grid>
 
             <StackPanel Grid.Row="6" Background="White" Margin="0,10">
                 <StackPanel.Effect>
