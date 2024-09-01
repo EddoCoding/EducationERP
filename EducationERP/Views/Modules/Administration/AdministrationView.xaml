@@ -192,7 +192,7 @@
                                   SelectedItem="{Binding UserViewModel.SelectedUser}" ColumnHeaderStyle="{StaticResource ColumnHeaderUsers}" CanUserAddRows="False"
                                   CanUserDeleteRows="False" CanUserResizeRows="False" RowHeaderWidth="0" BorderBrush="Gray" BorderThickness="1,0,1,1" SelectionMode="Single" 
                                   CanUserReorderColumns="False" CanUserResizeColumns="False" RowStyle="{StaticResource UserRowStyle}" TextOptions.TextFormattingMode="Display"
-                                  HorizontalScrollBarVisibility="Disabled">
+                                  HorizontalScrollBarVisibility="Disabled" EnableRowVirtualization="True" VirtualizingPanel.VirtualizationMode="Recycling">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="ФИО" Width="*" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Идентификатор" Width="*" IsReadOnly="True"/>
