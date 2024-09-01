@@ -52,7 +52,7 @@ namespace EducationERP.ViewModels.Modules.Administration
             OpenWindowAddUserCommand = RaketaCommand.Launch(OpenWindowAddUser);
             ChangeUserCommand = RaketaTCommand<UserVM>.Launch(ChangeUser);
             DeleteUserCommand = RaketaTCommand<UserVM>.Launch(DeleteUser);
-            UpdateUserCommand = RaketaCommand.Launch(UpdateCollection);
+            UpdateUserCommand = RaketaCommand.Launch(UpdateCollectionAsync);
         }
 
         void OpenWindowAddUser() => _serviceView.Window<AddUserViewModel>().Modal();
@@ -68,9 +68,9 @@ namespace EducationERP.ViewModels.Modules.Administration
                 Users.Remove(user);
             }
         }
-        void UpdateCollection() 
+        async void UpdateCollectionAsync()
         {
-            var users = _userRepository.GetUsers();
+            var users = await _userRepository.GetUsersAsync();
             usersFilter.Clear();
             if (users != null)
             {

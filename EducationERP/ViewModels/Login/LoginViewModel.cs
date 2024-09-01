@@ -22,13 +22,13 @@ namespace EducationERP.ViewModels.Login
             _userRepository = userRepository;
             _userSystem = userSystem;
 
-            LoginCommand = RaketaCommand.Launch(Login);
+            LoginCommand = RaketaCommand.Launch(LoginAsync);
             ExitCommand = RaketaCommand.Launch(ExitLogin);
         }
 
-        void Login()
+        async void LoginAsync()
         {
-            var user = _userRepository.GetUser(Identifier, Password);
+            var user = await _userRepository.GetUserAsync(Identifier, Password);
             if (user != null)
             {
                 _userSystem.FullName = $"{user.SurName} {user.Name} {user.MiddleName}";

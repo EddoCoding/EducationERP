@@ -9,21 +9,22 @@ namespace EducationERP.Common.Components.Repositories
     {
         public ObservableCollection<UserVM> Users { get; set; } = new();
 
-        public UserVM[] GetUsers()
+        public async Task<UserVM[]> GetUsersAsync()
         {
             if (!context.CanConnect()) return null;
 
             try
             {
-                IEnumerable<UserVM> users = new List<UserVM>(context.Users.Select(x => new UserVM()
+                var users = await Task.Run(() => context.Users.Select(x => new UserVM()
                 {
                     Id = x.Id,
                     Identifier = x.Identifier,
                     Password = x.Password,
                     FullName = $"{x.SurName} {x.Name} {x.MiddleName}",
                     ModuleAdministration = x.ModuleAdministration
-                }));
-                return users.ToArray();
+                }).ToArray());
+
+                return users;
             }
             catch 
             {
@@ -31,10 +32,11 @@ namespace EducationERP.Common.Components.Repositories
                 return null;
             }
         }
-        public User GetUser(string identifier, string password)
+        public async Task<User> GetUserAsync(string identifier, string password)
         {
             if (!context.CanConnect()) return null;
-            return context?.Users.FirstOrDefault(x => x.Identifier == identifier && x.Password == password);
+            var user = await Task.Run(() => context?.Users.FirstOrDefault(x => x.Identifier == identifier && x.Password == password));
+            return user;
         }
         public void AddUser(User user)
         {

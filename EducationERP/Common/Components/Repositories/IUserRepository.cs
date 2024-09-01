@@ -8,8 +8,8 @@ namespace EducationERP.Common.Components.Repositories
     {
         ObservableCollection<UserVM> Users { get; set; }
 
-        UserVM[] GetUsers();
-        User GetUser(string identifier, string password);
+        Task<UserVM[]> GetUsersAsync();
+        Task<User> GetUserAsync(string identifier, string password);
         void AddUser(User user);
         void DeleteUser(UserVM user);
     }
