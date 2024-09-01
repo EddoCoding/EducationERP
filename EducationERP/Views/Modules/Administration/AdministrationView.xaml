@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EducationERP.Views.Modules.Administration"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:converters="clr-namespace:EducationERP.Common.Converters"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800" FontFamily="{StaticResource OpenSans}">
     <UserControl.Resources>
@@ -111,7 +112,14 @@
                         <Border Margin="0,1" BorderThickness="0,0,0,1" BorderBrush="LightGray" Background="{TemplateBinding Background}">
                             <Grid>
                                 <ToggleButton IsChecked="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected, Mode=TwoWay}"
-                                              HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Style="{StaticResource ToggleButton}"/>
+                                              HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Style="{StaticResource ToggleButton}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseDoubleClick">
+                                            <i:InvokeCommandAction Command="{Binding DataContext.UserViewModel.ChangeUserCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                                   CommandParameter="{Binding DataContext.UserViewModel.SelectedUser, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ToggleButton>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>

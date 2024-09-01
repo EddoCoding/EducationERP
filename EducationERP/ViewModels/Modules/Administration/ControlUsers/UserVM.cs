@@ -1,6 +1,4 @@
-﻿using Raketa;
-
-namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
+﻿namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
 {
     public class UserVM
     {
