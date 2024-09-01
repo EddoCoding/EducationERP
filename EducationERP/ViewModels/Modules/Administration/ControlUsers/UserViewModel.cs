@@ -8,8 +8,21 @@ namespace EducationERP.ViewModels.Modules.Administration
 {
     public class UserViewModel : RaketaViewModel
     {
-        public string TextSearch { get; set; } = string.Empty;
+        string textSearch = string.Empty;
+        public string TextSearch
+        {
+            get => textSearch; 
+            set
+            {
+                SetValue(ref textSearch, value);
+                if (usersFilter != null && !String.IsNullOrWhiteSpace(textSearch)) SearchUser();
+                if(String.IsNullOrWhiteSpace(textSearch)) SearchUser();
+            }
+        }
+
         public ObservableCollection<UserVM> Users { get; set; } = new();
+        List<UserVM> usersFilter { get; set; } = new();
+
 
         UserVM selectedUser;
         public UserVM SelectedUser
@@ -58,11 +71,25 @@ namespace EducationERP.ViewModels.Modules.Administration
         void UpdateCollection() 
         {
             var users = _userRepository.GetUsers();
+            usersFilter.Clear();
             if (users != null)
             {
                 Users.Clear();
-                foreach (var user in users) Users.Add(user);
+                foreach (var user in users)
+                {
+                    Users.Add(user);
+                    usersFilter.Add(user);
+                }
             }
+        }
+        async Task SearchUser()
+        {
+            var users = await Task.Run(() => usersFilter.FindAll(x => x.FullName.IndexOf(textSearch, StringComparison.OrdinalIgnoreCase) >= 0));
+            await Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                Users.Clear();
+                foreach (var user in users) Users.Add(user);
+            });
         }
     }
 }

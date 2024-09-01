@@ -176,8 +176,16 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="Список пользователей"/>
-                            <TextBox Grid.Column="1" Text="Поиск пользователей" Margin="10,0,0,0" Foreground="Gray" FontSize="14" VerticalContentAlignment="Center"/>
+                            <TextBlock Grid.Column="0" Text="Список пользователей" VerticalAlignment="Center"/>
+                            <TextBox Grid.Column="1" Text="{Binding UserViewModel.TextSearch, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,0" Foreground="Black" FontSize="14" VerticalContentAlignment="Center">
+                                <TextBox.Template>
+                                    <ControlTemplate TargetType="TextBox">
+                                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" SnapsToDevicePixels="True">
+                                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Height="20"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </TextBox.Template>
+                            </TextBox>
                         </Grid>
 
                         <DataGrid Grid.Row="1" Margin="10,0" Height="350" Background="White" ItemsSource="{Binding UserViewModel.Users}" AutoGenerateColumns="False"
