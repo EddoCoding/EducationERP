@@ -6,9 +6,11 @@ using EducationERP.ViewModels;
 using EducationERP.ViewModels.Login;
 using EducationERP.ViewModels.Modules.Administration;
 using EducationERP.ViewModels.Modules.Administration.ControlUsers;
+using EducationERP.ViewModels.Modules.AdmissionsCampaign;
 using EducationERP.Views;
 using EducationERP.Views.Modules.Administration;
 using EducationERP.Views.Modules.Administration.ControlUsers;
+using EducationERP.Views.Modules.AdmissionsCampaign;
 using Raketa;
 using System.Windows;
 
@@ -41,6 +43,7 @@ namespace EducationERP
             _serviceView.RegisterTypeView<AddUserViewModel, WindowAddUser>();
             _serviceView.RegisterTypeView<ChangeUserViewModel, WindowChangeUser>();
             _serviceView.RegisterTypeView<AdministrationViewModel, AdministrationView>();
+            _serviceView.RegisterTypeView<AdmissionsCampaignViewModel, AdmissionsCampaignView>();
         }
 
         void RegisterDependency()

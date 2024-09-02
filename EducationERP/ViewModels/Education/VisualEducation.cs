@@ -48,6 +48,11 @@ namespace EducationERP.ViewModels.Education
         public bool ModuleAdministration { get; set; } = false;
         public void GetAccess(UserSystem userSystem) 
         {
+            //Приёмная кампания
+            if (userSystem.AdmissionsCampaign == true) ModuleAdmissionCampaign = true;
+            else if (userSystem.AdmissionsCampaign == false) ModuleAdmissionCampaign = true;
+
+            //Администрирование
             if(userSystem.Administration == true) ModuleAdministration = true;
             else if(userSystem.Administration == false) ModuleAdministration = true;
         }

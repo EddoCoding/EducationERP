@@ -2,6 +2,7 @@
 using EducationERP.Common.Components.Services;
 using EducationERP.ViewModels.Education;
 using EducationERP.ViewModels.Modules.Administration;
+using EducationERP.ViewModels.Modules.AdmissionsCampaign;
 using Raketa;
 
 namespace EducationERP.ViewModels
@@ -12,7 +13,7 @@ namespace EducationERP.ViewModels
 
         public VisualEducation Visual { get; set; }
         public RaketaCommand ExitCommand { get; set; }
-        public RaketaCommand AdministrationCommand { get; set; }
+        public RaketaTCommand<string> ModuleCommand { get; set; }
 
         IServiceView _serviceView;
         public ITabControl TabControl { get; set; }
@@ -25,10 +26,21 @@ namespace EducationERP.ViewModels
             TabControl = tabControl;
 
             ExitCommand = RaketaCommand.Launch(ExitEducation);
-            AdministrationCommand = RaketaCommand.Launch(OpenAdministration);
+            ModuleCommand = RaketaTCommand<string>.Launch(OpenModule);
         }
 
         void ExitEducation() => _serviceView.Close<EducationViewModel>();
-        void OpenAdministration() => TabControl.CreateTab<AdministrationViewModel>("Администрирование");
+        void OpenModule(string module)
+        {
+            switch(module)
+            {
+                case "Приёмная кампания":
+                    TabControl.CreateTab<AdmissionsCampaignViewModel>("Приёмная кампания");
+                    break;
+                case "Администрирование":
+                    TabControl.CreateTab<AdministrationViewModel>("Администрирование");
+                    break;
+            }
+        }
     }
 }

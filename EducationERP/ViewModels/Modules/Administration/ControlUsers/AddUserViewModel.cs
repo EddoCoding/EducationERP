@@ -16,7 +16,9 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
         public RaketaCommand GenerationPasswordCommand { get; set; }
         public RaketaTCommand<User> AddUserCommand { get; set; }
         public RaketaCommand ExitCommand { get; set; }
-        public RaketaTCommand<string> ChangeRoleAccessCommand { get; set; }
+
+        public RaketaTCommand<string> ChangeRoleAccessAdmissionsCampaignCommand { get; set; }
+        public RaketaTCommand<string> ChangeRoleAccessAdministrationCommand { get; set; }
 
         IServiceView _serviceView;
         IUserRepository _userRepository;
@@ -30,7 +32,8 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
             AddUserCommand = RaketaTCommand<User>.Launch(AddUser);
             ExitCommand = RaketaCommand.Launch(Exit);
 
-            ChangeRoleAccessCommand = RaketaTCommand<string>.Launch(RoleAccess);
+            ChangeRoleAccessAdmissionsCampaignCommand = RaketaTCommand<string>.Launch(RoleAccessAdmissionsCampaign);
+            ChangeRoleAccessAdministrationCommand = RaketaTCommand<string>.Launch(RoleAccessAdministration);
         }
 
         void GenerationIdentifier() => User.Identifier = Generation();
@@ -56,7 +59,26 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
             });
             _serviceView.Close<AddUserViewModel>();
         }
-        void RoleAccess(string roleAccess)
+
+        void RoleAccessAdmissionsCampaign(string roleAccess)
+        {
+            if (roleAccess == "Без доступа")
+            {
+                User.ModuleAdmissionsCampaign = false;
+                Visual.RoleAdmissionsCampaign = "Ограниченный";
+            }
+            else if (roleAccess == "Ограниченный")
+            {
+                User.ModuleAdmissionsCampaign = true;
+                Visual.RoleAdmissionsCampaign = "Полный";
+            }
+            else
+            {
+                User.ModuleAdmissionsCampaign = null;
+                Visual.RoleAdmissionsCampaign = "Без доступа";
+            }
+        }
+        void RoleAccessAdministration(string roleAccess)
         {
             if(roleAccess == "Без доступа")
             {
@@ -74,6 +96,7 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
                 Visual.RoleAdministration = "Без доступа";
             }
         }
+
         string Generation()
         {
             string signs = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

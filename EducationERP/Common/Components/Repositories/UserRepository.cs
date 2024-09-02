@@ -21,7 +21,8 @@ namespace EducationERP.Common.Components.Repositories
                     Identifier = x.Identifier,
                     Password = x.Password,
                     FullName = $"{x.SurName} {x.Name} {x.MiddleName}",
-                    ModuleAdministration = x.ModuleAdministration
+                    ModuleAdministration = x.ModuleAdministration,
+                    ModuleAdmissionsCampaign = x.ModuleAdmissionsCampaign
                 }).ToArray());
 
                 return users;

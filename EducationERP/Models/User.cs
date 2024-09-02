@@ -22,6 +22,7 @@ namespace EducationERP.Models
         public string Name { get; set; } = string.Empty;
         public string MiddleName { get; set; } = string.Empty;
 
+        public bool? ModuleAdmissionsCampaign { get; set; } = null;
         public bool? ModuleAdministration { get; set; } = null;
     }
 }

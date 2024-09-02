@@ -166,10 +166,23 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
+                    <TextBlock Grid.Column="0" Text="Модуль - Приёмная кампания" Style="{StaticResource AccessTextBlock}"/>
+                    <ToggleButton Grid.Column="1" Style="{StaticResource AccessToggleButton}" IsThreeState="True" Margin="10,0"
+                                  Content="{Binding Visual.RoleAdmissionsCampaign}" IsChecked="{Binding User.ModuleAdmissionsCampaign}"
+                                  Command="{Binding ChangeRoleAccessAdmissionsCampaignCommand}" CommandParameter="{Binding Visual.RoleAdmissionsCampaign}"/>
+
+                </Grid>
+
+                <Grid Margin="10,5,0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
                     <TextBlock Grid.Column="0" Text="Модуль - Администрирование" Style="{StaticResource AccessTextBlock}"/>
                     <ToggleButton Grid.Column="1" Style="{StaticResource AccessToggleButton}" IsThreeState="True" Margin="10,0"
                                   Content="{Binding Visual.RoleAdministration}" IsChecked="{Binding User.ModuleAdministration}"
-                                  Command="{Binding ChangeRoleAccessCommand}" CommandParameter="{Binding Visual.RoleAdministration}"/>
+                                  Command="{Binding ChangeRoleAccessAdministrationCommand}" CommandParameter="{Binding Visual.RoleAdministration}"/>
 
                 </Grid>
 

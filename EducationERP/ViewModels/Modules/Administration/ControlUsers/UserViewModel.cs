@@ -23,7 +23,6 @@ namespace EducationERP.ViewModels.Modules.Administration
         public ObservableCollection<UserVM> Users { get; set; } = new();
         List<UserVM> usersFilter { get; set; } = new();
 
-
         UserVM selectedUser;
         public UserVM SelectedUser
         {

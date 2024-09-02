@@ -33,6 +33,7 @@ namespace EducationERP.ViewModels.Login
             {
                 _userSystem.FullName = $"{user.SurName} {user.Name} {user.MiddleName}";
                 _userSystem.Administration = user.ModuleAdministration;
+                _userSystem.AdmissionsCampaign = user.ModuleAdmissionsCampaign;
 
                 _serviceView.Window<EducationViewModel>().NonModal();
                 _serviceView.Close<LoginViewModel>();

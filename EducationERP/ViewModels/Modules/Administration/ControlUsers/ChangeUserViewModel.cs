@@ -14,8 +14,11 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
         public RaketaCommand GenerationIdentifierCommand { get; set; }
         public RaketaCommand GenerationPasswordCommand { get; set; }
         public RaketaTCommand<User> SaveUserCommand { get; set; }
-        public RaketaTCommand<string> ChangeRoleAccessCommand { get; set; }
         public RaketaCommand ExitCommand { get; set; }
+
+        public RaketaTCommand<string> ChangeRoleAccessAdmissionsCampaignCommand { get; set; }
+        public RaketaTCommand<string> ChangeRoleAccessAdministrationCommand { get; set; }
+
 
         IServiceView _serviceView;
         DataContext _context;
@@ -29,8 +32,10 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
             GenerationIdentifierCommand = RaketaCommand.Launch(GenerationIdentifier);
             GenerationPasswordCommand = RaketaCommand.Launch(GenerationPassword);
             SaveUserCommand = RaketaTCommand<User>.Launch(SaveUser);
-            ChangeRoleAccessCommand = RaketaTCommand<string>.Launch(RoleAccess);
             ExitCommand = RaketaCommand.Launch(Exit);
+
+            ChangeRoleAccessAdmissionsCampaignCommand = RaketaTCommand<string>.Launch(RoleAccessAdmissionsCampaign);
+            ChangeRoleAccessAdministrationCommand = RaketaTCommand<string>.Launch(RoleAccessAdministration);
         }
 
         void Mapp(UserVM SelectedUser)
@@ -45,10 +50,15 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
             User.Identifier = SelectedUser.Identifier;
             User.Password = SelectedUser.Password;
             User.ModuleAdministration = SelectedUser.ModuleAdministration;
+            User.ModuleAdmissionsCampaign = SelectedUser.ModuleAdmissionsCampaign;
 
             if (SelectedUser.ModuleAdministration == true) Visual.RoleAdministration = "Полный";
             else if (SelectedUser.ModuleAdministration == false) Visual.RoleAdministration = "Ограниченный";
             else Visual.RoleAdministration = "Без доступа";
+
+            if (SelectedUser.ModuleAdmissionsCampaign == true) Visual.RoleAdmissionsCampaign = "Полный";
+            else if (SelectedUser.ModuleAdmissionsCampaign == false) Visual.RoleAdmissionsCampaign = "Ограниченный";
+            else Visual.RoleAdmissionsCampaign = "Без доступа";
         }
         void GenerationIdentifier() => User.Identifier = Generation();
         void GenerationPassword() => User.Password = Generation();
@@ -73,6 +83,7 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
                 user.Identifier = User.Identifier;
                 user.Password = User.Password;
                 user.ModuleAdministration= User.ModuleAdministration;
+                user.ModuleAdmissionsCampaign= User.ModuleAdmissionsCampaign;
 
                 _context.SaveChanges();
 
@@ -80,7 +91,26 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
                 _serviceView.Close<ChangeUserViewModel>();
             }
         }
-        void RoleAccess(string roleAccess)
+
+        void RoleAccessAdmissionsCampaign(string roleAccess)
+        {
+            if (roleAccess == "Без доступа")
+            {
+                User.ModuleAdmissionsCampaign = false;
+                Visual.RoleAdmissionsCampaign = "Ограниченный";
+            }
+            else if (roleAccess == "Ограниченный")
+            {
+                User.ModuleAdmissionsCampaign = true;
+                Visual.RoleAdmissionsCampaign = "Полный";
+            }
+            else
+            {
+                User.ModuleAdmissionsCampaign = null;
+                Visual.RoleAdmissionsCampaign = "Без доступа";
+            }
+        }
+        void RoleAccessAdministration(string roleAccess)
         {
             if (roleAccess == "Без доступа")
             {
@@ -98,6 +128,8 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
                 Visual.RoleAdministration = "Без доступа";
             }
         }
+
+
         string Generation()
         {
             string signs = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
