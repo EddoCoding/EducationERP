@@ -9,12 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Common\Resources\Images\addPersonalFile.png" />
     <None Remove="Common\Resources\Images\addUser.png" />
     <None Remove="Common\Resources\Images\admissionCampaign.png" />
     <None Remove="Common\Resources\Images\changeDocument.png" />
+    <None Remove="Common\Resources\Images\changePersonalFile.png" />
     <None Remove="Common\Resources\Images\changeSize.png" />
     <None Remove="Common\Resources\Images\changeUser.png" />
     <None Remove="Common\Resources\Images\createBaseData.png" />
+    <None Remove="Common\Resources\Images\deletePersonalFile.png" />
     <None Remove="Common\Resources\Images\deleteUser.png" />
     <None Remove="Common\Resources\Images\exit.png" />
     <None Remove="Common\Resources\Images\login.png" />
@@ -29,6 +32,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Common\Resources\Images\addPersonalFile.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Common\Resources\Images\addUser.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -38,10 +44,16 @@
     <Resource Include="Common\Resources\Images\changeDocument.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Common\Resources\Images\changePersonalFile.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Common\Resources\Images\changeSize.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Common\Resources\Images\changeUser.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Resources\Images\deletePersonalFile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Common\Resources\Images\deleteUser.png">
