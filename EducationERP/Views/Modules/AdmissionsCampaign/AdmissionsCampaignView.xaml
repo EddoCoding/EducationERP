@@ -184,19 +184,19 @@
 
                 <Button Content="/Common/Resources/Images/addPersonalFile.png" Style="{StaticResource ButtonImage}" Height="24" Width="24" 
                         VerticalAlignment="Top" Margin="10" ToolTip="Создать личное дело абитуриента"
-                        Command="{Binding .}"/>
+                        Command="{Binding OpenTabPersonalFileCommand}"/>
 
                 <Button Content="/Common/Resources/Images/changePersonalFile.png" Style="{StaticResource ButtonImage}" Height="24" Width="24"
                         VerticalAlignment="Top" Margin="10" ToolTip="Изменить личное дело"
-                        Command="{Binding .}" CommandParameter="{Binding .}"/>
+                        Command="{Binding ChangePersonalFileCommand}" CommandParameter="{Binding SelectedApplicant}"/>
 
                 <Button Content="/Common/Resources/Images/deletePersonalFile.png" Style="{StaticResource ButtonImage}" Height="24" Width="24" 
                         VerticalAlignment="Top" Margin="10" ToolTip="Удалить личное дело"
-                        Command="{Binding .}" CommandParameter="{Binding .}"/>
+                        Command="{Binding DeletePersonalFileCommand}" CommandParameter="{Binding SelectedApplicant}"/>
 
                 <Button Content="/Common/Resources/Images/update.png" Style="{StaticResource ButtonImage}" Height="24" Width="24" 
                         VerticalAlignment="Top" Margin="10" ToolTip="Обновить список абитуриентов"
-                        Command="{Binding .}"/>
+                        Command="{Binding UpdatePersonalFileCommand}"/>
 
             </StackPanel>
 

@@ -8,7 +8,7 @@ namespace EducationERP.Common.Components.Repositories
     {
         public ObservableCollection<ApplicantVM> Applicants { get; set; } = new();
 
-        public void CreatePersonalFile() => throw new NotImplementedException();
+        public void AddPersonalFile() => throw new NotImplementedException();
         public Task<Applicant> ChangePersonalFile() => throw new NotImplementedException();
         public Task<ApplicantVM[]> UpdatePersonalFiles() => throw new NotImplementedException();
         public void DeletePersonalFile() => throw new NotImplementedException();

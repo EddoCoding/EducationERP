@@ -44,6 +44,7 @@ namespace EducationERP
             _serviceView.RegisterTypeView<ChangeUserViewModel, WindowChangeUser>();
             _serviceView.RegisterTypeView<AdministrationViewModel, AdministrationView>();
             _serviceView.RegisterTypeView<AdmissionsCampaignViewModel, AdmissionsCampaignView>();
+            _serviceView.RegisterTypeView<AddApplicantViewModel, AddApplicantView>();
         }
 
         void RegisterDependency()
@@ -53,6 +54,7 @@ namespace EducationERP
             _container.RegisterSingleton<UserSystem, UserSystem>();
             _container.RegisterSingleton<MainTabControl, ITabControl>();
             _container.RegisterSingleton<UserRepository, IUserRepository>();
+            _container.RegisterSingleton<ApplicantRepository, IApplicantRepository>();
         }
     }
 }
