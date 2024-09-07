@@ -1,5 +1,6 @@
 ﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
+using EducationERP.Common.ToolsDev;
 using Raketa;
 using System.Collections.ObjectModel;
 
@@ -11,7 +12,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         public ApplicantVM SelectedApplicant { get; set; }
 
         public RaketaCommand ExitCommand { get; set; }
-        public RaketaCommand CreatePersonalFileCommand { get; set; }
+        public RaketaCommand OpenTabPersonalFileCommand { get; set; }
         public RaketaCommand ChangePersonalFileCommand { get; set; }
         public RaketaCommand DeletePersonalFileCommand { get; set; }
         public RaketaCommand UpdatePersonalFileCommand { get; set; }
@@ -26,16 +27,16 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             _applicantRepository = applicantRepository;
 
             ExitCommand = RaketaCommand.Launch(CloseTab);
-            CreatePersonalFileCommand = RaketaCommand.Launch(CreatePersonalFile);
+            OpenTabPersonalFileCommand = RaketaCommand.Launch(CreatePersonalFile);
             ChangePersonalFileCommand = RaketaCommand.Launch(ChangePersonalFile);
             DeletePersonalFileCommand = RaketaCommand.Launch(DeletePersonalFile);
             UpdatePersonalFileCommand = RaketaCommand.Launch(UpdatePersonalFile);
         }
 
         void CloseTab() => _tabControl.RemoveTab();
-        void CreatePersonalFile() => _applicantRepository.CreatePersonalFile();
-        void ChangePersonalFile() => _applicantRepository.ChangePersonalFile();
-        void DeletePersonalFile() => _applicantRepository.DeletePersonalFile();
-        void UpdatePersonalFile() => _applicantRepository.UpdatePersonalFiles();
+        void CreatePersonalFile() => _tabControl.CreateTab<AddApplicantViewModel>("Добавление абитуриента");
+        void ChangePersonalFile() => Dev.NotReady("Изменение личного дела");
+        void DeletePersonalFile() => Dev.NotReady("Удаление личного дела");
+        void UpdatePersonalFile() => Dev.NotReady("Обновление личных дел");
     }
 }

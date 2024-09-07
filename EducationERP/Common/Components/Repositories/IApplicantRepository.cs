@@ -8,7 +8,7 @@ namespace EducationERP.Common.Components.Repositories
     {
         ObservableCollection<ApplicantVM> Applicants { get; set; }
 
-        void CreatePersonalFile();
+        void AddPersonalFile();
         Task<Applicant> ChangePersonalFile();
         void DeletePersonalFile();
         Task<ApplicantVM[]> UpdatePersonalFiles();
