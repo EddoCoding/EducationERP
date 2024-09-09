@@ -78,5 +78,28 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+    <Style x:Key="defaultAdd" TargetType="Button">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border BorderThickness="0" Background="{TemplateBinding Background}">
+                        <Border.Effect>
+                            <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                        </Border.Effect>
+
+                        <ContentPresenter Margin="5"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FFD700"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>
