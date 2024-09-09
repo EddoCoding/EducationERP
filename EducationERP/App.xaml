@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="Common/Resources/Styles/TextBoxStyles.xaml"/>
                 <ResourceDictionary Source="Common/Resources/Styles/ButtonStyles.xaml"/>
                 <ResourceDictionary Source="Common/Resources/Styles/ComboBoxStyles.xaml"/>
+                <ResourceDictionary Source="Common/Resources/Styles/ScrollBarStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             
         </ResourceDictionary>
