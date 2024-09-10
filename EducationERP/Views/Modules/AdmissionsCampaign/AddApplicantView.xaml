@@ -4,9 +4,32 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EducationERP.Views.Modules.AdmissionsCampaign"
+             xmlns:converters="clr-namespace:EducationERP.Common.Converters"
+             xmlns:selectors="clr-namespace:EducationERP.Common.Selectors"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800" 
              FontFamily="{StaticResource OpenSans}" RenderOptions.BitmapScalingMode="NearestNeighbor">
     <UserControl.Resources>
+        <converters:DateOnlyToDateOnlyConverter x:Key="DateOnlyToDateOnly"/>
+
+        <DataTemplate x:Key="Passport">
+            <Grid Height="20" Width="50" Background="Red"/>
+        </DataTemplate>
+        <DataTemplate x:Key="ForeignPassport">
+            <Grid Height="20" Width="70" Background="Blue"/>
+        </DataTemplate>
+        <DataTemplate x:Key="Snils">
+            <Grid Height="20" Width="90" Background="Green"/>
+        </DataTemplate>
+        <DataTemplate x:Key="Inn">
+            <Grid Height="20" Width="110" Background="Yellow"/>
+        </DataTemplate>
+
+        <selectors:SelectorDocuments x:Key="SelectorDocuments" 
+                                     TemplatePassport="{StaticResource Passport}"
+                                     TemplateForeignPassport="{StaticResource ForeignPassport}"
+                                     TemplateSnils="{StaticResource Snils}"
+                                     TemplateInn="{StaticResource Inn}"/>
+
         <Style x:Key="RadioButtonCustom" TargetType="RadioButton">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -43,6 +66,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
     </UserControl.Resources>
 
     <ScrollViewer>
@@ -56,252 +80,265 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,10,0,0">
                 <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0" FontSize="15" Text="ЛИЧНОЕ ДЕЛО АБИТУРИЕНТА" Foreground="Black" VerticalAlignment="Center"/>
                 <Button Grid.Column="1" Content="X" Style="{StaticResource ButtonExitUserControl}" FontSize="14"
-                    Margin="10,0,5,0" RenderOptions.BitmapScalingMode="Fant" Command="{Binding ExitCommand}" ToolTip="Закрыть вкладку"/>
+                        Margin="10,0,5,0" RenderOptions.BitmapScalingMode="Fant" Command="{Binding ExitCommand}" ToolTip="Закрыть вкладку"/>
             </Grid>
 
+            <!--ЛИЧНАЯ ИНФОРМАЦИЯ-->
             <Grid Grid.Row="1" Margin="10,0,0,0">
                 <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="15" Text="Личная информация" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
-                
-                <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="550" HorizontalAlignment="Left">
-                <Grid.Effect>
-                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
-                </Grid.Effect>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="0" Text="Фамилия:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" Text="{Binding .}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5"/>
-            </Grid>
-
-                <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="550" HorizontalAlignment="Left">
-                <Grid.Effect>
-                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
-                </Grid.Effect>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="0" Text="Имя:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" Text="{Binding .}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5"/>
-            </Grid>
-
-                <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="550" HorizontalAlignment="Left">
-                <Grid.Effect>
-                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
-                </Grid.Effect>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="0" Text="Отчество:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" Text="{Binding .}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5"/>
-            </Grid>
-
-                <Grid Grid.Row="5" Grid.Column="0" Background="White" Margin="10,10,0,0" Width="230" HorizontalAlignment="Left">
-                <Grid.Effect>
-                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
-                </Grid.Effect>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="105"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="0" Text="Дата рождения:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" Text="{Binding .}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5"/>
-                <Button Grid.Column="2" Style="{StaticResource ButtonImage}" Content="/Common/Resources/Images/calendar.png" Height="24" Width="24" Margin="0,0,5,0"/>
-            </Grid>
-
-                <Grid Grid.Row="5" Grid.Column="1" Background="White" Margin="20,10,10,0" Width="110" HorizontalAlignment="Left">
-                <Grid.Effect>
-                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
-                </Grid.Effect>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="45"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="0" Text="Пол" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
-                <ComboBox Grid.Column="1" Style="{StaticResource ComboBoxGender}" ItemContainerStyle="{StaticResource ComboBoxItemGender}">
-                    <ComboBoxItem Content="Муж"/>
-                    <ComboBoxItem Content="Жен"/>
-                </ComboBox>
-            </Grid>
-
-                <Grid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="550" HorizontalAlignment="Left">
-                <Grid.Effect>
-                <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
-            </Grid.Effect>
-                <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="0" Text="Место рождения:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" Text="{Binding .}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5"/>
-            </Grid>
-            
-                <Grid Grid.Row="7" Grid.ColumnSpan="2" Margin="10,10,10,0" Background="White" Width="550" HorizontalAlignment="Left">
-                <Grid.Effect>
-                <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
-            </Grid.Effect>
-                <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-                
-                <RadioButton Grid.Row="0" Grid.ColumnSpan="2" Content="Гражданин России" Style="{StaticResource RadioButtonCustom}" IsChecked="True" Margin="10,10,0,5"/>
-                <RadioButton Grid.Row="1" Grid.ColumnSpan="2" Content="Лицо без гражданства" Style="{StaticResource RadioButtonCustom}" Margin="10,5,0,5"/>
-                <RadioButton Grid.Row="2" Grid.Column="0" Content="Иностранный гражданин" Style="{StaticResource RadioButtonCustom}" Margin="10,5,0,10"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding .}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,10" VerticalAlignment="Bottom"/>
-            </Grid>
-
-                <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,0,0" Width="285" HorizontalAlignment="Left">
-                <Grid.Effect>
-                <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
-            </Grid.Effect>
-                <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="0" Text="Гражданство действует с:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" Text="{Binding .}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5"/>
-                <Button Grid.Column="2" Style="{StaticResource ButtonImage}" Content="/Common/Resources/Images/calendar.png" Height="24" Width="24" Margin="0,0,5,0"/>
-            </Grid>
-            
-            </Grid>
-
-            <Grid Grid.Row="2" Margin="10,10,0,0">
-                <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="15" Text="Контактная информация" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
-
-                <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="550" HorizontalAlignment="Left">
-                <Grid.Effect>
-                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
-                </Grid.Effect>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="0" Text="Адрес места проживания:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" Text="{Binding .}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5"/>
-            </Grid>
-
-                <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="550" HorizontalAlignment="Left">
-                <Grid.Effect>
-                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
-                </Grid.Effect>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="0" Text="Адрес по прописке:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" Text="{Binding .}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5"/>
-            </Grid>
-
-                <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="300" HorizontalAlignment="Left">
-                <Grid.Effect>
-                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
-                </Grid.Effect>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="0" Text="Домашний телефон:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" Text="{Binding .}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5"/>
-            </Grid>
-
-                <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="300" HorizontalAlignment="Left">
-                <Grid.Effect>
-                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
-                </Grid.Effect>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="0" Text="Мобильный телефон:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" Text="{Binding .}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5"/>
-            </Grid>
-
-                <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="400" HorizontalAlignment="Left">
-                <Grid.Effect>
-                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
-                </Grid.Effect>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="0" Text="Почта:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" Text="{Binding .}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5"/>
-            </Grid>
-
-                <Grid Grid.Row="6" Background="White" Grid.ColumnSpan="2" Margin="10,10,10,0" Width="550" HorizontalAlignment="Left">
-                <Grid.Effect>
-                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
-                </Grid.Effect>
-                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Дополнительная контактная информация" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
-                <TextBox Grid.Row="1" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,10"
-                         TextWrapping="Wrap"/>
-            </Grid>
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="15" Text="Личная информация" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
+
+                <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="550" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Фамилия:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding ApplicantVM.SurName}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5"/>
+                </Grid>
+
+                <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="550" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Имя:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding ApplicantVM.Name}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5"/>
+                </Grid>
+
+                <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="550" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Отчество:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding ApplicantVM.MiddleName}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5"/>
+                </Grid>
+
+                <Grid Grid.Row="5" Grid.Column="0" Background="White" Margin="10,10,0,0" Width="230" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="105"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Дата рождения:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5" 
+                             Text="{Binding ApplicantVM.DateOfBirth, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}" 
+                             />
+                    <Button Grid.Column="2" Style="{StaticResource ButtonImage}" Content="/Common/Resources/Images/calendar.png" Height="24" Width="24" Margin="0,0,5,0"/>
+                </Grid>
+
+                <Grid Grid.Row="5" Grid.Column="1" Background="White" Margin="20,10,10,0" Width="110" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="45"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Пол" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <ComboBox Grid.Column="1" Style="{StaticResource ComboBoxGender}" ItemContainerStyle="{StaticResource ComboBoxItemGender}"
+                              Text="{Binding ApplicantVM.Gender}">
+                        <ComboBoxItem Content="Муж"/>
+                        <ComboBoxItem Content="Жен"/>
+                    </ComboBox>
+                </Grid>
+
+                <Grid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="550" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Место рождения:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding ApplicantVM.PlaceOfBirth}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5"/>
+                </Grid>
+
+                <Grid Grid.Row="7" Grid.ColumnSpan="2" Margin="10,10,10,0" Background="White" Width="550" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <RadioButton Grid.Row="0" Grid.ColumnSpan="2" Content="Гражданин России" Style="{StaticResource RadioButtonCustom}" Margin="10,10,0,5" 
+                                 IsChecked="{Binding ApplicantVM.IsCitizenRus}" Command="{Binding CitizenshipCommand}"/>
+                    <RadioButton Grid.Row="1" Grid.ColumnSpan="2" Content="Лицо без гражданства" Style="{StaticResource RadioButtonCustom}" Margin="10,5,0,5" 
+                                 IsChecked="{Binding ApplicantVM.NotCitizen}" Command="{Binding CitizenshipCommand}"/>
+                    <RadioButton Grid.Row="2" Grid.Column="0" Content="Иностранный гражданин" Style="{StaticResource RadioButtonCustom}" Margin="10,5,0,10" 
+                                 IsChecked="{Binding ApplicantVM.IsForeign}" Command="{Binding CitizenshipCommand}"/>
+                    
+                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ApplicantVM.Citizenship}" Style="{StaticResource CustomTextBox}" 
+                             Margin="10,0,10,10" VerticalAlignment="Bottom" IsEnabled="{Binding Visual.IsEnabledTextBox}"/>
+                </Grid>
+
+                <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,0,0" Width="285" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Гражданство действует с:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5" 
+                             Text="{Binding ApplicantVM.CitizenshipValidFrom, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}"/>
+                    <Button Grid.Column="2" Style="{StaticResource ButtonImage}" Content="/Common/Resources/Images/calendar.png" Height="24" Width="24" Margin="0,0,5,0"/>
+                </Grid>
 
             </Grid>
 
+            <!--КОНТАКТНАЯ ИНФОРМАЦИЯ-->
+            <Grid Grid.Row="2" Margin="10,10,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="15" Text="Контактная информация" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
+
+                <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="550" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Адрес места проживания:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding ApplicantVM.ResidentialAddress}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5"/>
+                </Grid>
+
+                <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="550" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Адрес по прописке:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding ApplicantVM.AddressOfRegistration}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5"/>
+                </Grid>
+
+                <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="300" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Домашний телефон:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding ApplicantVM.HomePhone}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5"/>
+                </Grid>
+
+                <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="300" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Мобильный телефон:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding ApplicantVM.MobilePhone}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5"/>
+                </Grid>
+
+                <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="400" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Почта:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding ApplicantVM.Mail}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5"/>
+                </Grid>
+
+                <Grid Grid.Row="6" Background="White" Grid.ColumnSpan="2" Margin="10,10,10,0" Width="550" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Дополнительная контактная информация" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
+                    <TextBox Grid.Row="1" Text="{Binding ApplicantVM.AdditionalInformation}" Style="{StaticResource CustomTextBox}" 
+                             Margin="10,0,10,10" TextWrapping="Wrap"/>
+                </Grid>
+
+            </Grid>
+
+            <!--ДОКУМЕНТЫ-->
             <Grid Grid.Row="3" Margin="10,10,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -311,10 +348,12 @@
 
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="15" Text="Документы" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
                 <Button Grid.Row="1" Content="Добавить документ" Style="{StaticResource defaultAdd}" Margin="10,10,0,0" HorizontalAlignment="Left"
-                        Command="{Binding .}"/>
-                <ListView Grid.Row="2" Margin="10,5,10,0" Height="160" ItemsSource="{Binding .}"/>
+                        Command="{Binding AddDocumentCommand}"/>
+                <ListView Grid.Row="2" Margin="10,5,10,0" Height="160" ItemTemplateSelector="{StaticResource SelectorDocuments}"
+                          ItemsSource="{Binding Documents}"/>
             </Grid>
 
+            <!--ОБРАЗОВАНИЕ-->
             <Grid Grid.Row="4" Margin="10,10,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -334,6 +373,7 @@
                 <ListView Grid.Row="4" Margin="10,5,10,0" Height="100" ItemsSource="{Binding .}"/>
             </Grid>
 
+            <!--ОТЛИЧИТЕЛЬНЫЕ ПРИЗНАКИ-->
             <Grid Grid.Row="5" Margin="10,10,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -347,7 +387,8 @@
                 <ListView Grid.Row="2" Margin="10,5,10,0" Height="160" ItemsSource="{Binding .}"/>
 
             </Grid>
-            
+
+            <!--НАПРАВЛЕНИЯ-->
             <Grid Grid.Row="6" Margin="10,10,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -366,6 +407,7 @@
                 </StackPanel>
             </Grid>
 
+            <!--ПОДАННЫЕ ДОКУМЕНТЫ-->
             <Grid Grid.Row="7" Margin="10,10,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -378,6 +420,10 @@
                         Command="{Binding .}"/>
                 <ListView Grid.Row="2" Margin="10,5,10,0" Height="160" ItemsSource="{Binding .}"/>
             </Grid>
+
+            <!--КНОПКА СФОРМИРОВАТЬ ЛИЧНОЕ ДЕЛО-->
+            <Button Grid.Row="8" Content="Сформировать личное дело" Style="{StaticResource defaultAdd}" HorizontalAlignment="Center" Margin="0,20"
+                    Command="{Binding CreatePersonalFileCommand}"/>
 
         </Grid>
         

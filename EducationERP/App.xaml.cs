@@ -45,6 +45,7 @@ namespace EducationERP
             _serviceView.RegisterTypeView<AdministrationViewModel, AdministrationView>();
             _serviceView.RegisterTypeView<AdmissionsCampaignViewModel, AdmissionsCampaignView>();
             _serviceView.RegisterTypeView<AddApplicantViewModel, AddApplicantView>();
+            _serviceView.RegisterTypeView<DocumentVIewModel, DocumentWindow>();
         }
 
         void RegisterDependency()

@@ -6,10 +6,7 @@ namespace EducationERP.Modules.Login.View
 {
     public partial class LoginWindow : Window, IView
     {
-        public LoginWindow()
-        {
-            InitializeComponent();
-        }
+        public LoginWindow() => InitializeComponent();
 
         public void Exit() => this.Close();
 
