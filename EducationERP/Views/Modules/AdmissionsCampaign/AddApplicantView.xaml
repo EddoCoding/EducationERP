@@ -165,8 +165,7 @@
 
                     <TextBlock Grid.Column="0" Text="Дата рождения:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
                     <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="10,5,10,5" 
-                             Text="{Binding ApplicantVM.DateOfBirth, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}" 
-                             />
+                             Text="{Binding ApplicantVM.DateOfBirth, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}"/>
                     <Button Grid.Column="2" Style="{StaticResource ButtonImage}" Content="/Common/Resources/Images/calendar.png" Height="24" Width="24" Margin="0,0,5,0"/>
                 </Grid>
 
@@ -180,7 +179,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="Пол" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
-                    <ComboBox Grid.Column="1" Style="{StaticResource ComboBoxGender}" ItemContainerStyle="{StaticResource ComboBoxItemGender}"
+                    <ComboBox Grid.Column="1" Style="{StaticResource ComboBoxCustom}" ItemContainerStyle="{StaticResource ComboBoxItemCustom}"
                               Text="{Binding ApplicantVM.Gender}">
                         <ComboBoxItem Content="Муж"/>
                         <ComboBoxItem Content="Жен"/>

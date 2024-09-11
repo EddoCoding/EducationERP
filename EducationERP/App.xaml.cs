@@ -7,6 +7,7 @@ using EducationERP.ViewModels.Login;
 using EducationERP.ViewModels.Modules.Administration;
 using EducationERP.ViewModels.Modules.Administration.ControlUsers;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign;
+using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using EducationERP.Views;
 using EducationERP.Views.Modules.Administration;
 using EducationERP.Views.Modules.Administration.ControlUsers;
@@ -45,7 +46,7 @@ namespace EducationERP
             _serviceView.RegisterTypeView<AdministrationViewModel, AdministrationView>();
             _serviceView.RegisterTypeView<AdmissionsCampaignViewModel, AdmissionsCampaignView>();
             _serviceView.RegisterTypeView<AddApplicantViewModel, AddApplicantView>();
-            _serviceView.RegisterTypeView<DocumentVIewModel, DocumentWindow>();
+            _serviceView.RegisterTypeView<DocumentViewModel, DocumentWindow>();
         }
 
         void RegisterDependency()
