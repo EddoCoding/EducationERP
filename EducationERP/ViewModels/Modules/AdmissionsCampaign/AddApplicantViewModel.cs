@@ -1,8 +1,8 @@
 ﻿using EducationERP.Common.Components.Services;
 using EducationERP.Models;
+using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using Raketa;
 using System.Collections.ObjectModel;
-using System.Windows;
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 {
@@ -60,6 +60,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             }
         }
         void CreatePersonalFile() { }
-        void AddDocument() => _serviceView.Window<DocumentVIewModel>().NonModal();
+        void AddDocument() => _serviceView.Window<DocumentViewModel>().NonModal();
     }
 }

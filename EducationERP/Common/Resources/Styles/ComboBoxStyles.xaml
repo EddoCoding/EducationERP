@@ -26,9 +26,9 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="ComboBoxGender" TargetType="ComboBox">
+    <Style x:Key="ComboBoxCustom" TargetType="ComboBox">
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="10,3,0,3"/>
+        <Setter Property="Padding" Value="10,3,5,3"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBox">
@@ -65,7 +65,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="ComboBoxItemGender" TargetType="ComboBoxItem">
+    <Style x:Key="ComboBoxItemCustom" TargetType="ComboBoxItem">
         <Setter Property="Padding" Value="4"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Template">
