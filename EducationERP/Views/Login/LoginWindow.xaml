@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationERP.Modules.Login.View"
-        mc:Ignorable="d" Title="Вход" Height="200" Width="450" MouseDown="MoveWindow"
+        mc:Ignorable="d" Title="Вход" Height="185" Width="450" MouseDown="MoveWindow"
         Background="WhiteSmoke" FontFamily="{StaticResource OpenSans}" WindowStyle="None" 
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" RenderOptions.BitmapScalingMode="NearestNeighbor">
     <Window.InputBindings>
@@ -38,7 +38,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Text="Идентификатор" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
-                    <TextBox Grid.Row="1" Text="{Binding Identifier, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,10"/>
+                    <TextBox Grid.Row="1" Text="{Binding Identifier, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,5"/>
                 </Grid>
 
                 <Grid Grid.Row="0" Background="White">
@@ -51,7 +51,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Text="Пароль" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
-                    <TextBox Grid.Row="1" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,10"/>
+                    <TextBox Grid.Row="1" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,5"/>
                 </Grid>
 
                 <TextBlock Text="Введите логин и пароль, нажмите кнопку вход" Foreground="Gray" Margin="0,5"/>
