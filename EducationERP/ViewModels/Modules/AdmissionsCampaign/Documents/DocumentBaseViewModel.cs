@@ -2,7 +2,7 @@
 {
     public class DocumentBaseViewModel
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string TypeDocument { get; set; } = string.Empty;
         public string SurName { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;

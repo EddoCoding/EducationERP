@@ -1,4 +1,4 @@
-﻿using EducationERP.ViewModels.Login;
+﻿using EducationERP.Common.Components.Repositories;
 using Raketa;
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents
@@ -20,19 +20,25 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents
             set => SetValue(ref selectedDocument, value);
         }
 
-        public RaketaCommand AddDocumentCommand { get; set; }
+        public RaketaTCommand<DocumentBaseViewModel> AddDocumentCommand { get; set; }
         public RaketaCommand ExitCommand { get; set; }
 
         IServiceView _serviceView;
-        public DocumentViewModel(IServiceView serviceView)
+        IApplicantRepository _applicantRepository;
+        public DocumentViewModel(IServiceView serviceView, IApplicantRepository applicantRepository)
         {
             _serviceView = serviceView;
+            _applicantRepository = applicantRepository;
 
-            AddDocumentCommand = RaketaCommand.Launch(AddDocuments);
+            AddDocumentCommand = RaketaTCommand<DocumentBaseViewModel>.Launch(AddDocuments);
             ExitCommand = RaketaCommand.Launch(ExitLogin);
         }
 
-        void AddDocuments() { }
+        void AddDocuments(DocumentBaseViewModel document)
+        {
+            _applicantRepository.AddDocument(document);
+            _serviceView.Close<DocumentViewModel>();
+        }
         void ExitLogin() => _serviceView.Close<DocumentViewModel>();
     }
 }
