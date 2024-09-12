@@ -1,4 +1,5 @@
-﻿using Raketa;
+﻿using EducationERP.ViewModels.Login;
+using Raketa;
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents
 {
@@ -10,7 +11,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents
             new SnilsViewModel(),
             new InnViewModel(),
             new ForeignPassportViewModel()
-        };
+        }; // ДОКУМЕНТЫ
 
         DocumentBaseViewModel selectedDocument;
         public DocumentBaseViewModel SelectedDocument
@@ -19,9 +20,19 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents
             set => SetValue(ref selectedDocument, value);
         }
 
-        public DocumentViewModel()
+        public RaketaCommand AddDocumentCommand { get; set; }
+        public RaketaCommand ExitCommand { get; set; }
+
+        IServiceView _serviceView;
+        public DocumentViewModel(IServiceView serviceView)
         {
-            
+            _serviceView = serviceView;
+
+            AddDocumentCommand = RaketaCommand.Launch(AddDocuments);
+            ExitCommand = RaketaCommand.Launch(ExitLogin);
         }
+
+        void AddDocuments() { }
+        void ExitLogin() => _serviceView.Close<DocumentViewModel>();
     }
 }

@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:EducationERP.Views.Modules.AdmissionsCampaign"
         xmlns:viewDocuments="clr-namespace:EducationERP.Views.Modules.AdmissionsCampaign.Documents"
         xmlns:viewModelDocuments="clr-namespace:EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents"
-        mc:Ignorable="d" Title="Добавление документа" Height="450" Width="750" MinWidth="750">
+        mc:Ignorable="d" Title="Добавление документа" Height="450" Width="670" MouseDown="MoveWindow"
+        Background="WhiteSmoke" FontFamily="{StaticResource OpenSans}" WindowStyle="None" 
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" RenderOptions.BitmapScalingMode="NearestNeighbor">
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModelDocuments:PassportViewModel}">
             <viewDocuments:PassportView/>
@@ -40,7 +42,7 @@
 
             <TextBlock Grid.Column="0" Text="Документ" Foreground="Gray" FontSize="13" Margin="10,5" VerticalAlignment="Center"/>
             <ComboBox Grid.Column="1" Style="{StaticResource ComboBoxCustom}" ItemContainerStyle="{StaticResource ComboBoxItemCustom}" 
-                      ItemsSource="{Binding Documents}" SelectedItem="{Binding SelectedDocument}">
+                      ItemsSource="{Binding Documents}" SelectedItem="{Binding SelectedDocument}" Width="160">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding TypeDocument}" />
@@ -52,8 +54,8 @@
         <ContentPresenter Grid.Row="1" Content="{Binding SelectedDocument}" Margin="10"/>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0,10,10">
-            <Button Content="Добавить" Margin="10,0"/>
-            <Button Content="Отменить"/>
+            <Button Content="Добавить" Style="{StaticResource ButtonTextCreate}" Margin="10,0" Command="{Binding .}"/>
+            <Button Content="Отменить" Style="{StaticResource ButtonTextCancel}" Command="{Binding ExitCommand}"/>
         </StackPanel>
         
     </Grid>
