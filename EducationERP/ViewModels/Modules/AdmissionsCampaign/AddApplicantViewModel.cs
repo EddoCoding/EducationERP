@@ -1,8 +1,10 @@
-﻿using EducationERP.Common.Components.Services;
+﻿using EducationERP.Common.Components.Repositories;
+using EducationERP.Common.Components.Services;
 using EducationERP.Models;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using Raketa;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 {
@@ -12,32 +14,39 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         public ApplicantVM ApplicantVM { get; set; } = new();
         public VisualAddApplicant Visual { get; set; } = new();
 
-        public ObservableCollection<Document> Documents { get; set; } = new(); 
+        public ObservableCollection<DocumentBaseViewModel> Documents { get; set; } = new(); 
 
 
         public RaketaCommand ExitCommand { get; set; }
         public RaketaCommand CitizenshipCommand { get; set; }
         public RaketaCommand CreatePersonalFileCommand { get; set; }
+
         public RaketaCommand AddDocumentCommand { get; set; }
+        public RaketaTCommand<DocumentBaseViewModel> ChangeDocumentCommand { get; set; }
+        public RaketaTCommand<DocumentBaseViewModel> DeleteDocumentCommand { get; set; }
 
         IServiceView _serviceView;
         ITabControl _tabControl;
-        public AddApplicantViewModel(IServiceView serviceView, ITabControl tabControl)
+        IApplicantRepository _applicantRepository;
+        public AddApplicantViewModel(IServiceView serviceView, ITabControl tabControl, IApplicantRepository applicantRepository)
         {
             _serviceView = serviceView;
             _tabControl = tabControl;
+            _applicantRepository = applicantRepository;
 
-            Documents.Add(new Passport());
-            Documents.Add(new ForeignPassport());
-            Documents.Add(new Snils());
-            Documents.Add(new Inn());
-
+            applicantRepository.Documents.CollectionChanged += (sender, e) =>
+            {
+                if (e.OldItems != null) foreach (DocumentBaseViewModel item in e.OldItems) Documents.Remove(item);
+                if (e.NewItems != null) foreach (DocumentBaseViewModel item in e.NewItems) Documents.Add(item);
+            };
 
             ExitCommand = RaketaCommand.Launch(CloseTab);
             CitizenshipCommand = RaketaCommand.Launch(Citizenship);
             CreatePersonalFileCommand = RaketaCommand.Launch(CreatePersonalFile);
 
             AddDocumentCommand = RaketaCommand.Launch(AddDocument);
+            ChangeDocumentCommand = RaketaTCommand<DocumentBaseViewModel>.Launch(ChangeDocument);
+            DeleteDocumentCommand = RaketaTCommand<DocumentBaseViewModel>.Launch(DeleteDocument);
         }
 
         void CloseTab() => _tabControl.RemoveTab();
@@ -60,6 +69,9 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             }
         }
         void CreatePersonalFile() { }
-        void AddDocument() => _serviceView.Window<DocumentViewModel>().NonModal();
+
+        void AddDocument() => _serviceView.Window<DocumentViewModel>().Modal();
+        void ChangeDocument(DocumentBaseViewModel document) => _serviceView.Window<ChangeDocumentViewModel>(null, document).Modal();
+        void DeleteDocument(DocumentBaseViewModel document) => _applicantRepository.DeleteDocuments(document);
     }
 }

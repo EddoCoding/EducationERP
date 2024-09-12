@@ -12,6 +12,7 @@ using EducationERP.Views;
 using EducationERP.Views.Modules.Administration;
 using EducationERP.Views.Modules.Administration.ControlUsers;
 using EducationERP.Views.Modules.AdmissionsCampaign;
+using EducationERP.Views.Modules.AdmissionsCampaign.Documents;
 using Raketa;
 using System.Windows;
 
@@ -47,6 +48,7 @@ namespace EducationERP
             _serviceView.RegisterTypeView<AdmissionsCampaignViewModel, AdmissionsCampaignView>();
             _serviceView.RegisterTypeView<AddApplicantViewModel, AddApplicantView>();
             _serviceView.RegisterTypeView<DocumentViewModel, DocumentWindow>();
+            _serviceView.RegisterTypeView<ChangeDocumentViewModel, ChangeDocumentWindow>();
         }
 
         void RegisterDependency()

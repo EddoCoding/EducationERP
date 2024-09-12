@@ -24,6 +24,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="White" Margin="0,5">
@@ -109,7 +110,7 @@
             <TextBox Grid.Column="1" Text="{Binding PlaceOfBirth}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"/>
         </Grid>
 
-        <Grid Grid.Row="5" Grid.Column="0" Background="White" Margin="0,5">
+        <Grid Grid.Row="5" Grid.ColumnSpan="3" Background="White" Margin="0,5">
             <Grid.Effect>
                 <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
             </Grid.Effect>
@@ -122,7 +123,7 @@
             <TextBox Grid.Column="1" Text="{Binding IssuedBy}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"/>
         </Grid>
 
-        <Grid Grid.Row="5" Grid.Column="1" Background="White" Margin="0,5">
+        <Grid Grid.Row="6" Grid.Column="0" Background="White" Margin="0,5">
             <Grid.Effect>
                 <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
             </Grid.Effect>
@@ -136,7 +137,7 @@
                      Text="{Binding DateOfIssue, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}"/>
         </Grid>
 
-        <Grid Grid.Row="5" Grid.Column="2" Background="White" Margin="0,5">
+        <Grid Grid.Row="6" Grid.Column="1" Background="White" Margin="10,5">
             <Grid.Effect>
                 <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
             </Grid.Effect>
@@ -149,7 +150,7 @@
             <TextBox Grid.Column="1" Text="{Binding SeriesNumber}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"/>
         </Grid>
 
-        <Grid Grid.Row="6" Grid.ColumnSpan="3" Background="White" Margin="0,5">
+        <Grid Grid.Row="7" Grid.ColumnSpan="3" Background="White" Margin="0,5">
             <Grid.Effect>
                 <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
             </Grid.Effect>

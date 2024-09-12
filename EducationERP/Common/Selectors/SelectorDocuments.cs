@@ -1,4 +1,4 @@
-﻿using EducationERP.Models;
+﻿using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,10 +13,10 @@ namespace EducationERP.Common.Selectors
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            if (item is Passport) return TemplatePassport;
-            else if (item is Snils) return TemplateSnils;
-            else if (item is Inn) return TemplateInn;
-            else if (item is ForeignPassport) return TemplateForeignPassport;
+            if (item is PassportViewModel) return TemplatePassport;
+            else if (item is SnilsViewModel) return TemplateSnils;
+            else if (item is InnViewModel) return TemplateInn;
+            else if (item is ForeignPassportViewModel) return TemplateForeignPassport;
 
             return null;
         }
