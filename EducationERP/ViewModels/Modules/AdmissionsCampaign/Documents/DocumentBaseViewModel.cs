@@ -1,6 +1,6 @@
 ﻿namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents
 {
-    public class DocumentBaseViewModel
+    public abstract class DocumentBaseViewModel
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string TypeDocument { get; set; } = string.Empty;
@@ -11,5 +11,7 @@
         public string Gender { get; set; } = string.Empty;
         public string PlaceOfBirth { get; set; } = string.Empty;
         public string AdditionalInformation { get; set; } = string.Empty;
+
+        public abstract bool Validation();
     }
 }
