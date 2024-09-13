@@ -8,6 +8,7 @@
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800" FontFamily="{StaticResource OpenSans}">
     <UserControl.Resources>
         <converters:DateOnlyToDateOnlyConverter x:Key="DateOnlyToDateOnly"/>
+        <converters:StringToSeriesNumberInnConverter x:Key="StringToSeriesNumberInn"/>
     </UserControl.Resources>
 
     <Grid>
@@ -119,10 +120,10 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" Text="Номер Инн:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="1" Text="{Binding NumberINN}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"/>
+            <TextBox Grid.Column="1" Text="{Binding NumberINN}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14" MaxLength="12"/>
         </Grid>
 
-        <Grid Grid.Row="5" Grid.Column="1" Background="White" Margin="0,5,10,5">
+        <Grid Grid.Row="5" Grid.Column="1" Background="White" Margin="-18,5,10,5">
             <Grid.Effect>
                 <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
             </Grid.Effect>
@@ -146,9 +147,10 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" Text="Серия и номер:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="1" Text="{Binding SeriesNumber}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"/>
+            <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"
+                     Text="{Binding SeriesNumber, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToSeriesNumberInn}}"/>
         </Grid>
-
+        
         <Grid Grid.Row="6" Grid.ColumnSpan="3" Background="White" Margin="0,5">
             <Grid.Effect>
                 <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>

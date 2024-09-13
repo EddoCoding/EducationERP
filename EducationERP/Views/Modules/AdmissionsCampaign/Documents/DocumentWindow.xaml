@@ -6,9 +6,10 @@
         xmlns:local="clr-namespace:EducationERP.Views.Modules.AdmissionsCampaign"
         xmlns:viewDocuments="clr-namespace:EducationERP.Views.Modules.AdmissionsCampaign.Documents"
         xmlns:viewModelDocuments="clr-namespace:EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents"
-        mc:Ignorable="d" Title="Добавление документа" Height="450" Width="670" MouseDown="MoveWindow"
+        mc:Ignorable="d" Title="Добавление документа" Height="450" Width="720" MouseDown="MoveWindow"
         Background="WhiteSmoke" FontFamily="{StaticResource OpenSans}" WindowStyle="None" 
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" RenderOptions.BitmapScalingMode="NearestNeighbor">
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" RenderOptions.BitmapScalingMode="NearestNeighbor"
+        BorderBrush="LightGray" BorderThickness="1">
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModelDocuments:PassportViewModel}">
             <viewDocuments:PassportView/>
@@ -26,30 +27,30 @@
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Background="White" Margin="10,10,0,0" HorizontalAlignment="Left">
-            <Grid.Effect>
-                <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
-            </Grid.Effect>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+                <Grid.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </Grid.Effect>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="Документ" Foreground="Gray" FontSize="13" Margin="10,5" VerticalAlignment="Center"/>
-            <ComboBox Grid.Column="1" Style="{StaticResource ComboBoxCustom}" ItemContainerStyle="{StaticResource ComboBoxItemCustom}" 
+                <TextBlock Grid.Column="0" Text="Документ" Foreground="Gray" FontSize="13" Margin="10,5" VerticalAlignment="Center"/>
+                <ComboBox Grid.Column="1" Style="{StaticResource ComboBoxCustom}" ItemContainerStyle="{StaticResource ComboBoxItemCustom}" 
                       ItemsSource="{Binding Documents}" SelectedItem="{Binding SelectedDocument}" Width="160">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding TypeDocument}" />
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-        </Grid>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding TypeDocument}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
 
         <ContentPresenter Grid.Row="1" Content="{Binding SelectedDocument}" Margin="10"/>
 

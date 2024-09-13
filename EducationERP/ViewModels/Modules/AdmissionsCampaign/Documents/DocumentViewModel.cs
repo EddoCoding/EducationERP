@@ -30,14 +30,18 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents
             _serviceView = serviceView;
             _applicantRepository = applicantRepository;
 
-            AddDocumentCommand = RaketaTCommand<DocumentBaseViewModel>.Launch(AddDocuments);
+            AddDocumentCommand = RaketaTCommand<DocumentBaseViewModel>.Launch(AddDocument);
             ExitCommand = RaketaCommand.Launch(ExitLogin);
         }
 
-        void AddDocuments(DocumentBaseViewModel document)
+        void AddDocument(DocumentBaseViewModel document)
         {
-            _applicantRepository.AddDocument(document);
-            _serviceView.Close<DocumentViewModel>();
+            var isValidated = document.Validation();
+            if (isValidated)
+            {
+                _applicantRepository.AddDocument(document);
+                _serviceView.Close<DocumentViewModel>();
+            }
         }
         void ExitLogin() => _serviceView.Close<DocumentViewModel>();
     }
