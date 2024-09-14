@@ -18,7 +18,6 @@ namespace EducationERP.Common.Components.Repositories
         //Документы
         ObservableCollection<DocumentBaseViewModel> Documents { get; set; }
         void AddDocument(DocumentBaseViewModel document);
-        void ChangeDocuments(DocumentBaseViewModel document);
         void DeleteDocuments(DocumentBaseViewModel document);
     }
 }

@@ -18,6 +18,7 @@
     <None Remove="Common\Resources\Images\changeSize.png" />
     <None Remove="Common\Resources\Images\changeUser.png" />
     <None Remove="Common\Resources\Images\createBaseData.png" />
+    <None Remove="Common\Resources\Images\deleteDocument.png" />
     <None Remove="Common\Resources\Images\deletePersonalFile.png" />
     <None Remove="Common\Resources\Images\deleteUser.png" />
     <None Remove="Common\Resources\Images\exit.png" />
@@ -55,6 +56,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Common\Resources\Images\changeUser.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Resources\Images\deleteDocument.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Common\Resources\Images\deletePersonalFile.png">

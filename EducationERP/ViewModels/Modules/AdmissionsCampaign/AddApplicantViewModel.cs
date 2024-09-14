@@ -1,10 +1,10 @@
 ﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
+using EducationERP.Common.ToolsDev;
 using EducationERP.Models;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using Raketa;
 using System.Collections.ObjectModel;
-using System.Windows;
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 {
@@ -68,7 +68,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 Visual.IsEnabledTextBox = true;
             }
         }
-        void CreatePersonalFile() { }
+        void CreatePersonalFile() => Dev.NotReady();
 
         void AddDocument() => _serviceView.Window<DocumentViewModel>().Modal();
         void ChangeDocument(DocumentBaseViewModel document) => _serviceView.Window<ChangeDocumentViewModel>(null, document).Modal();

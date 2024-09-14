@@ -603,7 +603,7 @@
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
+                            <Grid Margin="5">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
@@ -611,10 +611,12 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Column="0" Text="{Binding TypeDocument}" Margin="3" FontSize="14"/>
-                                <Button Grid.Column="1" Content="Изменить" HorizontalAlignment="Right"
+                                <Button Grid.Column="1" Content="/Common/Resources/Images/changeDocument.png" Style="{StaticResource ButtonImage}"
+                                        HorizontalAlignment="Right" Margin="0,0,5,0" Height="24" Width="24"
                                         Command="{Binding DataContext.ChangeDocumentCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                                         CommandParameter="{Binding}"/>
-                                <Button Grid.Column="2" Content="Удалить" Margin="10,0"
+                                <Button Grid.Column="2" Content="/Common/Resources/Images/deleteDocument.png" Style="{StaticResource ButtonImage}" 
+                                        Margin="5,0" Height="24" Width="24"
                                         Command="{Binding DataContext.DeleteDocumentCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                                         CommandParameter="{Binding}"/>
                             </Grid>
