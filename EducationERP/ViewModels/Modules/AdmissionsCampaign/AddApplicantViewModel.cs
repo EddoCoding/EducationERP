@@ -3,6 +3,7 @@ using EducationERP.Common.Components.Services;
 using EducationERP.Common.ToolsDev;
 using EducationERP.Models;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
+using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
 using Raketa;
 using System.Collections.ObjectModel;
 
@@ -24,6 +25,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         public RaketaCommand AddDocumentCommand { get; set; }
         public RaketaTCommand<DocumentBaseViewModel> ChangeDocumentCommand { get; set; }
         public RaketaTCommand<DocumentBaseViewModel> DeleteDocumentCommand { get; set; }
+
+        public RaketaCommand AddEducationCommand { get; set; }
 
         IServiceView _serviceView;
         ITabControl _tabControl;
@@ -47,6 +50,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             AddDocumentCommand = RaketaCommand.Launch(AddDocument);
             ChangeDocumentCommand = RaketaTCommand<DocumentBaseViewModel>.Launch(ChangeDocument);
             DeleteDocumentCommand = RaketaTCommand<DocumentBaseViewModel>.Launch(DeleteDocument);
+
+            AddEducationCommand = RaketaCommand.Launch(AddEducation);
         }
 
         void CloseTab() => _tabControl.RemoveTab();
@@ -72,6 +77,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 
         void AddDocument() => _serviceView.Window<DocumentViewModel>().Modal();
         void ChangeDocument(DocumentBaseViewModel document) => _serviceView.Window<ChangeDocumentViewModel>(null, document).Modal();
-        void DeleteDocument(DocumentBaseViewModel document) => _applicantRepository.DeleteDocuments(document);
+        void DeleteDocument(DocumentBaseViewModel document) => _applicantRepository.DeleteDocument(document);
+
+        void AddEducation() => _serviceView.Window<EducationDocViewModel>().Modal();
     }
 }

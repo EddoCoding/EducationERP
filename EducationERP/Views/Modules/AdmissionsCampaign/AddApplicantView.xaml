@@ -579,7 +579,7 @@
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="15" Text="Документы" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
                 <Button Grid.Row="1" Content="Добавить документ" Style="{StaticResource defaultAdd}" Margin="10,10,0,0" HorizontalAlignment="Left"
                         Command="{Binding AddDocumentCommand}"/>
-                <ListView Grid.Row="2" Margin="10,5,10,0" Height="160" ItemsSource="{Binding Documents}">
+                <ListView Grid.Row="2" Margin="10,5,100,0" Height="160" ItemsSource="{Binding Documents}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Template">
@@ -636,13 +636,13 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="15" Text="Образование" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
-                <Button Grid.Row="1" Content="Добавить документ об образовании" Style="{StaticResource defaultAdd}" Margin="10,10,0,0" HorizontalAlignment="Left"
-                        Command="{Binding .}"/>
-                <ListView Grid.Row="2" Margin="10,5,10,0" Height="160" ItemsSource="{Binding .}"/>
+                <Button Grid.Row="1" Content="Добавить образование" Style="{StaticResource defaultAdd}" Margin="10,10,0,0" HorizontalAlignment="Left"
+                        Command="{Binding AddEducationCommand}"/>
+                <ListView Grid.Row="2" Margin="10,5,100,0" Height="160" ItemsSource="{Binding .}"/>
                 
                 <Button Grid.Row="3" Content="Добавить ЕГЭ" Style="{StaticResource defaultAdd}" Margin="10,5,0,0" HorizontalAlignment="Left"
                     Command="{Binding .}"/>
-                <ListView Grid.Row="4" Margin="10,5,10,0" Height="100" ItemsSource="{Binding .}"/>
+                <ListView Grid.Row="4" Margin="10,5,100,0" Height="100" ItemsSource="{Binding .}"/>
             </Grid>
 
             <!--ОТЛИЧИТЕЛЬНЫЕ ПРИЗНАКИ-->
@@ -656,7 +656,7 @@
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="15" Text="Отличительные признаки" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
                 <Button Grid.Row="1" Content="Добавить признак" Style="{StaticResource defaultAdd}" Margin="10,10,0,0" HorizontalAlignment="Left"
                         Command="{Binding .}"/>
-                <ListView Grid.Row="2" Margin="10,5,10,0" Height="160" ItemsSource="{Binding .}"/>
+                <ListView Grid.Row="2" Margin="10,5,100,0" Height="160" ItemsSource="{Binding .}"/>
 
             </Grid>
 
@@ -672,7 +672,7 @@
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="15" Text="Направления подготовки" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
                 <Button Grid.Row="1" Content="Добавить направление" Style="{StaticResource defaultAdd}" Margin="10,10,0,0" HorizontalAlignment="Left"
                         Command="{Binding .}"/>
-                <ListView Grid.Row="2" Margin="10,5,10,0" Height="160" ItemsSource="{Binding .}"/>
+                <ListView Grid.Row="2" Margin="10,5,100,0" Height="160" ItemsSource="{Binding .}"/>
                 <StackPanel Grid.Row="3" Orientation="Horizontal">
                     <TextBlock Text="Выбрано основное направление подготовки:" Margin="10,5,10,0" FontSize="14"/>
                     <TextBlock Text="{Binding .}" Margin="0,5,10,0" FontSize="14" TextWrapping="Wrap" Width="660"/>
@@ -690,7 +690,7 @@
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="15" Text="Поданные документы" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
                 <Button Grid.Row="1" Content="Добавить документ" Style="{StaticResource defaultAdd}" Margin="10,10,0,0" HorizontalAlignment="Left"
                         Command="{Binding .}"/>
-                <ListView Grid.Row="2" Margin="10,5,10,0" Height="160" ItemsSource="{Binding .}"/>
+                <ListView Grid.Row="2" Margin="10,5,100,0" Height="160" ItemsSource="{Binding .}"/>
             </Grid>
 
             <!--КНОПКА СФОРМИРОВАТЬ ЛИЧНОЕ ДЕЛО-->
