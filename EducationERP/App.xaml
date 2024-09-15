@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="Common/Resources/Styles/ButtonStyles.xaml"/>
                 <ResourceDictionary Source="Common/Resources/Styles/ComboBoxStyles.xaml"/>
                 <ResourceDictionary Source="Common/Resources/Styles/ScrollBarStyles.xaml"/>
+                <ResourceDictionary Source="Common/Resources/Styles/CheckBoxStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             
         </ResourceDictionary>

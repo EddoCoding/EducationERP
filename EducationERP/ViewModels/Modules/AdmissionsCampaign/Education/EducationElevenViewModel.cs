@@ -2,14 +2,12 @@
 {
     public class EducationElevenViewModel : EducationBaseViewModel
     {
-        public string Code { get; set; } = string.Empty;
-        public string Series { get; set; } = string.Empty;
-        public string Number { get; set; } = string.Empty;
+        public string CodeSeriesNumber { get; set; } = string.Empty;
 
         public EducationElevenViewModel()
         {
-            TypeEducation = "Среднее общее образование";
-            IdentificationDocument = "Аттестат о среднем общем образовании";
+            TypeEducation = "Среднее общее образование (11)";
+            IdentificationDocument = "Аттестат о среднем общем образовании (11)";
         }
 
         public override bool Validation()

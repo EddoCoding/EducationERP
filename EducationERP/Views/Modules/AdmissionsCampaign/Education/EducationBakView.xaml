@@ -4,10 +4,204 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EducationERP.Views.Modules.AdmissionsCampaign.Education"
-             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800" Background="Green">
+             xmlns:converters="clr-namespace:EducationERP.Common.Converters"
+             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800" FontFamily="{StaticResource OpenSans}">
+    <UserControl.Resources>
+        <converters:DateOnlyToDateOnlyConverter x:Key="DateOnlyToDateOnly"/>
+    </UserControl.Resources>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
+        <Grid Grid.Row="0" Background="White" Margin="0,5">
+            <Grid.Effect>
+                <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+            </Grid.Effect>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="Удостоверяющий документ:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="1" Text="{Binding IdentificationDocument}" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center" FontStyle="Italic"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Background="White" Margin="0,5">
+            <Grid.Effect>
+                <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+            </Grid.Effect>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="Выдан кем:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" Text="{Binding IssuedBy}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Background="White" Margin="0,5" Width="180" HorizontalAlignment="Left">
+                <Grid.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </Grid.Effect>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Дата выдачи:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"
+                         Text="{Binding DateOfIssue, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}"/>
+            </Grid>
+
+            <Grid Grid.Column="1" Background="White" Margin="10,5,0,5" Width="115" HorizontalAlignment="Left">
+                <Grid.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </Grid.Effect>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="С отличием" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                <CheckBox Grid.Column="1" IsChecked="{Binding Honours}"  Margin="10,5,0,5" VerticalAlignment="Center"/>
+            </Grid>
+
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Background="White" Margin="0,5">
+                <Grid.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </Grid.Effect>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Форма обучения" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                <ComboBox Grid.Column="1" Text="{Binding FormOfEducation}" Margin="10,0,0,0" Width="115"
+                          Style="{StaticResource ComboBoxCustom}" ItemContainerStyle="{StaticResource ComboBoxItemCustom}">
+                    <ComboBoxItem Content="Очная"/>
+                    <ComboBoxItem Content="Заочная"/>
+                    <ComboBoxItem Content="Очно-Заочная"/>
+                </ComboBox>
+            </Grid>
+
+            <Grid Grid.Column="1" Background="White" Margin="10,5,0,5">
+                <Grid.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </Grid.Effect>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Регистрационный номер:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1" Text="{Binding RegistrationNumber}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14" Width="80"/>
+            </Grid>
+
+        </Grid>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Background="White" Margin="0,5" Width="220" HorizontalAlignment="Left">
+                <Grid.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </Grid.Effect>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Серия диплома:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1" Text="{Binding DiplomaSeries}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"/>
+            </Grid>
+
+            <Grid Grid.Column="1" Background="White" Margin="10,5,0,5" Width="220" HorizontalAlignment="Left">
+                <Grid.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </Grid.Effect>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Номер диплома:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1" Text="{Binding DiplomaNumber}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"/>
+            </Grid>
+
+        </Grid>
+
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Background="White" Margin="0,5" Width="240" HorizontalAlignment="Left">
+                <Grid.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </Grid.Effect>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Серия приложения:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1" Text="{Binding SupplementSeries}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"/>
+            </Grid>
+
+            <Grid Grid.Column="1" Background="White" Margin="10,5,0,5" Width="240" HorizontalAlignment="Left">
+                <Grid.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </Grid.Effect>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Номер приложения:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1" Text="{Binding SupplementNumber}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"/>
+            </Grid>
+
+        </Grid>
+
+        <Grid Grid.Row="6" Background="White" Margin="0,5">
+            <Grid.Effect>
+                <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+            </Grid.Effect>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Дополнительная информация" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
+            <TextBox Grid.Row="1" Text="{Binding AdditionalInformation}" Style="{StaticResource CustomTextBox}" 
+                     Margin="10,5" FontSize="14" TextWrapping="Wrap"/>
+        </Grid>
     </Grid>
 
 </UserControl>
