@@ -4,9 +4,9 @@ using System.Windows.Input;
 
 namespace EducationERP.Views.Modules.AdmissionsCampaign.Education
 {
-    public partial class EducationDocWindow : Window, IView
+    public partial class ChangeEducationDocWindow : Window, IView
     {
-        public EducationDocWindow() => InitializeComponent();
+        public ChangeEducationDocWindow() => InitializeComponent();
 
         public void Exit() => this.Close();
 
