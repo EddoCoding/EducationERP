@@ -1,4 +1,6 @@
-﻿namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Education
+﻿using System.Windows;
+
+namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Education
 {
     public class EducationElevenViewModel : EducationBaseViewModel
     {
@@ -12,7 +14,23 @@
 
         public override bool Validation()
         {
-            throw new NotImplementedException();
+            if (String.IsNullOrWhiteSpace(IssuedBy))
+            {
+                MessageBox.Show("Выдан кем не указано!");
+                return false;
+            }
+            if (DateOfIssue == default || DateOfIssue > DateOnly.FromDateTime(DateTime.Now))
+            {
+                MessageBox.Show("Дата выдачи не указана или указана неверно!");
+                return false;
+            }
+            if (String.IsNullOrWhiteSpace(CodeSeriesNumber))
+            {
+                MessageBox.Show("Код, серия и номер аттестата не указаны!");
+                return false;
+            }
+
+            return true;
         }
     }
 }

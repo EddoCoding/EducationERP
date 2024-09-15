@@ -14,15 +14,5 @@ namespace EducationERP.Common.Components.Repositories
         Task<Applicant> ChangePersonalFile();
         void DeletePersonalFile();
         Task<ApplicantVM[]> UpdatePersonalFiles();
-
-
-        //Документы
-        ObservableCollection<DocumentBaseViewModel> Documents { get; set; }
-        void AddDocument(DocumentBaseViewModel document);
-        void DeleteDocument(DocumentBaseViewModel document);
-
-        ObservableCollection<EducationBaseViewModel> Educations { get; set; }
-        public void AddEducation(EducationBaseViewModel education);
-        public void DeleteEducation(EducationBaseViewModel education);
     }
 }

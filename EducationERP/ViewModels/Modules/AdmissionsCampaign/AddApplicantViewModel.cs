@@ -16,6 +16,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         public VisualAddApplicant Visual { get; set; } = new();
 
         public ObservableCollection<DocumentBaseViewModel> Documents { get; set; } = new(); 
+        public ObservableCollection<EducationBaseViewModel> Educations { get; set; } = new(); 
 
 
         public RaketaCommand ExitCommand { get; set; }
@@ -36,12 +37,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             _serviceView = serviceView;
             _tabControl = tabControl;
             _applicantRepository = applicantRepository;
-
-            applicantRepository.Documents.CollectionChanged += (sender, e) =>
-            {
-                if (e.OldItems != null) foreach (DocumentBaseViewModel item in e.OldItems) Documents.Remove(item);
-                if (e.NewItems != null) foreach (DocumentBaseViewModel item in e.NewItems) Documents.Add(item);
-            };
 
             ExitCommand = RaketaCommand.Launch(CloseTab);
             CitizenshipCommand = RaketaCommand.Launch(Citizenship);
@@ -75,10 +70,10 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         }
         void CreatePersonalFile() => Dev.NotReady();
 
-        void AddDocument() => _serviceView.Window<DocumentViewModel>().Modal();
+        void AddDocument() => _serviceView.Window<DocumentViewModel>(null, Documents).Modal();
         void ChangeDocument(DocumentBaseViewModel document) => _serviceView.Window<ChangeDocumentViewModel>(null, document).Modal();
-        void DeleteDocument(DocumentBaseViewModel document) => _applicantRepository.DeleteDocument(document);
+        void DeleteDocument(DocumentBaseViewModel document) => Documents.Remove(document);
 
-        void AddEducation() => _serviceView.Window<EducationDocViewModel>().Modal();
+        void AddEducation() => _serviceView.Window<EducationDocViewModel>(null, Educations).Modal();
     }
 }

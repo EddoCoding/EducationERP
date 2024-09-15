@@ -1,10 +1,13 @@
 ﻿using EducationERP.Common.Components.Repositories;
 using Raketa;
+using System.Collections.ObjectModel;
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents
 {
     public class DocumentViewModel : RaketaViewModel
     {
+        ObservableCollection<DocumentBaseViewModel> _documents;
+
         public DocumentBaseViewModel[] Documents { get; set; } =
         {
             new PassportViewModel(),
@@ -24,11 +27,10 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents
         public RaketaCommand ExitCommand { get; set; }
 
         IServiceView _serviceView;
-        IApplicantRepository _applicantRepository;
-        public DocumentViewModel(IServiceView serviceView, IApplicantRepository applicantRepository)
+        public DocumentViewModel(IServiceView serviceView, ObservableCollection<DocumentBaseViewModel> documents)
         {
             _serviceView = serviceView;
-            _applicantRepository = applicantRepository;
+            _documents = documents;
 
             AddDocumentCommand = RaketaTCommand<DocumentBaseViewModel>.Launch(AddDocument);
             ExitCommand = RaketaCommand.Launch(ExitLogin);
@@ -39,7 +41,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents
             var isValidated = document.Validation();
             if (isValidated)
             {
-                _applicantRepository.AddDocument(document);
+                _documents.Add(document);
+                _documents = null;
                 _serviceView.Close<DocumentViewModel>();
             }
         }

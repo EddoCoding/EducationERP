@@ -2,6 +2,7 @@
 using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
 using EducationERP.Modules.Login.View;
+using EducationERP.ViewModels;
 using EducationERP.ViewModels.Login;
 using EducationERP.ViewModels.Modules.Administration;
 using EducationERP.ViewModels.Modules.Administration.ControlUsers;
@@ -16,7 +17,6 @@ using EducationERP.Views.Modules.AdmissionsCampaign.Documents;
 using EducationERP.Views.Modules.AdmissionsCampaign.Education;
 using Raketa;
 using System.Windows;
-using EducationViewModel = EducationERP.ViewModels.EducationViewModel;
 
 namespace EducationERP
 {
@@ -61,7 +61,7 @@ namespace EducationERP
             _container.RegisterSingleton<UserSystem, UserSystem>();
             _container.RegisterSingleton<MainTabControl, ITabControl>();
             _container.RegisterSingleton<UserRepository, IUserRepository>();
-            _container.RegisterSingleton<ApplicantRepository, IApplicantRepository>();
+            _container.RegisterTransient<ApplicantRepository, IApplicantRepository>();
         }
     }
 }
