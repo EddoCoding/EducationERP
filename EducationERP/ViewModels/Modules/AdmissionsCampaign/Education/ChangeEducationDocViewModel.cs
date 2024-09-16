@@ -1,5 +1,4 @@
-﻿using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
-using Raketa;
+﻿using Raketa;
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Education
 {
