@@ -3,11 +3,47 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:EducationERP.Views.Modules.AdmissionsCampaign.Education"
-        mc:Ignorable="d"
-        Title="ChangeEducationDocWindow" Height="450" Width="800">
-    
+        xmlns:local="clr-namespace:EducationERP.Views.Modules.AdmissionsCampaign.Documents"
+        xmlns:viewEducations="clr-namespace:EducationERP.Views.Modules.AdmissionsCampaign.Education"
+        xmlns:viewModelEducations="clr-namespace:EducationERP.ViewModels.Modules.AdmissionsCampaign.Education"
+        mc:Ignorable="d" Title="Добавление образования" Height="450" Width="670" MouseDown="MoveWindow"
+        Background="WhiteSmoke" FontFamily="{StaticResource OpenSans}" WindowStyle="None" 
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" RenderOptions.BitmapScalingMode="NearestNeighbor"
+        BorderBrush="LightGray" BorderThickness="1">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModelEducations:EducationNineViewModel}">
+            <viewEducations:EducationNineView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelEducations:EducationElevenViewModel}">
+            <viewEducations:EducationElevenView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelEducations:EducationSpoViewModel}">
+            <viewEducations:EducationSpoView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelEducations:EducationBakViewModel}">
+            <viewEducations:EducationBakView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelEducations:EducationMagViewModel}">
+            <viewEducations:EducationMagView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelEducations:EducationAspViewModel}">
+            <viewEducations:EducationAspView/>
+        </DataTemplate>
+    </Window.Resources>
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ContentPresenter Grid.Row="0" Content="{Binding Education}" Margin="10"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,0,10,10">
+            <Button Content="Изменить" Style="{StaticResource ButtonTextCreate}" Margin="10,0"
+                    Command="{Binding SaveEducationCommand}" CommandParameter="{Binding Education}"/>
+            <Button Content="Отменить" Style="{StaticResource ButtonTextCancel}" Command="{Binding ExitCommand}"/>
+        </StackPanel>
 
     </Grid>
 

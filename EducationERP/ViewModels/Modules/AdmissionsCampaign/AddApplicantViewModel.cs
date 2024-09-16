@@ -79,7 +79,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         void DeleteDocument(DocumentBaseViewModel document) => Documents.Remove(document);
 
         void AddEducation() => _serviceView.Window<EducationDocViewModel>(null, Educations).Modal();
-        void ChangeEducation(EducationBaseViewModel education) { } //_serviceView.Window<ChangeDocumentViewModel>(null, education).Modal();
+        void ChangeEducation(EducationBaseViewModel education) => _serviceView.Window<ChangeEducationDocViewModel>(null, education).Modal();
         void DeleteEducation(EducationBaseViewModel education) => Educations.Remove(education);
     }
 }
