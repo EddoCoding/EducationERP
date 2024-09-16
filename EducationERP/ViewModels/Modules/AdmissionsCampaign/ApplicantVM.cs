@@ -6,6 +6,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
     public class ApplicantVM : RaketaViewModel
     {
         string citizenship = string.Empty;
+        int totalPoints;
 
         public string SurName { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
@@ -31,10 +32,15 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         public string Mail { get; set; } = string.Empty;
         public string AdditionalInformation { get; set; } = string.Empty;
 
-        // Коллекции/Списки/Массивы - Документы
+        // Документы, Образование, Признаки и т.д.
         public ObservableCollection<string> Documents { get; set; } = new();
-        public ObservableCollection<string> EducationDocuments { get; set; } = new();
-        public ObservableCollection<string> ExamResult { get; set; } = new();
+        public ObservableCollection<string> Educations { get; set; } = new();
+        public ObservableCollection<string> EGES { get; set; } = new();
+        public int TotalPoints
+        {
+            get => totalPoints;
+            set => SetValue(ref totalPoints, value);
+        }
         public ObservableCollection<string> DistinguishingFeatures { get; set; } = new();
         public ObservableCollection<string> AreasOfTraining { get; set; } = new();
         public string SelectedDirectionOfTraining { get; set; } = string.Empty;

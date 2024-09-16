@@ -4,6 +4,7 @@ using EducationERP.Common.ToolsDev;
 using EducationERP.Models;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
+using EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams;
 using Raketa;
 using System.Collections.ObjectModel;
 
@@ -15,21 +16,32 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         public ApplicantVM ApplicantVM { get; set; } = new();
         public VisualAddApplicant Visual { get; set; } = new();
 
-        public ObservableCollection<DocumentBaseViewModel> Documents { get; set; } = new(); 
-        public ObservableCollection<EducationBaseViewModel> Educations { get; set; } = new(); 
-
 
         public RaketaCommand ExitCommand { get; set; }
         public RaketaCommand CitizenshipCommand { get; set; }
         public RaketaCommand CreatePersonalFileCommand { get; set; }
 
+
+        //ДОКУМЕНТЫ
+        public ObservableCollection<DocumentBaseViewModel> Documents { get; set; } = new(); 
         public RaketaCommand AddDocumentCommand { get; set; }
         public RaketaTCommand<DocumentBaseViewModel> ChangeDocumentCommand { get; set; }
         public RaketaTCommand<DocumentBaseViewModel> DeleteDocumentCommand { get; set; }
 
+
+        //ОБРАЗОВАНИЕ
+        public ObservableCollection<EducationBaseViewModel> Educations { get; set; } = new(); 
         public RaketaCommand AddEducationCommand { get; set; }
         public RaketaTCommand<EducationBaseViewModel> ChangeEducationCommand { get; set; }
         public RaketaTCommand<EducationBaseViewModel> DeleteEducationCommand { get; set; }
+
+
+        //ЕГЭ
+        public ObservableCollection<EGEVM> EGES { get; set; } = new();
+        public RaketaCommand AddEGECommand { get; set; }
+        public RaketaTCommand<EGEVM> DeleteEGECommand { get; set; }
+
+
 
         IServiceView _serviceView;
         ITabControl _tabControl;
@@ -51,6 +63,9 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             AddEducationCommand = RaketaCommand.Launch(AddEducation);
             ChangeEducationCommand = RaketaTCommand<EducationBaseViewModel>.Launch(ChangeEducation);
             DeleteEducationCommand = RaketaTCommand<EducationBaseViewModel>.Launch(DeleteEducation);
+
+            AddEGECommand = RaketaCommand.Launch(AddEGE);
+            DeleteEGECommand = RaketaTCommand<EGEVM>.Launch(DeleteEGE);
         }
 
         void CloseTab() => _tabControl.RemoveTab();
@@ -81,5 +96,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         void AddEducation() => _serviceView.Window<EducationDocViewModel>(null, Educations).Modal();
         void ChangeEducation(EducationBaseViewModel education) => _serviceView.Window<ChangeEducationDocViewModel>(null, education).Modal();
         void DeleteEducation(EducationBaseViewModel education) => Educations.Remove(education);
+
+        void AddEGE() => _serviceView.Window<EGEViewModel>(null, EGES).Modal();
+        void DeleteEGE(EGEVM ege) => EGES.Remove(ege);
     }
 }

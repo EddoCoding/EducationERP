@@ -1061,8 +1061,8 @@
                 <TextBlock Grid.Row="3" Text="{Binding Educations.Count, StringFormat='Количество образований: {0}'}" Margin="10,3,0,0" FontSize="13"/>
                 
                 <Button Grid.Row="4" Content="Добавить ЕГЭ" Style="{StaticResource defaultAdd}" Margin="10,10,0,0" HorizontalAlignment="Left"
-                        Command="{Binding .}"/>
-                <ListView Grid.Row="5" Margin="10,5,100,0" MaxHeight="100" ItemsSource="{Binding Exams}">
+                        Command="{Binding AddEGECommand}"/>
+                <ListView Grid.Row="5" Margin="10,5,100,0" MaxHeight="100" ItemsSource="{Binding EGES}">
                     <ListView.Style>
                         <Style TargetType="ListView">
                             <Setter Property="Template">
@@ -1085,9 +1085,6 @@
                                     <ControlTemplate TargetType="ListViewItem">
                                         <Border Background="{TemplateBinding Background}">
                                             <ContentPresenter/>
-                                            <!--<Border.ToolTip>
-                                                <ToolTip Style="{StaticResource ToolTipExamInfo}"/>
-                                            </Border.ToolTip>-->
                                         </Border>
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="IsMouseOver" Value="True">
@@ -1104,24 +1101,25 @@
                             <Grid Margin="5">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Grid.Column="0" Text="{Binding .}" FontSize="13" VerticalAlignment="Center"/>
-                                <Button Grid.Column="1" Content="/Common/Resources/Images/changeDocument.png" Style="{StaticResource ButtonImage}"
-                                        HorizontalAlignment="Right" Margin="0,0,5,0" Height="24" Width="24"
-                                        Command="{Binding DataContext.ChangeEducationCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
-                                        CommandParameter="{Binding}"/>
-                                <Button Grid.Column="2" Content="/Common/Resources/Images/deleteDocument.png" Style="{StaticResource ButtonImage}" 
+                                <TextBlock Grid.Column="0" Text="Предмет:" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="1" Text="{Binding AcademicSubject}" FontSize="13" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="2" Text="Балл:" FontSize="13" Margin="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="3" Text="{Binding SubjectScores}" FontSize="13" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                <Button Grid.Column="4" Content="/Common/Resources/Images/deleteDocument.png" Style="{StaticResource ButtonImage}" 
                                         Margin="5,0" Height="24" Width="24"
-                                        Command="{Binding DataContext.DeleteEducationCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                        Command="{Binding DataContext.DeleteEGECommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                                         CommandParameter="{Binding}"/>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <TextBlock Grid.Row="6" Text="{Binding Exams, StringFormat='Количество предметов ЕГЭ: {0}'}" Margin="10,3,0,0" FontSize="13"/>
+                <TextBlock Grid.Row="6" Text="{Binding ApplicantVM.TotalPoints, StringFormat='Общий балл ЕГЭ: {0}'}" Margin="10,3,0,0" FontSize="13"/>
             </Grid>
 
             <!--ОТЛИЧИТЕЛЬНЫЕ ПРИЗНАКИ-->
