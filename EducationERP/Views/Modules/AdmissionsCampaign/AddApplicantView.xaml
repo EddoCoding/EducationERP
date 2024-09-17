@@ -929,7 +929,7 @@
                                 <Setter.Value>
                                     <ControlTemplate TargetType="ListView">
                                         <ScrollViewer>
-                                            <Border BorderThickness="0,0,0,0.4" BorderBrush="Black">
+                                            <Border BorderThickness="0,0,0,0.8" BorderBrush="Black">
                                                 <ItemsPresenter/>
                                             </Border>
                                         </ScrollViewer>
@@ -1006,7 +1006,7 @@
                                 <Setter.Value>
                                     <ControlTemplate TargetType="ListView">
                                         <ScrollViewer>
-                                            <Border BorderThickness="0,0,0,0.4" BorderBrush="Black">
+                                            <Border BorderThickness="0,0,0,0.8" BorderBrush="Black">
                                                 <ItemsPresenter/>
                                             </Border>
                                         </ScrollViewer>
@@ -1069,7 +1069,7 @@
                                 <Setter.Value>
                                     <ControlTemplate TargetType="ListView">
                                         <ScrollViewer>
-                                            <Border BorderThickness="0,0,0,0.5" BorderBrush="Black">
+                                            <Border BorderThickness="0,0,0,0.8" BorderBrush="Black">
                                                 <ItemsPresenter/>
                                             </Border>
                                         </ScrollViewer>

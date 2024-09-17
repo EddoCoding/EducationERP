@@ -11,7 +11,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 {
     public  class AddApplicantViewModel : RaketaViewModel
     {
-        public Applicant Applicant { get; set; } = new();
         public ApplicantVM ApplicantVM { get; set; } = new();
         public VisualAddApplicant Visual { get; set; } = new();
 
