@@ -1,6 +1,5 @@
 ﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
-using EducationERP.Common.ToolsDev;
 using EducationERP.Models;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
@@ -23,22 +22,19 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 
 
         //ДОКУМЕНТЫ
-        public ObservableCollection<DocumentBaseViewModel> Documents { get; set; } = new(); 
-        public RaketaCommand AddDocumentCommand { get; set; }
+        public RaketaTCommand<ObservableCollection<DocumentBaseViewModel>> AddDocumentCommand { get; set; }
         public RaketaTCommand<DocumentBaseViewModel> ChangeDocumentCommand { get; set; }
         public RaketaTCommand<DocumentBaseViewModel> DeleteDocumentCommand { get; set; }
 
 
         //ОБРАЗОВАНИЕ
-        public ObservableCollection<EducationBaseViewModel> Educations { get; set; } = new(); 
-        public RaketaCommand AddEducationCommand { get; set; }
+        public RaketaTCommand<ObservableCollection<EducationBaseViewModel>> AddEducationCommand { get; set; }
         public RaketaTCommand<EducationBaseViewModel> ChangeEducationCommand { get; set; }
         public RaketaTCommand<EducationBaseViewModel> DeleteEducationCommand { get; set; }
 
 
         //ЕГЭ
-        public ObservableCollection<EGEVM> EGES { get; set; } = new();
-        public RaketaCommand AddEGECommand { get; set; }
+        public RaketaTCommand<ObservableCollection<EGEVM>> AddEGECommand { get; set; }
         public RaketaTCommand<EGEVM> DeleteEGECommand { get; set; }
 
 
@@ -56,19 +52,24 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             CitizenshipCommand = RaketaCommand.Launch(Citizenship);
             CreatePersonalFileCommand = RaketaCommand.Launch(CreatePersonalFile);
 
-            AddDocumentCommand = RaketaCommand.Launch(AddDocument);
+            AddDocumentCommand = RaketaTCommand<ObservableCollection<DocumentBaseViewModel>>.Launch(AddDocument);
             ChangeDocumentCommand = RaketaTCommand<DocumentBaseViewModel>.Launch(ChangeDocument);
             DeleteDocumentCommand = RaketaTCommand<DocumentBaseViewModel>.Launch(DeleteDocument);
 
-            AddEducationCommand = RaketaCommand.Launch(AddEducation);
+            AddEducationCommand = RaketaTCommand<ObservableCollection<EducationBaseViewModel>>.Launch(AddEducation);
             ChangeEducationCommand = RaketaTCommand<EducationBaseViewModel>.Launch(ChangeEducation);
             DeleteEducationCommand = RaketaTCommand<EducationBaseViewModel>.Launch(DeleteEducation);
 
-            AddEGECommand = RaketaCommand.Launch(AddEGE);
+            AddEGECommand = RaketaTCommand<ObservableCollection<EGEVM>>.Launch(AddEGE);
             DeleteEGECommand = RaketaTCommand<EGEVM>.Launch(DeleteEGE);
         }
 
-        void CloseTab() => _tabControl.RemoveTab();
+        void CloseTab()
+        {
+            ApplicantVM.Dispose();
+            ApplicantVM = null;
+            _tabControl.RemoveTab();
+        }
         void Citizenship()
         {
             if(ApplicantVM.IsCitizenRus == true)
@@ -87,17 +88,21 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 Visual.IsEnabledTextBox = true;
             }
         }
-        void CreatePersonalFile() => Dev.NotReady();
+        void CreatePersonalFile()
+        {
+            ApplicantVM.Dispose();
+            ApplicantVM = null;
+        }
 
-        void AddDocument() => _serviceView.Window<DocumentViewModel>(null, Documents).Modal();
+        void AddDocument(ObservableCollection<DocumentBaseViewModel> documents) => _serviceView.Window<DocumentViewModel>(null, documents).Modal();
         void ChangeDocument(DocumentBaseViewModel document) => _serviceView.Window<ChangeDocumentViewModel>(null, document).Modal();
-        void DeleteDocument(DocumentBaseViewModel document) => Documents.Remove(document);
+        void DeleteDocument(DocumentBaseViewModel document) => ApplicantVM.Documents.Remove(document);
 
-        void AddEducation() => _serviceView.Window<EducationDocViewModel>(null, Educations).Modal();
+        void AddEducation(ObservableCollection<EducationBaseViewModel> educations) => _serviceView.Window<EducationDocViewModel>(null, educations).Modal();
         void ChangeEducation(EducationBaseViewModel education) => _serviceView.Window<ChangeEducationDocViewModel>(null, education).Modal();
-        void DeleteEducation(EducationBaseViewModel education) => Educations.Remove(education);
+        void DeleteEducation(EducationBaseViewModel education) => ApplicantVM.Educations.Remove(education);
 
-        void AddEGE() => _serviceView.Window<EGEViewModel>(null, EGES).Modal();
-        void DeleteEGE(EGEVM ege) => EGES.Remove(ege);
+        void AddEGE(ObservableCollection<EGEVM> eges) => _serviceView.Window<EGEViewModel>(null, eges).Modal();
+        void DeleteEGE(EGEVM ege) => ApplicantVM.EGES.Remove(ege);
     }
 }
