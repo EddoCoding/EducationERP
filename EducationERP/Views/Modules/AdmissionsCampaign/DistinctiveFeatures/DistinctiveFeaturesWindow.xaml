@@ -44,7 +44,7 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Text="Балл признака" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
-                <TextBox Grid.Row="1" Text="{Binding DistinctiveFeature.SubjectScores}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,5"/>
+                <TextBox Grid.Row="1" Text="{Binding DistinctiveFeature.FeatureScore}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,5"/>
             </Grid>
         </Grid>
 

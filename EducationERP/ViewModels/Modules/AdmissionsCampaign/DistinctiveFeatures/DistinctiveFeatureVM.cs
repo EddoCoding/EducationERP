@@ -1,4 +1,6 @@
-﻿namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures
+﻿using System.Windows;
+
+namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures
 {
     public class DistinctiveFeatureVM
     {
@@ -7,8 +9,16 @@
 
         public bool Validation()
         {
-            if (String.IsNullOrWhiteSpace(NameFeature)) return false;
-            if (FeatureScore < 0) return false;
+            if (String.IsNullOrWhiteSpace(NameFeature) || String.IsNullOrWhiteSpace(FeatureScore.ToString()))
+            {
+                MessageBox.Show("Данные неполные!");
+                return false;
+            }
+            if (FeatureScore < 0)
+            {
+                MessageBox.Show("Балл не может быть меньше нуля");
+                return false;
+            }
         
             return true;
         }

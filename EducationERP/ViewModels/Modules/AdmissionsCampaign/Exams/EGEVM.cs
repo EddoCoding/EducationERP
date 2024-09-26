@@ -1,4 +1,6 @@
-﻿namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams
+﻿using System.Windows;
+
+namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams
 {
     public class EGEVM
     {
@@ -7,8 +9,16 @@
 
         public bool Validation()
         {
-            if (String.IsNullOrWhiteSpace(AcademicSubject)) return false;
-            if(SubjectScores < 0) return false;
+            if (String.IsNullOrWhiteSpace(AcademicSubject) || String.IsNullOrWhiteSpace(SubjectScores.ToString()))
+            {
+                MessageBox.Show("Данные неполные!");
+                return false;
+            }
+            if(SubjectScores < 0)
+            {
+                MessageBox.Show("Балл не может быть меньше нуля");
+                return false;
+            }
 
             return true;
         }
