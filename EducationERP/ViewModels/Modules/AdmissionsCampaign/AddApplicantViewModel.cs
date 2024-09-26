@@ -1,6 +1,6 @@
 ﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
-using EducationERP.Models;
+using EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams;
@@ -37,6 +37,10 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         public RaketaTCommand<EGEVM> DeleteEGECommand { get; set; }
 
 
+        //ОТЛИЧИТЕЛЬНЫЕ ПРИЗНАКИ
+        public RaketaTCommand<ObservableCollection<DistinctiveFeatureVM>> AddDistinctiveFeatureCommand { get; set; }
+        public RaketaTCommand<DistinctiveFeatureVM> DeleteDistinctiveFeatureCommand { get; set; }
+
 
         IServiceView _serviceView;
         ITabControl _tabControl;
@@ -61,6 +65,9 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 
             AddEGECommand = RaketaTCommand<ObservableCollection<EGEVM>>.Launch(AddEGE);
             DeleteEGECommand = RaketaTCommand<EGEVM>.Launch(DeleteEGE);
+
+            AddDistinctiveFeatureCommand = RaketaTCommand<ObservableCollection<DistinctiveFeatureVM>>.Launch(AddDistinctiveFeature);
+            DeleteDistinctiveFeatureCommand = RaketaTCommand<DistinctiveFeatureVM>.Launch(DeleteDistinctiveFeature);
         }
 
         void CloseTab()
@@ -103,5 +110,9 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 
         void AddEGE(ObservableCollection<EGEVM> eges) => _serviceView.Window<EGEViewModel>(null, eges).Modal();
         void DeleteEGE(EGEVM ege) => ApplicantVM.EGES.Remove(ege);
+
+        void AddDistinctiveFeature(ObservableCollection<DistinctiveFeatureVM> distinctiveFeatures) => 
+            _serviceView.Window<DistinctiveFeatureViewModel>(null, distinctiveFeatures).Modal();
+        void DeleteDistinctiveFeature(DistinctiveFeatureVM distinctiveFeature) => ApplicantVM.DistinguishingFeatures.Remove(distinctiveFeature);
     }
 }
