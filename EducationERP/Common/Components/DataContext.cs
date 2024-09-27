@@ -8,6 +8,9 @@ namespace EducationERP.Common.Components
     public class DataContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<EducationalLevelPreparation> SettingLevels { get; set; }
+        public DbSet<EducationalDirectionTraining> SettingDirections { get; set; }
+        public DbSet<EducationalProfile> SettingProfiles { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder.UseNpgsql(ConfigurationManager.ConnectionStrings["StrConnection"].ToString());
