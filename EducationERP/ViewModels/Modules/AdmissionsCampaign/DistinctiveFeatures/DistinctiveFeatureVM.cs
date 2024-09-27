@@ -1,25 +1,25 @@
 ﻿using System.Windows;
 
-namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams
+namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures
 {
-    public class EGEVM
+    public class DistinctiveFeatureVM
     {
-        public string AcademicSubject { get; set; } = string.Empty;
-        public int SubjectScores { get; set; }
+        public string NameFeature { get; set; } = string.Empty;
+        public int FeatureScore { get; set; }
 
         public bool Validation()
         {
-            if (String.IsNullOrWhiteSpace(AcademicSubject) || String.IsNullOrWhiteSpace(SubjectScores.ToString()))
+            if (String.IsNullOrWhiteSpace(NameFeature) || String.IsNullOrWhiteSpace(FeatureScore.ToString()))
             {
                 MessageBox.Show("Данные неполные!");
                 return false;
             }
-            if(SubjectScores < 0)
+            if (FeatureScore < 0)
             {
                 MessageBox.Show("Балл не может быть меньше нуля");
                 return false;
             }
-
+        
             return true;
         }
     }

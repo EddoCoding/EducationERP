@@ -1,4 +1,5 @@
-﻿using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
+﻿using EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures;
+using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams;
 using Raketa;
@@ -11,6 +12,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
     {
         string citizenship = string.Empty;
         int totalPoints;
+        int pointsDistinctiveFeatures;
 
         public string SurName { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
@@ -39,33 +41,55 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         // Документы, Образование, Признаки и т.д.
         public ObservableCollection<DocumentBaseViewModel> Documents { get; set; } = new();
         public ObservableCollection<EducationBaseViewModel> Educations { get; set; } = new();
+
         public ObservableCollection<EGEVM> EGES { get; set; } = new();
         public int TotalPoints
         {
             get => totalPoints;
             set => SetValue(ref totalPoints, value);
         }
-        public ObservableCollection<string> DistinguishingFeatures { get; set; } = new();
+
+        public ObservableCollection<DistinctiveFeatureVM> DistinguishingFeatures { get; set; } = new();
+        public int PointsDistinctiveFeatures
+        {
+            get => pointsDistinctiveFeatures;
+            set => SetValue(ref pointsDistinctiveFeatures, value);
+        }
+
         public ObservableCollection<string> AreasOfTraining { get; set; } = new();
         public string SelectedDirectionOfTraining { get; set; } = string.Empty;
         public ObservableCollection<string> SubmittedDocuments { get; set; } = new();
 
 
+        public ApplicantVM()
+        {
+            EGES.CollectionChanged += ChangeValueTotalPoints;
+            DistinguishingFeatures.CollectionChanged += ChangeValuePointsDistinctiveFeatures;
+        }
 
-        public ApplicantVM() => EGES.CollectionChanged += ChangeValueProperty;
-
-        void ChangeValueProperty(object sender, NotifyCollectionChangedEventArgs e)
+        void ChangeValueTotalPoints(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
                 foreach (var newItem in e.NewItems)
                     if (newItem is EGEVM ege) TotalPoints += ege.SubjectScores;
-
-
             if (e.OldItems != null)
                 foreach (var oldItem in e.OldItems)
                     if (oldItem is EGEVM ege) TotalPoints -= ege.SubjectScores;
         }
+        void ChangeValuePointsDistinctiveFeatures(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+                foreach (var newItem in e.NewItems)
+                    if (newItem is DistinctiveFeatureVM distinctiveFeature) PointsDistinctiveFeatures += distinctiveFeature.FeatureScore;
+            if (e.OldItems != null)
+                foreach (var oldItem in e.OldItems)
+                    if (oldItem is DistinctiveFeatureVM distinctiveFeature) PointsDistinctiveFeatures -= distinctiveFeature.FeatureScore;
+        }
 
-        public void Dispose() => EGES.CollectionChanged -= ChangeValueProperty;
+        public void Dispose()
+        {
+            EGES.CollectionChanged -= ChangeValueTotalPoints;
+            DistinguishingFeatures.CollectionChanged -= ChangeValuePointsDistinctiveFeatures;
+        }
     }
 }

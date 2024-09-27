@@ -235,13 +235,66 @@
                                     Command="{Binding UserViewModel.UpdateUserCommand}"/>
 
                         </StackPanel>
-
                     </Grid>
                 </Expander>
 
                 <Expander Grid.Row="2" FontSize="15" Style="{StaticResource CustomExpander}" Header="Настройка модуля - Учебный отдел" Margin="0,5,0,0" Padding="2,0"/>
 
-                <Expander Grid.Row="3" FontSize="15" Style="{StaticResource CustomExpander}" Header="Настройка модуля - Приёмная кампания" Margin="0,5,0,0" Padding="2,0"/>
+                <Expander Grid.Row="3" FontSize="15" Style="{StaticResource CustomExpander}" Header="Настройка модуля - Приёмная кампания" Margin="0,5,0,0" Padding="2,0">
+                    <Grid Background="White">
+                        <Grid.Effect>
+                            <DropShadowEffect Color="LightGray" ShadowDepth="0"/>
+                        </Grid.Effect>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TreeView Grid.Row="0" Background="White" BorderThickness="0" Margin="0,0,0,5">
+
+                            <TreeViewItem ItemsSource="{Binding SettingAdmissionCampaignViewModel.Levels}" FontSize="14" VerticalAlignment="Center">
+                                <TreeViewItem.ItemTemplate>
+                                    <HierarchicalDataTemplate ItemsSource="{Binding DirectionsTraining}">
+                                        <TextBlock Grid.Column="0" Text="{Binding LevelName}"/>
+                                        <HierarchicalDataTemplate.ItemTemplate>
+                                            <HierarchicalDataTemplate ItemsSource="{Binding EducationalProfiles}">
+                                                <TextBlock Text="{Binding DirectionName}" />
+                                                <HierarchicalDataTemplate.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel>
+                                                            <TextBlock Text="{Binding ProfileName}" />
+                                                            <ItemsControl ItemsSource="{Binding FormsOfTraining}">
+                                                                <ItemsControl.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <TextBlock Text="{Binding}" />
+                                                                    </DataTemplate>
+                                                                </ItemsControl.ItemTemplate>
+                                                            </ItemsControl>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </HierarchicalDataTemplate.ItemTemplate>
+                                            </HierarchicalDataTemplate>
+                                        </HierarchicalDataTemplate.ItemTemplate>
+                                    </HierarchicalDataTemplate>
+                                </TreeViewItem.ItemTemplate>
+                                <TreeViewItem.HeaderTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Уровни подготовки" Margin="5,0,0,0" VerticalAlignment="Center" />
+                                            <Button Content="/Common/Resources/Images/addUser.png" Style="{StaticResource ButtonImage}" Height="18" Width="18" 
+                                                    Margin="10,5,0,5" Background="WhiteSmoke" RenderOptions.BitmapScalingMode="Fant" ToolTip="Добавить уровень"
+                                                    Command="{Binding DataContext.OpenWindowAddLevelCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
+                                                    CommandParameter="{Binding DataContext.SettingAdmissionCampaignViewModel.Levels, RelativeSource={RelativeSource AncestorType=TreeView}}">
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </TreeViewItem.HeaderTemplate>
+                            </TreeViewItem>
+                        </TreeView>
+
+                        </Grid>
+                </Expander>
 
                 <Expander Grid.Row="4" FontSize="15" Style="{StaticResource CustomExpander}" Header="Настройка модуля - Деканат" Margin="0,5,0,0" Padding="2,0"/>
 
