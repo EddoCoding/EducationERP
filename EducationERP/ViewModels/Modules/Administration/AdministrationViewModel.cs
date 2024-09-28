@@ -1,6 +1,7 @@
 ﻿using EducationERP.Common.Components;
 using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
+using EducationERP.Models;
 using EducationERP.ViewModels.LoginSetting;
 using EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaign;
 using Raketa;
@@ -24,14 +25,14 @@ namespace EducationERP.ViewModels.Modules.Administration
         IServiceView _serviceView;
         ITabControl _tabControl;
         public AdministrationViewModel(IServiceView serviceView, IConfig config, ITabControl tabControl, DataContext context, 
-            IUserRepository userRepository, UserSystem userSystem)
+            IUserRepository userRepository, ILevelRepository levelRepository, UserSystem userSystem)
         {
             _serviceView = serviceView;
             _tabControl = tabControl;
 
             Visual = new(userSystem);
             UserViewModel = new(serviceView, userRepository);
-            SettingAdmissionCampaignViewModel = new();
+            SettingAdmissionCampaignViewModel = new(levelRepository);
             SettingBDViewModel = new(serviceView, config, context);
 
             OpenWindowAddLevelCommand = RaketaTCommand<ObservableCollection<EducationalLevelPreparationVM>>.Launch(OpenWindowAddLevel);

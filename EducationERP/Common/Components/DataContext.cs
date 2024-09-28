@@ -91,14 +91,13 @@ namespace EducationERP.Common.Components
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<EducationalLevelPreparation>()
-                .HasMany<EducationalDirectionTraining>()
-                .WithOne(x => x.EducationalLevelPreparation)
-                .HasForeignKey(x => x.EducationalLevelPreparationId)
+                .HasMany(l => l.DirectionsTraining)
+                .WithOne(d => d.EducationalLevelPreparation)
+                .HasForeignKey(d => d.EducationalLevelPreparationId) 
                 .OnDelete(DeleteBehavior.Cascade);
 
-
             modelBuilder.Entity<EducationalDirectionTraining>()
-                .HasMany<EducationalProfile>()
+                .HasMany(z => z.EducationalProfiles)
                 .WithOne(x => x.EducationalDirectionTraining)
                 .HasForeignKey(x => x.EducationalDirectionTrainingId)
                 .OnDelete(DeleteBehavior.Cascade);

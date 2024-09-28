@@ -32,6 +32,7 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaig
                 Id = levelVM.Id,
                 LevelName = levelVM.LevelName
             });
+
             if(isAdded)
             {
                 _levels.Add(levelVM);

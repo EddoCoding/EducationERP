@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EducationERP.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240928153259_FourMigration")]
+    [Migration("20240928211858_FourMigration")]
     partial class FourMigration
     {
         /// <inheritdoc />
@@ -128,7 +128,7 @@ namespace EducationERP.Migrations
             modelBuilder.Entity("EducationERP.Models.EducationalDirectionTraining", b =>
                 {
                     b.HasOne("EducationERP.Models.EducationalLevelPreparation", "EducationalLevelPreparation")
-                        .WithMany()
+                        .WithMany("DirectionsTraining")
                         .HasForeignKey("EducationalLevelPreparationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -139,12 +139,22 @@ namespace EducationERP.Migrations
             modelBuilder.Entity("EducationERP.Models.Modules.Administration.EducationalProfile", b =>
                 {
                     b.HasOne("EducationERP.Models.EducationalDirectionTraining", "EducationalDirectionTraining")
-                        .WithMany()
+                        .WithMany("EducationalProfiles")
                         .HasForeignKey("EducationalDirectionTrainingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("EducationalDirectionTraining");
+                });
+
+            modelBuilder.Entity("EducationERP.Models.EducationalDirectionTraining", b =>
+                {
+                    b.Navigation("EducationalProfiles");
+                });
+
+            modelBuilder.Entity("EducationERP.Models.EducationalLevelPreparation", b =>
+                {
+                    b.Navigation("DirectionsTraining");
                 });
 #pragma warning restore 612, 618
         }

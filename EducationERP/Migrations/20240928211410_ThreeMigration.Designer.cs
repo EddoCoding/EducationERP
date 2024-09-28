@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EducationERP.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240928173325_BackChangePropertyOnUnique")]
-    partial class BackChangePropertyOnUnique
+    [Migration("20240928211410_ThreeMigration")]
+    partial class ThreeMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,6 +73,9 @@ namespace EducationERP.Migrations
                     b.Property<Guid>("EducationalDirectionTrainingId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("EducationalDirectionTrainingId1")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("ProfileCode")
                         .IsRequired()
                         .HasColumnType("text");
@@ -84,6 +87,8 @@ namespace EducationERP.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EducationalDirectionTrainingId");
+
+                    b.HasIndex("EducationalDirectionTrainingId1");
 
                     b.ToTable("SettingProfiles");
                 });
@@ -128,7 +133,7 @@ namespace EducationERP.Migrations
             modelBuilder.Entity("EducationERP.Models.EducationalDirectionTraining", b =>
                 {
                     b.HasOne("EducationERP.Models.EducationalLevelPreparation", "EducationalLevelPreparation")
-                        .WithMany()
+                        .WithMany("DirectionsTraining")
                         .HasForeignKey("EducationalLevelPreparationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -144,7 +149,22 @@ namespace EducationERP.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("EducationERP.Models.EducationalDirectionTraining", null)
+                        .WithMany("EducationalProfiles")
+                        .HasForeignKey("EducationalDirectionTrainingId1")
+                        .HasConstraintName("FK_SettingProfiles_SettingDirections_EducationalDirectionTrai~1");
+
                     b.Navigation("EducationalDirectionTraining");
+                });
+
+            modelBuilder.Entity("EducationERP.Models.EducationalDirectionTraining", b =>
+                {
+                    b.Navigation("EducationalProfiles");
+                });
+
+            modelBuilder.Entity("EducationERP.Models.EducationalLevelPreparation", b =>
+                {
+                    b.Navigation("DirectionsTraining");
                 });
 #pragma warning restore 612, 618
         }
