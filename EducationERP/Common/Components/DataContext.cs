@@ -89,6 +89,19 @@ namespace EducationERP.Common.Components
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<EducationalLevelPreparation>()
+                .HasMany<EducationalDirectionTraining>()
+                .WithOne(x => x.EducationalLevelPreparation)
+                .HasForeignKey(x => x.EducationalLevelPreparationId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+            modelBuilder.Entity<EducationalDirectionTraining>()
+                .HasMany<EducationalProfile>()
+                .WithOne(x => x.EducationalDirectionTraining)
+                .HasForeignKey(x => x.EducationalDirectionTrainingId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

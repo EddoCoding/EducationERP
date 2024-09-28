@@ -1,4 +1,4 @@
-﻿using EducationERP.Common.Components;
+﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Models;
 using Raketa;
 using System.Collections.ObjectModel;
@@ -14,29 +14,29 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaig
         public RaketaCommand ExitCommand { get; set; }
 
         IServiceView _serviceView;
-        DataContext _dataContext;
-        public AddSettingLevelViewModel(IServiceView serviceView, DataContext dataContext, ObservableCollection<EducationalLevelPreparationVM> levels)
+        ILevelRepository _repository;
+        public AddSettingLevelViewModel(IServiceView serviceView, ILevelRepository repository, ObservableCollection<EducationalLevelPreparationVM> levels)
         {
             _serviceView = serviceView;
-            _dataContext = dataContext;
+            _repository = repository;
             _levels = levels;
 
             AddLevelCommand = RaketaTCommand<EducationalLevelPreparationVM>.Launch(AddLevel);
             ExitCommand = RaketaCommand.Launch(ExitLogin);
         }
 
-        void AddLevel(EducationalLevelPreparationVM level)
+        async Task AddLevel(EducationalLevelPreparationVM levelVM)
         {
-            var levelModel = new EducationalLevelPreparation
+            var isAdded = await _repository.Create(new EducationalLevelPreparation
             {
-                Id = level.Id,
-                LevelName = level.LevelName
-            };
-            _dataContext.SettingLevels.Add(levelModel);
-            _dataContext.SaveChanges();
-
-            _levels.Add(level);
-            _serviceView.Close<AddSettingLevelViewModel>();
+                Id = levelVM.Id,
+                LevelName = levelVM.LevelName
+            });
+            if(isAdded)
+            {
+                _levels.Add(levelVM);
+                _serviceView.Close<AddSettingLevelViewModel>();
+            }
         }
         void ExitLogin() => _serviceView.Close<AddSettingLevelViewModel>();
     }
