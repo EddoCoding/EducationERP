@@ -1,4 +1,5 @@
 ﻿using EducationERP.Common.Components;
+using EducationERP.Models.Modules.Administration;
 using Raketa;
 
 namespace EducationERP.ViewModels.LoginSetting
@@ -81,7 +82,7 @@ namespace EducationERP.ViewModels.LoginSetting
         {
             if (_context.ApplyMigrate())
             {
-                _context.Users.Add(new Models.User()
+                _context.Users.Add(new User()
                 {
                     SurName = "Администратор",
                     Identifier = "qwe",

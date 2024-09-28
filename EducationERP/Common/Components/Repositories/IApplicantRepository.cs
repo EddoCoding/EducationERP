@@ -1,4 +1,4 @@
-﻿using EducationERP.Models;
+﻿using EducationERP.Models.Modules.AdmissionsCampaign;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;

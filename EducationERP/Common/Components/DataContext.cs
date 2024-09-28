@@ -1,4 +1,5 @@
 ﻿using EducationERP.Models;
+using EducationERP.Models.Modules.Administration;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using System.Windows;
@@ -83,6 +84,23 @@ namespace EducationERP.Common.Components
             config.AppSettings.Settings["IsConfigured"].Value = "True";
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<EducationalLevelPreparation>()
+                .HasMany(l => l.DirectionsTraining)
+                .WithOne(d => d.EducationalLevelPreparation)
+                .HasForeignKey(d => d.EducationalLevelPreparationId) 
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<EducationalDirectionTraining>()
+                .HasMany(z => z.EducationalProfiles)
+                .WithOne(x => x.EducationalDirectionTraining)
+                .HasForeignKey(x => x.EducationalDirectionTrainingId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

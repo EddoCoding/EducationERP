@@ -72,6 +72,7 @@ namespace EducationERP
             _container.RegisterSingleton<MainTabControl, ITabControl>();
             _container.RegisterSingleton<UserRepository, IUserRepository>();
             _container.RegisterTransient<ApplicantRepository, IApplicantRepository>();
+            _container.RegisterTransient<LevelRepositor, ILevelRepository>();
         }
     }
 }

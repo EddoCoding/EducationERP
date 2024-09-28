@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EducationERP.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240927205120_ThreeMigration")]
-    partial class ThreeMigration
+    [Migration("20240928211858_FourMigration")]
+    partial class FourMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,7 +64,7 @@ namespace EducationERP.Migrations
                     b.ToTable("SettingLevels");
                 });
 
-            modelBuilder.Entity("EducationERP.Models.EducationalProfile", b =>
+            modelBuilder.Entity("EducationERP.Models.Modules.Administration.EducationalProfile", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -88,7 +88,7 @@ namespace EducationERP.Migrations
                     b.ToTable("SettingProfiles");
                 });
 
-            modelBuilder.Entity("EducationERP.Models.User", b =>
+            modelBuilder.Entity("EducationERP.Models.Modules.Administration.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -128,7 +128,7 @@ namespace EducationERP.Migrations
             modelBuilder.Entity("EducationERP.Models.EducationalDirectionTraining", b =>
                 {
                     b.HasOne("EducationERP.Models.EducationalLevelPreparation", "EducationalLevelPreparation")
-                        .WithMany()
+                        .WithMany("DirectionsTraining")
                         .HasForeignKey("EducationalLevelPreparationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -136,15 +136,25 @@ namespace EducationERP.Migrations
                     b.Navigation("EducationalLevelPreparation");
                 });
 
-            modelBuilder.Entity("EducationERP.Models.EducationalProfile", b =>
+            modelBuilder.Entity("EducationERP.Models.Modules.Administration.EducationalProfile", b =>
                 {
                     b.HasOne("EducationERP.Models.EducationalDirectionTraining", "EducationalDirectionTraining")
-                        .WithMany()
+                        .WithMany("EducationalProfiles")
                         .HasForeignKey("EducationalDirectionTrainingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("EducationalDirectionTraining");
+                });
+
+            modelBuilder.Entity("EducationERP.Models.EducationalDirectionTraining", b =>
+                {
+                    b.Navigation("EducationalProfiles");
+                });
+
+            modelBuilder.Entity("EducationERP.Models.EducationalLevelPreparation", b =>
+                {
+                    b.Navigation("DirectionsTraining");
                 });
 #pragma warning restore 612, 618
         }
