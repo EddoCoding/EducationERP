@@ -251,6 +251,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
+                        <!--УПРАВЛЕНИЕ НАПРАВЛЕНИЯМИ ПОДГОТОВКИ-->
                         <TreeView Grid.Row="0" Background="White" BorderThickness="0" Margin="0,0,0,5">
 
                             <TreeViewItem ItemsSource="{Binding SettingAdmissionCampaignViewModel.Levels}" FontSize="14" VerticalAlignment="Center">

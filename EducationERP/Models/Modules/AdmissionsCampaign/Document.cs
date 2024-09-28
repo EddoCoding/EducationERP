@@ -1,4 +1,4 @@
-﻿namespace EducationERP.Models
+﻿namespace EducationERP.Models.Modules.AdmissionsCampaign
 {
     public class Document
     {
