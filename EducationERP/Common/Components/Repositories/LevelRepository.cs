@@ -6,7 +6,7 @@ namespace EducationERP.Common.Components.Repositories
 {
     public class LevelRepositor : ILevelRepository
     {
-        public async Task<bool> Create(EducationalLevelPreparation level)
+        public async Task<bool> CreateLevel(EducationalLevelPreparation level)
         {
             using (var db = new DataContext())
             {
@@ -23,21 +23,7 @@ namespace EducationERP.Common.Components.Repositories
                 }
             }
         }
-
-        public async Task Delete(Guid id)
-        {
-            using(var db = new DataContext())
-            {
-                var level = await db.SettingLevels.FindAsync(id);
-                if(level != null)
-                {
-                    db.SettingLevels.Remove(level);
-                    await db.SaveChangesAsync();            
-                }
-            }
-        }
-
-        public List<EducationalLevelPreparation> Read()
+        public List<EducationalLevelPreparation> ReadLevels()
         {
             using (var db = new DataContext()) 
             {
@@ -48,10 +34,17 @@ namespace EducationERP.Common.Components.Repositories
                     .ToList();
             }
         }
-
-        public Task Update(Guid id)
+        public async Task DeleteLevel(Guid id)
         {
-            throw new NotImplementedException();
+            using(var db = new DataContext())
+            {
+                var level = await db.SettingLevels.FindAsync(id);
+                if(level != null)
+                {
+                    db.SettingLevels.Remove(level);
+                    await db.SaveChangesAsync();            
+                }
+            }
         }
     }
 }

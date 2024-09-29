@@ -348,7 +348,8 @@
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Grid.Column="0" Text="{Binding LevelName}" VerticalAlignment="Center"/>
                                             <Button Content="/Common/Resources/Images/plus.png" Style="{StaticResource ButtonImage}" Height="16" Width="16"
-                                                    Margin="5,0,0,0" VerticalAlignment="Center" Command="{Binding .}"
+                                                    Margin="5,0,0,0" VerticalAlignment="Center" Command="{Binding DataContext.SettingAdmissionCampaignViewModel.OpenWindowAddDirectionCommand,
+                                                    RelativeSource={RelativeSource AncestorType=TreeView}}" CommandParameter="{Binding}"
                                                     ToolTip="Добавить направление"/>
                                             <Button Content="/Common/Resources/Images/minus.png" Style="{StaticResource ButtonImage}" Height="19" Width="19"
                                                     Margin="3,0" Command="{Binding DataContext.SettingAdmissionCampaignViewModel.DeleteLevelCommand, 

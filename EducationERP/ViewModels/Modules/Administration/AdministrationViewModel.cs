@@ -29,7 +29,7 @@ namespace EducationERP.ViewModels.Modules.Administration
 
             Visual = new(userSystem);
             UserViewModel = new(serviceView, userRepository);
-            SettingAdmissionCampaignViewModel = new(levelRepository);
+            SettingAdmissionCampaignViewModel = new(serviceView, levelRepository);
             SettingBDViewModel = new(serviceView, config, context);
 
             OpenWindowAddLevelCommand = RaketaTCommand<ObservableCollection<EducationalLevelPreparationVM>>.Launch(OpenWindowAddLevel);

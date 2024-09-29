@@ -1,7 +1,5 @@
-﻿using EducationERP.Common.Components;
-using EducationERP.Common.Components.Repositories;
+﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Models;
-using EducationERP.Models.Modules.Administration;
 using Raketa;
 using System.Collections.ObjectModel;
 
@@ -29,74 +27,14 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaig
 
         async Task AddLevel(EducationalLevelPreparationVM levelVM)
         {
-            //var isAdded = await _repository.Create(new EducationalLevelPreparation
-            //{
-            //    Id = levelVM.Id,
-            //    LevelName = levelVM.LevelName
-            //});
-            //
-            //if(isAdded)
-            //{
-            //    _levels.Add(levelVM);
-            //    _serviceView.Close<AddSettingLevelViewModel>();
-            //}
-
-            using(var db = new DataContext())
+            var isAdded = await _repository.CreateLevel(new EducationalLevelPreparation
             {
-                var level = new EducationalLevelPreparation
-                {
-                    Id = levelVM.Id,
-                    LevelName = levelVM.LevelName
-                };
-                db.SettingLevels.Add(level);
-                await db.SaveChangesAsync();
+                Id = levelVM.Id,
+                LevelName = levelVM.LevelName
+            });
             
-                var direction = new EducationalDirectionTraining
-                {
-                    Id = Guid.NewGuid(),
-                    DirectionCode = "Код 2",
-                    DirectionName = "Юриспруденция",
-                    EducationalLevelPreparationId = level.Id,
-                    EducationalLevelPreparation = level
-                };
-                db.SettingDirections.Add(direction);
-                await db.SaveChangesAsync();
-           
-                var profile = new EducationalProfile
-                {
-                    Id = Guid.NewGuid(),
-                    ProfileCode = "Код 3",
-                    ProfileName = "Неэкономическая система",
-                    EducationalDirectionTrainingId = direction.Id,
-                    EducationalDirectionTraining = direction
-                };
-                db.SettingProfiles.AddRange(profile);
-                await db.SaveChangesAsync();
-
-                var form = new EducationalFormOfTraining
-                {
-                    Id = Guid.NewGuid(),
-                    FormName = "Заочная",
-                    EducationalProfileId = profile.Id,
-                    EducationalProfile = profile
-                };
-                var form1 = new EducationalFormOfTraining
-                {
-                    Id = Guid.NewGuid(),
-                    FormName = "Очно-Заочная",
-                    EducationalProfileId = profile.Id,
-                    EducationalProfile = profile
-                };
-                var form2 = new EducationalFormOfTraining
-                {
-                    Id = Guid.NewGuid(),
-                    FormName = "Очная",
-                    EducationalProfileId = profile.Id,
-                    EducationalProfile = profile
-                };
-                db.SettingForms.AddRange(form, form1, form2);
-                await db.SaveChangesAsync();
-
+            if(isAdded)
+            {
                 _levels.Add(levelVM);
                 _serviceView.Close<AddSettingLevelViewModel>();
             }
