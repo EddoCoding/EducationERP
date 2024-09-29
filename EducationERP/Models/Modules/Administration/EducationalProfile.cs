@@ -5,6 +5,7 @@
         public Guid Id { get; set; }
         public string ProfileCode { get; set; } = string.Empty;
         public string ProfileName { get; set; } = string.Empty;
+        public ICollection<EducationalFormOfTraining> FormsOfTraining { get; set; }
 
         public Guid EducationalDirectionTrainingId { get; set; }
         public EducationalDirectionTraining EducationalDirectionTraining { get; set; }

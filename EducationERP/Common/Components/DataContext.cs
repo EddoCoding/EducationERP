@@ -12,6 +12,7 @@ namespace EducationERP.Common.Components
         public DbSet<EducationalLevelPreparation> SettingLevels { get; set; }
         public DbSet<EducationalDirectionTraining> SettingDirections { get; set; }
         public DbSet<EducationalProfile> SettingProfiles { get; set; }
+        public DbSet<EducationalFormOfTraining> SettingForms { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder.UseNpgsql(ConfigurationManager.ConnectionStrings["StrConnection"].ToString());
@@ -90,16 +91,25 @@ namespace EducationERP.Common.Components
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<EducationalLevelPreparation>()
-                .HasMany(l => l.DirectionsTraining)
-                .WithOne(d => d.EducationalLevelPreparation)
-                .HasForeignKey(d => d.EducationalLevelPreparationId) 
+            modelBuilder
+                .Entity<EducationalLevelPreparation>()
+                .HasMany(z => z.DirectionsTraining)
+                .WithOne(x =>x.EducationalLevelPreparation)
+                .HasForeignKey(c => c.EducationalLevelPreparationId) 
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<EducationalDirectionTraining>()
+            modelBuilder
+                .Entity<EducationalDirectionTraining>()
                 .HasMany(z => z.EducationalProfiles)
                 .WithOne(x => x.EducationalDirectionTraining)
-                .HasForeignKey(x => x.EducationalDirectionTrainingId)
+                .HasForeignKey(c => c.EducationalDirectionTrainingId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder
+                .Entity<EducationalProfile>()
+                .HasMany(z => z.FormsOfTraining)
+                .WithOne(x => x.EducationalProfile)
+                .HasForeignKey(c => c.EducationalProfileId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

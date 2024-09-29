@@ -16,11 +16,8 @@ namespace EducationERP.ViewModels.Modules.Administration
         public SettingAdmissionCampaignViewModel SettingAdmissionCampaignViewModel { get; set; }
         public SettingBDViewModel SettingBDViewModel { get; set; }
 
-
         public RaketaTCommand<ObservableCollection<EducationalLevelPreparationVM>> OpenWindowAddLevelCommand { get; set; }
         public RaketaCommand ExitCommand { get; set; }
-
-
 
         IServiceView _serviceView;
         ITabControl _tabControl;
@@ -41,6 +38,7 @@ namespace EducationERP.ViewModels.Modules.Administration
 
         void OpenWindowAddLevel(ObservableCollection<EducationalLevelPreparationVM> levels) => 
             _serviceView.Window<AddSettingLevelViewModel>(null, levels).NonModal();
+
         void CloseTab() => _tabControl.RemoveTab();
     }
 }
