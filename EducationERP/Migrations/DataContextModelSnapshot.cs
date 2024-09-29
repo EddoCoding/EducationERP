@@ -61,6 +61,26 @@ namespace EducationERP.Migrations
                     b.ToTable("SettingLevels");
                 });
 
+            modelBuilder.Entity("EducationERP.Models.Modules.Administration.EducationalFormOfTraining", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("EducationalProfileId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("FormName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EducationalProfileId");
+
+                    b.ToTable("SettingForms");
+                });
+
             modelBuilder.Entity("EducationERP.Models.Modules.Administration.EducationalProfile", b =>
                 {
                     b.Property<Guid>("Id")
@@ -133,6 +153,17 @@ namespace EducationERP.Migrations
                     b.Navigation("EducationalLevelPreparation");
                 });
 
+            modelBuilder.Entity("EducationERP.Models.Modules.Administration.EducationalFormOfTraining", b =>
+                {
+                    b.HasOne("EducationERP.Models.Modules.Administration.EducationalProfile", "EducationalProfile")
+                        .WithMany("FormsOfTraining")
+                        .HasForeignKey("EducationalProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EducationalProfile");
+                });
+
             modelBuilder.Entity("EducationERP.Models.Modules.Administration.EducationalProfile", b =>
                 {
                     b.HasOne("EducationERP.Models.EducationalDirectionTraining", "EducationalDirectionTraining")
@@ -152,6 +183,11 @@ namespace EducationERP.Migrations
             modelBuilder.Entity("EducationERP.Models.EducationalLevelPreparation", b =>
                 {
                     b.Navigation("DirectionsTraining");
+                });
+
+            modelBuilder.Entity("EducationERP.Models.Modules.Administration.EducationalProfile", b =>
+                {
+                    b.Navigation("FormsOfTraining");
                 });
 #pragma warning restore 612, 618
         }
