@@ -49,7 +49,7 @@
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0,10,10">
             <Button Content="Добавить" Style="{StaticResource ButtonTextCreate}" Margin="10,0" 
-                    Command="{Binding AddDirectionCommand}" CommandParameter="{Binding Level}"/>
+                    Command="{Binding AddDirectionCommand}" CommandParameter="{Binding Direction}"/>
             <Button Content="Отменить" Style="{StaticResource ButtonTextCancel}" Command="{Binding ExitCommand}"/>
         </StackPanel>
     </Grid>
