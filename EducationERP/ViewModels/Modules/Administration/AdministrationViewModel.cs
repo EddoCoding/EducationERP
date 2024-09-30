@@ -1,11 +1,9 @@
 ﻿using EducationERP.Common.Components;
 using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
-using EducationERP.Models;
 using EducationERP.ViewModels.LoginSetting;
 using EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaign;
 using Raketa;
-using System.Collections.ObjectModel;
 
 namespace EducationERP.ViewModels.Modules.Administration
 {
@@ -16,7 +14,7 @@ namespace EducationERP.ViewModels.Modules.Administration
         public SettingAdmissionCampaignViewModel SettingAdmissionCampaignViewModel { get; set; }
         public SettingBDViewModel SettingBDViewModel { get; set; }
 
-        public RaketaTCommand<ObservableCollection<EducationalLevelPreparationVM>> OpenWindowAddLevelCommand { get; set; }
+        //public RaketaTCommand<ObservableCollection<EducationalLevelPreparationVM>> OpenWindowAddLevelCommand { get; set; }
         public RaketaCommand ExitCommand { get; set; }
 
         IServiceView _serviceView;
@@ -29,15 +27,15 @@ namespace EducationERP.ViewModels.Modules.Administration
 
             Visual = new(userSystem);
             UserViewModel = new(serviceView, userRepository);
-            SettingAdmissionCampaignViewModel = new(levelRepository);
+            //SettingAdmissionCampaignViewModel = new(serviceView, levelRepository);
             SettingBDViewModel = new(serviceView, config, context);
 
-            OpenWindowAddLevelCommand = RaketaTCommand<ObservableCollection<EducationalLevelPreparationVM>>.Launch(OpenWindowAddLevel);
+            //OpenWindowAddLevelCommand = RaketaTCommand<ObservableCollection<EducationalLevelPreparationVM>>.Launch(OpenWindowAddLevel);
             ExitCommand = RaketaCommand.Launch(CloseTab);
         }
 
-        void OpenWindowAddLevel(ObservableCollection<EducationalLevelPreparationVM> levels) => 
-            _serviceView.Window<AddSettingLevelViewModel>(null, levels).NonModal();
+        //void OpenWindowAddLevel(ObservableCollection<EducationalLevelPreparationVM> levels) => 
+        //    _serviceView.Window<AddSettingLevelViewModel>(null, levels).NonModal();
 
         void CloseTab() => _tabControl.RemoveTab();
     }
