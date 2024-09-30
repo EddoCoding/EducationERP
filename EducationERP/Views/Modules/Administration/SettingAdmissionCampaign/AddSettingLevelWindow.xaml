@@ -4,12 +4,30 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationERP.Views.Modules.Administration.ControlUsers"
-        mc:Ignorable="d" Title="Добавление уровня подготовки" Height="95" Width="400" MouseDown="MoveWindow"
+        mc:Ignorable="d" Title="Добавление уровня подготовки" Height="110" Width="400" MouseDown="MoveWindow"
         Background="WhiteSmoke" FontFamily="{StaticResource OpenSans}" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         RenderOptions.BitmapScalingMode="NearestNeighbor" BorderBrush="LightGray" BorderThickness="1">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -20,7 +38,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0" Background="White" Margin="0,10">
+            <Grid Grid.Row="0" Background="White" Margin="0,10,0,0">
                 <Grid.Effect>
                     <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
                 </Grid.Effect>
@@ -30,13 +48,21 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Text="Наименование уровня подготовки" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
-                <TextBox Grid.Row="1" Text="{Binding Level.LevelName}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,5"/>
+                <TextBox Grid.Row="1" Text="{Binding LevelVM.NameLevel}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,5"/>
             </Grid>
         </Grid>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0,10,10">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,3,0,0">
+            <TextBlock Text="Быстрый выбор:" Foreground="Gray"/>
+            <Button Content="Бакалавриат" Margin="3,0,0,0" Command="{Binding SelectLevelCommand}" CommandParameter="Бакалавриат"/>
+            <Button Content="Магистратура" Margin="3,0,0,0" Command="{Binding SelectLevelCommand}" CommandParameter="Магистратура"/>
+            <Button Content="Аспирантура" Margin="3,0,0,0" Command="{Binding SelectLevelCommand}" CommandParameter="Аспирантура"/>
+            <Button Content="СПО" Margin="3,0,0,0" Command="{Binding SelectLevelCommand}" CommandParameter="СПО"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0,10,10">
             <Button Content="Добавить" Style="{StaticResource ButtonTextCreate}" Margin="10,0" 
-                    Command="{Binding AddLevelCommand}" CommandParameter="{Binding Level}"/>
+                    Command="{Binding AddLevelCommand}" CommandParameter="{Binding LevelVM}"/>
             <Button Content="Отменить" Style="{StaticResource ButtonTextCancel}" Command="{Binding ExitCommand}"/>
         </StackPanel>
     </Grid>

@@ -341,8 +341,31 @@
 
                         <TextBlock Grid.Row="0" Text="Управление образованием" Margin="10,10,0,0" Foreground="Gray"/>
 
+                        <TreeView Grid.Row="1" Margin="10" BorderThickness="0">
+                            <TreeViewItem ItemsSource="{Binding SettingAdmissionCampaignViewModel.Levels}">
+                                <TreeViewItem.HeaderTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Уровни подготовки"  VerticalAlignment="Center"/>
+                                                <Button Content="/Common/Resources/Images/plus.png" Style="{StaticResource ButtonImage}" Height="18" Width="18"
+                                                        Margin="5,2" ToolTip="Добавить уровень подготовки"
+                                                        Command="{Binding DataContext.SettingAdmissionCampaignViewModel.OpenWindowAddLevelCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
+                                                        CommandParameter="{Binding DataContext.SettingAdmissionCampaignViewModel.Levels, RelativeSource={RelativeSource AncestorType=TreeView}}"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </TreeViewItem.HeaderTemplate>
+                                <TreeViewItem.ItemTemplate>
+                                    <HierarchicalDataTemplate ItemsSource="{Binding .}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding NameLevel}"/>
+                                        </StackPanel>
+                                    </HierarchicalDataTemplate>
+                                </TreeViewItem.ItemTemplate>
+                            </TreeViewItem>
+                        </TreeView>
                         
-
                     </Grid>
                 </Expander>
 

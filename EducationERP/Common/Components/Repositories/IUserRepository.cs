@@ -1,4 +1,4 @@
-﻿using EducationERP.Models.Modules.Administration;
+﻿using EducationERP.Models.Modules.Administration.SettingUser;
 using EducationERP.ViewModels.Modules.Administration.ControlUsers;
 using System.Collections.ObjectModel;
 
