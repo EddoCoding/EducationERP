@@ -35,22 +35,12 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaig
                 Id = levelVM.Id,
                 NameLevel = levelVM.NameLevel
             };
-            _repository.CreateLevel(level);
-
-            _levelVMs.Add(levelVM);
-            _serviceView.Close<AddSettingLevelViewModel>();
-
-            //var isAdded = await _repository.CreateLevel(new EducationalLevelPreparation
-            //{
-            //    Id = levelVM.Id,
-            //    LevelName = levelVM.LevelName
-            //});
-            //
-            //if(isAdded)
-            //{
-            //    _levels.Add(levelVM);
-            //    _serviceView.Close<AddSettingLevelViewModel>();
-            //}
+            bool isAdded = _repository.CreateLevel(level);
+            if (isAdded)
+            {
+                _levelVMs.Add(levelVM);
+                _serviceView.Close<AddSettingLevelViewModel>();
+            }
         }
         void ExitLogin() => _serviceView.Close<AddSettingLevelViewModel>();
     }

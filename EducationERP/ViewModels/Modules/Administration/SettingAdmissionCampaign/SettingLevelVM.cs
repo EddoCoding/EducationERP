@@ -7,12 +7,12 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaig
     {
         string nameLevel = string.Empty;
 
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string NameLevel
         {
             get => nameLevel;
             set => SetValue(ref nameLevel, value);
         }
-        public ObservableCollection<string> Directions { get; set; } = new();
+        public ObservableCollection<SettingDirectionVM> Directions { get; set; } = new();
     }
 }
