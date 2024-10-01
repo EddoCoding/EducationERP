@@ -1,5 +1,5 @@
 ﻿using EducationERP.Common.Components;
-using EducationERP.Models.Modules.Administration;
+using EducationERP.Models.Modules.Administration.SettingUser;
 using Raketa;
 using System.Text;
 using System.Windows;

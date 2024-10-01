@@ -341,8 +341,81 @@
 
                         <TextBlock Grid.Row="0" Text="Управление образованием" Margin="10,10,0,0" Foreground="Gray"/>
 
+                        <TreeView Grid.Row="1" Margin="10" BorderThickness="0" FontSize="14">
+                            <TreeViewItem ItemsSource="{Binding SettingAdmissionCampaignViewModel.Levels}">
+                                <TreeViewItem.HeaderTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Уровни подготовки" VerticalAlignment="Center"/>
+                                                <Button Content="/Common/Resources/Images/plus.png" Style="{StaticResource ButtonImage}" Height="18" Width="18"
+                                                        Margin="5,2" ToolTip="Добавить уровень подготовки"
+                                                        Command="{Binding DataContext.SettingAdmissionCampaignViewModel.OpenWindowAddLevelCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
+                                                        CommandParameter="{Binding DataContext.SettingAdmissionCampaignViewModel.Levels, RelativeSource={RelativeSource AncestorType=TreeView}}"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </TreeViewItem.HeaderTemplate>
+                                <TreeViewItem.ItemTemplate>
+                                    <HierarchicalDataTemplate ItemsSource="{Binding Directions}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding NameLevel}" VerticalAlignment="Center"/>
+                                            <Button Content="/Common/Resources/Images/plus.png" Style="{StaticResource ButtonImage}" Margin="5,0" Height="18" Width="18"
+                                                    Command="{Binding DataContext.SettingAdmissionCampaignViewModel.OpenWindowAddDirectionCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
+                                                    CommandParameter="{Binding}"/>
+                                            <Button Content="/Common/Resources/Images/minus.png" Style="{StaticResource ButtonImage}" Height="20" Width="20"
+                                                    Command="{Binding DataContext.SettingAdmissionCampaignViewModel.DeleteLevelCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
+                                                    CommandParameter="{Binding}"/>
+                                        </StackPanel>
+                                        <HierarchicalDataTemplate.ItemTemplate>
+                                            <HierarchicalDataTemplate ItemsSource="{Binding Profiles}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="Направление" VerticalAlignment="Center" Foreground="Gray" FontSize="12"/>
+                                                    <TextBlock Text="{Binding CodeDirection}" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                                    <TextBlock Text="{Binding NameDirection}" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                                    <Button Content="/Common/Resources/Images/plus.png" Style="{StaticResource ButtonImage}" Margin="5,0" Height="18" Width="18"
+                                                            Command="{Binding DataContext.SettingAdmissionCampaignViewModel.OpenWindowAddProfileCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
+                                                            CommandParameter="{Binding}"/>
+                                                    <Button Content="/Common/Resources/Images/minus.png" Style="{StaticResource ButtonImage}" Height="20" Width="20"
+                                                            Command="{Binding DataContext.SettingAdmissionCampaignViewModel.DeleteDirectionCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
+                                                            CommandParameter="{Binding}"/>
+                                                </StackPanel>
+                                                <HierarchicalDataTemplate.ItemTemplate>
+                                                    <HierarchicalDataTemplate ItemsSource="{Binding Forms}">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="Профиль" VerticalAlignment="Center" Foreground="Gray" FontSize="12"/>
+                                                            <TextBlock Text="{Binding CodeProfile}" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                                            <TextBlock Text="{Binding NameProfile}" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                                            <Button Content="/Common/Resources/Images/plus.png" Style="{StaticResource ButtonImage}" Margin="5,0" Height="18" Width="18"
+                                                                    Command="{Binding DataContext.SettingAdmissionCampaignViewModel.OpenWindowAddFormCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
+                                                                    CommandParameter="{Binding}"/>
+                                                            <Button Content="/Common/Resources/Images/minus.png" Style="{StaticResource ButtonImage}" Height="20" Width="20"
+                                                                    Command="{Binding DataContext.SettingAdmissionCampaignViewModel.DeleteProfileCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
+                                                                    CommandParameter="{Binding}"/>
+                                                        </StackPanel>
+                                                        <HierarchicalDataTemplate.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock Text="Форма" VerticalAlignment="Center" Foreground="Gray" FontSize="12"/>
+                                                                    <TextBlock Text="{Binding NameForm}" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                                                    <Button Content="/Common/Resources/Images/minus.png" Style="{StaticResource ButtonImage}" Height="20" Width="20" Margin="5,0,0,0"
+                                                                            Command="{Binding DataContext.SettingAdmissionCampaignViewModel.DeleteFormCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
+                                                                            CommandParameter="{Binding}"/>
+                                                                </StackPanel>
+                                                            </DataTemplate>
+                                                        </HierarchicalDataTemplate.ItemTemplate>
+                                                        <HierarchicalDataTemplate.ItemContainerStyle>
+                                                            <Style/>
+                                                        </HierarchicalDataTemplate.ItemContainerStyle>
+                                                    </HierarchicalDataTemplate>
+                                                </HierarchicalDataTemplate.ItemTemplate>
+                                            </HierarchicalDataTemplate>
+                                        </HierarchicalDataTemplate.ItemTemplate>
+                                    </HierarchicalDataTemplate>
+                                </TreeViewItem.ItemTemplate>
+                            </TreeViewItem>
+                        </TreeView>
                         
-
                     </Grid>
                 </Expander>
 

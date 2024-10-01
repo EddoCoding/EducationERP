@@ -1,6 +1,6 @@
 ﻿using Raketa;
 
-namespace EducationERP.Models.Modules.Administration
+namespace EducationERP.Models.Modules.Administration.SettingUser
 {
     public class User : RaketaViewModel
     {
