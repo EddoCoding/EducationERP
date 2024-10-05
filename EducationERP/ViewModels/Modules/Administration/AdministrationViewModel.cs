@@ -19,14 +19,14 @@ namespace EducationERP.ViewModels.Modules.Administration
         IServiceView _serviceView;
         ITabControl _tabControl;
         public AdministrationViewModel(IServiceView serviceView, IConfig config, ITabControl tabControl, DataContext context, 
-            IUserRepository userRepository, ILevelRepository levelRepository, UserSystem userSystem)
+            IUserRepository userRepository, UserSystem userSystem)
         {
             _serviceView = serviceView;
             _tabControl = tabControl;
 
             Visual = new(userSystem);
             UserViewModel = new(serviceView, userRepository);
-            SettingAdmissionCampaignViewModel = new(serviceView, levelRepository);
+            SettingAdmissionCampaignViewModel = new(serviceView);
             SettingBDViewModel = new(serviceView, config, context);
 
             ExitCommand = RaketaCommand.Launch(CloseTab);
