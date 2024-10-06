@@ -228,6 +228,37 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <Style x:Key="ButtonAdd" TargetType="Button">
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="Green"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonDelete" TargetType="Button">
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="red"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
 
     <Grid Background="White">
@@ -339,8 +370,91 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="0" Text="Управление образованием для нового учебного года" Margin="10,10,0,0" Foreground="Gray" FontSize="14"/>
+                        <TextBlock Grid.Row="0" Text="Управление образованием приёмной кампании" Margin="10,10,0,0" Foreground="Gray" FontSize="14"/>
 
+                        <TreeView x:Name="qwe" Grid.Row="1" Margin="10,5" BorderThickness="0" FontSize="14">
+                            <TreeViewItem ItemsSource="{Binding SettingAdmissionCampaignViewModel.Faculties}" IsExpanded="True">
+                                <TreeViewItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Факультеты"/>
+                                        <Button Content="добавить" Style="{StaticResource ButtonAdd}" Margin="5,0" ToolTip="Добавить факультет"
+                                                Command="{Binding DataContext.SettingAdmissionCampaignViewModel.OpenWindowAddFacultyCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
+                                                CommandParameter="{Binding DataContext.SettingAdmissionCampaignViewModel.Faculties, RelativeSource={RelativeSource AncestorType=TreeView}}"/>
+                                    </StackPanel>
+                                </TreeViewItem.Header>
+                                <TreeViewItem.ItemTemplate>
+                                    <HierarchicalDataTemplate ItemsSource="{Binding Levels}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding NameFaculty}"/>
+                                            <Button Content="добавить" Style="{StaticResource ButtonAdd}" Margin="5,0" ToolTip="Добавить уровень"
+                                                    Command="{Binding DataContext.SettingAdmissionCampaignViewModel.OpenWindowAddLevelCommand, RelativeSource={RelativeSource AncestorType=TreeView}}"
+                                                    CommandParameter="{Binding}"/>
+                                            <Button Content="удалить" Style="{StaticResource ButtonDelete}" ToolTip="Удалить факультет"
+                                                    Command="{Binding DataContext.SettingAdmissionCampaignViewModel.DeleteFacultyCommand, RelativeSource={RelativeSource AncestorType=TreeView}}"
+                                                    CommandParameter="{Binding}"/>
+                                        </StackPanel>
+                                        <HierarchicalDataTemplate.ItemTemplate>
+                                            <HierarchicalDataTemplate ItemsSource="{Binding Directions}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="Уровень" FontSize="12" Foreground="Gray" VerticalAlignment="Center"/>
+                                                    <TextBlock Text="{Binding NameLevel}" Margin="5,0,0,0"/>
+                                                    <Button Content="добавить" Style="{StaticResource ButtonAdd}" Margin="5,0" ToolTip="Добавить направление"
+                                                            Command="{Binding DataContext.SettingAdmissionCampaignViewModel.OpenWindowAddDirectionCommand, RelativeSource={RelativeSource AncestorType=TreeView}}"
+                                                            CommandParameter="{Binding}"/>
+                                                    <Button Content="удалить" Style="{StaticResource ButtonDelete}" ToolTip="Удалить уровень"
+                                                            Command="{Binding DataContext.SettingAdmissionCampaignViewModel.DeleteLevelCommand, RelativeSource={RelativeSource AncestorType=TreeView}}"
+                                                            CommandParameter="{Binding}"/>
+                                                </StackPanel>
+                                                <HierarchicalDataTemplate.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto"/>
+                                                                <RowDefinition Height="Auto"/>
+                                                                <RowDefinition Height="Auto"/>
+                                                                <RowDefinition Height="Auto"/>
+                                                            </Grid.RowDefinitions>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                                                                <TextBlock Text="Направление" FontSize="12" Foreground="Gray" VerticalAlignment="Center"/>
+                                                                <TextBlock Text="{Binding CodeDirection}" Margin="5,0,0,0"/>
+                                                                <TextBlock Text="{Binding NameDirection}" Margin="5,0,0,0"/>
+                                                            </StackPanel>
+                                                            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                                                                <TextBlock Text="Профиль" FontSize="12" Foreground="Gray" VerticalAlignment="Center"/>
+                                                                <TextBlock Text="{Binding CodeProfile}" Margin="5,0,0,0"/>
+                                                                <TextBlock Text="{Binding NameProfile}" Margin="5,0,0,0"/>
+                                                            </StackPanel>
+                                                            <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+                                                                <TextBlock Text="Форма обучения" FontSize="12" Foreground="Gray" VerticalAlignment="Center"/>
+                                                                <TextBlock Text="{Binding NameFormEducation}" Margin="5,0,0,0"/>
+                                                                <TextBlock Text="Форма оплаты" FontSize="12" Foreground="Gray" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                                                <TextBlock Text="{Binding NameFormPayment}" Margin="5,0,0,0"/>
+                                                            </StackPanel>
+
+                                                            <Button Grid.RowSpan="3" Grid.Column="1" Content="удалить" Style="{StaticResource ButtonDelete}" VerticalAlignment="Center" 
+                                                                    ToolTip="Удалить направление" Margin="20,0,0,0"
+                                                                    Command="{Binding DataContext.SettingAdmissionCampaignViewModel.DeleteDirectionCommand, RelativeSource={RelativeSource AncestorType=TreeView}}"
+                                                                    CommandParameter="{Binding}"/>
+
+                                                            <Line Grid.Row="4" Grid.ColumnSpan="2" X1="0" X2="100" Y1="0" Y2="0" StrokeThickness="1" Stroke="Gray" Stretch="Fill"/>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </HierarchicalDataTemplate.ItemTemplate>
+                                                <HierarchicalDataTemplate.ItemContainerStyle>
+                                                    <Style/>
+                                                </HierarchicalDataTemplate.ItemContainerStyle>
+                                            </HierarchicalDataTemplate>
+                                        </HierarchicalDataTemplate.ItemTemplate>
+                                    </HierarchicalDataTemplate>
+                                </TreeViewItem.ItemTemplate>
+                            </TreeViewItem>
+                        </TreeView>
+                        
                     </Grid>
                 </Expander>
 

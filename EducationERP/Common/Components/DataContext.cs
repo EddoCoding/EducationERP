@@ -1,4 +1,6 @@
-﻿using EducationERP.Models.Modules.Administration.SettingUser;
+﻿using EducationERP.Common.Components.Configurations;
+using EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign;
+using EducationERP.Models.Modules.Administration.SettingUser;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using System.Windows;
@@ -8,6 +10,10 @@ namespace EducationERP.Common.Components
     public class DataContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<SettingFaculty> Faculties { get; set; }
+        public DbSet<SettingLevel> Levels { get; set; }
+        public DbSet<SettingDirection> Directions { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder.UseNpgsql(ConfigurationManager.ConnectionStrings["StrConnection"].ToString());
@@ -80,6 +86,14 @@ namespace EducationERP.Common.Components
             config.AppSettings.Settings["IsConfigured"].Value = "True";
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new FacultyConfiguration());
+            modelBuilder.ApplyConfiguration(new LevelConfiguration());
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

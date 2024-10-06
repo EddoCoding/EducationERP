@@ -127,9 +127,4 @@
     </Resource>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Common\Components\Configurations\" />
-    <Folder Include="Models\Modules\Administration\SettingAdmissionsCampaign\" />
-  </ItemGroup>
-
 </Project>

@@ -32,7 +32,23 @@ namespace EducationERP.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("CodeProfile")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("NameDirection")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("NameFormEducation")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("NameFormPayment")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("NameProfile")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -46,24 +62,19 @@ namespace EducationERP.Migrations
                     b.ToTable("Directions");
                 });
 
-            modelBuilder.Entity("EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign.SettingForm", b =>
+            modelBuilder.Entity("EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign.SettingFaculty", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("NameForm")
+                    b.Property<string>("NameFaculty")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("SettingProfileId")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("SettingProfileId");
-
-                    b.ToTable("Forms");
+                    b.ToTable("Faculties");
                 });
 
             modelBuilder.Entity("EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign.SettingLevel", b =>
@@ -76,33 +87,14 @@ namespace EducationERP.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("SettingFacultyId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("SettingFacultyId");
 
                     b.ToTable("Levels");
-                });
-
-            modelBuilder.Entity("EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign.SettingProfile", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("CodeProfile")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("NameProfile")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("SettingDirectionId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SettingDirectionId");
-
-                    b.ToTable("Profiles");
                 });
 
             modelBuilder.Entity("EducationERP.Models.Modules.Administration.SettingUser.User", b =>
@@ -153,41 +145,25 @@ namespace EducationERP.Migrations
                     b.Navigation("SettingLevel");
                 });
 
-            modelBuilder.Entity("EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign.SettingForm", b =>
+            modelBuilder.Entity("EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign.SettingLevel", b =>
                 {
-                    b.HasOne("EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign.SettingProfile", "SettingProfile")
-                        .WithMany("Forms")
-                        .HasForeignKey("SettingProfileId")
+                    b.HasOne("EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign.SettingFaculty", "SettingFaculty")
+                        .WithMany("Levels")
+                        .HasForeignKey("SettingFacultyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("SettingProfile");
+                    b.Navigation("SettingFaculty");
                 });
 
-            modelBuilder.Entity("EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign.SettingProfile", b =>
+            modelBuilder.Entity("EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign.SettingFaculty", b =>
                 {
-                    b.HasOne("EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign.SettingDirection", "SettingDirection")
-                        .WithMany("Profiles")
-                        .HasForeignKey("SettingDirectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SettingDirection");
-                });
-
-            modelBuilder.Entity("EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign.SettingDirection", b =>
-                {
-                    b.Navigation("Profiles");
+                    b.Navigation("Levels");
                 });
 
             modelBuilder.Entity("EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign.SettingLevel", b =>
                 {
                     b.Navigation("Directions");
-                });
-
-            modelBuilder.Entity("EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign.SettingProfile", b =>
-                {
-                    b.Navigation("Forms");
                 });
 #pragma warning restore 612, 618
         }

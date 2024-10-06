@@ -4,9 +4,9 @@ using System.Windows.Input;
 
 namespace EducationERP.Views.Modules.Administration.SettingAdmissionCampaign
 {
-    public partial class AddSettingProfileWindow : Window, IView
+    public partial class AddSettingFacultyWindow : Window, IView
     {
-        public AddSettingProfileWindow() => InitializeComponent();
+        public AddSettingFacultyWindow() => InitializeComponent();
 
         public void Exit() => this.Close();
 

@@ -61,6 +61,9 @@ namespace EducationERP
             _serviceView.RegisterTypeView<ChangeEducationDocViewModel, ChangeEducationDocWindow>();
             _serviceView.RegisterTypeView<EGEViewModel, EGEWindow>();
             _serviceView.RegisterTypeView<DistinctiveFeatureViewModel, DistinctiveFeaturesWindow>();
+            _serviceView.RegisterTypeView<AddSettingFacultyViewModel, AddSettingFacultyWindow>();
+            _serviceView.RegisterTypeView<AddSettingLevelViewModel, AddSettingLevelWindow>();
+            _serviceView.RegisterTypeView<AddSettingDirectionViewModel, AddSettingDirectionWindow>();
         }
 
         void RegisterDependency()
@@ -71,6 +74,7 @@ namespace EducationERP
             _container.RegisterSingleton<MainTabControl, ITabControl>();
             _container.RegisterSingleton<UserRepository, IUserRepository>();
             _container.RegisterTransient<ApplicantRepository, IApplicantRepository>();
+            _container.RegisterTransient<SettingFacultyRepository, ISettingFacultyRepository>();
         }
     }
 }
