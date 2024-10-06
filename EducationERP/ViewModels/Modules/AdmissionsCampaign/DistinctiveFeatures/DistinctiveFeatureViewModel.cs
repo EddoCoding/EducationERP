@@ -20,7 +20,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures
             this.distinctiveFeatures = distinctiveFeatures;
 
             AddDistinctiveFeatureCommand = RaketaTCommand<DistinctiveFeatureVM>.Launch(AddDistinctiveFeature);
-            ExitCommand = RaketaCommand.Launch(ExitLogin);
+            ExitCommand = RaketaCommand.Launch(CloseWindow);
         }
 
         void AddDistinctiveFeature(DistinctiveFeatureVM distinctiveFeature)
@@ -33,6 +33,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures
                 _serviceView.Close<DistinctiveFeatureViewModel>();
             }
         }
-        void ExitLogin() => _serviceView.Close<DistinctiveFeatureViewModel>();
+        void CloseWindow() => _serviceView.Close<DistinctiveFeatureViewModel>();
     }
 }

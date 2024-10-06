@@ -38,7 +38,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Education
             _educations = educations;
 
             AddEducationCommand = RaketaTCommand<EducationBaseViewModel>.Launch(AddEducation);
-            ExitCommand = RaketaCommand.Launch(ExitLogin);
+            ExitCommand = RaketaCommand.Launch(CloseWindow);
         }
 
         void AddEducation(EducationBaseViewModel education)
@@ -51,6 +51,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Education
                 _serviceView.Close<EducationDocViewModel>();
             }
         }
-        void ExitLogin() => _serviceView.Close<EducationDocViewModel>();
+        void CloseWindow() => _serviceView.Close<EducationDocViewModel>();
     }
 }

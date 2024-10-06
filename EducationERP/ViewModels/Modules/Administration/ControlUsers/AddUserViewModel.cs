@@ -30,7 +30,7 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
             GenerationIdentifierCommand = RaketaCommand.Launch(GenerationIdentifier);
             GenerationPasswordCommand = RaketaCommand.Launch(GenerationPassword);
             AddUserCommand = RaketaTCommand<User>.Launch(AddUser);
-            ExitCommand = RaketaCommand.Launch(Exit);
+            ExitCommand = RaketaCommand.Launch(CloseWindow);
 
             ChangeRoleAccessAdmissionsCampaignCommand = RaketaTCommand<string>.Launch(RoleAccessAdmissionsCampaign);
             ChangeRoleAccessAdministrationCommand = RaketaTCommand<string>.Launch(RoleAccessAdministration);
@@ -110,6 +110,6 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
 
             return sb.ToString();
         }
-        void Exit() => _serviceView.Close<AddUserViewModel>();
+        void CloseWindow() => _serviceView.Close<AddUserViewModel>();
     }
 }
