@@ -26,12 +26,11 @@
         #endregion
 
         public ICollection<Document> Documents { get; set; }
-
+        //public ICollection<EducationBase> Educations { get; set; }
+        //public ICollection<EGE> EGES { get; set; }
+        //public ICollection<DistinctiveFeature> DistinguishingFeatures { get; set; }
 
         #region MyRegion
-        //public string[] EducationDocuments { get; set; }
-        //public string[] ExamResult { get; set; }
-        // string[] DistinguishingFeatures { get; set; }
         //public string[] AreasOfTraining { get; set; }
         //public string SelectedDirectionOfTraining { get; set; } = string.Empty;
         //public string[] SubmittedDocuments { get; set; }
