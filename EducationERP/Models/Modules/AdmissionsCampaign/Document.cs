@@ -11,5 +11,8 @@
         public DateOnly DateOfBirth { get; set; }
         public string PlaceOfBirth { get; set; } = string.Empty;
         public string AdditionalInformation { get; set; } = string.Empty;
+
+        public Guid ApplicantId { get; set; }
+        public Applicant Applicant { get; set; }
     }
 }

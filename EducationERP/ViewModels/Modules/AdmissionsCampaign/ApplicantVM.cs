@@ -14,6 +14,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         int totalPoints;
         int pointsDistinctiveFeatures;
 
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string SurName { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
         public string MiddleName { get; set; } = string.Empty;

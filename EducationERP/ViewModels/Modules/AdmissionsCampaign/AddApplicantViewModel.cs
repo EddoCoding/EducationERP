@@ -1,5 +1,7 @@
-﻿using EducationERP.Common.Components.Repositories;
+﻿using EducationERP.Common.Components;
+using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
+using EducationERP.Models.Modules.AdmissionsCampaign;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
@@ -99,8 +101,64 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         }
         void CreatePersonalFile()
         {
-            ApplicantVM.Dispose();
-            ApplicantVM = null;
+            #region Типа работает
+            //using(var db = new DataContext())
+            //{
+            //    var applicant = new Applicant
+            //    {
+            //        Id = ApplicantVM.Id,
+            //        SurName = ApplicantVM.SurName,
+            //        Name = ApplicantVM.Name,
+            //        MiddleName = ApplicantVM.MiddleName,
+            //        DateOfBirth = ApplicantVM.DateOfBirth,
+            //        Gender = ApplicantVM.Gender,
+            //        PlaceOfBirth = ApplicantVM.PlaceOfBirth,
+            //        IsCitizenRus = ApplicantVM.IsCitizenRus,
+            //        NotCitizen = ApplicantVM.NotCitizen,
+            //        IsForeign = ApplicantVM.IsForeign,
+            //        CitizenshipValidFrom = ApplicantVM.CitizenshipValidFrom,
+            //
+            //        ResidentialAddress = ApplicantVM.ResidentialAddress,
+            //        AddressOfRegistration = ApplicantVM.AddressOfRegistration,
+            //        HomePhone = ApplicantVM.HomePhone,
+            //        MobilePhone = ApplicantVM.MobilePhone,
+            //        Mail = ApplicantVM.Mail,
+            //        AdditionalInformation = ApplicantVM.AdditionalInformation
+            //    };
+            //    db.Applicants.Add(applicant);
+            //    db.SaveChanges();
+            //
+            //    foreach (var document in ApplicantVM.Documents)
+            //    {
+            //        if(document is PassportViewModel passportVM)
+            //        {
+            //            var passport = new Passport
+            //            {
+            //                Id = passportVM.Id,
+            //                TypeDocument = passportVM.TypeDocument,
+            //                SurName = passportVM.SurName,
+            //                Name = passportVM.Name,
+            //                MiddleName = passportVM.MiddleName,
+            //                Gender = passportVM.Gender,
+            //                DateOfBirth = passportVM.DateOfBirth,
+            //                PlaceOfBirth = passportVM.PlaceOfBirth,
+            //                IssuedBy = passportVM.IssuedBy,
+            //                DateOfIssue = passportVM.DateOfIssue,
+            //                DepartmentCode = passportVM.DepartmentCode,
+            //                SeriesNumber = passportVM.SeriesNumber,
+            //                AdditionalInformation = passportVM.AdditionalInformation,
+            //                ApplicantId = applicant.Id
+            //            };
+            //            db.Passports.Add(passport);
+            //        }
+            //    };
+            //    db.SaveChanges();
+            //}
+
+            #endregion
+
+            //ApplicantVM.Dispose();
+            //ApplicantVM = null;
         }
 
         void AddDocument(ObservableCollection<DocumentBaseViewModel> documents) => _serviceView.Window<DocumentViewModel>(null, documents).Modal();
@@ -118,9 +176,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             _serviceView.Window<DistinctiveFeatureViewModel>(null, distinctiveFeatures).Modal();
         void DeleteDistinctiveFeature(DistinctiveFeatureVM distinctiveFeature) => ApplicantVM.DistinguishingFeatures.Remove(distinctiveFeature);
 
-        void AreasOfTraining()
-        {
-
-        }
+        void AreasOfTraining() { }
     }
 }

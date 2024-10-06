@@ -1,6 +1,7 @@
 ﻿using EducationERP.Common.Components.Configurations;
 using EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign;
 using EducationERP.Models.Modules.Administration.SettingUser;
+using EducationERP.Models.Modules.AdmissionsCampaign;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using System.Windows;
@@ -10,7 +11,11 @@ namespace EducationERP.Common.Components
     public class DataContext : DbContext
     {
         // ПРИЁМНАЯ КАМПАНИЯ
-
+        public DbSet<Applicant> Applicants { get; set; }
+        public DbSet<Passport> Passports { get; set; }
+        public DbSet<Snils> Snilss { get; set; }
+        public DbSet<Inn> Inns { get; set; }
+        public DbSet<ForeignPassport> ForeignPassports { get; set; }
         // АДМИНИСТРИРОВАНИЕ
         public DbSet<User> Users { get; set; }
         public DbSet<SettingFaculty> Faculties { get; set; }
@@ -95,6 +100,13 @@ namespace EducationERP.Common.Components
         {
             modelBuilder.ApplyConfiguration(new FacultyConfiguration());
             modelBuilder.ApplyConfiguration(new LevelConfiguration());
+
+            modelBuilder
+                .Entity<Applicant>()
+                .HasMany(x => x.Documents)
+                .WithOne(x => x.Applicant);
+
+            modelBuilder.Entity<Document>().UseTpcMappingStrategy();
 
             base.OnModelCreating(modelBuilder);
         }
