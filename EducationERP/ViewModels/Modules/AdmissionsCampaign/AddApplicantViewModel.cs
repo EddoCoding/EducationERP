@@ -2,6 +2,7 @@
 using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
 using EducationERP.Models.Modules.AdmissionsCampaign;
+using EducationERP.Models.Modules.AdmissionsCampaign.Educations;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
@@ -209,6 +210,126 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                         ApplicantId = applicant.Id
                     };
                     _applicantRepository.Create<ForeignPassport>(foreignPassport);
+                }
+            }
+
+            foreach(var education in applicantVM.Educations)
+            {
+                if(education is EducationNineViewModel educationNineVM)
+                {
+                    var educationNine = new EducationNine
+                    {
+                        Id = educationNineVM.Id,
+                        TypeEducation = educationNineVM.TypeEducation,
+                        IdentificationDocument = educationNineVM.IdentificationDocument,
+                        IssuedBy = educationNineVM.IssuedBy,
+                        DateOfIssue = educationNineVM.DateOfIssue,
+                        Honours = educationNineVM.Honours,
+                        CodeSeriesNumber = educationNineVM.CodeSeriesNumber,
+                        AdditionalInformation = educationNineVM.AdditionalInformation,
+                        ApplicantId = applicant.Id
+                    };
+                    _applicantRepository.Create<EducationNine>(educationNine);
+                }
+                else if (education is EducationElevenViewModel educationElevenVM)
+                {
+                    var educationEleven = new EducationEleven
+                    {
+                        Id = educationElevenVM.Id,
+                        TypeEducation = educationElevenVM.TypeEducation,
+                        IdentificationDocument = educationElevenVM.IdentificationDocument,
+                        IssuedBy = educationElevenVM.IssuedBy,
+                        DateOfIssue = educationElevenVM.DateOfIssue,
+                        Honours = educationElevenVM.Honours,
+                        CodeSeriesNumber = educationElevenVM.CodeSeriesNumber,
+                        AdditionalInformation = educationElevenVM.AdditionalInformation,
+                        ApplicantId = applicant.Id
+                    };
+                    _applicantRepository.Create<EducationEleven>(educationEleven);
+                }
+                else if (education is EducationSpoViewModel educationSpoVM)
+                {
+                    var educationSpo = new EducationSPO
+                    {
+                        Id = educationSpoVM.Id,
+                        TypeEducation = educationSpoVM.TypeEducation,
+                        IdentificationDocument = educationSpoVM.IdentificationDocument,
+                        IssuedBy = educationSpoVM.IssuedBy,
+                        DateOfIssue = educationSpoVM.DateOfIssue,
+                        Honours = educationSpoVM.Honours,
+                        FormOfEducation = educationSpoVM.FormOfEducation,
+                        RegistrationNumber = educationSpoVM.RegistrationNumber,
+                        DiplomaSeries = educationSpoVM.DiplomaSeries,
+                        DiplomaNumber = educationSpoVM.DiplomaNumber,
+                        SupplementSeries = educationSpoVM.SupplementSeries,
+                        SupplementNumber = educationSpoVM.SupplementNumber,
+                        AdditionalInformation = educationSpoVM.AdditionalInformation,
+                        ApplicantId = applicant.Id
+                    };
+                    _applicantRepository.Create<EducationSPO>(educationSpo);
+                }
+                else if (education is EducationBakViewModel educationBakVM)
+                {
+                    var educationBak = new EducationBak
+                    {
+                        Id = educationBakVM.Id,
+                        TypeEducation = educationBakVM.TypeEducation,
+                        IdentificationDocument = educationBakVM.IdentificationDocument,
+                        IssuedBy = educationBakVM.IssuedBy,
+                        DateOfIssue = educationBakVM.DateOfIssue,
+                        Honours = educationBakVM.Honours,
+                        FormOfEducation = educationBakVM.FormOfEducation,
+                        RegistrationNumber = educationBakVM.RegistrationNumber,
+                        DiplomaSeries = educationBakVM.DiplomaSeries,
+                        DiplomaNumber = educationBakVM.DiplomaNumber,
+                        SupplementSeries = educationBakVM.SupplementSeries,
+                        SupplementNumber = educationBakVM.SupplementNumber,
+                        AdditionalInformation = educationBakVM.AdditionalInformation,
+                        ApplicantId = applicant.Id
+                    };
+                    _applicantRepository.Create<EducationBak>(educationBak);
+                }
+                else if (education is EducationMagViewModel educationMagVM)
+                {
+                    var educationMag = new EducationMag
+                    {
+                        Id = educationMagVM.Id,
+                        TypeEducation = educationMagVM.TypeEducation,
+                        IdentificationDocument = educationMagVM.IdentificationDocument,
+                        IssuedBy = educationMagVM.IssuedBy,
+                        DateOfIssue = educationMagVM.DateOfIssue,
+                        Honours = educationMagVM.Honours,
+                        FormOfEducation = educationMagVM.FormOfEducation,
+                        RegistrationNumber = educationMagVM.RegistrationNumber,
+                        DiplomaSeries = educationMagVM.DiplomaSeries,
+                        DiplomaNumber = educationMagVM.DiplomaNumber,
+                        SupplementSeries = educationMagVM.SupplementSeries,
+                        SupplementNumber = educationMagVM.SupplementNumber,
+                        AdditionalInformation = educationMagVM.AdditionalInformation,
+                        ApplicantId = applicant.Id
+                    };
+                    _applicantRepository.Create<EducationMag>(educationMag);
+                }
+                else if (education is EducationAspViewModel educationAspVM)
+                {
+                    var educationAsp = new EducationAsp
+                    {
+                        Id = educationAspVM.Id,
+                        TypeEducation = educationAspVM.TypeEducation,
+                        IdentificationDocument = educationAspVM.IdentificationDocument,
+                        IssuedBy = educationAspVM.IssuedBy,
+                        DateOfIssue = educationAspVM.DateOfIssue,
+                        Honours = educationAspVM.Honours,
+                        FormOfEducation = educationAspVM.FormOfEducation,
+                        RegistrationNumber = educationAspVM.RegistrationNumber,
+                        DiplomaSeries = educationAspVM.DiplomaSeries,
+                        DiplomaNumber = educationAspVM.DiplomaNumber,
+                        SupplementSeries = educationAspVM.SupplementSeries,
+                        SupplementNumber = educationAspVM.SupplementNumber,
+                        AdditionalInformation = educationAspVM.AdditionalInformation,
+                        ApplicantId = applicant.Id
+                    };
+                    _applicantRepository.Create<EducationAsp>(educationAsp);
                 }
             }
 

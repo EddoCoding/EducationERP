@@ -2,6 +2,7 @@
 using EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign;
 using EducationERP.Models.Modules.Administration.SettingUser;
 using EducationERP.Models.Modules.AdmissionsCampaign;
+using EducationERP.Models.Modules.AdmissionsCampaign.Educations;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using System.Windows;
@@ -16,6 +17,12 @@ namespace EducationERP.Common.Components
         public DbSet<Snils> Snilss { get; set; }
         public DbSet<Inn> Inns { get; set; }
         public DbSet<ForeignPassport> ForeignPassports { get; set; }
+        public DbSet<EducationNine> EducationsNine { get; set; }
+        public DbSet<EducationEleven> EducationsEleven { get; set; }
+        public DbSet<EducationSPO> EducationsSPO { get; set; }
+        public DbSet<EducationBak> EducationsBak { get; set; }
+        public DbSet<EducationMag> EducationsMag { get; set; }
+        public DbSet<EducationAsp> EducationsAsp { get; set; }
         // АДМИНИСТРИРОВАНИЕ
         public DbSet<User> Users { get; set; }
         public DbSet<SettingFaculty> Faculties { get; set; }
@@ -106,7 +113,13 @@ namespace EducationERP.Common.Components
                 .HasMany(x => x.Documents)
                 .WithOne(x => x.Applicant);
 
+            modelBuilder
+                .Entity<Applicant>()
+                .HasMany(x => x.Educations)
+                .WithOne(x => x.Applicant);
+
             modelBuilder.Entity<Document>().UseTpcMappingStrategy();
+            modelBuilder.Entity<EducationBase>().UseTpcMappingStrategy();
 
             base.OnModelCreating(modelBuilder);
         }
