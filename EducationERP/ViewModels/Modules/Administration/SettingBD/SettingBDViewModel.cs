@@ -63,7 +63,7 @@ namespace EducationERP.ViewModels.LoginSetting
             SaveConfigCommand = RaketaCommand.Launch(SaveConfig);
             RemoveConfigCommand = RaketaCommand.Launch(RemoveConfig);
             CreateISCommand = RaketaCommand.Launch(CreateIS);
-            ExitCommand = RaketaCommand.Launch(ExitSettingBD);
+            ExitCommand = RaketaCommand.Launch(CloseWindow);
         }
 
         void SaveConfig() => _config.SaveConfig(Host, Port, Username, Password, Database, PathTemporaryData);
@@ -101,6 +101,6 @@ namespace EducationERP.ViewModels.LoginSetting
             Database = _config.GetValueConnect("Database");
             PathTemporaryData = _config.GetValueConfig("PathTemporaryData");
         }
-        void ExitSettingBD() => _serviceView.Close<SettingBDViewModel>();
+        void CloseWindow() => _serviceView.Close<SettingBDViewModel>();
     }
 }

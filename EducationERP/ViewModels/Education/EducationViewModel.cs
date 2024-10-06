@@ -25,11 +25,11 @@ namespace EducationERP.ViewModels
             _serviceView = serviceView;
             TabControl = tabControl;
 
-            ExitCommand = RaketaCommand.Launch(ExitEducation);
+            ExitCommand = RaketaCommand.Launch(CloseWindow);
             ModuleCommand = RaketaTCommand<string>.Launch(OpenModule);
         }
 
-        void ExitEducation() => _serviceView.Close<EducationViewModel>();
+        void CloseWindow() => _serviceView.Close<EducationViewModel>();
         void OpenModule(string module)
         {
             switch(module)

@@ -23,7 +23,7 @@ namespace EducationERP.ViewModels.Login
             _userSystem = userSystem;
 
             LoginCommand = RaketaCommand.Launch(LoginAsync);
-            ExitCommand = RaketaCommand.Launch(ExitLogin);
+            ExitCommand = RaketaCommand.Launch(CloseWindow);
         }
 
         async void LoginAsync()
@@ -41,6 +41,6 @@ namespace EducationERP.ViewModels.Login
             else MessageBox.Show("Ошибка соединения!");
         }
 
-        void ExitLogin() => _serviceView.Close<LoginViewModel>();
+        void CloseWindow() => _serviceView.Close<LoginViewModel>();
     }
 }

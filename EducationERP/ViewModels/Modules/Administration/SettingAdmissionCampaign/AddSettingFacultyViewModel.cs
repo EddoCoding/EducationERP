@@ -27,7 +27,6 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaig
             ExitCommand = RaketaCommand.Launch(CloseWindow);
         }
 
-        void CloseWindow() => _serviceView.Close<AddSettingFacultyViewModel>();
         void AddFaculty(SettingFacultyVM facultyVM)
         {
             var isValidated = facultyVM.Validation();
@@ -46,5 +45,6 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaig
                 }
             }
         }
+        void CloseWindow() => _serviceView.Close<AddSettingFacultyViewModel>();
     }
 }

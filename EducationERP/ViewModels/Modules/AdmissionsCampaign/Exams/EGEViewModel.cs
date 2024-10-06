@@ -19,7 +19,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams
             _eges = EGES;
 
             AddEGECommand = RaketaTCommand<EGEVM>.Launch(AddEGE);
-            ExitCommand = RaketaCommand.Launch(ExitLogin);
+            ExitCommand = RaketaCommand.Launch(CloseWindow);
 
         }
 
@@ -33,6 +33,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams
                 _serviceView.Close<EGEViewModel>();
             }
         }
-        void ExitLogin() => _serviceView.Close<EGEViewModel>();
+        void CloseWindow() => _serviceView.Close<EGEViewModel>();
     }
 }

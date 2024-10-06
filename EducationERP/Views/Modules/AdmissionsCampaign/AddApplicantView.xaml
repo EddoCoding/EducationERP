@@ -1270,7 +1270,7 @@
 
             <!--КНОПКА СФОРМИРОВАТЬ ЛИЧНОЕ ДЕЛО-->
             <Button Grid.Row="8" Content="Сформировать личное дело" Style="{StaticResource defaultAdd}" HorizontalAlignment="Center" Margin="0,20"
-                    Command="{Binding CreatePersonalFileCommand}"/>
+                    Command="{Binding CreatePersonalFileCommand}" CommandParameter="{Binding ApplicantVM}"/>
 
         </Grid>
         

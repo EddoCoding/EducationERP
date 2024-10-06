@@ -19,7 +19,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 
         public RaketaCommand ExitCommand { get; set; }
         public RaketaCommand CitizenshipCommand { get; set; }
-        public RaketaCommand CreatePersonalFileCommand { get; set; }
+        public RaketaTCommand<ApplicantVM> CreatePersonalFileCommand { get; set; }
 
 
         //ДОКУМЕНТЫ
@@ -58,7 +58,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 
             ExitCommand = RaketaCommand.Launch(CloseTab);
             CitizenshipCommand = RaketaCommand.Launch(Citizenship);
-            CreatePersonalFileCommand = RaketaCommand.Launch(CreatePersonalFile);
+            CreatePersonalFileCommand = RaketaTCommand<ApplicantVM>.Launch(CreatePersonalFile);
 
             AddDocumentCommand = RaketaTCommand<ObservableCollection<DocumentBaseViewModel>>.Launch(AddDocument);
             ChangeDocumentCommand = RaketaTCommand<DocumentBaseViewModel>.Launch(ChangeDocument);
@@ -99,66 +99,122 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 Visual.IsEnabledTextBox = true;
             }
         }
-        void CreatePersonalFile()
+        void CreatePersonalFile(ApplicantVM applicantVM)
         {
-            #region Типа работает
-            //using(var db = new DataContext())
-            //{
-            //    var applicant = new Applicant
-            //    {
-            //        Id = ApplicantVM.Id,
-            //        SurName = ApplicantVM.SurName,
-            //        Name = ApplicantVM.Name,
-            //        MiddleName = ApplicantVM.MiddleName,
-            //        DateOfBirth = ApplicantVM.DateOfBirth,
-            //        Gender = ApplicantVM.Gender,
-            //        PlaceOfBirth = ApplicantVM.PlaceOfBirth,
-            //        IsCitizenRus = ApplicantVM.IsCitizenRus,
-            //        NotCitizen = ApplicantVM.NotCitizen,
-            //        IsForeign = ApplicantVM.IsForeign,
-            //        CitizenshipValidFrom = ApplicantVM.CitizenshipValidFrom,
-            //
-            //        ResidentialAddress = ApplicantVM.ResidentialAddress,
-            //        AddressOfRegistration = ApplicantVM.AddressOfRegistration,
-            //        HomePhone = ApplicantVM.HomePhone,
-            //        MobilePhone = ApplicantVM.MobilePhone,
-            //        Mail = ApplicantVM.Mail,
-            //        AdditionalInformation = ApplicantVM.AdditionalInformation
-            //    };
-            //    db.Applicants.Add(applicant);
-            //    db.SaveChanges();
-            //
-            //    foreach (var document in ApplicantVM.Documents)
-            //    {
-            //        if(document is PassportViewModel passportVM)
-            //        {
-            //            var passport = new Passport
-            //            {
-            //                Id = passportVM.Id,
-            //                TypeDocument = passportVM.TypeDocument,
-            //                SurName = passportVM.SurName,
-            //                Name = passportVM.Name,
-            //                MiddleName = passportVM.MiddleName,
-            //                Gender = passportVM.Gender,
-            //                DateOfBirth = passportVM.DateOfBirth,
-            //                PlaceOfBirth = passportVM.PlaceOfBirth,
-            //                IssuedBy = passportVM.IssuedBy,
-            //                DateOfIssue = passportVM.DateOfIssue,
-            //                DepartmentCode = passportVM.DepartmentCode,
-            //                SeriesNumber = passportVM.SeriesNumber,
-            //                AdditionalInformation = passportVM.AdditionalInformation,
-            //                ApplicantId = applicant.Id
-            //            };
-            //            db.Passports.Add(passport);
-            //        }
-            //    };
-            //    db.SaveChanges();
-            //}
+            //ВЫЗВАТЬ МЕТОД Validation() МОДЕЛИ ПРЕДСТАВЛЕНИЯ ApplicantVM, И ЕСЛИ ВСЕ ХОРОШО ДЕЛАЕМ МАПИНГ
+            //Если добавился, то добавляем в коллекцию абитуриентов applicantVM
 
-            #endregion
+            var applicant = new Applicant
+            {
+                Id = applicantVM.Id,
+                SurName = applicantVM.SurName,
+                Name = applicantVM.Name,
+                MiddleName = applicantVM.MiddleName,
+                DateOfBirth = applicantVM.DateOfBirth,
+                Gender = applicantVM.Gender,
+                PlaceOfBirth = applicantVM.PlaceOfBirth,
+                IsCitizenRus = applicantVM.IsCitizenRus,
+                NotCitizen = applicantVM.NotCitizen,
+                IsForeign = applicantVM.IsForeign,
+                Citizenship = applicantVM.Citizenship,
+                CitizenshipValidFrom = applicantVM.CitizenshipValidFrom,
+
+                ResidentialAddress = applicantVM.ResidentialAddress,
+                AddressOfRegistration = applicantVM.AddressOfRegistration,
+                HomePhone = applicantVM.HomePhone,
+                MobilePhone = applicantVM.MobilePhone,
+                Mail = applicantVM.Mail,
+                AdditionalInformation = applicantVM.AdditionalInformation
+            };
+            _applicantRepository.Create<Applicant>(applicant);
+
+            foreach(var document in applicantVM.Documents)
+            {
+                if(document is PassportViewModel passportVM)
+                {
+                    var passport = new Passport
+                    {
+                        Id = passportVM.Id,
+                        TypeDocument = passportVM.TypeDocument,
+                        SurName = passportVM.SurName,
+                        Name = passportVM.Name,
+                        MiddleName = passportVM.MiddleName,
+                        Gender = passportVM.Gender,
+                        DateOfBirth = passportVM.DateOfBirth,
+                        PlaceOfBirth = passportVM.PlaceOfBirth,
+                        IssuedBy = passportVM.IssuedBy,
+                        DateOfIssue = passportVM.DateOfIssue,
+                        DepartmentCode = passportVM.DepartmentCode,
+                        SeriesNumber = passportVM.SeriesNumber,
+                        AdditionalInformation = passportVM.AdditionalInformation,
+                        ApplicantId = applicant.Id
+                    };
+                    _applicantRepository.Create<Passport>(passport);
+                }
+                else if (document is SnilsViewModel snilsVM)
+                {
+                    var snils = new Snils
+                    {
+                        Id = snilsVM.Id,
+                        TypeDocument = snilsVM.TypeDocument,
+                        SurName = snilsVM.SurName,
+                        Name = snilsVM.Name,
+                        MiddleName = snilsVM.MiddleName,
+                        Gender = snilsVM.Gender,
+                        DateOfBirth = snilsVM.DateOfBirth,
+                        PlaceOfBirth = snilsVM.PlaceOfBirth,
+                        Number = snilsVM.Number,
+                        RegistrationDate = snilsVM.RegistrationDate,
+                        AdditionalInformation = snilsVM.AdditionalInformation,
+                        ApplicantId = applicant.Id
+                    };
+                    _applicantRepository.Create<Snils>(snils);
+                }
+                else if (document is InnViewModel innVM)
+                {
+                    var inn = new Inn
+                    {
+                        Id = innVM.Id,
+                        TypeDocument = innVM.TypeDocument,
+                        SurName = innVM.SurName,
+                        Name = innVM.Name,
+                        MiddleName = innVM.MiddleName,
+                        Gender = innVM.Gender,
+                        DateOfBirth = innVM.DateOfBirth,
+                        PlaceOfBirth = innVM.PlaceOfBirth,
+                        NumberINN = innVM.NumberINN,
+                        DateAssigned = innVM.DateAssigned,
+                        SeriesNumber = innVM.SeriesNumber,
+                        AdditionalInformation = innVM.AdditionalInformation,
+                        ApplicantId = applicant.Id
+                    };
+                    _applicantRepository.Create<Inn>(inn);
+                }
+                else if (document is ForeignPassportViewModel foreignPassportVM)
+                {
+                    var foreignPassport = new ForeignPassport
+                    {
+                        Id = foreignPassportVM.Id,
+                        TypeDocument = foreignPassportVM.TypeDocument,
+                        SurName = foreignPassportVM.SurName,
+                        Name = foreignPassportVM.Name,
+                        MiddleName = foreignPassportVM.MiddleName,
+                        Gender = foreignPassportVM.Gender,
+                        DateOfBirth = foreignPassportVM.DateOfBirth,
+                        PlaceOfBirth = foreignPassportVM.PlaceOfBirth,
+                        IssuedBy = foreignPassportVM.IssuedBy,
+                        DateOfIssue = foreignPassportVM.DateOfIssue,
+                        SeriesNumber = foreignPassportVM.SeriesNumber,
+                        AdditionalInformation = foreignPassportVM.AdditionalInformation,
+                        ApplicantId = applicant.Id
+                    };
+                    _applicantRepository.Create<ForeignPassport>(foreignPassport);
+                }
+            }
 
             //ApplicantVM.Dispose();
             //ApplicantVM = null;
+            //Вызываем закрытие вкладки
         }
 
         void AddDocument(ObservableCollection<DocumentBaseViewModel> documents) => _serviceView.Window<DocumentViewModel>(null, documents).Modal();
@@ -175,7 +231,5 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         void AddDistinctiveFeature(ObservableCollection<DistinctiveFeatureVM> distinctiveFeatures) => 
             _serviceView.Window<DistinctiveFeatureViewModel>(null, distinctiveFeatures).Modal();
         void DeleteDistinctiveFeature(DistinctiveFeatureVM distinctiveFeature) => ApplicantVM.DistinguishingFeatures.Remove(distinctiveFeature);
-
-        void AreasOfTraining() { }
     }
 }

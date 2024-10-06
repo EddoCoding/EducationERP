@@ -17,7 +17,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents
             Document = document;
 
             SaveDocumentCommand = RaketaTCommand<DocumentBaseViewModel>.Launch(SaveDocument);
-            ExitCommand = RaketaCommand.Launch(ExitLogin);
+            ExitCommand = RaketaCommand.Launch(CloseWindow);
         }
 
         void SaveDocument(DocumentBaseViewModel document)
@@ -28,6 +28,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents
                 _serviceView.Close<ChangeDocumentViewModel>();
             }
         }
-        void ExitLogin() => _serviceView.Close<ChangeDocumentViewModel>();
+        void CloseWindow() => _serviceView.Close<ChangeDocumentViewModel>();
     }
 }
