@@ -42,6 +42,9 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         public RaketaTCommand<DistinctiveFeatureVM> DeleteDistinctiveFeatureCommand { get; set; }
 
 
+        //НАПРАВЛЕНИЯ ПОДГОТОВКИ
+        public RaketaTCommand<ObservableCollection<string>> AddAreasOfTrainingCommand { get; set; }
+
         IServiceView _serviceView;
         ITabControl _tabControl;
         IApplicantRepository _applicantRepository;
@@ -114,5 +117,10 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         void AddDistinctiveFeature(ObservableCollection<DistinctiveFeatureVM> distinctiveFeatures) => 
             _serviceView.Window<DistinctiveFeatureViewModel>(null, distinctiveFeatures).Modal();
         void DeleteDistinctiveFeature(DistinctiveFeatureVM distinctiveFeature) => ApplicantVM.DistinguishingFeatures.Remove(distinctiveFeature);
+
+        void AreasOfTraining()
+        {
+
+        }
     }
 }

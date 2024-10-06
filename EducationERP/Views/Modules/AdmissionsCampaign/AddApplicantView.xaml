@@ -1206,7 +1206,48 @@
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="15" Text="Направления подготовки" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
                 <Button Grid.Row="1" Content="Добавить направление" Style="{StaticResource defaultAdd}" Margin="10,10,0,0" HorizontalAlignment="Left"
                         Command="{Binding .}"/>
-                <ListView Grid.Row="2" Margin="10,5,100,0" Height="160" ItemsSource="{Binding .}"/>
+                <ListView Grid.Row="2" Margin="10,5,100,0" MaxHeight="160" ItemsSource="{Binding ApplicantVM.AreasOfTraining}">
+                    <ListView.Style>
+                        <Style TargetType="ListView">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListView">
+                                        <ScrollViewer>
+                                            <Border BorderThickness="0,0,0,0.8" BorderBrush="Black">
+                                                <ItemsPresenter/>
+                                            </Border>
+                                        </ScrollViewer>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.Style>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="WhiteSmoke"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <!--ОТОБРАЗИТЬ КАК БУДУТ ВЫГЛЯДЕТЬ ВЫБРАННЫЕ НАПРАВЛЕНИЯ ПОДГОТОВКИ-->
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
                 <StackPanel Grid.Row="3" Orientation="Horizontal">
                     <TextBlock Text="Выбрано основное направление подготовки:" Margin="10,5,10,0" FontSize="14"/>
                     <TextBlock Text="{Binding .}" Margin="0,5,10,0" FontSize="14" TextWrapping="Wrap" Width="660"/>

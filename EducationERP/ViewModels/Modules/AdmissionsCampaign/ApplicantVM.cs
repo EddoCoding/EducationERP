@@ -58,6 +58,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 
         public ObservableCollection<string> AreasOfTraining { get; set; } = new();
         public string SelectedDirectionOfTraining { get; set; } = string.Empty;
+
         public ObservableCollection<string> SubmittedDocuments { get; set; } = new();
 
 

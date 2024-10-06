@@ -24,12 +24,12 @@
         public string AdditionalInformation { get; set; } = string.Empty;
 
         // Коллекции/Списки/Массивы - Документы
-        public string[] Documents { get; set; }
-        public string[] EducationDocuments { get; set; }
-        public string[] ExamResult { get; set; }
-        public string[] DistinguishingFeatures { get; set; }
-        public string[] AreasOfTraining { get; set; }
-        public string SelectedDirectionOfTraining { get; set; } = string.Empty;
-        public string[] SubmittedDocuments { get; set; }
+        public ICollection<Document> Documents { get; set; }
+        //public string[] EducationDocuments { get; set; }
+        //public string[] ExamResult { get; set; }
+        // string[] DistinguishingFeatures { get; set; }
+        //public string[] AreasOfTraining { get; set; }
+        //public string SelectedDirectionOfTraining { get; set; } = string.Empty;
+        //public string[] SubmittedDocuments { get; set; }
     }
 }

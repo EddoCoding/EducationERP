@@ -2,7 +2,6 @@
 using EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign;
 using Raketa;
 using System.Collections.ObjectModel;
-using System.Windows;
 
 namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaign
 {

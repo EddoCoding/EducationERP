@@ -9,6 +9,9 @@ namespace EducationERP.Common.Components
 {
     public class DataContext : DbContext
     {
+        // ПРИЁМНАЯ КАМПАНИЯ
+
+        // АДМИНИСТРИРОВАНИЕ
         public DbSet<User> Users { get; set; }
         public DbSet<SettingFaculty> Faculties { get; set; }
         public DbSet<SettingLevel> Levels { get; set; }
