@@ -14,6 +14,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         int totalPoints;
         int pointsDistinctiveFeatures;
 
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string SurName { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
         public string MiddleName { get; set; } = string.Empty;
@@ -58,6 +59,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 
         public ObservableCollection<string> AreasOfTraining { get; set; } = new();
         public string SelectedDirectionOfTraining { get; set; } = string.Empty;
+
         public ObservableCollection<string> SubmittedDocuments { get; set; } = new();
 
 
