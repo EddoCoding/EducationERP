@@ -1,137 +1,119 @@
 ﻿using EducationERP.Common.Components.Repositories;
+using EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign;
 using Raketa;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaign
 {
     public class SettingAdmissionCampaignViewModel : RaketaViewModel
     {
-        public RaketaTCommand<ObservableCollection<SettingLevelVM>> OpenWindowAddLevelCommand { get; set; }
+        public ObservableCollection<SettingFacultyVM> Faculties { get; set; } = new();
+
+        public RaketaTCommand<ObservableCollection<SettingFacultyVM>> OpenWindowAddFacultyCommand { get; set; }
+        public RaketaTCommand<SettingFacultyVM> DeleteFacultyCommand { get; set; }
+        public RaketaTCommand<SettingFacultyVM> OpenWindowAddLevelCommand { get; set; }
         public RaketaTCommand<SettingLevelVM> DeleteLevelCommand { get; set; }
         public RaketaTCommand<SettingLevelVM> OpenWindowAddDirectionCommand { get; set; }
         public RaketaTCommand<SettingDirectionVM> DeleteDirectionCommand { get; set; }
-        public RaketaTCommand<SettingDirectionVM> OpenWindowAddProfileCommand { get; set; }
-        public RaketaTCommand<SettingProfileVM> DeleteProfileCommand { get; set; }
-        public RaketaTCommand<SettingProfileVM> OpenWindowAddFormCommand { get; set; }
-        public RaketaTCommand<SettingFormVM> DeleteFormCommand { get; set; }
-
-        public ObservableCollection<SettingLevelVM> Levels { get; set; } = new();
 
         IServiceView _serviceView;
-        ILevelRepository _levelRepository;
-        public SettingAdmissionCampaignViewModel(IServiceView serviceView, ILevelRepository levelRepository)
+        ISettingFacultyRepository _facultyRepository;
+        public SettingAdmissionCampaignViewModel(IServiceView serviceView, ISettingFacultyRepository facultyRepository)
         {
             _serviceView = serviceView;
-            _levelRepository = levelRepository;
+            _facultyRepository = facultyRepository;
 
-            foreach(var level in levelRepository.ReadLevels())
+            foreach (var faculty in facultyRepository.Read())
             {
-                var levelVM = new SettingLevelVM
+                var facultyVM = new SettingFacultyVM
                 {
-                    Id = level.Id,
-                    NameLevel = level.NameLevel,
-                    Directions = new()
+                    Id = faculty.Id,
+                    NameFaculty = faculty.NameFaculty,
+                    Levels = new()
                 };
-                foreach (var direction in level.Directions) 
+                foreach(var level in faculty.Levels)
                 {
-                    var directionVM = new SettingDirectionVM
+                    var levelVM = new SettingLevelVM
                     {
-                        Id = direction.Id,
-                        CodeDirection = direction.CodeDirection,
-                        NameDirection = direction.NameDirection,
-                        Profiles = new()
+                        Id = level.Id,
+                        NameLevel = level.NameLevel,
+                        Directions = new()
                     };
-                    foreach(var profile in direction.Profiles)
+                    foreach(var direction in level.Directions)
                     {
-                        var profileVM = new SettingProfileVM
+                        var directionVM = new SettingDirectionVM
                         {
-                            Id = profile.Id,
-                            CodeProfile = profile.CodeProfile,
-                            NameProfile = profile.NameProfile,
-                            Forms = new()
+                            Id= direction.Id,
+                            CodeDirection = direction.CodeDirection,
+                            NameDirection = direction.NameDirection,
+                            CodeProfile = direction.CodeProfile,
+                            NameProfile = direction.NameProfile,
+                            NameFormEducation = direction.NameFormEducation,
+                            NameFormPayment = direction.NameFormPayment
                         };
-                        foreach(var form in profile.Forms)
-                        {
-                            var formVM = new SettingFormVM
-                            {
-                                Id = form.Id,
-                                NameForm = form.NameForm
-                            };
-                            profileVM.Forms.Add(formVM);
-                        }
-                        directionVM.Profiles.Add(profileVM);
+                        levelVM.Directions.Add(directionVM);
                     }
-                    levelVM.Directions.Add(directionVM);
+                    facultyVM.Levels.Add(levelVM);
                 }
-                Levels.Add(levelVM);
+                Faculties.Add(facultyVM);
             }
 
-            OpenWindowAddLevelCommand = RaketaTCommand<ObservableCollection<SettingLevelVM>>.Launch(OpenWindowAddLevel);
+            OpenWindowAddFacultyCommand = RaketaTCommand<ObservableCollection<SettingFacultyVM>>.Launch(OpenWindowAddFaculty);
+            DeleteFacultyCommand = RaketaTCommand<SettingFacultyVM>.Launch(DeleteFaculty);
+            OpenWindowAddLevelCommand = RaketaTCommand<SettingFacultyVM>.Launch(OpenWindowAddLevel);
             DeleteLevelCommand = RaketaTCommand<SettingLevelVM>.Launch(DeleteLevel);
             OpenWindowAddDirectionCommand = RaketaTCommand<SettingLevelVM>.Launch(OpenWindowAddDirection);
             DeleteDirectionCommand = RaketaTCommand<SettingDirectionVM>.Launch(DeleteDirection);
-            OpenWindowAddProfileCommand = RaketaTCommand<SettingDirectionVM>.Launch(OpenWindowAddProfile);
-            DeleteProfileCommand = RaketaTCommand<SettingProfileVM>.Launch(DeleteProfile);
-            OpenWindowAddFormCommand = RaketaTCommand<SettingProfileVM>.Launch(OpenWindowAddForm);
-            DeleteFormCommand = RaketaTCommand<SettingFormVM>.Launch(DeleteForm);
         }
 
-        void OpenWindowAddLevel(ObservableCollection<SettingLevelVM> levelVMs) => 
-            _serviceView.Window<AddSettingLevelViewModel>(null, levelVMs).Modal();
+        void OpenWindowAddFaculty(ObservableCollection<SettingFacultyVM> faculties) => 
+            _serviceView.Window<AddSettingFacultyViewModel>(null, faculties).Modal();
+        void DeleteFaculty(SettingFacultyVM facultyVM)
+        {
+            bool isDeleted = _facultyRepository.Delete<SettingFaculty>(facultyVM.Id);
+            if (isDeleted)
+            {
+                foreach(var faculty in Faculties)
+                    if(faculty.Id == facultyVM.Id)
+                    {
+                        Faculties.Remove(faculty);
+                        return;
+                    }
+            }
+        }
+        void OpenWindowAddLevel(SettingFacultyVM facultyVM) => 
+            _serviceView.Window<AddSettingLevelViewModel>(null, facultyVM).Modal();
         void DeleteLevel(SettingLevelVM levelVM)
         {
-            bool isDeleted = _levelRepository.DeleteLevel(levelVM.Id);
-            if (isDeleted) Levels.Remove(levelVM);
+            bool isDeleted = _facultyRepository.Delete<SettingLevel>(levelVM.Id);
+            if (isDeleted)
+            {
+                foreach (var faculty in Faculties)
+                    foreach(var level in faculty.Levels)
+                        if (level.Id == levelVM.Id)
+                        {
+                            faculty.Levels.Remove(level);
+                            return;
+                        }
+
+            }
         }
-        void OpenWindowAddDirection(SettingLevelVM levelVM) =>
+        void OpenWindowAddDirection(SettingLevelVM levelVM) => 
             _serviceView.Window<AddSettingDirectionViewModel>(null, levelVM).Modal();
         void DeleteDirection(SettingDirectionVM directionVM)
         {
-            bool isDeleted = _levelRepository.DeleteDirection(directionVM.Id);
+            bool isDeleted = _facultyRepository.Delete<SettingDirection>(directionVM.Id);
             if (isDeleted)
             {
-                foreach (var level in Levels)
-                    foreach (var direction in level.Directions)
-                        if (direction.Id == directionVM.Id)
-                        {
-                            level.Directions.Remove(directionVM);
-                            return;
-                        }
-            }
-        }
-        void OpenWindowAddProfile(SettingDirectionVM directionVM) =>
-            _serviceView.Window<AddSettingProfileViewModel>(null, directionVM).Modal();
-        void DeleteProfile(SettingProfileVM profileVM)
-        {
-            bool isDeleted = _levelRepository.DeleteProfile(profileVM.Id);
-            if (isDeleted)
-            {
-                foreach (var level in Levels)
-                    foreach (var direction in level.Directions)
-                        foreach (var profile in direction.Profiles)
-                            if (profile.Id == profileVM.Id)
+                foreach (var faculty in Faculties)
+                    foreach (var level in faculty.Levels)
+                        foreach(var direction in level.Directions)
+                            if (direction.Id == directionVM.Id)
                             {
-                                direction.Profiles.Remove(profileVM);
+                                level.Directions.Remove(direction);
                                 return;
                             }
-            }
-        }
-        void OpenWindowAddForm(SettingProfileVM profileVM) =>
-            _serviceView.Window<AddSettingFormViewModel>(null, profileVM).Modal();
-        void DeleteForm(SettingFormVM formVM)
-        {
-            bool isDeleted = _levelRepository.DeleteForm(formVM.Id);
-            if (isDeleted)
-            {
-                foreach (var level in Levels)
-                    foreach (var direction in level.Directions)
-                        foreach (var profile in direction.Profiles)
-                            foreach (var form in profile.Forms)
-                                if (form.Id == formVM.Id)
-                                {
-                                    profile.Forms.Remove(formVM);
-                                    return;
-                                }
             }
         }
     }

@@ -4,12 +4,33 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationERP.Views.Modules.Administration.ControlUsers"
-        mc:Ignorable="d" Title="Добавление направления подготовки" Height="155" Width="400" MouseDown="MoveWindow"
+        mc:Ignorable="d" Title="Добавление направления подготовки" Height="300" Width="600" MouseDown="MoveWindow"
         Background="WhiteSmoke" FontFamily="{StaticResource OpenSans}" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         RenderOptions.BitmapScalingMode="NearestNeighbor" BorderBrush="LightGray" BorderThickness="1">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter VerticalAlignment="Center"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -18,10 +39,32 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Background="White" Margin="0,10,0,0">
+                <Grid.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </Grid.Effect>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,0,0,0">
+                    <TextBlock Text="Код направления" Foreground="Gray" FontSize="13"/>
+                    <TextBlock Text="Пример: 09.03.03" FontSize="13" Margin="5,0,0,0"/>
+                </StackPanel>
+                <TextBox Grid.Row="1" Text="{Binding DirectionVM.CodeDirection}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,5"/>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0" Background="White" Margin="0,10">
+            <Grid Grid.Row="0" Background="White" Margin="0,10,0,0">
                 <Grid.Effect>
                     <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
                 </Grid.Effect>
@@ -30,32 +73,115 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Код направления подготовки" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
-                <TextBox Grid.Row="1" Text="{Binding DirectionVM.CodeDirection}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,5"/>
-            </Grid>
-
-            <Grid Grid.Row="1" Background="White">
-                <Grid.Effect>
-                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
-                </Grid.Effect>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <TextBlock Grid.Row="0" Text="Наименование направления подготовки" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,0,0,0">
+                    <TextBlock Text="Наименование направления" Foreground="Gray" FontSize="13"/>
+                    <TextBlock Text="Пример: Прикладная информатика" FontSize="13" Margin="5,0,0,0"/>
+                </StackPanel>
+                
                 <TextBox Grid.Row="1" Text="{Binding DirectionVM.NameDirection}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,5"/>
             </Grid>
-            
-            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,3,0,0">
-                <TextBlock Text="Например:" Foreground="Gray"/>
-                <TextBlock Text="09.03.03" Foreground="Gray" Margin="5,0,0,0"/>
-                <TextBlock Text="Прикладная информатика" Foreground="Gray" Margin="5,0,0,0"/>
-            </StackPanel>
         </Grid>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0,10,10">
-            <Button Content="Добавить" Style="{StaticResource ButtonTextCreate}" Margin="10,0" 
+        <Grid Grid.Row="2" Margin="10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Background="White" Margin="0,10,0,0">
+                <Grid.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </Grid.Effect>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,0,0,0">
+                    <TextBlock Text="Код профиля" Foreground="Gray" FontSize="13"/>
+                    <TextBlock Text="Пример: 09.03.03.01" FontSize="13" Margin="5,0,0,0"/>
+                </StackPanel>
+                
+                <TextBox Grid.Row="1" Text="{Binding DirectionVM.CodeProfile}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,5"/>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="3" Margin="10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Background="White" Margin="0,10,0,0">
+                <Grid.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </Grid.Effect>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,0,0,0">
+                    <TextBlock Text="Наименование профиля" Foreground="Gray" FontSize="13"/>
+                    <TextBlock Text="Пример: Прикладная информатика в экономических системах" FontSize="13" Margin="5,0,0,0"/>
+                </StackPanel>
+                
+                <TextBox Grid.Row="1" Text="{Binding DirectionVM.NameProfile}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,5"/>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="4" Margin="10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="0" Background="White" Margin="0,10,5,0">
+                <Grid.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </Grid.Effect>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Форма обучения" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
+                <TextBox Grid.Row="1" Text="{Binding DirectionVM.NameFormEducation}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,5"/>
+            </Grid>
+            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="0,3,0,0">
+                <TextBlock Text="Быстрый выбор:" Foreground="Gray"/>
+                <Button Content="Очная" Margin="5,0,0,0" Command="{Binding SelectFormEducationCommand}" CommandParameter="Очная"/>
+                <Button Content="Очно-Заочная" Margin="5,0,0,0" Command="{Binding SelectFormEducationCommand}" CommandParameter="Очно-Заочная"/>
+                <Button Content="Заочная" Margin="5,0,0,0" Command="{Binding SelectFormEducationCommand}" CommandParameter="Заочная"/>
+            </StackPanel>
+
+            <Grid Grid.Row="0" Grid.Column="1" Background="White" Margin="5,10,0,0">
+                <Grid.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </Grid.Effect>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Форма оплаты" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
+                <TextBox Grid.Row="1" Text="{Binding DirectionVM.NameFormPayment}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,5"/>
+            </Grid>
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="5,3,0,0">
+                <TextBlock Text="Быстрый выбор:" Foreground="Gray"/>
+                <Button Content="Бюджет" Margin="5,0,0,0" Command="{Binding SelectFormPaymentCommand}" CommandParameter="Бюджет"/>
+                <Button Content="Платная основа" Margin="5,0,0,0" Command="{Binding SelectFormPaymentCommand}" CommandParameter="Платная основа"/>
+                <TextBlock Text="или др." Foreground="Gray" Margin="5,0,0,0"/>
+            </StackPanel>
+
+        </Grid>
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0,10,10">
+            <Button Content="Добавить направление" Style="{StaticResource ButtonTextCreate}" Margin="10,0" 
                     Command="{Binding AddDirectionCommand}" CommandParameter="{Binding DirectionVM}"/>
             <Button Content="Отменить" Style="{StaticResource ButtonTextCancel}" Command="{Binding ExitCommand}"/>
         </StackPanel>

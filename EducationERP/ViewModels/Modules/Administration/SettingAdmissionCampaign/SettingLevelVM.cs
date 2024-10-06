@@ -1,5 +1,6 @@
 ﻿using Raketa;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaign
 {
@@ -14,5 +15,16 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaig
             set => SetValue(ref nameLevel, value);
         }
         public ObservableCollection<SettingDirectionVM> Directions { get; set; } = new();
+
+        public bool Validation()
+        {
+            if (String.IsNullOrWhiteSpace(NameLevel))
+            {
+                MessageBox.Show("Введите название уровня подготовки!");
+                return false;
+            }
+
+            return true;
+        }
     }
 }

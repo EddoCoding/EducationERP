@@ -4,15 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EducationERP.Common.Components.Configurations
 {
-    public class SettingFormConfiguration : IEntityTypeConfiguration<SettingForm>
+    public class FacultyConfiguration : IEntityTypeConfiguration<SettingFaculty>
     {
-        public void Configure(EntityTypeBuilder<SettingForm> builder)
+        public void Configure(EntityTypeBuilder<SettingFaculty> builder)
         {
             builder
-                .HasKey(x => x.Id);
-
-            builder
-                .HasOne(x => x.SettingProfile);
+                .HasMany(x => x.Levels)
+                .WithOne(x => x.SettingFaculty);
         }
     }
 }

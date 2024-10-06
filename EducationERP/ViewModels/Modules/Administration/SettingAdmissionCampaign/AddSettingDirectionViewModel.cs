@@ -8,38 +8,53 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaig
     {
         public SettingDirectionVM DirectionVM { get; set; } = new();
 
+        public RaketaTCommand<string> SelectFormEducationCommand { get; set; }
+        public RaketaTCommand<string> SelectFormPaymentCommand { get; set; }
         public RaketaTCommand<SettingDirectionVM> AddDirectionCommand { get; set; }
         public RaketaCommand ExitCommand { get; set; }
 
         IServiceView _serviceView;
-        ILevelRepository _levelRepository;
+        ISettingFacultyRepository _facultyRepository;
         SettingLevelVM _levelVM;
-        public AddSettingDirectionViewModel(IServiceView serviceView, ILevelRepository levelRepository, SettingLevelVM levelVM)
+        public AddSettingDirectionViewModel(IServiceView serviceView, ISettingFacultyRepository facultyRepository, 
+            SettingLevelVM levelVM)
         {
             _serviceView = serviceView;
-            _levelRepository = levelRepository;
+            _facultyRepository = facultyRepository;
             _levelVM = levelVM;
 
+            SelectFormEducationCommand = RaketaTCommand<string>.Launch(SelectFormEducation);
+            SelectFormPaymentCommand = RaketaTCommand<string>.Launch(SelectFormPayment);
             AddDirectionCommand = RaketaTCommand<SettingDirectionVM>.Launch(AddDirection);
-            ExitCommand = RaketaCommand.Launch(ExitLogin);
+            ExitCommand = RaketaCommand.Launch(CloseWindow);
         }
 
+        void SelectFormEducation(string nameFormEducation) => DirectionVM.NameFormEducation = nameFormEducation;
+        void SelectFormPayment(string nameFormPayment) => DirectionVM.NameFormPayment = nameFormPayment;
         void AddDirection(SettingDirectionVM directionVM)
         {
-            var direction = new SettingDirection
+            var isValidated = directionVM.Validation();
+            if (isValidated)
             {
-                Id = directionVM.Id,
-                CodeDirection = directionVM.CodeDirection,
-                NameDirection = directionVM.NameDirection,
-                SettingLevelId = _levelVM.Id
-            };
-            bool isAdded = _levelRepository.CreateDirection(direction);
-            if(isAdded)
-            {
-                _levelVM.Directions.Add(directionVM);
-                _serviceView.Close<AddSettingDirectionViewModel>();
+                bool isAdded = _facultyRepository.Create<SettingDirection>(new SettingDirection
+                {
+                    Id = directionVM.Id,
+                    CodeDirection = directionVM.CodeDirection,
+                    NameDirection = directionVM.NameDirection,
+                    CodeProfile = directionVM.CodeProfile,
+                    NameProfile = directionVM.NameProfile,
+                    NameFormEducation = directionVM.NameFormEducation,
+                    NameFormPayment = directionVM.NameFormPayment,
+                    SettingLevelId = _levelVM.Id
+                });
+                if (isAdded)
+                {
+                    _levelVM.Directions.Add(directionVM);
+                    _levelVM = null;
+                    _serviceView.Close<AddSettingDirectionViewModel>();
+                }
             }
         }
-        void ExitLogin() => _serviceView.Close<AddSettingDirectionViewModel>();
+        void CloseWindow() => _serviceView.Close<AddSettingDirectionViewModel>();
     }
 }

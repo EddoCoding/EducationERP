@@ -10,10 +10,10 @@ namespace EducationERP.Common.Components
     public class DataContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<SettingFaculty> Faculties { get; set; }
         public DbSet<SettingLevel> Levels { get; set; }
         public DbSet<SettingDirection> Directions { get; set; }
-        public DbSet<SettingProfile> Profiles { get; set; }
-        public DbSet<SettingForm> Forms { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder.UseNpgsql(ConfigurationManager.ConnectionStrings["StrConnection"].ToString());
@@ -90,10 +90,8 @@ namespace EducationERP.Common.Components
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new SettingLevelConfiguration());
-            modelBuilder.ApplyConfiguration(new SettingDirectionConfiguration());
-            modelBuilder.ApplyConfiguration(new SettingProfileConfiguration());
-            modelBuilder.ApplyConfiguration(new SettingFormConfiguration());
+            modelBuilder.ApplyConfiguration(new FacultyConfiguration());
+            modelBuilder.ApplyConfiguration(new LevelConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

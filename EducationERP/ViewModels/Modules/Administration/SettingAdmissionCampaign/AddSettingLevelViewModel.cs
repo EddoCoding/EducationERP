@@ -1,7 +1,6 @@
 ﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign;
 using Raketa;
-using System.Collections.ObjectModel;
 
 namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaign
 {
@@ -9,39 +8,45 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaig
     {
         public SettingLevelVM LevelVM { get; set; } = new();
 
-        public RaketaTCommand<string> SelectLevelCommand { get; set; }
         public RaketaTCommand<SettingLevelVM> AddLevelCommand { get; set; }
+        public RaketaTCommand<string> SelectLevelCommand { get; set; }
         public RaketaCommand ExitCommand { get; set; }
 
         IServiceView _serviceView;
-        ILevelRepository _repository;
-        ObservableCollection<SettingLevelVM> _levelVMs;
-        public AddSettingLevelViewModel(IServiceView serviceView, ILevelRepository repository, ObservableCollection<SettingLevelVM> levelVMs)
+        ISettingFacultyRepository _facultyRepository;
+        SettingFacultyVM _facultyVM;
+        public AddSettingLevelViewModel(IServiceView serviceView, ISettingFacultyRepository facultyRepository, SettingFacultyVM facultyVM)
         {
             _serviceView = serviceView;
-            _repository = repository;
-            _levelVMs = levelVMs;
+            _facultyRepository = facultyRepository;
+            _facultyVM = facultyVM;
 
-            SelectLevelCommand = RaketaTCommand<string>.Launch(SelectLevel);
             AddLevelCommand = RaketaTCommand<SettingLevelVM>.Launch(AddLevel);
-            ExitCommand = RaketaCommand.Launch(ExitLogin);
+            SelectLevelCommand = RaketaTCommand<string>.Launch(SelectLevel);
+            ExitCommand = RaketaCommand.Launch(CloseWindow);
         }
 
-        void SelectLevel(string level) => LevelVM.NameLevel = level;
         void AddLevel(SettingLevelVM levelVM)
         {
-            var level = new SettingLevel
+            var isValidated = levelVM.Validation();
+            if (isValidated)
             {
-                Id = levelVM.Id,
-                NameLevel = levelVM.NameLevel
-            };
-            bool isAdded = _repository.CreateLevel(level);
-            if (isAdded)
-            {
-                _levelVMs.Add(levelVM);
-                _serviceView.Close<AddSettingLevelViewModel>();
+                bool isAdded = _facultyRepository.Create<SettingLevel>(new SettingLevel
+                {
+                    Id = levelVM.Id,
+                    NameLevel = levelVM.NameLevel,
+                    SettingFacultyId = _facultyVM.Id
+                });
+                if (isAdded)
+                {
+                    _facultyVM.Levels.Add(levelVM);
+                    _facultyVM = null;
+                    _serviceView.Close<AddSettingLevelViewModel>();
+                }
             }
         }
-        void ExitLogin() => _serviceView.Close<AddSettingLevelViewModel>();
+        void SelectLevel(string nameLevel) => LevelVM.NameLevel = nameLevel;
+
+        void CloseWindow() => _serviceView.Close<AddSettingLevelViewModel>();
     }
 }
