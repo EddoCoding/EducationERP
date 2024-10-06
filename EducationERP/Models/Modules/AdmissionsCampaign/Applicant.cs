@@ -2,7 +2,7 @@
 {
     public class Applicant
     {
-        //  Личная информация
+        #region Личная информация
         public Guid Id { get; set; }
         public string SurName { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
@@ -15,14 +15,15 @@
         public bool? IsForeign { get; set; }
         public string Citizenship { get; set; } = string.Empty;
         public DateOnly CitizenshipValidFrom { get; set; }
-
-        //  Контактная информация
+        #endregion
+        #region Контактная информация
         public string ResidentialAddress { get; set; } = string.Empty;
         public string AddressOfRegistration { get; set; } = string.Empty;
         public string HomePhone { get; set; } = string.Empty;
         public string MobilePhone { get; set; } = string.Empty;
         public string Mail { get; set; } = string.Empty;
         public string AdditionalInformation { get; set; } = string.Empty;
+        #endregion
 
         public ICollection<Document> Documents { get; set; }
 
