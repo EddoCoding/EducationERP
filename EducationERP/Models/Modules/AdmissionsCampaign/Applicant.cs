@@ -1,4 +1,6 @@
-﻿namespace EducationERP.Models.Modules.AdmissionsCampaign
+﻿using EducationERP.Models.Modules.AdmissionsCampaign.Educations;
+
+namespace EducationERP.Models.Modules.AdmissionsCampaign
 {
     public class Applicant
     {
@@ -26,7 +28,7 @@
         #endregion
 
         public ICollection<Document> Documents { get; set; }
-        //public ICollection<EducationBase> Educations { get; set; }
+        public ICollection<EducationBase> Educations { get; set; }
         //public ICollection<EGE> EGES { get; set; }
         //public ICollection<DistinctiveFeature> DistinguishingFeatures { get; set; }
 

@@ -2,6 +2,7 @@
 {
     public abstract class EducationBaseViewModel
     {
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string TypeEducation { get; set; } = string.Empty;                         
         public string IdentificationDocument { get; set; } = string.Empty;
         public string IssuedBy { get; set; } = string.Empty;

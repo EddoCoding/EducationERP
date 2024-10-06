@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EducationERP.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241006160803_check")]
-    partial class check
+    [Migration("20241006202547_FourMigration")]
+    partial class FourMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -151,6 +151,10 @@ namespace EducationERP.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Citizenship")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<DateOnly>("CitizenshipValidFrom")
                         .HasColumnType("date");
 
@@ -256,6 +260,46 @@ namespace EducationERP.Migrations
                     b.UseTpcMappingStrategy();
                 });
 
+            modelBuilder.Entity("EducationERP.Models.Modules.AdmissionsCampaign.Educations.EducationBase", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("AdditionalInformation")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("ApplicantId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateOnly>("DateOfIssue")
+                        .HasColumnType("date");
+
+                    b.Property<bool>("Honours")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("IdentificationDocument")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("IssuedBy")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("TypeEducation")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicantId");
+
+                    b.ToTable("EducationBase");
+
+                    b.UseTpcMappingStrategy();
+                });
+
             modelBuilder.Entity("EducationERP.Models.Modules.AdmissionsCampaign.ForeignPassport", b =>
                 {
                     b.HasBaseType("EducationERP.Models.Modules.AdmissionsCampaign.Document");
@@ -328,6 +372,152 @@ namespace EducationERP.Migrations
                     b.ToTable("Snilss");
                 });
 
+            modelBuilder.Entity("EducationERP.Models.Modules.AdmissionsCampaign.Educations.EducationAsp", b =>
+                {
+                    b.HasBaseType("EducationERP.Models.Modules.AdmissionsCampaign.Educations.EducationBase");
+
+                    b.Property<string>("DiplomaNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("DiplomaSeries")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FormOfEducation")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("RegistrationNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SupplementNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SupplementSeries")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.ToTable("EducationsAsp");
+                });
+
+            modelBuilder.Entity("EducationERP.Models.Modules.AdmissionsCampaign.Educations.EducationBak", b =>
+                {
+                    b.HasBaseType("EducationERP.Models.Modules.AdmissionsCampaign.Educations.EducationBase");
+
+                    b.Property<string>("DiplomaNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("DiplomaSeries")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FormOfEducation")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("RegistrationNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SupplementNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SupplementSeries")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.ToTable("EducationsBak");
+                });
+
+            modelBuilder.Entity("EducationERP.Models.Modules.AdmissionsCampaign.Educations.EducationEleven", b =>
+                {
+                    b.HasBaseType("EducationERP.Models.Modules.AdmissionsCampaign.Educations.EducationBase");
+
+                    b.Property<string>("CodeSeriesNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.ToTable("EducationsEleven");
+                });
+
+            modelBuilder.Entity("EducationERP.Models.Modules.AdmissionsCampaign.Educations.EducationMag", b =>
+                {
+                    b.HasBaseType("EducationERP.Models.Modules.AdmissionsCampaign.Educations.EducationBase");
+
+                    b.Property<string>("DiplomaNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("DiplomaSeries")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FormOfEducation")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("RegistrationNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SupplementNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SupplementSeries")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.ToTable("EducationsMag");
+                });
+
+            modelBuilder.Entity("EducationERP.Models.Modules.AdmissionsCampaign.Educations.EducationNine", b =>
+                {
+                    b.HasBaseType("EducationERP.Models.Modules.AdmissionsCampaign.Educations.EducationBase");
+
+                    b.Property<string>("CodeSeriesNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.ToTable("EducationsNine");
+                });
+
+            modelBuilder.Entity("EducationERP.Models.Modules.AdmissionsCampaign.Educations.EducationSPO", b =>
+                {
+                    b.HasBaseType("EducationERP.Models.Modules.AdmissionsCampaign.Educations.EducationBase");
+
+                    b.Property<string>("DiplomaNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("DiplomaSeries")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FormOfEducation")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("RegistrationNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SupplementNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SupplementSeries")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.ToTable("EducationsSPO");
+                });
+
             modelBuilder.Entity("EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign.SettingDirection", b =>
                 {
                     b.HasOne("EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign.SettingLevel", "SettingLevel")
@@ -361,6 +551,17 @@ namespace EducationERP.Migrations
                     b.Navigation("Applicant");
                 });
 
+            modelBuilder.Entity("EducationERP.Models.Modules.AdmissionsCampaign.Educations.EducationBase", b =>
+                {
+                    b.HasOne("EducationERP.Models.Modules.AdmissionsCampaign.Applicant", "Applicant")
+                        .WithMany("Educations")
+                        .HasForeignKey("ApplicantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Applicant");
+                });
+
             modelBuilder.Entity("EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign.SettingFaculty", b =>
                 {
                     b.Navigation("Levels");
@@ -374,6 +575,8 @@ namespace EducationERP.Migrations
             modelBuilder.Entity("EducationERP.Models.Modules.AdmissionsCampaign.Applicant", b =>
                 {
                     b.Navigation("Documents");
+
+                    b.Navigation("Educations");
                 });
 #pragma warning restore 612, 618
         }
