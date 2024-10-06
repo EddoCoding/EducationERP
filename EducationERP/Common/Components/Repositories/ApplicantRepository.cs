@@ -1,16 +1,17 @@
-﻿using EducationERP.Models.Modules.AdmissionsCampaign;
-using EducationERP.ViewModels.Modules.AdmissionsCampaign;
-using System.Collections.ObjectModel;
-
-namespace EducationERP.Common.Components.Repositories
+﻿namespace EducationERP.Common.Components.Repositories
 {
-    public class ApplicantRepository(DataContext context) : IApplicantRepository
+    public class ApplicantRepository : IApplicantRepository
     {
-        public ObservableCollection<ApplicantVM> Applicants { get; set; } = new();
+        public bool Create<T>(T model) where T : class
+        {
+            using (var db = new DataContext())
+            {
+                db.Set<T>().Add(model);
+                db.SaveChanges();
+                return true;
+            }
 
-        public void AddPersonalFile() => throw new NotImplementedException();
-        public Task<Applicant> ChangePersonalFile() => throw new NotImplementedException();
-        public Task<ApplicantVM[]> UpdatePersonalFiles() => throw new NotImplementedException();
-        public void DeletePersonalFile() => throw new NotImplementedException();
+            return false;
+        }
     }
 }
