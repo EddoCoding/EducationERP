@@ -19,6 +19,10 @@ namespace EducationERP.Common.Components.Configurations
             builder
                 .HasMany(x => x.EGES)
                 .WithOne(x => x.Applicant);
+
+            builder
+                .HasMany(x => x.DistinguishingFeatures)
+                .WithOne(x => x.Applicant);
         }
     }
 }

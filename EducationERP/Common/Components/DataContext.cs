@@ -2,6 +2,7 @@
 using EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign;
 using EducationERP.Models.Modules.Administration.SettingUser;
 using EducationERP.Models.Modules.AdmissionsCampaign;
+using EducationERP.Models.Modules.AdmissionsCampaign.DistinctiveFeatures;
 using EducationERP.Models.Modules.AdmissionsCampaign.Educations;
 using EducationERP.Models.Modules.AdmissionsCampaign.Exams;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +20,7 @@ namespace EducationERP.Common.Components
         public DbSet<Snils> Snilss { get; set; }
         public DbSet<Inn> Inns { get; set; }
         public DbSet<ForeignPassport> ForeignPassports { get; set; }
-        // -- Образование --
+        // -- Образования --
         public DbSet<EducationNine> EducationsNine { get; set; }
         public DbSet<EducationEleven> EducationsEleven { get; set; }
         public DbSet<EducationSPO> EducationsSPO { get; set; }
@@ -28,6 +29,8 @@ namespace EducationERP.Common.Components
         public DbSet<EducationAsp> EducationsAsp { get; set; }
         // -- ЕГЭ --
         public DbSet<EGE> EGES { get; set; }
+        // -- Отличительные признаки --
+        public DbSet<DistinctiveFeature> DistinctiveFeatures { get; set; }
 
         // АДМИНИСТРИРОВАНИЕ
         public DbSet<User> Users { get; set; }
