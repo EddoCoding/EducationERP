@@ -4,6 +4,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures
 {
     public class DistinctiveFeatureVM
     {
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string NameFeature { get; set; } = string.Empty;
         public int FeatureScore { get; set; }
 

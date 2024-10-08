@@ -1,6 +1,7 @@
 ﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
 using EducationERP.Models.Modules.AdmissionsCampaign;
+using EducationERP.Models.Modules.AdmissionsCampaign.DistinctiveFeatures;
 using EducationERP.Models.Modules.AdmissionsCampaign.Educations;
 using EducationERP.Models.Modules.AdmissionsCampaign.Exams;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures;
@@ -127,7 +128,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 Mail = applicantVM.Mail,
                 AdditionalInformation = applicantVM.AdditionalInformation,
 
-                TotalPoints = applicantVM.TotalPoints
+                TotalPoints = applicantVM.TotalPoints,
+                PointsDistinctiveFeatures = applicantVM.PointsDistinctiveFeatures
             };
             _applicantRepository.Create<Applicant>(applicant);
 
@@ -340,19 +342,34 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             //Перебор ЕГЭ
             if(applicantVM.TotalPoints > 0)
             {
-                foreach(var egevm in applicantVM.EGES)
+                foreach(var egeVM in applicantVM.EGES)
                 {
                     var ege = new EGE
                     {
-                        Id = egevm.Id,
-                        AcademicSubject = egevm.AcademicSubject,
-                        SubjectScores = egevm.SubjectScores,
+                        Id = egeVM.Id,
+                        AcademicSubject = egeVM.AcademicSubject,
+                        SubjectScores = egeVM.SubjectScores,
                         ApplicantId = applicant.Id
                     };
                     _applicantRepository.Create<EGE>(ege);
                 }
             }
 
+            //Перебор отличительных признаков
+            if (applicantVM.PointsDistinctiveFeatures > 0)
+            {
+                foreach (var distinguishingFeatureVM in applicantVM.DistinguishingFeatures)
+                {
+                    var distinguishingFeature = new DistinctiveFeature
+                    {
+                        Id = distinguishingFeatureVM.Id,
+                        NameFeature = distinguishingFeatureVM.NameFeature,
+                        FeatureScore = distinguishingFeatureVM.FeatureScore,
+                        ApplicantId = applicant.Id
+                    };
+                    _applicantRepository.Create<DistinctiveFeature>(distinguishingFeature);
+                }
+            }
 
 
             //ApplicantVM.Dispose();
