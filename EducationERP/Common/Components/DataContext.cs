@@ -3,6 +3,7 @@ using EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign;
 using EducationERP.Models.Modules.Administration.SettingUser;
 using EducationERP.Models.Modules.AdmissionsCampaign;
 using EducationERP.Models.Modules.AdmissionsCampaign.Educations;
+using EducationERP.Models.Modules.AdmissionsCampaign.Exams;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using System.Windows;
@@ -12,17 +13,22 @@ namespace EducationERP.Common.Components
     public class DataContext : DbContext
     {
         // ПРИЁМНАЯ КАМПАНИЯ
+        // -- Документы --
         public DbSet<Applicant> Applicants { get; set; }
         public DbSet<Passport> Passports { get; set; }
         public DbSet<Snils> Snilss { get; set; }
         public DbSet<Inn> Inns { get; set; }
         public DbSet<ForeignPassport> ForeignPassports { get; set; }
+        // -- Образование --
         public DbSet<EducationNine> EducationsNine { get; set; }
         public DbSet<EducationEleven> EducationsEleven { get; set; }
         public DbSet<EducationSPO> EducationsSPO { get; set; }
         public DbSet<EducationBak> EducationsBak { get; set; }
         public DbSet<EducationMag> EducationsMag { get; set; }
         public DbSet<EducationAsp> EducationsAsp { get; set; }
+        // -- ЕГЭ --
+        public DbSet<EGE> EGES { get; set; }
+
         // АДМИНИСТРИРОВАНИЕ
         public DbSet<User> Users { get; set; }
         public DbSet<SettingFaculty> Faculties { get; set; }
@@ -107,16 +113,7 @@ namespace EducationERP.Common.Components
         {
             modelBuilder.ApplyConfiguration(new FacultyConfiguration());
             modelBuilder.ApplyConfiguration(new LevelConfiguration());
-
-            modelBuilder
-                .Entity<Applicant>()
-                .HasMany(x => x.Documents)
-                .WithOne(x => x.Applicant);
-
-            modelBuilder
-                .Entity<Applicant>()
-                .HasMany(x => x.Educations)
-                .WithOne(x => x.Applicant);
+            modelBuilder.ApplyConfiguration(new ApplicantConfiguration());
 
             modelBuilder.Entity<Document>().UseTpcMappingStrategy();
             modelBuilder.Entity<EducationBase>().UseTpcMappingStrategy();

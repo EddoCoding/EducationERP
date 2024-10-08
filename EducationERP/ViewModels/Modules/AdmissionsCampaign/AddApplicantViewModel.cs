@@ -1,8 +1,8 @@
-﻿using EducationERP.Common.Components;
-using EducationERP.Common.Components.Repositories;
+﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
 using EducationERP.Models.Modules.AdmissionsCampaign;
 using EducationERP.Models.Modules.AdmissionsCampaign.Educations;
+using EducationERP.Models.Modules.AdmissionsCampaign.Exams;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
@@ -125,10 +125,13 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 HomePhone = applicantVM.HomePhone,
                 MobilePhone = applicantVM.MobilePhone,
                 Mail = applicantVM.Mail,
-                AdditionalInformation = applicantVM.AdditionalInformation
+                AdditionalInformation = applicantVM.AdditionalInformation,
+
+                TotalPoints = applicantVM.TotalPoints
             };
             _applicantRepository.Create<Applicant>(applicant);
 
+            //Перебор документов
             foreach(var document in applicantVM.Documents)
             {
                 if(document is PassportViewModel passportVM)
@@ -213,6 +216,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 }
             }
 
+            //Перебор образований
             foreach(var education in applicantVM.Educations)
             {
                 if(education is EducationNineViewModel educationNineVM)
@@ -332,6 +336,24 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                     _applicantRepository.Create<EducationAsp>(educationAsp);
                 }
             }
+
+            //Перебор ЕГЭ
+            if(applicantVM.TotalPoints > 0)
+            {
+                foreach(var egevm in applicantVM.EGES)
+                {
+                    var ege = new EGE
+                    {
+                        Id = egevm.Id,
+                        AcademicSubject = egevm.AcademicSubject,
+                        SubjectScores = egevm.SubjectScores,
+                        ApplicantId = applicant.Id
+                    };
+                    _applicantRepository.Create<EGE>(ege);
+                }
+            }
+
+
 
             //ApplicantVM.Dispose();
             //ApplicantVM = null;

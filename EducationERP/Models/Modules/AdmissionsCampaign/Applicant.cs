@@ -1,4 +1,5 @@
 ﻿using EducationERP.Models.Modules.AdmissionsCampaign.Educations;
+using EducationERP.Models.Modules.AdmissionsCampaign.Exams;
 
 namespace EducationERP.Models.Modules.AdmissionsCampaign
 {
@@ -29,7 +30,8 @@ namespace EducationERP.Models.Modules.AdmissionsCampaign
 
         public ICollection<Document> Documents { get; set; }
         public ICollection<EducationBase> Educations { get; set; }
-        //public ICollection<EGE> EGES { get; set; }
+        public ICollection<EGE> EGES { get; set; }
+        public int TotalPoints { get; set; }
         //public ICollection<DistinctiveFeature> DistinguishingFeatures { get; set; }
 
         #region MyRegion
