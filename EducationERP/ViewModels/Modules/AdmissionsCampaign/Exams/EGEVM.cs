@@ -4,6 +4,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams
 {
     public class EGEVM
     {
+        public Guid Id { get; set; } = Guid .NewGuid();
         public string AcademicSubject { get; set; } = string.Empty;
         public int SubjectScores { get; set; }
 

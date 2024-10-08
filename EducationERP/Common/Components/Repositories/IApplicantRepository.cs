@@ -1,6 +1,4 @@
-﻿using EducationERP.Models.Modules.AdmissionsCampaign;
-
-namespace EducationERP.Common.Components.Repositories
+﻿namespace EducationERP.Common.Components.Repositories
 {
     public interface IApplicantRepository
     {
