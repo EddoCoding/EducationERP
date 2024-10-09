@@ -1,9 +1,11 @@
 ﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
 using EducationERP.Models.Modules.AdmissionsCampaign;
+using EducationERP.Models.Modules.AdmissionsCampaign.Directions;
 using EducationERP.Models.Modules.AdmissionsCampaign.DistinctiveFeatures;
 using EducationERP.Models.Modules.AdmissionsCampaign.Educations;
 using EducationERP.Models.Modules.AdmissionsCampaign.Exams;
+using EducationERP.ViewModels.Modules.AdmissionsCampaign.Directions;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
@@ -47,7 +49,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 
 
         //НАПРАВЛЕНИЯ ПОДГОТОВКИ
-        public RaketaTCommand<ObservableCollection<string>> AddAreasOfTrainingCommand { get; set; }
+        public RaketaTCommand<ObservableCollection<SelectedDirectionVM>> OpenWindowAddDirectionCommand { get; set; }
+        public RaketaTCommand<SelectedDirectionVM> DeleteSelectedDirectionVMCommand { get; set; }
 
         IServiceView _serviceView;
         ITabControl _tabControl;
@@ -75,6 +78,9 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 
             AddDistinctiveFeatureCommand = RaketaTCommand<ObservableCollection<DistinctiveFeatureVM>>.Launch(AddDistinctiveFeature);
             DeleteDistinctiveFeatureCommand = RaketaTCommand<DistinctiveFeatureVM>.Launch(DeleteDistinctiveFeature);
+
+            OpenWindowAddDirectionCommand = RaketaTCommand<ObservableCollection<SelectedDirectionVM>>.Launch(OpenWindowAddDirection);
+            DeleteSelectedDirectionVMCommand = RaketaTCommand<SelectedDirectionVM>.Launch(DeleteSelectedDirectionVM);
         }
 
         void CloseTab()
@@ -371,6 +377,27 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 }
             }
 
+            //Перебор направлений подготовки
+            if(applicantVM.DirectionsOfTraining.Count > 0)
+            {
+                foreach(var directionVM in applicantVM.DirectionsOfTraining)
+                {
+                    var direction = new SelectedDirection
+                    {
+                        Id = directionVM.Id,
+                        NameFaculty = directionVM.NameFaculty,
+                        NameLevel = directionVM.NameLevel,
+                        CodeDirection = directionVM.CodeDirection,
+                        NameDirection = directionVM.NameDirection,
+                        CodeProfile = directionVM.CodeProfile,
+                        NameProfile = directionVM.NameProfile,
+                        NameFormEducation = directionVM.NameFormEducation,
+                        NameFormPayment = directionVM.NameFormPayment,
+                        ApplicantId = applicant.Id
+                    };
+                    _applicantRepository.Create<SelectedDirection>(direction);
+                }
+            }
 
             //ApplicantVM.Dispose();
             //ApplicantVM = null;
@@ -390,6 +417,13 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 
         void AddDistinctiveFeature(ObservableCollection<DistinctiveFeatureVM> distinctiveFeatures) => 
             _serviceView.Window<DistinctiveFeatureViewModel>(null, distinctiveFeatures).Modal();
-        void DeleteDistinctiveFeature(DistinctiveFeatureVM distinctiveFeature) => ApplicantVM.DistinguishingFeatures.Remove(distinctiveFeature);
+        void DeleteDistinctiveFeature(DistinctiveFeatureVM distinctiveFeature) => 
+            ApplicantVM.DistinguishingFeatures.Remove(distinctiveFeature);
+
+        void OpenWindowAddDirection(ObservableCollection<SelectedDirectionVM> directions) =>
+            _serviceView.Window<AddDirectionViewModel>(null, directions).Modal();
+
+        void DeleteSelectedDirectionVM(SelectedDirectionVM selectedDirectionVM) => 
+            ApplicantVM.DirectionsOfTraining.Remove(selectedDirectionVM);
     }
 }

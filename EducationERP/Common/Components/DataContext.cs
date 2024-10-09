@@ -2,6 +2,7 @@
 using EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign;
 using EducationERP.Models.Modules.Administration.SettingUser;
 using EducationERP.Models.Modules.AdmissionsCampaign;
+using EducationERP.Models.Modules.AdmissionsCampaign.Directions;
 using EducationERP.Models.Modules.AdmissionsCampaign.DistinctiveFeatures;
 using EducationERP.Models.Modules.AdmissionsCampaign.Educations;
 using EducationERP.Models.Modules.AdmissionsCampaign.Exams;
@@ -13,7 +14,7 @@ namespace EducationERP.Common.Components
 {
     public class DataContext : DbContext
     {
-        // ПРИЁМНАЯ КАМПАНИЯ
+        #region ПРИЁМНАЯ КАМПАНИЯ
         // -- Документы --
         public DbSet<Applicant> Applicants { get; set; }
         public DbSet<Passport> Passports { get; set; }
@@ -31,13 +32,15 @@ namespace EducationERP.Common.Components
         public DbSet<EGE> EGES { get; set; }
         // -- Отличительные признаки --
         public DbSet<DistinctiveFeature> DistinctiveFeatures { get; set; }
-
-        // АДМИНИСТРИРОВАНИЕ
+        // -- Выбранные направления --
+        public DbSet<SelectedDirection> SelectedDirections { get; set; }
+        #endregion
+        #region АДМИНИСТРИРОВАНИЕ
         public DbSet<User> Users { get; set; }
         public DbSet<SettingFaculty> Faculties { get; set; }
         public DbSet<SettingLevel> Levels { get; set; }
         public DbSet<SettingDirection> Directions { get; set; }
-
+        #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder.UseNpgsql(ConfigurationManager.ConnectionStrings["StrConnection"].ToString());

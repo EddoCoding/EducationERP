@@ -1,4 +1,5 @@
-﻿using EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures;
+﻿using EducationERP.ViewModels.Modules.AdmissionsCampaign.Directions;
+using EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams;
@@ -57,8 +58,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             set => SetValue(ref pointsDistinctiveFeatures, value);
         }
 
-        public ObservableCollection<string> AreasOfTraining { get; set; } = new();
-        public string SelectedDirectionOfTraining { get; set; } = string.Empty;
+        public ObservableCollection<SelectedDirectionVM> DirectionsOfTraining { get; set; } = new();
 
         public ObservableCollection<string> SubmittedDocuments { get; set; } = new();
 
