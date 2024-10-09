@@ -1201,12 +1201,15 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="15" Text="Направления подготовки" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
                 <Button Grid.Row="1" Content="Добавить направление" Style="{StaticResource defaultAdd}" Margin="10,10,0,0" HorizontalAlignment="Left"
-                        Command="{Binding .}"/>
-                <ListView Grid.Row="2" Margin="10,5,100,0" MaxHeight="160" ItemsSource="{Binding ApplicantVM.AreasOfTraining}">
+                        Command="{Binding OpenWindowAddDirectionCommand}"
+                        CommandParameter="{Binding ApplicantVM.DirectionsOfTraining}"/>
+                <ListView Grid.Row="2" Margin="10,5,100,0" MaxHeight="180" FontSize="12"
+                          ItemsSource="{Binding ApplicantVM.DirectionsOfTraining}" SelectedItem="{Binding ApplicantVM.SelectedDirectionOfTraining}">
                     <ListView.Style>
                         <Style TargetType="ListView">
                             <Setter Property="Template">
@@ -1243,15 +1246,56 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="5">
-                                <!--ОТОБРАЗИТЬ КАК БУДУТ ВЫГЛЯДЕТЬ ВЫБРАННЫЕ НАПРАВЛЕНИЯ ПОДГОТОВКИ-->
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                                        <TextBlock Text="Код/Направление:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding CodeDirection}" Margin="5,0" FontSize="14"/>
+                                        <TextBlock Text="{Binding NameDirection}" FontSize="14"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                                        <TextBlock Text="Код/Профиль:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding CodeProfile}" Margin="5,0" FontSize="14"/>
+                                        <TextBlock Text="{Binding NameProfile}" FontSize="14"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+                                        <TextBlock Text="Факультет:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding NameFaculty}" Margin="5,0,0,0" FontSize="14"/>
+                                        <TextBlock Text="Уровень подготовки:" FontWeight="Bold" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding NameLevel}" Margin="5,0,0,0" FontSize="14"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
+                                        <TextBlock Text="Форма подготовки:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding NameFormEducation}" Margin="5,0,0,0" FontSize="14"/>
+                                        <TextBlock Text="Форма оплаты:" FontWeight="Bold" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding NameFormPayment}" Margin="5,0,0,0" FontSize="14"/>
+                                    </StackPanel>
+                                    
+                                    <Button Grid.RowSpan="4" Grid.Column="1" Content="/Common/Resources/Images/deleteDocument.png" Style="{StaticResource ButtonImage}" 
+                                            Margin="5,0" Height="24" Width="24" ToolTip="Удалить направление"
+                                            Command="{Binding DataContext.DeleteSelectedDirectionVMCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                            CommandParameter="{Binding}"/>
+
+                                </Grid>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <StackPanel Grid.Row="3" Orientation="Horizontal">
-                    <TextBlock Text="Выбрано основное направление подготовки:" Margin="10,5,10,0" FontSize="14"/>
-                    <TextBlock Text="{Binding .}" Margin="0,5,10,0" FontSize="14" TextWrapping="Wrap" Width="660"/>
-                </StackPanel>
+
+                <TextBlock Grid.Row="3" Text="{Binding ApplicantVM.DirectionsOfTraining.Count, StringFormat='Выбрано направлений: {0}'}" Margin="10,3,0,0" FontSize="13"/>
             </Grid>
 
             <!--ПОДАННЫЕ ДОКУМЕНТЫ-->

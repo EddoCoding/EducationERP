@@ -12,7 +12,15 @@ namespace EducationERP.Common.Components.Repositories
                 return db.Faculties
                     .Include(x => x.Levels)
                     .ThenInclude(x => x.Directions)
-                    .ToArray();
+                    .ToArray()
+                    .Select(faculty =>
+                    {
+                        foreach (var level in faculty.Levels)
+                        {
+                            level.Directions = level.Directions.OrderBy(x => x.NameDirection).ToArray();
+                        }
+                        return faculty;
+                    });
             }
         }
         public bool Create<T>(T model) where T : class

@@ -1,4 +1,5 @@
-﻿using EducationERP.Models.Modules.AdmissionsCampaign.DistinctiveFeatures;
+﻿using EducationERP.Models.Modules.AdmissionsCampaign.Directions;
+using EducationERP.Models.Modules.AdmissionsCampaign.DistinctiveFeatures;
 using EducationERP.Models.Modules.AdmissionsCampaign.Educations;
 using EducationERP.Models.Modules.AdmissionsCampaign.Exams;
 
@@ -35,10 +36,9 @@ namespace EducationERP.Models.Modules.AdmissionsCampaign
         public int TotalPoints { get; set; }
         public ICollection<DistinctiveFeature> DistinguishingFeatures { get; set; }
         public int PointsDistinctiveFeatures { get; set; }
+        public ICollection<SelectedDirection> DirectionsOfTraining { get; set; }
 
         #region MyRegion
-        //public string[] AreasOfTraining { get; set; }
-        //public string SelectedDirectionOfTraining { get; set; } = string.Empty;
         //public string[] SubmittedDocuments { get; set; }
 
         #endregion

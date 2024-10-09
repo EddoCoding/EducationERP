@@ -8,6 +8,7 @@ using EducationERP.ViewModels.Modules.Administration;
 using EducationERP.ViewModels.Modules.Administration.ControlUsers;
 using EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaign;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign;
+using EducationERP.ViewModels.Modules.AdmissionsCampaign.Directions;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
@@ -17,6 +18,7 @@ using EducationERP.Views.Modules.Administration;
 using EducationERP.Views.Modules.Administration.ControlUsers;
 using EducationERP.Views.Modules.Administration.SettingAdmissionCampaign;
 using EducationERP.Views.Modules.AdmissionsCampaign;
+using EducationERP.Views.Modules.AdmissionsCampaign.Directions;
 using EducationERP.Views.Modules.AdmissionsCampaign.DistinctiveFeatures;
 using EducationERP.Views.Modules.AdmissionsCampaign.Documents;
 using EducationERP.Views.Modules.AdmissionsCampaign.Education;
@@ -64,6 +66,7 @@ namespace EducationERP
             _serviceView.RegisterTypeView<AddSettingFacultyViewModel, AddSettingFacultyWindow>();
             _serviceView.RegisterTypeView<AddSettingLevelViewModel, AddSettingLevelWindow>();
             _serviceView.RegisterTypeView<AddSettingDirectionViewModel, AddSettingDirectionWindow>();
+            _serviceView.RegisterTypeView<AddDirectionViewModel, AddDirectionWindow>();
         }
 
         void RegisterDependency()
