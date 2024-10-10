@@ -1,4 +1,6 @@
-﻿namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams
+﻿using System.Windows;
+
+namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams
 {
     public class ExamVM
     {
@@ -9,5 +11,16 @@
         public string LocationExam { get; set; } = string.Empty;
         public bool IsSpecial { get; set; }
         public string AdditionalIformation { get; set; } = string.Empty;
+
+        public bool Validation()
+        {
+            if (String.IsNullOrWhiteSpace(AcademicSubject))
+            {
+                MessageBox.Show("Введите название сдаваемого предмета!");
+                return false;
+            }
+
+            return true;
+        }
     }
 }

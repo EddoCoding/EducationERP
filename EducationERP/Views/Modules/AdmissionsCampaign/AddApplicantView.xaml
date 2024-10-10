@@ -1360,7 +1360,7 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Text="{Binding AcademicSubject}" Margin="5,0" FontSize="14"/>
+                                    <TextBlock Text="{Binding AcademicSubject}" Margin="5,0" FontSize="14" VerticalAlignment="Center"/>
 
                                     <Button Grid.RowSpan="4" Grid.Column="1" Content="/Common/Resources/Images/deleteDocument.png" Style="{StaticResource ButtonImage}" 
                                             Margin="5,0" Height="24" Width="24" ToolTip="Удалить экзамен/испытание"

@@ -23,17 +23,13 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams
 
         void AddExam(ExamVM examVM)
         {
-            _exams.Add(examVM);
-            _exams = null;
-            _serviceView.Close<AddExamViewModel>();
-
-            //var isValidated = distinctiveFeature.Validation();
-            //if (isValidated)
-            //{
-            //    distinctiveFeatures.Add(distinctiveFeature);
-            //    distinctiveFeatures = null;
-            //    _serviceView.Close<DistinctiveFeatureViewModel>();
-            //}
+            bool isValidated = examVM.Validation();
+            if (isValidated)
+            {
+                _exams.Add(examVM);
+                _exams = null;
+                _serviceView.Close<AddExamViewModel>();
+            }
         }
         void CloseWindow() => _serviceView.Close<AddExamViewModel>();
     }
