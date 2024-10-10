@@ -53,8 +53,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         public RaketaTCommand<SelectedDirectionVM> DeleteSelectedDirectionVMCommand { get; set; }
 
         //ИСПЫТАНИЯ/ЭКЗАМЕНЫ
-        public RaketaTCommand<ObservableCollection<ExamVM>> OpenWindowAddExamCommand { get; set; } //Сделать тип испытания/экзамена
-        public RaketaTCommand<ExamVM> DeleteExamCommand { get; set; } //Сделать тип испытания/экзамена
+        public RaketaTCommand<ObservableCollection<ExamVM>> OpenWindowAddExamCommand { get; set; }
+        public RaketaTCommand<ExamVM> DeleteExamCommand { get; set; }
 
         IServiceView _serviceView;
         ITabControl _tabControl;
@@ -403,6 +403,26 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                         ApplicantId = applicant.Id
                     };
                     _applicantRepository.Create<SelectedDirection>(direction);
+                }
+            }
+
+            //Перебор испытаний/экзаменов
+            if(applicantVM.Exams.Count > 0)
+            {
+                foreach(var examVM in applicantVM.Exams)
+                {
+                    var exam = new Exam
+                    {
+                        Id = examVM.Id,
+                        AcademicSubject = examVM.AcademicSubject,
+                        DateExam = examVM.DateExam,
+                        TimeExam = examVM.TimeExam,
+                        LocationExam = examVM.LocationExam,
+                        IsSpecial = examVM.IsSpecial,
+                        AdditionalIformation = examVM.AdditionalIformation,
+                        ApplicantId = applicant.Id
+                    };
+                    _applicantRepository.Create<Exam>(exam);
                 }
             }
 

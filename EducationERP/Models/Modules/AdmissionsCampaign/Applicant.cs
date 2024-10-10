@@ -38,10 +38,5 @@ namespace EducationERP.Models.Modules.AdmissionsCampaign
         public int PointsDistinctiveFeatures { get; set; }
         public ICollection<SelectedDirection> DirectionsOfTraining { get; set; }
         public ICollection<Exam> Exams { get; set; }
-
-        #region MyRegion
-        //public string[] SubmittedDocuments { get; set; }
-
-        #endregion
     }
 }

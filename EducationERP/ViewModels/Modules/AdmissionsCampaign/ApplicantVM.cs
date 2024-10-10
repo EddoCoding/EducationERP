@@ -67,10 +67,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         //Добавленные испытания/экзамены
         public ObservableCollection<ExamVM> Exams { get; set; } = new();
 
-        //Поданые документы
-        //public ObservableCollection<string> SubmittedDocuments { get; set; } = new();
-
-
         public ApplicantVM()
         {
             EGES.CollectionChanged += ChangeValueTotalPoints;
