@@ -1,4 +1,6 @@
-﻿namespace EducationERP.Models.Modules.AdmissionsCampaign.Directions
+﻿using EducationERP.Models.Modules.AdmissionsCampaign.Exams;
+
+namespace EducationERP.Models.Modules.AdmissionsCampaign.Directions
 {
     public class SelectedDirection
     {

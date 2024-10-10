@@ -7,6 +7,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Directions
 {
     public class AddDirectionViewModel : RaketaViewModel
     {
+
         SettingFacultyVM facultyVM = new();
         SettingLevelVM levelVM = new();
 

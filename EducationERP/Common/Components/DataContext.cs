@@ -34,6 +34,8 @@ namespace EducationERP.Common.Components
         public DbSet<DistinctiveFeature> DistinctiveFeatures { get; set; }
         // -- Выбранные направления --
         public DbSet<SelectedDirection> SelectedDirections { get; set; }
+        // -- Назначенные экзамены/испытания --
+        public DbSet<Exam> Exams { get; set; }
         #endregion
         #region АДМИНИСТРИРОВАНИЕ
         public DbSet<User> Users { get; set; }
