@@ -654,6 +654,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,10,0,0">
@@ -1201,15 +1202,14 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="15" Text="Направления подготовки" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
+                <TextBlock Grid.Row="0" FontSize="15" Text="Направления подготовки" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
                 <Button Grid.Row="1" Content="Добавить направление" Style="{StaticResource defaultAdd}" Margin="10,10,0,0" HorizontalAlignment="Left"
                         Command="{Binding OpenWindowAddDirectionCommand}"
                         CommandParameter="{Binding ApplicantVM.DirectionsOfTraining}"/>
                 <ListView Grid.Row="2" Margin="10,5,100,0" MaxHeight="180" FontSize="12"
-                          ItemsSource="{Binding ApplicantVM.DirectionsOfTraining}" SelectedItem="{Binding ApplicantVM.SelectedDirectionOfTraining}">
+                          ItemsSource="{Binding ApplicantVM.DirectionsOfTraining}">
                     <ListView.Style>
                         <Style TargetType="ListView">
                             <Setter Property="Template">
@@ -1265,9 +1265,9 @@
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
-                                        <TextBlock Text="Код/Профиль:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Код/Профиль:" FontWeight="Bold" VerticalAlignment="Top"/>
                                         <TextBlock Text="{Binding CodeProfile}" Margin="5,0" FontSize="14"/>
-                                        <TextBlock Text="{Binding NameProfile}" FontSize="14"/>
+                                        <TextBlock Text="{Binding NameProfile}" FontSize="14" TextWrapping="Wrap" Width="650"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
@@ -1298,8 +1298,86 @@
                 <TextBlock Grid.Row="3" Text="{Binding ApplicantVM.DirectionsOfTraining.Count, StringFormat='Выбрано направлений: {0}'}" Margin="10,3,0,0" FontSize="13"/>
             </Grid>
 
-            <!--ПОДАННЫЕ ДОКУМЕНТЫ-->
             <Grid Grid.Row="7" Margin="10,5,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" FontSize="15" Text="Испытания/Экзамены" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
+                <Button Grid.Row="1" Content="Добавить испытание/экзамен" Style="{StaticResource defaultAdd}" Margin="10,10,0,0" HorizontalAlignment="Left"
+                        Command="{Binding OpenWindowAddExamCommand}"
+                        CommandParameter="{Binding ApplicantVM.Exams}"/>
+                <ListView Grid.Row="2" Margin="10,5,100,0" MaxHeight="180" FontSize="12"
+                    ItemsSource="{Binding ApplicantVM.Exams}">
+                    <ListView.Style>
+                        <Style TargetType="ListView">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListView">
+                                        <ScrollViewer>
+                                            <Border BorderThickness="0,0,0,0.8" BorderBrush="Black">
+                                                <ItemsPresenter/>
+                                            </Border>
+                                        </ScrollViewer>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.Style>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="WhiteSmoke"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Text="{Binding AcademicSubject}" Margin="5,0" FontSize="14" VerticalAlignment="Center"/>
+
+                                    <Button Grid.RowSpan="4" Grid.Column="1" Content="/Common/Resources/Images/deleteDocument.png" Style="{StaticResource ButtonImage}" 
+                                            Margin="5,0" Height="24" Width="24" ToolTip="Удалить экзамен/испытание"
+                                            Command="{Binding DataContext.DeleteExamCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                            CommandParameter="{Binding}"/>
+
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <TextBlock Grid.Row="3" Text="{Binding ApplicantVM.Exams.Count, StringFormat='Назначено испытаний/экзаменов: {0}'}" Margin="10,3,0,0" FontSize="13"/>
+            </Grid>
+            
+            <!--ПОДАННЫЕ ДОКУМЕНТЫ-->
+            <Grid Grid.Row="8" Margin="10,5,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -1313,7 +1391,7 @@
             </Grid>
 
             <!--КНОПКА СФОРМИРОВАТЬ ЛИЧНОЕ ДЕЛО-->
-            <Button Grid.Row="8" Content="Сформировать личное дело" Style="{StaticResource defaultAdd}" HorizontalAlignment="Center" Margin="0,20"
+            <Button Grid.Row="9" Content="Сформировать личное дело" Style="{StaticResource defaultAdd}" HorizontalAlignment="Center" Margin="0,20"
                     Command="{Binding CreatePersonalFileCommand}" CommandParameter="{Binding ApplicantVM}"/>
 
         </Grid>

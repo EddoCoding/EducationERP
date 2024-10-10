@@ -27,6 +27,10 @@ namespace EducationERP.Common.Components.Configurations
             builder
                 .HasMany(x => x.DirectionsOfTraining)
                 .WithOne(x => x.Applicant);
+
+            builder
+                .HasMany(x => x.Exams)
+                .WithOne(x => x.Applicant);
         }
     }
 }

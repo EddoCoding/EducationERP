@@ -15,6 +15,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         int totalPoints;
         int pointsDistinctiveFeatures;
 
+        #region Личная информация
         public Guid Id { get; set; } = Guid.NewGuid();
         public string SurName { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
@@ -31,36 +32,43 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             set => SetValue(ref citizenship, value);
         }
         public DateOnly CitizenshipValidFrom { get; set; }
-
-        //  Контактная информация
+        #endregion
+        #region Контактная информация
         public string ResidentialAddress { get; set; } = string.Empty;
         public string AddressOfRegistration { get; set; } = string.Empty;
         public string HomePhone { get; set; } = string.Empty;
         public string MobilePhone { get; set; } = string.Empty;
         public string Mail { get; set; } = string.Empty;
         public string AdditionalInformation { get; set; } = string.Empty;
+        #endregion
 
-        // Документы, Образование, Признаки и т.д.
+        //Документы
         public ObservableCollection<DocumentBaseViewModel> Documents { get; set; } = new();
+        //Образования
         public ObservableCollection<EducationBaseViewModel> Educations { get; set; } = new();
-
+        //ЕГЭ
         public ObservableCollection<EGEVM> EGES { get; set; } = new();
+        //Сумма баллов ЕГЭ со всех добавленных предметов ЕГЭ
         public int TotalPoints
         {
             get => totalPoints;
             set => SetValue(ref totalPoints, value);
         }
-
+        //Отличительные признаки
         public ObservableCollection<DistinctiveFeatureVM> DistinguishingFeatures { get; set; } = new();
+        //Сумма баллов ОП со всех добавленных объектов ОП
         public int PointsDistinctiveFeatures
         {
             get => pointsDistinctiveFeatures;
             set => SetValue(ref pointsDistinctiveFeatures, value);
         }
-
+        //Выбранные направления подготовки
         public ObservableCollection<SelectedDirectionVM> DirectionsOfTraining { get; set; } = new();
+        //Добавленные испытания/экзамены
+        public ObservableCollection<ExamVM> Exams { get; set; } = new();
 
-        public ObservableCollection<string> SubmittedDocuments { get; set; } = new();
+        //Поданые документы
+        //public ObservableCollection<string> SubmittedDocuments { get; set; } = new();
 
 
         public ApplicantVM()

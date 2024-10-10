@@ -7,17 +7,9 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Directions
 {
     public class AddDirectionViewModel : RaketaViewModel
     {
-        //Должна быть коллекция факультетов
-        //Должна быть коллекция уровней
-        //Должна быть коллекция направлений
-        //Должно быть свойство выбранного факультета
-        //Должно быть свойство выбранного уровня
-        //Должно быть свойство выбранного направления (не точно)
 
-        //В конструкторе при загрузке Window с VM, идет обращение к репозиторию, который возвращает факультеты и помещает в коллекцию факультетов
-
-        SettingFacultyVM facultyVM;
-        SettingLevelVM levelVM;
+        SettingFacultyVM facultyVM = new();
+        SettingLevelVM levelVM = new();
 
         public SelectedDirectionVM SelectedDirectionVM { get; set; } = new();
         public ObservableCollection<SettingFacultyVM> Faculties { get; set; } = new();
@@ -85,26 +77,25 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Directions
 
         void AddDirection(SelectedDirectionVM selectedDirectionVM)
         {
-            selectedDirectionVM.NameFaculty = FacultyVM.NameFaculty;
-            selectedDirectionVM.NameLevel = LevelVM.NameLevel;
-            selectedDirectionVM.CodeDirection = DirectionVM.CodeDirection;
-            selectedDirectionVM.NameDirection = DirectionVM.NameDirection;
-            selectedDirectionVM.CodeProfile = DirectionVM.CodeProfile;
-            selectedDirectionVM.NameProfile = DirectionVM.NameProfile;
-            selectedDirectionVM.NameFormEducation = DirectionVM.NameFormEducation;
-            selectedDirectionVM.NameFormPayment = DirectionVM.NameFormPayment;
-
-            _directions.Add(selectedDirectionVM);
-            _directions = null;
-            _serviceView.Close<AddDirectionViewModel>();
-
-            //var isValidated = distinctiveFeature.Validation();
-            //if (isValidated)
-            //{
-            //    distinctiveFeatures.Add(distinctiveFeature);
-            //    distinctiveFeatures = null;
-            //    _serviceView.Close<DistinctiveFeatureViewModel>();
-            //}
+            if(FacultyVM != null || LevelVM != null || DirectionVM != null)
+            {
+                selectedDirectionVM.NameFaculty = FacultyVM.NameFaculty;
+                selectedDirectionVM.NameLevel = LevelVM.NameLevel;
+                selectedDirectionVM.CodeDirection = DirectionVM.CodeDirection;
+                selectedDirectionVM.NameDirection = DirectionVM.NameDirection;
+                selectedDirectionVM.CodeProfile = DirectionVM.CodeProfile;
+                selectedDirectionVM.NameProfile = DirectionVM.NameProfile;
+                selectedDirectionVM.NameFormEducation = DirectionVM.NameFormEducation;
+                selectedDirectionVM.NameFormPayment = DirectionVM.NameFormPayment;
+            }
+            
+            bool isValidated = selectedDirectionVM.Validation();
+            if (isValidated)
+            {
+                _directions.Add(selectedDirectionVM);
+                _directions = null;
+                _serviceView.Close<AddDirectionViewModel>();
+            }
         }
         void CloseWindow() => _serviceView.Close<AddDirectionViewModel>();
     }
