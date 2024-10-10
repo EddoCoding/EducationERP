@@ -53,8 +53,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         public RaketaTCommand<SelectedDirectionVM> DeleteSelectedDirectionVMCommand { get; set; }
 
         //ИСПЫТАНИЯ/ЭКЗАМЕНЫ
-        public RaketaTCommand<ObservableCollection<ExamVM>> OpenWindowAddExamCommand { get; set; } //Сделать тип испытания/экзамена
-        public RaketaTCommand<ExamVM> DeleteExamCommand { get; set; } //Сделать тип испытания/экзамена
+        public RaketaTCommand<ObservableCollection<ExamVM>> OpenWindowAddExamCommand { get; set; }
+        public RaketaTCommand<ExamVM> DeleteExamCommand { get; set; }
 
         IServiceView _serviceView;
         ITabControl _tabControl;
@@ -100,15 +100,15 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         {
             if(ApplicantVM.IsCitizenRus == true)
             {
-                ApplicantVM.Citizenship = string.Empty;
+                ApplicantVM.Citizenship = "Россия";
                 Visual.IsEnabledTextBox = false;
             }
-            if(ApplicantVM.NotCitizen == true)
+            else if(ApplicantVM.NotCitizen == true)
             {
-                ApplicantVM.Citizenship = string.Empty;
+                ApplicantVM.Citizenship = "Без гражданства";
                 Visual.IsEnabledTextBox = false;
             }
-            if(ApplicantVM.IsForeign == true)
+            else
             {
                 ApplicantVM.Citizenship = string.Empty;
                 Visual.IsEnabledTextBox = true;
@@ -116,10 +116,10 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         }
         void CreatePersonalFile(ApplicantVM applicantVM)
         {
-            //ВЫЗВАТЬ МЕТОД Validation() МОДЕЛИ ПРЕДСТАВЛЕНИЯ ApplicantVM, И ЕСЛИ ВСЕ ХОРОШО ДЕЛАЕМ МАПИНГ
-            //Если добавился, то добавляем в коллекцию абитуриентов applicantVM
-
-            var applicant = new Applicant
+            bool isValidated = applicantVM.Validation();
+            if (isValidated) 
+            {
+                var applicant = new Applicant
             {
                 Id = applicantVM.Id,
                 SurName = applicantVM.SurName,
@@ -144,10 +144,10 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 TotalPoints = applicantVM.TotalPoints,
                 PointsDistinctiveFeatures = applicantVM.PointsDistinctiveFeatures
             };
-            _applicantRepository.Create<Applicant>(applicant);
+                _applicantRepository.Create<Applicant>(applicant);
 
-            //Перебор документов
-            foreach(var document in applicantVM.Documents)
+                //Перебор документов
+                foreach(var document in applicantVM.Documents)
             {
                 if(document is PassportViewModel passportVM)
                 {
@@ -231,8 +231,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 }
             }
 
-            //Перебор образований
-            foreach(var education in applicantVM.Educations)
+                //Перебор образований
+                foreach(var education in applicantVM.Educations)
             {
                 if(education is EducationNineViewModel educationNineVM)
                 {
@@ -352,8 +352,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 }
             }
 
-            //Перебор ЕГЭ
-            if(applicantVM.TotalPoints > 0)
+                //Перебор ЕГЭ
+                if(applicantVM.TotalPoints > 0)
             {
                 foreach(var egeVM in applicantVM.EGES)
                 {
@@ -368,8 +368,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 }
             }
 
-            //Перебор отличительных признаков
-            if (applicantVM.PointsDistinctiveFeatures > 0)
+                //Перебор отличительных признаков
+                if (applicantVM.PointsDistinctiveFeatures > 0)
             {
                 foreach (var distinguishingFeatureVM in applicantVM.DistinguishingFeatures)
                 {
@@ -384,8 +384,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 }
             }
 
-            //Перебор направлений подготовки
-            if(applicantVM.DirectionsOfTraining.Count > 0)
+                //Перебор направлений подготовки
+                if(applicantVM.DirectionsOfTraining.Count > 0)
             {
                 foreach(var directionVM in applicantVM.DirectionsOfTraining)
                 {
@@ -406,9 +406,31 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 }
             }
 
-            //ApplicantVM.Dispose();
-            //ApplicantVM = null;
-            //Вызываем закрытие вкладки
+                //Перебор испытаний/экзаменов
+                if(applicantVM.Exams.Count > 0)
+            {
+                foreach(var examVM in applicantVM.Exams)
+                {
+                    var exam = new Exam
+                    {
+                        Id = examVM.Id,
+                        AcademicSubject = examVM.AcademicSubject,
+                        DateExam = examVM.DateExam,
+                        TimeExam = examVM.TimeExam,
+                        LocationExam = examVM.LocationExam,
+                        IsSpecial = examVM.IsSpecial,
+                        AdditionalIformation = examVM.AdditionalIformation,
+                        ApplicantId = applicant.Id
+                    };
+                    _applicantRepository.Create<Exam>(exam);
+                }
+            }
+
+                //ApplicantVM.Dispose();
+                //ApplicantVM = null;
+                //Вызываем закрытие вкладки
+            }
+
         }
 
         void AddDocument(ObservableCollection<DocumentBaseViewModel> documents) => _serviceView.Window<DocumentViewModel>(null, documents).Modal();
