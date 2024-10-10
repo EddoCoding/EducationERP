@@ -6,12 +6,13 @@ using EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams;
 using Raketa;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Windows;
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 {
     public class ApplicantVM : RaketaViewModel, IDisposable
     {
-        string citizenship = string.Empty;
+        string citizenship = "Россия";
         int totalPoints;
         int pointsDistinctiveFeatures;
 
@@ -41,7 +42,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         public string Mail { get; set; } = string.Empty;
         public string AdditionalInformation { get; set; } = string.Empty;
         #endregion
-
+        #region Коллекции и доп. свойства
         //Документы
         public ObservableCollection<DocumentBaseViewModel> Documents { get; set; } = new();
         //Образования
@@ -66,6 +67,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         public ObservableCollection<SelectedDirectionVM> DirectionsOfTraining { get; set; } = new();
         //Добавленные испытания/экзамены
         public ObservableCollection<ExamVM> Exams { get; set; } = new();
+        #endregion
 
         public ApplicantVM()
         {
@@ -96,6 +98,61 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         {
             EGES.CollectionChanged -= ChangeValueTotalPoints;
             DistinguishingFeatures.CollectionChanged -= ChangeValuePointsDistinctiveFeatures;
+        }
+
+        public bool Validation()
+        {
+            //Валидация личных данных
+            if (String.IsNullOrWhiteSpace(SurName))
+            {
+                MessageBox.Show("Введите фамилию!");
+                return false;
+            }
+            if (String.IsNullOrWhiteSpace(Name))
+            {
+                MessageBox.Show("Введите имя!");
+                return false;
+            }
+            if (DateOfBirth == default || DateOfBirth > DateOnly.FromDateTime(DateTime.Now))
+            {
+                MessageBox.Show("Дата рождения не указана или указана неверно!");
+                return false;
+            }
+            if (String.IsNullOrWhiteSpace(Gender))
+            {
+                MessageBox.Show("Введите пол!");
+                return false;
+            }
+            if (String.IsNullOrWhiteSpace(PlaceOfBirth))
+            {
+                MessageBox.Show("Введите место рождения!");
+                return false;
+            }
+            //Сделать проверку на название гражданства 
+            if (CitizenshipValidFrom == default || CitizenshipValidFrom > DateOnly.FromDateTime(DateTime.Now))
+            {
+                MessageBox.Show("С какой даты действует гражданство не указано или указано неверно!");
+                return false;
+            }
+
+            //Валидация контактных данных
+            if (String.IsNullOrWhiteSpace(ResidentialAddress))
+            {
+                MessageBox.Show("Введите адрес проживания!");
+                return false;
+            }
+            if (String.IsNullOrWhiteSpace(AddressOfRegistration))
+            {
+                MessageBox.Show("Введите адрес по прописке!");
+                return false;
+            }
+            if (String.IsNullOrWhiteSpace(MobilePhone))
+            {
+                MessageBox.Show("Введите номер мобильного телефона!");
+                return false;
+            }
+
+            return true;
         }
     }
 }
