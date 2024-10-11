@@ -128,13 +128,16 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 MessageBox.Show("Введите место рождения!");
                 return false;
             }
-            //Сделать проверку на название гражданства 
+            if (String.IsNullOrWhiteSpace(Citizenship))
+            {
+                MessageBox.Show("Введите гражданство!");
+                return false;
+            }
             if (CitizenshipValidFrom == default || CitizenshipValidFrom > DateOnly.FromDateTime(DateTime.Now))
             {
                 MessageBox.Show("С какой даты действует гражданство не указано или указано неверно!");
                 return false;
             }
-
             //Валидация контактных данных
             if (String.IsNullOrWhiteSpace(ResidentialAddress))
             {

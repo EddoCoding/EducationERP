@@ -120,30 +120,30 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             if (isValidated) 
             {
                 var applicant = new Applicant
-            {
-                Id = applicantVM.Id,
-                SurName = applicantVM.SurName,
-                Name = applicantVM.Name,
-                MiddleName = applicantVM.MiddleName,
-                DateOfBirth = applicantVM.DateOfBirth,
-                Gender = applicantVM.Gender,
-                PlaceOfBirth = applicantVM.PlaceOfBirth,
-                IsCitizenRus = applicantVM.IsCitizenRus,
-                NotCitizen = applicantVM.NotCitizen,
-                IsForeign = applicantVM.IsForeign,
-                Citizenship = applicantVM.Citizenship,
-                CitizenshipValidFrom = applicantVM.CitizenshipValidFrom,
+                {
+                    Id = applicantVM.Id,
+                    SurName = applicantVM.SurName,
+                    Name = applicantVM.Name,
+                    MiddleName = applicantVM.MiddleName,
+                    DateOfBirth = applicantVM.DateOfBirth,
+                    Gender = applicantVM.Gender,
+                    PlaceOfBirth = applicantVM.PlaceOfBirth,
+                    IsCitizenRus = applicantVM.IsCitizenRus,
+                    NotCitizen = applicantVM.NotCitizen,
+                    IsForeign = applicantVM.IsForeign,
+                    Citizenship = applicantVM.Citizenship,
+                    CitizenshipValidFrom = applicantVM.CitizenshipValidFrom,
 
-                ResidentialAddress = applicantVM.ResidentialAddress,
-                AddressOfRegistration = applicantVM.AddressOfRegistration,
-                HomePhone = applicantVM.HomePhone,
-                MobilePhone = applicantVM.MobilePhone,
-                Mail = applicantVM.Mail,
-                AdditionalInformation = applicantVM.AdditionalInformation,
+                    ResidentialAddress = applicantVM.ResidentialAddress,
+                    AddressOfRegistration = applicantVM.AddressOfRegistration,
+                    HomePhone = applicantVM.HomePhone,
+                    MobilePhone = applicantVM.MobilePhone,
+                    Mail = applicantVM.Mail,
+                    AdditionalInformation = applicantVM.AdditionalInformation,
 
-                TotalPoints = applicantVM.TotalPoints,
-                PointsDistinctiveFeatures = applicantVM.PointsDistinctiveFeatures
-            };
+                    TotalPoints = applicantVM.TotalPoints,
+                    PointsDistinctiveFeatures = applicantVM.PointsDistinctiveFeatures
+                };
                 _applicantRepository.Create<Applicant>(applicant);
 
                 //Перебор документов
@@ -386,10 +386,10 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 
                 //Перебор направлений подготовки
                 if(applicantVM.DirectionsOfTraining.Count > 0)
-            {
-                foreach(var directionVM in applicantVM.DirectionsOfTraining)
                 {
-                    var direction = new SelectedDirection
+                    foreach(var directionVM in applicantVM.DirectionsOfTraining)
+                    {
+                        var direction = new SelectedDirection
                     {
                         Id = directionVM.Id,
                         NameFaculty = directionVM.NameFaculty,
@@ -402,29 +402,30 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                         NameFormPayment = directionVM.NameFormPayment,
                         ApplicantId = applicant.Id
                     };
-                    _applicantRepository.Create<SelectedDirection>(direction);
+                        _applicantRepository.Create<SelectedDirection>(direction);
+                    }
                 }
-            }
 
                 //Перебор испытаний/экзаменов
                 if(applicantVM.Exams.Count > 0)
-            {
-                foreach(var examVM in applicantVM.Exams)
                 {
-                    var exam = new Exam
+                    foreach(var examVM in applicantVM.Exams)
                     {
-                        Id = examVM.Id,
-                        AcademicSubject = examVM.AcademicSubject,
-                        DateExam = examVM.DateExam,
-                        TimeExam = examVM.TimeExam,
-                        LocationExam = examVM.LocationExam,
-                        IsSpecial = examVM.IsSpecial,
-                        AdditionalIformation = examVM.AdditionalIformation,
-                        ApplicantId = applicant.Id
-                    };
-                    _applicantRepository.Create<Exam>(exam);
+                        var exam = new Exam
+                        {
+                            Id = examVM.Id,
+                            AcademicSubject = examVM.AcademicSubject,
+                            DateExam = examVM.DateExam,
+                            TimeExam = examVM.TimeExam,
+                            LocationExam = examVM.LocationExam,
+                            IsSpecial = examVM.IsSpecial,
+                            AdditionalIformation = examVM.AdditionalIformation,
+                            SubjectScores = examVM.SubjectScores,
+                            ApplicantId = applicant.Id
+                        };
+                        _applicantRepository.Create<Exam>(exam);
+                    }
                 }
-            }
 
                 //ApplicantVM.Dispose();
                 //ApplicantVM = null;
