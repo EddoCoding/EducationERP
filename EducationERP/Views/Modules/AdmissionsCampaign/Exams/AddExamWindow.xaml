@@ -4,10 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationERP.Views.Modules.AdmissionsCampaign"
+        xmlns:converters="clr-namespace:EducationERP.Common.Converters"
         mc:Ignorable="d" Title="Добавление испытания/экзамена" Height="300" Width="400" MouseDown="MoveWindow"
         Background="WhiteSmoke" FontFamily="{StaticResource OpenSans}" WindowStyle="None" 
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" RenderOptions.BitmapScalingMode="NearestNeighbor"
         BorderBrush="LightGray" BorderThickness="1">
+    <Window.Resources>
+        <converters:DateOnlyToDateOnlyConverter x:Key="DateOnlyToDateOnly"/>
+    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -53,7 +57,8 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Text="Дата проведения" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
-                    <TextBox Grid.Row="1" Text="{Binding ExamVM.DateExam}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,5"/>
+                    <TextBox Grid.Row="1" Text="{Binding ExamVM.DateExam, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}" 
+                             Style="{StaticResource CustomTextBox}" Margin="10,0,10,5"/>
                 </Grid>
 
                 <Grid Background="White" Grid.Column="1" Margin="10,0,0,0">
@@ -66,7 +71,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Text="Время проведения" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
-                    <TextBox Grid.Row="1" Text="{Binding ExamVM.TimeExam}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,5"/>
+                    <TextBox Grid.Row="1" Text="{Binding ExamVM.TimeExam, StringFormat='{}{0:HH\\:mm}'}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,5"/>
                 </Grid>
 
             </Grid>

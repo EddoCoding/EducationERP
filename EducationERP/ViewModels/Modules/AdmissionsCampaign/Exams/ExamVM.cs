@@ -20,6 +20,11 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams
                 MessageBox.Show("Введите название сдаваемого предмета!");
                 return false;
             }
+            if (DateExam == default || DateExam < DateOnly.FromDateTime(DateTime.Now))
+            {
+                MessageBox.Show("Дата проведения не указана или указана неверно!");
+                return false;
+            }
 
             return true;
         }
