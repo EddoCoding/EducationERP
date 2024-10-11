@@ -178,6 +178,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -206,26 +207,29 @@
             <ListView Grid.Row="1" Grid.Column="0" Margin="10,0" ItemContainerStyle="{StaticResource ListViewApplicantItem}"
                       ItemsSource="{Binding Applicants}" SelectedItem="{Binding SelectedApplicant}"/>
 
-            <StackPanel Grid.Row="2" Background="White" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding Applicants.Count, StringFormat='Количество абитуриентов в текущей приёмной кампании: {0}'}" 
+                       Margin="10,3,0,0" FontSize="14"/>
+
+            <StackPanel Grid.Row="3" Grid.Column="0" Background="White" Margin="10,5,10,10" Orientation="Horizontal" HorizontalAlignment="Right">
                 <StackPanel.Effect>
                     <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
                 </StackPanel.Effect>
 
                 <Button Content="/Common/Resources/Images/addPersonalFile.png" Style="{StaticResource ButtonImage}" Height="24" Width="24" 
-                        VerticalAlignment="Top" Margin="10" ToolTip="Создать личное дело абитуриента"
+                        VerticalAlignment="Top" Margin="7" ToolTip="Создать личное дело абитуриента"
                         Command="{Binding OpenTabPersonalFileCommand}"
                         CommandParameter="{Binding Applicants}"/>
 
                 <Button Content="/Common/Resources/Images/changePersonalFile.png" Style="{StaticResource ButtonImage}" Height="24" Width="24"
-                        VerticalAlignment="Top" Margin="10" ToolTip="Изменить личное дело"
+                        VerticalAlignment="Top" Margin="7" ToolTip="Изменить личное дело"
                         Command="{Binding ChangePersonalFileCommand}" CommandParameter="{Binding .}"/>
 
                 <Button Content="/Common/Resources/Images/deletePersonalFile.png" Style="{StaticResource ButtonImage}" Height="24" Width="24" 
-                        VerticalAlignment="Top" Margin="10" ToolTip="Удалить личное дело"
+                        VerticalAlignment="Top" Margin="7" ToolTip="Удалить личное дело"
                         Command="{Binding DeletePersonalFileCommand}"/>
 
                 <Button Content="/Common/Resources/Images/update.png" Style="{StaticResource ButtonImage}" Height="24" Width="24" 
-                        VerticalAlignment="Top" Margin="10" ToolTip="Обновить список абитуриентов"
+                        VerticalAlignment="Top" Margin="7" ToolTip="Обновить список абитуриентов"
                         Command="{Binding UpdatePersonalFileCommand}"/>
 
             </StackPanel>

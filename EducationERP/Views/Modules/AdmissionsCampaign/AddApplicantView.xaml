@@ -726,20 +726,18 @@
                     <TextBox Grid.Column="1" Text="{Binding ApplicantVM.MiddleName}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"/>
                 </Grid>
 
-                <Grid Grid.Row="5" Grid.Column="0" Background="White" Margin="10,10,0,0" Width="230" HorizontalAlignment="Left">
+                <Grid Grid.Row="5" Grid.Column="0" Background="White" Margin="10,10,0,0" Width="200" HorizontalAlignment="Left">
                     <Grid.Effect>
                         <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
                     </Grid.Effect>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="105"/>
-                        <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="Дата рождения:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
                     <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14" 
                              Text="{Binding ApplicantVM.DateOfBirth, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}"/>
-                    <Button Grid.Column="2" Style="{StaticResource ButtonImage}" Content="/Common/Resources/Images/calendar.png" Height="24" Width="24" Margin="0,0,5,0"/>
                 </Grid>
 
                 <Grid Grid.Row="5" Grid.Column="1" Background="White" Margin="20,10,10,0" Width="110" HorizontalAlignment="Left">
@@ -797,20 +795,18 @@
                              Margin="10,5" FontSize="14" VerticalAlignment="Center" IsEnabled="{Binding Visual.IsEnabledTextBox}"/>
                 </Grid>
 
-                <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,0,0" Width="285" HorizontalAlignment="Left">
+                <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,0,0" Width="255" HorizontalAlignment="Left">
                     <Grid.Effect>
                         <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
                     </Grid.Effect>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="Гражданство действует с:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
                     <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14" 
                              Text="{Binding ApplicantVM.CitizenshipValidFrom, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}"/>
-                    <Button Grid.Column="2" Style="{StaticResource ButtonImage}" Content="/Common/Resources/Images/calendar.png" Height="24" Width="24" Margin="0,0,5,0"/>
                 </Grid>
 
             </Grid>

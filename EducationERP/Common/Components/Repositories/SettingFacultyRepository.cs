@@ -1,5 +1,6 @@
 ﻿using EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign;
 using Microsoft.EntityFrameworkCore;
+using System.Windows;
 
 namespace EducationERP.Common.Components.Repositories
 {
@@ -9,11 +10,13 @@ namespace EducationERP.Common.Components.Repositories
         {
             using (var db = new DataContext())
             {
-                return db.Faculties
-                    .Include(x => x.Levels)
-                    .ThenInclude(x => x.Directions)
-                    .ToArray()
-                    .Select(faculty =>
+                try
+                {
+                    return db.Faculties
+                        .Include(x => x.Levels)
+                        .ThenInclude(x => x.Directions)
+                        .ToArray()
+                        .Select(faculty =>
                     {
                         foreach (var level in faculty.Levels)
                         {
@@ -21,28 +24,51 @@ namespace EducationERP.Common.Components.Repositories
                         }
                         return faculty;
                     });
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка получения данных из базы данных!");
+                    return Enumerable.Empty<SettingFaculty>();
+                }
             }
         }
         public async Task<bool> Create<T>(T model) where T : class
         {
             using (var db = new DataContext())
             {
-                await db.Set<T>().AddAsync(model);
-                await db.SaveChangesAsync();
-                return true;
+                try
+                {
+                    await db.Set<T>().AddAsync(model);
+                    await db.SaveChangesAsync();
+                    return true;
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка добавления данных в базу данных!");
+                    return false;
+                }
             }
         }
         public async Task<bool> Delete<T>(Guid id) where T : class
         {
             using (var db = new DataContext()) 
             {
-                var entity = await db.Set<T>().FindAsync(id);
-                if (entity != null)
+                try
                 {
-                    db.Set<T>().Remove(entity);
-                    await db.SaveChangesAsync();
-                    return true;
+                    var entity = await db.Set<T>().FindAsync(id);
+                    if (entity != null)
+                    {
+                        db.Set<T>().Remove(entity);
+                        await db.SaveChangesAsync();
+                        return true;
+                    }
                 }
+                catch
+                {
+                    MessageBox.Show("Ошибка удаления данных из базы данных!");
+                    return false;
+                }
+
             }
 
             return false;
