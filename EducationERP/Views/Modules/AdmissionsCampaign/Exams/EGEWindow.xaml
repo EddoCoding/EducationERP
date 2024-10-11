@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationERP.Views.Modules.AdmissionsCampaign"
-        mc:Ignorable="d" Title="Добавление ЕГЭ" Height="150" Width="300" MouseDown="MoveWindow"
+        mc:Ignorable="d" Title="Добавление ЕГЭ" Height="140" Width="350" MouseDown="MoveWindow"
         Background="WhiteSmoke" FontFamily="{StaticResource OpenSans}" WindowStyle="None" 
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" RenderOptions.BitmapScalingMode="NearestNeighbor"
         BorderBrush="LightGray" BorderThickness="1">
