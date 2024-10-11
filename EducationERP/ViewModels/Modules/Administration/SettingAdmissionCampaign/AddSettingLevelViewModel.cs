@@ -26,12 +26,12 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaig
             ExitCommand = RaketaCommand.Launch(CloseWindow);
         }
 
-        void AddLevel(SettingLevelVM levelVM)
+        async void AddLevel(SettingLevelVM levelVM)
         {
             var isValidated = levelVM.Validation();
             if (isValidated)
             {
-                bool isAdded = _facultyRepository.Create<SettingLevel>(new SettingLevel
+                bool isAdded = await _facultyRepository.Create<SettingLevel>(new SettingLevel
                 {
                     Id = levelVM.Id,
                     NameLevel = levelVM.NameLevel,

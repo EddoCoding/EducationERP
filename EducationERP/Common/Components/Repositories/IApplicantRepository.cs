@@ -2,6 +2,6 @@
 {
     public interface IApplicantRepository
     {
-        bool Create<T>(T model) where T: class;
+        Task<bool> Create<T>(T model) where T: class;
     }
 }

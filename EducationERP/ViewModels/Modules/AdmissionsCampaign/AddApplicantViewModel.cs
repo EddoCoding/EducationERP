@@ -128,7 +128,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             _serviceView.Window<AddExamViewModel>(null, exams).Modal();
         void DeleteExam(ExamVM examVM) => ApplicantVM.Exams.Remove(examVM);
 
-        void CreatePersonalFile(ApplicantVM applicantVM)
+        async void CreatePersonalFile(ApplicantVM applicantVM)
         {
             bool isValidated = applicantVM.Validation();
             if (isValidated)
@@ -158,7 +158,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                     TotalPoints = applicantVM.TotalPoints,
                     PointsDistinctiveFeatures = applicantVM.PointsDistinctiveFeatures
                 };
-                _applicantRepository.Create<Applicant>(applicant);
+                await _applicantRepository.Create<Applicant>(applicant);
 
                 //Перебор документов
                 foreach (var document in applicantVM.Documents)
@@ -182,7 +182,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                             AdditionalInformation = passportVM.AdditionalInformation,
                             ApplicantId = applicant.Id
                         };
-                        _applicantRepository.Create<Passport>(passport);
+                        await _applicantRepository.Create<Passport>(passport);
                     }
                     else if (document is SnilsViewModel snilsVM)
                     {
@@ -201,7 +201,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                             AdditionalInformation = snilsVM.AdditionalInformation,
                             ApplicantId = applicant.Id
                         };
-                        _applicantRepository.Create<Snils>(snils);
+                        await _applicantRepository.Create<Snils>(snils);
                     }
                     else if (document is InnViewModel innVM)
                     {
@@ -221,7 +221,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                             AdditionalInformation = innVM.AdditionalInformation,
                             ApplicantId = applicant.Id
                         };
-                        _applicantRepository.Create<Inn>(inn);
+                        await _applicantRepository.Create<Inn>(inn);
                     }
                     else if (document is ForeignPassportViewModel foreignPassportVM)
                     {
@@ -241,7 +241,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                             AdditionalInformation = foreignPassportVM.AdditionalInformation,
                             ApplicantId = applicant.Id
                         };
-                        _applicantRepository.Create<ForeignPassport>(foreignPassport);
+                        await _applicantRepository.Create<ForeignPassport>(foreignPassport);
                     }
                 }
 
@@ -262,7 +262,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                             AdditionalInformation = educationNineVM.AdditionalInformation,
                             ApplicantId = applicant.Id
                         };
-                        _applicantRepository.Create<EducationNine>(educationNine);
+                        await _applicantRepository.Create<EducationNine>(educationNine);
                     }
                     else if (education is EducationElevenViewModel educationElevenVM)
                     {
@@ -278,7 +278,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                             AdditionalInformation = educationElevenVM.AdditionalInformation,
                             ApplicantId = applicant.Id
                         };
-                        _applicantRepository.Create<EducationEleven>(educationEleven);
+                        await _applicantRepository.Create<EducationEleven>(educationEleven);
                     }
                     else if (education is EducationSpoViewModel educationSpoVM)
                     {
@@ -299,7 +299,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                             AdditionalInformation = educationSpoVM.AdditionalInformation,
                             ApplicantId = applicant.Id
                         };
-                        _applicantRepository.Create<EducationSPO>(educationSpo);
+                        await _applicantRepository.Create<EducationSPO>(educationSpo);
                     }
                     else if (education is EducationBakViewModel educationBakVM)
                     {
@@ -320,7 +320,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                             AdditionalInformation = educationBakVM.AdditionalInformation,
                             ApplicantId = applicant.Id
                         };
-                        _applicantRepository.Create<EducationBak>(educationBak);
+                        await _applicantRepository.Create<EducationBak>(educationBak);
                     }
                     else if (education is EducationMagViewModel educationMagVM)
                     {
@@ -341,7 +341,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                             AdditionalInformation = educationMagVM.AdditionalInformation,
                             ApplicantId = applicant.Id
                         };
-                        _applicantRepository.Create<EducationMag>(educationMag);
+                        await _applicantRepository.Create<EducationMag>(educationMag);
                     }
                     else if (education is EducationAspViewModel educationAspVM)
                     {
@@ -362,7 +362,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                             AdditionalInformation = educationAspVM.AdditionalInformation,
                             ApplicantId = applicant.Id
                         };
-                        _applicantRepository.Create<EducationAsp>(educationAsp);
+                        await _applicantRepository.Create<EducationAsp>(educationAsp);
                     }
                 }
 
@@ -378,7 +378,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                             SubjectScores = egeVM.SubjectScores,
                             ApplicantId = applicant.Id
                         };
-                        _applicantRepository.Create<EGE>(ege);
+                        await _applicantRepository.Create<EGE>(ege);
                     }
                 }
 
@@ -394,7 +394,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                             FeatureScore = distinguishingFeatureVM.FeatureScore,
                             ApplicantId = applicant.Id
                         };
-                        _applicantRepository.Create<DistinctiveFeature>(distinguishingFeature);
+                        await _applicantRepository.Create<DistinctiveFeature>(distinguishingFeature);
                     }
                 }
 
@@ -416,7 +416,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                             NameFormPayment = directionVM.NameFormPayment,
                             ApplicantId = applicant.Id
                         };
-                        _applicantRepository.Create<SelectedDirection>(direction);
+                        await _applicantRepository.Create<SelectedDirection>(direction);
                     }
                 }
 
@@ -437,7 +437,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                             SubjectScores = examVM.SubjectScores,
                             ApplicantId = applicant.Id
                         };
-                        _applicantRepository.Create<Exam>(exam);
+                        await _applicantRepository.Create<Exam>(exam);
                     }
                 }
 

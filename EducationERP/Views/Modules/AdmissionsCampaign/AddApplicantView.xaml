@@ -794,7 +794,7 @@
                                  IsChecked="{Binding ApplicantVM.IsForeign}" Command="{Binding CitizenshipCommand}"/>
                     
                     <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ApplicantVM.Citizenship}" Style="{StaticResource CustomTextBox}" 
-                             Margin="10,5" FontSize="14" VerticalAlignment="Bottom" IsEnabled="{Binding Visual.IsEnabledTextBox}"/>
+                             Margin="10,5" FontSize="14" VerticalAlignment="Center" IsEnabled="{Binding Visual.IsEnabledTextBox}"/>
                 </Grid>
 
                 <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,0,0" Width="285" HorizontalAlignment="Left">

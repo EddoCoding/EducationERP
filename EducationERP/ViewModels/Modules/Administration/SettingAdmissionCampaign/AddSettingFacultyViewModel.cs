@@ -27,12 +27,12 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaig
             ExitCommand = RaketaCommand.Launch(CloseWindow);
         }
 
-        void AddFaculty(SettingFacultyVM facultyVM)
+        async void AddFaculty(SettingFacultyVM facultyVM)
         {
             var isValidated = facultyVM.Validation();
             if (isValidated)
             {
-                bool isAdded = _facultyRepository.Create<SettingFaculty>(new SettingFaculty
+                bool isAdded = await _facultyRepository.Create<SettingFaculty>(new SettingFaculty
                 {
                     Id = facultyVM.Id,
                     NameFaculty = facultyVM.NameFaculty

@@ -68,9 +68,9 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaig
 
         void OpenWindowAddFaculty(ObservableCollection<SettingFacultyVM> faculties) => 
             _serviceView.Window<AddSettingFacultyViewModel>(null, faculties).Modal();
-        void DeleteFaculty(SettingFacultyVM facultyVM)
+        async void DeleteFaculty(SettingFacultyVM facultyVM)
         {
-            bool isDeleted = _facultyRepository.Delete<SettingFaculty>(facultyVM.Id);
+            bool isDeleted = await _facultyRepository.Delete<SettingFaculty>(facultyVM.Id);
             if (isDeleted)
             {
                 foreach(var faculty in Faculties)
@@ -83,9 +83,9 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaig
         }
         void OpenWindowAddLevel(SettingFacultyVM facultyVM) => 
             _serviceView.Window<AddSettingLevelViewModel>(null, facultyVM).Modal();
-        void DeleteLevel(SettingLevelVM levelVM)
+        async void DeleteLevel(SettingLevelVM levelVM)
         {
-            bool isDeleted = _facultyRepository.Delete<SettingLevel>(levelVM.Id);
+            bool isDeleted = await _facultyRepository.Delete<SettingLevel>(levelVM.Id);
             if (isDeleted)
             {
                 foreach (var faculty in Faculties)
@@ -100,9 +100,9 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaig
         }
         void OpenWindowAddDirection(SettingLevelVM levelVM) => 
             _serviceView.Window<AddSettingDirectionViewModel>(null, levelVM).Modal();
-        void DeleteDirection(SettingDirectionVM directionVM)
+        async void DeleteDirection(SettingDirectionVM directionVM)
         {
-            bool isDeleted = _facultyRepository.Delete<SettingDirection>(directionVM.Id);
+            bool isDeleted = await _facultyRepository.Delete<SettingDirection>(directionVM.Id);
             if (isDeleted)
             {
                 foreach (var faculty in Faculties)

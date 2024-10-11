@@ -31,12 +31,12 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaig
 
         void SelectFormEducation(string nameFormEducation) => DirectionVM.NameFormEducation = nameFormEducation;
         void SelectFormPayment(string nameFormPayment) => DirectionVM.NameFormPayment = nameFormPayment;
-        void AddDirection(SettingDirectionVM directionVM)
+        async void AddDirection(SettingDirectionVM directionVM)
         {
             var isValidated = directionVM.Validation();
             if (isValidated)
             {
-                bool isAdded = _facultyRepository.Create<SettingDirection>(new SettingDirection
+                bool isAdded = await _facultyRepository.Create<SettingDirection>(new SettingDirection
                 {
                     Id = directionVM.Id,
                     CodeDirection = directionVM.CodeDirection,

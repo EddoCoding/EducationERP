@@ -2,16 +2,14 @@
 {
     public class ApplicantRepository : IApplicantRepository
     {
-        public bool Create<T>(T model) where T : class
+        public async Task<bool> Create<T>(T model) where T : class
         {
             using (var db = new DataContext())
             {
-                db.Set<T>().Add(model);
-                db.SaveChanges();
+                await db.Set<T>().AddAsync(model);
+                await db.SaveChangesAsync();
                 return true;
             }
-
-            return false;
         }
     }
 }
