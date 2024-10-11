@@ -7,7 +7,7 @@ namespace EducationERP.Common.Components.Services
     {
         ObservableCollection<TabItemViewModel> Tabs { get; set; }
 
-        void CreateTab<ViewModel>(string title);
+        void CreateTab<ViewModel>(string title, string[] identifier = null, params object[] args);
         void RemoveTab(TabItemViewModel tab);
         void RemoveTab();
     }

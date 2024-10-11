@@ -125,6 +125,34 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="ListViewApplicantItem" TargetType="ListViewItem">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <Grid Background="{TemplateBinding Background}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="{Binding SurName}" Margin="5,3,0,3"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Name}" Margin="5,3,0,3"/>
+                            <TextBlock Grid.Column="2" Text="{Binding MiddleName}" Margin="5,3,0,3"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="WhiteSmoke"/>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Background" Value="WhiteSmoke"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     
     <Grid Background="White">
@@ -175,7 +203,8 @@
 
             </Grid>
 
-            <ListView Grid.Row="1" Grid.Column="0" Margin="10,0" ItemsSource="{Binding Applicants}" SelectedItem="{Binding SelectedApplicant}"/>
+            <ListView Grid.Row="1" Grid.Column="0" Margin="10,0" ItemContainerStyle="{StaticResource ListViewApplicantItem}"
+                      ItemsSource="{Binding Applicants}" SelectedItem="{Binding SelectedApplicant}"/>
 
             <StackPanel Grid.Row="2" Background="White" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
                 <StackPanel.Effect>
@@ -184,15 +213,16 @@
 
                 <Button Content="/Common/Resources/Images/addPersonalFile.png" Style="{StaticResource ButtonImage}" Height="24" Width="24" 
                         VerticalAlignment="Top" Margin="10" ToolTip="Создать личное дело абитуриента"
-                        Command="{Binding OpenTabPersonalFileCommand}"/>
+                        Command="{Binding OpenTabPersonalFileCommand}"
+                        CommandParameter="{Binding Applicants}"/>
 
                 <Button Content="/Common/Resources/Images/changePersonalFile.png" Style="{StaticResource ButtonImage}" Height="24" Width="24"
                         VerticalAlignment="Top" Margin="10" ToolTip="Изменить личное дело"
-                        Command="{Binding ChangePersonalFileCommand}" CommandParameter="{Binding SelectedApplicant}"/>
+                        Command="{Binding ChangePersonalFileCommand}" CommandParameter="{Binding .}"/>
 
                 <Button Content="/Common/Resources/Images/deletePersonalFile.png" Style="{StaticResource ButtonImage}" Height="24" Width="24" 
                         VerticalAlignment="Top" Margin="10" ToolTip="Удалить личное дело"
-                        Command="{Binding DeletePersonalFileCommand}" CommandParameter="{Binding SelectedApplicant}"/>
+                        Command="{Binding DeletePersonalFileCommand}"/>
 
                 <Button Content="/Common/Resources/Images/update.png" Style="{StaticResource ButtonImage}" Height="24" Width="24" 
                         VerticalAlignment="Top" Margin="10" ToolTip="Обновить список абитуриентов"

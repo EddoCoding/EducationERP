@@ -21,9 +21,9 @@ namespace EducationERP.Common.Components.Services
             _serviceView = serviceView;
             Tabs.CollectionChanged += OnTabsChanged;
         }
-        public void CreateTab<ViewModel>(string title)
+        public void CreateTab<ViewModel>(string title, string[] identifier = null, params object[] args)
         {
-            var uc = _serviceView.UserControl<ViewModel>();
+            var uc = _serviceView.UserControl<ViewModel>(identifier, args);
             var tab = new TabItemViewModel(title, uc);
             Tabs.Add(tab);
             SeletedTab = tab;

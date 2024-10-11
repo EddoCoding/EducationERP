@@ -1,10 +1,6 @@
-﻿using EducationERP.Common.Components;
-using EducationERP.Common.Components.Repositories;
+﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
 using EducationERP.Common.ToolsDev;
-using EducationERP.Models.Modules.AdmissionsCampaign;
-using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
-using Microsoft.EntityFrameworkCore;
 using Raketa;
 using System.Collections.ObjectModel;
 
@@ -13,10 +9,10 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
     public class AdmissionsCampaignViewModel : RaketaViewModel
     {
         public ObservableCollection<ApplicantVM> Applicants { get; set; } = new();
-        public ApplicantVM SelectedApplicant { get; set; }
+        public ApplicantVM SelectedApplicant { get; set; } = new();
 
         public RaketaCommand ExitCommand { get; set; }
-        public RaketaCommand OpenTabPersonalFileCommand { get; set; }
+        public RaketaTCommand<ObservableCollection<ApplicantVM>> OpenTabPersonalFileCommand { get; set; }
         public RaketaCommand ChangePersonalFileCommand { get; set; }
         public RaketaCommand DeletePersonalFileCommand { get; set; }
         public RaketaCommand UpdatePersonalFileCommand { get; set; }
@@ -93,16 +89,18 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             #endregion
 
             ExitCommand = RaketaCommand.Launch(CloseTab);
-            OpenTabPersonalFileCommand = RaketaCommand.Launch(CreatePersonalFile);
+            OpenTabPersonalFileCommand = RaketaTCommand<ObservableCollection<ApplicantVM>>.Launch(CreatePersonalFile);
             ChangePersonalFileCommand = RaketaCommand.Launch(ChangePersonalFile);
             DeletePersonalFileCommand = RaketaCommand.Launch(DeletePersonalFile);
             UpdatePersonalFileCommand = RaketaCommand.Launch(UpdatePersonalFile);
         }
 
-        void CloseTab() => _tabControl.RemoveTab();
-        void CreatePersonalFile() => _tabControl.CreateTab<AddApplicantViewModel>("Добавление абитуриента");
+        void CreatePersonalFile(ObservableCollection<ApplicantVM> applicants) => 
+            _tabControl.CreateTab<AddApplicantViewModel>("Добавление абитуриента", null, applicants);
         void ChangePersonalFile() => Dev.NotReady("Изменение личного дела");
-        void DeletePersonalFile() => Dev.NotReady("Удаление личного дела");
+        void DeletePersonalFile() => Applicants.Remove(SelectedApplicant);
         void UpdatePersonalFile() => Dev.NotReady("Обновление личных дел");
+
+        void CloseTab() => _tabControl.RemoveTab();
     }
 }

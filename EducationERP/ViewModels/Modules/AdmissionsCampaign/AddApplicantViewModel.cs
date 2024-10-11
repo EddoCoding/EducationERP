@@ -53,11 +53,14 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         IServiceView _serviceView;
         ITabControl _tabControl;
         IApplicantRepository _applicantRepository;
-        public AddApplicantViewModel(IServiceView serviceView, ITabControl tabControl, IApplicantRepository applicantRepository)
+        ObservableCollection<ApplicantVM> _applicants;
+        public AddApplicantViewModel(IServiceView serviceView, ITabControl tabControl, IApplicantRepository applicantRepository,
+            ObservableCollection<ApplicantVM> applicants)
         {
             _serviceView = serviceView;
             _tabControl = tabControl;
             _applicantRepository = applicantRepository;
+            _applicants = applicants;
 
             ExitCommand = RaketaCommand.Launch(CloseTab);
             CitizenshipCommand = RaketaCommand.Launch(Citizenship);
@@ -440,6 +443,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                         await _applicantRepository.Create<Exam>(exam);
                     }
                 }
+
+                _applicants.Add(applicantVM);
 
                 CloseTab();
             }
