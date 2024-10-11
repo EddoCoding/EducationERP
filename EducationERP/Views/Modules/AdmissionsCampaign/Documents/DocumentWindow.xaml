@@ -43,7 +43,7 @@
 
                 <TextBlock Grid.Column="0" Text="Документ" Foreground="Gray" FontSize="13" Margin="10,5" VerticalAlignment="Center"/>
                 <ComboBox Grid.Column="1" Style="{StaticResource ComboBoxCustom}" ItemContainerStyle="{StaticResource ComboBoxItemCustom}" 
-                      ItemsSource="{Binding Documents}" SelectedItem="{Binding SelectedDocument}" Width="160">
+                      ItemsSource="{Binding Documents}" SelectedItem="{Binding SelectedDocument}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding TypeDocument}" />

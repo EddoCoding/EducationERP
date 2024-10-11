@@ -10,8 +10,6 @@ using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams;
 using Raketa;
 using System.Collections.ObjectModel;
-using System.Reflection;
-using System.Xml.Linq;
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 {
@@ -35,8 +33,18 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             _tabControl = tabControl;
             _applicantRepository = applicantRepository;
 
-            //Получение абитуриентов
-            foreach(var applicant in applicantRepository.Read())
+            GetApplicant();
+
+            ExitCommand = RaketaCommand.Launch(CloseTab);
+            OpenTabPersonalFileCommand = RaketaTCommand<ObservableCollection<ApplicantVM>>.Launch(CreatePersonalFile);
+            ChangePersonalFileCommand = RaketaCommand.Launch(ChangePersonalFile);
+            DeletePersonalFileCommand = RaketaCommand.Launch(DeletePersonalFile);
+            UpdatePersonalFileCommand = RaketaCommand.Launch(UpdatePersonalFile);
+        }
+
+        void GetApplicant()
+        {
+            foreach (var applicant in _applicantRepository.Read())
             {
                 var applicantVM = new ApplicantVM
                 {
@@ -71,9 +79,9 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                     Exams = new()
                 };
                 //Перебор документов
-                foreach(var document in applicant.Documents)
+                foreach (var document in applicant.Documents)
                 {
-                    if(document is Passport passport)
+                    if (document is Passport passport)
                     {
                         var passportVM = new PassportViewModel
                         {
@@ -93,7 +101,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                         };
                         applicantVM.Documents.Add(passportVM);
                     }
-                    if(document is Snils snils)
+                    if (document is Snils snils)
                     {
                         var snilsVM = new SnilsViewModel
                         {
@@ -111,7 +119,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                         };
                         applicantVM.Documents.Add(snilsVM);
                     }
-                    if(document is Inn inn)
+                    if (document is Inn inn)
                     {
                         var innVM = new InnViewModel
                         {
@@ -130,7 +138,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                         };
                         applicantVM.Documents.Add(innVM);
                     }
-                    if(document is ForeignPassport foreignPassport)
+                    if (document is ForeignPassport foreignPassport)
                     {
                         var foreignPassportVM = new ForeignPassportViewModel
                         {
@@ -153,7 +161,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 //Перебор образований
                 foreach (var education in applicant.Educations)
                 {
-                    if(education is EducationNine educationNine)
+                    if (education is EducationNine educationNine)
                     {
                         var educationNineVM = new EducationNineViewModel
                         {
@@ -265,7 +273,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                     }
                 }
                 //Перебор ЕГЭ
-                foreach (var ege in applicant.EGES) 
+                foreach (var ege in applicant.EGES)
                 {
                     var egeVM = new EGEVM
                     {
@@ -287,7 +295,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                     applicantVM.DistinguishingFeatures.Add(distinguishingFeaturesVM);
                 }
                 //Перебор выбранных направлений
-                foreach(var direction in applicant.DirectionsOfTraining)
+                foreach (var direction in applicant.DirectionsOfTraining)
                 {
                     var directionVM = new SelectedDirectionVM
                     {
@@ -304,7 +312,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                     applicantVM.DirectionsOfTraining.Add(directionVM);
                 }
                 //Перебор экзаменов/испытаний
-                foreach(var exam in applicant.Exams)
+                foreach (var exam in applicant.Exams)
                 {
                     var examVM = new ExamVM
                     {
@@ -322,14 +330,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 
                 Applicants.Add(applicantVM);
             }
-
-            ExitCommand = RaketaCommand.Launch(CloseTab);
-            OpenTabPersonalFileCommand = RaketaTCommand<ObservableCollection<ApplicantVM>>.Launch(CreatePersonalFile);
-            ChangePersonalFileCommand = RaketaCommand.Launch(ChangePersonalFile);
-            DeletePersonalFileCommand = RaketaCommand.Launch(DeletePersonalFile);
-            UpdatePersonalFileCommand = RaketaCommand.Launch(UpdatePersonalFile);
         }
-
         void CreatePersonalFile(ObservableCollection<ApplicantVM> applicants) => 
             _tabControl.CreateTab<AddApplicantViewModel>("Добавление абитуриента", null, applicants);
         void ChangePersonalFile() => Dev.NotReady("Изменение личного дела");
@@ -338,7 +339,11 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             bool isDeleted = await _applicantRepository.Delete<Applicant>(SelectedApplicant.Id);
             if (isDeleted) Applicants.Remove(SelectedApplicant);
         }
-        void UpdatePersonalFile() => Dev.NotReady("Обновление личных дел");
+        void UpdatePersonalFile()
+        {
+            Applicants.Clear();
+            GetApplicant();
+        }
 
         void CloseTab() => _tabControl.RemoveTab();
     }
