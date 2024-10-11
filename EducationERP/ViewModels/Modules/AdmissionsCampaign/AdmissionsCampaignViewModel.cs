@@ -1,6 +1,7 @@
 ﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
 using EducationERP.Common.ToolsDev;
+using EducationERP.Models.Modules.AdmissionsCampaign;
 using Raketa;
 using System.Collections.ObjectModel;
 
@@ -98,7 +99,11 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         void CreatePersonalFile(ObservableCollection<ApplicantVM> applicants) => 
             _tabControl.CreateTab<AddApplicantViewModel>("Добавление абитуриента", null, applicants);
         void ChangePersonalFile() => Dev.NotReady("Изменение личного дела");
-        void DeletePersonalFile() => Applicants.Remove(SelectedApplicant);
+        async void DeletePersonalFile()
+        {
+            bool isDeleted = await _applicantRepository.Delete<Applicant>(SelectedApplicant.Id);
+            if (isDeleted) Applicants.Remove(SelectedApplicant);
+        }
         void UpdatePersonalFile() => Dev.NotReady("Обновление личных дел");
 
         void CloseTab() => _tabControl.RemoveTab();

@@ -11,5 +11,20 @@
                 return true;
             }
         }
+        public async Task<bool> Delete<T>(Guid id) where T : class
+        {
+            using (var db = new DataContext())
+            {
+                var entity = await db.Set<T>().FindAsync(id);
+                if (entity != null)
+                {
+                    db.Set<T>().Remove(entity);
+                    await db.SaveChangesAsync();
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
