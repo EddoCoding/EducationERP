@@ -11,6 +11,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams
         public string LocationExam { get; set; } = string.Empty;
         public bool IsSpecial { get; set; }
         public string AdditionalIformation { get; set; } = string.Empty;
+        public int SubjectScores { get; set; }
 
         public bool Validation()
         {

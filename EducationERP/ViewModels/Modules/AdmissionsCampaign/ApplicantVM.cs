@@ -94,12 +94,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                     if (oldItem is DistinctiveFeatureVM distinctiveFeature) PointsDistinctiveFeatures -= distinctiveFeature.FeatureScore;
         }
 
-        public void Dispose()
-        {
-            EGES.CollectionChanged -= ChangeValueTotalPoints;
-            DistinguishingFeatures.CollectionChanged -= ChangeValuePointsDistinctiveFeatures;
-        }
-
         public bool Validation()
         {
             //Валидация личных данных
@@ -128,13 +122,16 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 MessageBox.Show("Введите место рождения!");
                 return false;
             }
-            //Сделать проверку на название гражданства 
+            if (String.IsNullOrWhiteSpace(Citizenship))
+            {
+                MessageBox.Show("Введите гражданство!");
+                return false;
+            }
             if (CitizenshipValidFrom == default || CitizenshipValidFrom > DateOnly.FromDateTime(DateTime.Now))
             {
                 MessageBox.Show("С какой даты действует гражданство не указано или указано неверно!");
                 return false;
             }
-
             //Валидация контактных данных
             if (String.IsNullOrWhiteSpace(ResidentialAddress))
             {
@@ -153,6 +150,19 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             }
 
             return true;
+        }
+
+        public void Dispose()
+        {
+            if(Documents.Count > 0) Documents.Clear();
+            if(Educations.Count > 0) Educations.Clear();
+            if(EGES.Count > 0) EGES.Clear();
+            if(DistinguishingFeatures.Count > 0) DistinguishingFeatures.Clear();
+            if(DirectionsOfTraining.Count > 0) DirectionsOfTraining.Clear();
+            if(Exams.Count > 0) Exams.Clear();
+
+            EGES.CollectionChanged -= ChangeValueTotalPoints;
+            DistinguishingFeatures.CollectionChanged -= ChangeValuePointsDistinctiveFeatures;
         }
     }
 }
