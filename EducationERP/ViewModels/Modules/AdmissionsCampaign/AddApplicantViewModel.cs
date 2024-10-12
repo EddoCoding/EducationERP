@@ -166,29 +166,29 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 {
                     //Перебор документов
                     foreach (var document in applicantVM.Documents)
-                {
-                    if (document is PassportViewModel passportVM)
                     {
-                        var passport = new Passport
+                        if (document is PassportViewModel passportVM)
                         {
-                            Id = passportVM.Id,
-                            TypeDocument = passportVM.TypeDocument,
-                            SurName = passportVM.SurName,
-                            Name = passportVM.Name,
-                            MiddleName = passportVM.MiddleName,
-                            Gender = passportVM.Gender,
-                            DateOfBirth = passportVM.DateOfBirth,
-                            PlaceOfBirth = passportVM.PlaceOfBirth,
-                            IssuedBy = passportVM.IssuedBy,
-                            DateOfIssue = passportVM.DateOfIssue,
-                            DepartmentCode = passportVM.DepartmentCode,
-                            SeriesNumber = passportVM.SeriesNumber,
-                            AdditionalInformation = passportVM.AdditionalInformation,
-                            ApplicantId = applicant.Id
-                        };
-                        await _applicantRepository.Create<Passport>(passport);
-                    }
-                    else if (document is SnilsViewModel snilsVM)
+                            var passport = new Passport
+                            {
+                                Id = passportVM.Id,
+                                TypeDocument = passportVM.TypeDocument,
+                                SurName = passportVM.SurName,
+                                Name = passportVM.Name,
+                                MiddleName = passportVM.MiddleName,
+                                Gender = passportVM.Gender,
+                                DateOfBirth = passportVM.DateOfBirth,
+                                PlaceOfBirth = passportVM.PlaceOfBirth,
+                                IssuedBy = passportVM.IssuedBy,
+                                DateOfIssue = passportVM.DateOfIssue,
+                                DepartmentCode = passportVM.DepartmentCode,
+                                SeriesNumber = passportVM.SeriesNumber,
+                                AdditionalInformation = passportVM.AdditionalInformation,
+                                ApplicantId = applicant.Id
+                            };
+                            await _applicantRepository.Create<Passport>(passport);
+                        }
+                        else if (document is SnilsViewModel snilsVM)
                     {
                         var snils = new Snils
                         {
@@ -207,7 +207,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                         };
                         await _applicantRepository.Create<Snils>(snils);
                     }
-                    else if (document is InnViewModel innVM)
+                        else if (document is InnViewModel innVM)
                     {
                         var inn = new Inn
                         {
@@ -227,7 +227,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                         };
                         await _applicantRepository.Create<Inn>(inn);
                     }
-                    else if (document is ForeignPassportViewModel foreignPassportVM)
+                        else if (document is ForeignPassportViewModel foreignPassportVM)
                     {
                         var foreignPassport = new ForeignPassport
                         {
@@ -247,12 +247,12 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                         };
                         await _applicantRepository.Create<ForeignPassport>(foreignPassport);
                     }
-                }
+                    }
 
                     //Перебор образований
                     foreach (var education in applicantVM.Educations)
-                {
-                    if (education is EducationNineViewModel educationNineVM)
+                    {
+                        if (education is EducationNineViewModel educationNineVM)
                     {
                         var educationNine = new EducationNine
                         {
@@ -268,7 +268,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                         };
                         await _applicantRepository.Create<EducationNine>(educationNine);
                     }
-                    else if (education is EducationElevenViewModel educationElevenVM)
+                        else if (education is EducationElevenViewModel educationElevenVM)
                     {
                         var educationEleven = new EducationEleven
                         {
@@ -284,7 +284,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                         };
                         await _applicantRepository.Create<EducationEleven>(educationEleven);
                     }
-                    else if (education is EducationSpoViewModel educationSpoVM)
+                        else if (education is EducationSpoViewModel educationSpoVM)
                     {
                         var educationSpo = new EducationSPO
                         {
@@ -305,7 +305,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                         };
                         await _applicantRepository.Create<EducationSPO>(educationSpo);
                     }
-                    else if (education is EducationBakViewModel educationBakVM)
+                        else if (education is EducationBakViewModel educationBakVM)
                     {
                         var educationBak = new EducationBak
                         {
@@ -326,7 +326,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                         };
                         await _applicantRepository.Create<EducationBak>(educationBak);
                     }
-                    else if (education is EducationMagViewModel educationMagVM)
+                        else if (education is EducationMagViewModel educationMagVM)
                     {
                         var educationMag = new EducationMag
                         {
@@ -347,7 +347,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                         };
                         await _applicantRepository.Create<EducationMag>(educationMag);
                     }
-                    else if (education is EducationAspViewModel educationAspVM)
+                        else if (education is EducationAspViewModel educationAspVM)
                     {
                         var educationAsp = new EducationAsp
                         {
@@ -368,7 +368,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                         };
                         await _applicantRepository.Create<EducationAsp>(educationAsp);
                     }
-                }
+                    }
 
                     //Перебор ЕГЭ
                     if (applicantVM.TotalPoints > 0)
@@ -447,7 +447,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 
                     _applicants.Add(applicantVM);
 
-                    CloseTab();
+                   CloseTab();
                 }
             }
         }

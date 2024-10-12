@@ -15,8 +15,14 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 {
     public class AdmissionsCampaignViewModel : RaketaViewModel
     {
+        ApplicantVM _selectedApplicant;
+
         public ObservableCollection<ApplicantVM> Applicants { get; set; } = new();
-        public ApplicantVM SelectedApplicant { get; set; } = new();
+        public ApplicantVM SelectedApplicant
+        {
+            get => _selectedApplicant;
+            set => SetValue(ref _selectedApplicant, value);
+        }
 
         public RaketaCommand ExitCommand { get; set; }
         public RaketaTCommand<ObservableCollection<ApplicantVM>> OpenTabPersonalFileCommand { get; set; }
@@ -336,8 +342,11 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         void ChangePersonalFile() => Dev.NotReady("Изменение личного дела");
         async void DeletePersonalFile()
         {
-            bool isDeleted = await _applicantRepository.Delete<Applicant>(SelectedApplicant.Id);
-            if (isDeleted) Applicants.Remove(SelectedApplicant);
+            if(SelectedApplicant != null)
+            {
+                bool isDeleted = await _applicantRepository.Delete<Applicant>(SelectedApplicant.Id);
+                if (isDeleted) Applicants.Remove(SelectedApplicant);
+            }
         }
         void UpdatePersonalFile()
         {

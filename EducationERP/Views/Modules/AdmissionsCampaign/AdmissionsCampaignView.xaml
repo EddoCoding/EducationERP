@@ -4,9 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EducationERP.Views.Modules.AdmissionsCampaign"
+             xmlns:converters="clr-namespace:EducationERP.Common.Converters"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:selectors="clr-namespace:EducationERP.Common.Selectors"
+             xmlns:viewModelDocuments="clr-namespace:EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800" FontFamily="{StaticResource OpenSans}">
     <UserControl.Resources>
+        <converters:DateOnlyToDateOnlyConverter x:Key="DateOnlyToDateOnly"/>
+        
         <Style x:Key="RepeatButtonTransparent" TargetType="RepeatButton">
             <Setter Property="OverridesDefaultStyle" Value="true"/>
             <Setter Property="Background" Value="Transparent"/>
@@ -153,11 +158,257 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <DataTemplate x:Key="Passport">
+            <TextBlock Text="{Binding TypeDocument}" FontSize="13" Margin="2"/>
+        </DataTemplate>
+        <DataTemplate x:Key="Snils">
+            <TextBlock Text="{Binding TypeDocument}" FontSize="13" Margin="2"/>
+        </DataTemplate>
+        <DataTemplate x:Key="Inn">
+            <TextBlock Text="{Binding TypeDocument}" FontSize="13" Margin="2"/>
+        </DataTemplate>
+        <DataTemplate x:Key="ForeignPassport">
+            <TextBlock Text="{Binding TypeDocument}" FontSize="13" Margin="2"/>
+        </DataTemplate>
+        <selectors:SelectorDocuments x:Key="SelectorDocuments" 
+                             TemplatePassport="{StaticResource Passport}"
+                             TemplateForeignPassport="{StaticResource ForeignPassport}"
+                             TemplateSnils="{StaticResource Snils}"
+                             TemplateInn="{StaticResource Inn}"/>
+
+        <DataTemplate DataType="{x:Type viewModelDocuments:PassportViewModel}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="5,5,0,3" Text="Информация о документе" FontWeight="Bold"/>
+                    <Line Grid.Row="1" X1="0" X2="1" Y1="0" Y2="0" StrokeThickness="1" Stroke="Black" Stretch="Fill" Margin="5,0"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5,5,5,0">
+                        <TextBlock Text="ФИО:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SurName}" Margin="3,0,0,0"/>
+                        <TextBlock Text="{Binding Name}" Margin="3,0,0,0"/>
+                        <TextBlock Text="{Binding MiddleName}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата рождения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfBirth, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Пол:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Gender}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Место рождения:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding PlaceOfBirth}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Выдан кем:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IssuedBy}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата выдачи:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfIssue, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Код подразделения:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DepartmentCode}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Серия и номер:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SeriesNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="5,0,5,5">
+                        <TextBlock Text="Дополнительная информация:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding AdditionalInformation}" Margin="3,0,0,0" Width="400" TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelDocuments:SnilsViewModel}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="5,5,0,3" Text="Информация о документе" FontWeight="Bold"/>
+                    <Line Grid.Row="1" X1="0" X2="1" Y1="0" Y2="0" StrokeThickness="1" Stroke="Black" Stretch="Fill" Margin="5,0"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5,5,5,0">
+                        <TextBlock Text="ФИО:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SurName}" Margin="3,0,0,0"/>
+                        <TextBlock Text="{Binding Name}" Margin="3,0,0,0"/>
+                        <TextBlock Text="{Binding MiddleName}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата рождения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfBirth, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Пол:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Gender}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Место рождения:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding PlaceOfBirth}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Номер Снилс:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Number}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата регистрации:" FontWeight="Bold"/>
+                        <TextBlock Margin="3,0,0,0" Width="400" TextWrapping="Wrap"
+                           Text="{Binding RegistrationDate, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="5,0,5,5">
+                        <TextBlock Text="Дополнительная информация:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding AdditionalInformation}" Margin="3,0,0,0" Width="400" TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelDocuments:InnViewModel}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="5,5,0,3" Text="Информация о документе" FontWeight="Bold"/>
+                    <Line Grid.Row="1" X1="0" X2="1" Y1="0" Y2="0" StrokeThickness="1" Stroke="Black" Stretch="Fill" Margin="5,0"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5,5,5,0">
+                        <TextBlock Text="ФИО:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SurName}" Margin="3,0,0,0"/>
+                        <TextBlock Text="{Binding Name}" Margin="3,0,0,0"/>
+                        <TextBlock Text="{Binding MiddleName}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата рождения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfBirth, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Пол:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Gender}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Место рождения:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding PlaceOfBirth}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="ИНН:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding NumberINN}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата назначения:" FontWeight="Bold"/>
+                        <TextBlock Margin="3,0,0,0"
+                           Text="{Binding DateAssigned, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Серия и номер:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SeriesNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="5,0,5,5">
+                        <TextBlock Text="Дополнительная информация:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding AdditionalInformation}" Margin="3,0,0,0" Width="400" TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelDocuments:ForeignPassportViewModel}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="5,5,0,3" Text="Информация о документе" FontWeight="Bold"/>
+                    <Line Grid.Row="1" X1="0" X2="1" Y1="0" Y2="0" StrokeThickness="1" Stroke="Black" Stretch="Fill" Margin="5,0"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5,5,5,0">
+                        <TextBlock Text="ФИО:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SurName}" Margin="3,0,0,0"/>
+                        <TextBlock Text="{Binding Name}" Margin="3,0,0,0"/>
+                        <TextBlock Text="{Binding MiddleName}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата рождения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfBirth, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Пол:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Gender}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Место рождения:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding PlaceOfBirth}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Выдан кем:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IssuedBy}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата выдачи:" FontWeight="Bold"/>
+                        <TextBlock Margin="3,0,0,0"
+                           Text="{Binding DateOfIssue, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Серия и номер:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SeriesNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="5,0,5,5">
+                        <TextBlock Text="Дополнительная информация:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding AdditionalInformation}" Margin="3,0,0,0" Width="400" TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <Style x:Key="ToolTipDocumentInfo" TargetType="ToolTip">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToolTip">
+                        <ContentPresenter Content="{Binding}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -170,10 +421,10 @@
 
             <TextBlock Grid.Column="0" FontSize="15" Text="ПРИЁМНАЯ КАМПАНИЯ" Foreground="Black" VerticalAlignment="Center"/>
             <Button Grid.Column="1" Content="X" Style="{StaticResource ButtonExitUserControl}" FontSize="14"
-                    Margin="10,0,5,0" RenderOptions.BitmapScalingMode="Fant" Command="{Binding ExitCommand}" ToolTip="Закрыть вкладку"/>
+                    Margin="10,0" RenderOptions.BitmapScalingMode="Fant" Command="{Binding ExitCommand}" ToolTip="Закрыть вкладку"/>
         </Grid>
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -234,6 +485,131 @@
 
             </StackPanel>
 
+            <ScrollViewer Grid.RowSpan="3" Grid.Column="1" Background="White" Margin="0,10,10,20">
+                <ScrollViewer.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </ScrollViewer.Effect>
+                
+                <StackPanel Margin="0,0,30,10">
+
+                    <TextBlock Text="Личная информация" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
+                        <TextBlock Text="ФИО:" FontSize="14"/>
+                        <TextBlock Text="{Binding SelectedApplicant.SurName}" FontSize="14" Margin="5,0,0,0"/>
+                        <TextBlock Text="{Binding SelectedApplicant.Name}" Margin="5,0,0,0" FontSize="14"/>
+                        <TextBlock Text="{Binding SelectedApplicant.MiddleName}" Margin="5,0,0,0" FontSize="14"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
+                        <TextBlock Text="Дата рождения:" FontSize="14"/>
+                        <TextBlock Text="{Binding SelectedApplicant.DateOfBirth, StringFormat='dd.MM.yyyy',  Converter={StaticResource DateOnlyToDateOnly}}" 
+                            FontSize="14" Margin="5,0,0,0"/>
+                        <TextBlock Text="Пол:" FontSize="14" Margin="5,0,0,0"/>
+                        <TextBlock Text="{Binding SelectedApplicant.Gender}" 
+                            FontSize="14" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
+                        <TextBlock Text="Место рождения:" FontSize="14"/>
+                        <TextBlock Text="{Binding SelectedApplicant.PlaceOfBirth}" FontSize="14" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
+                        <TextBlock Text="Гражданство:" FontSize="14"/>
+                        <TextBlock Text="{Binding SelectedApplicant.Citizenship}" FontSize="14" Margin="5,0,0,0"/>
+                        <TextBlock Text="Действует с:" FontSize="14" Margin="5,0,0,0"/>
+                        <TextBlock Text="{Binding SelectedApplicant.CitizenshipValidFrom, StringFormat='dd.MM.yyyy',  Converter={StaticResource DateOnlyToDateOnly}}" 
+                            FontSize="14" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                    <TextBlock Text="Контактная информация" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
+                        <TextBlock Text="Адрес проживания:" FontSize="14"/>
+                        <TextBlock Text="{Binding SelectedApplicant.ResidentialAddress}" FontSize="14" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
+                        <TextBlock Text="Адрес по прописке:" FontSize="14"/>
+                        <TextBlock Text="{Binding SelectedApplicant.AddressOfRegistration}" FontSize="14" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
+                        <TextBlock Text="Домашний телефон:" FontSize="14"/>
+                        <TextBlock Text="{Binding SelectedApplicant.HomePhone}" FontSize="14" Margin="5,0,0,0"/>
+                        <TextBlock Text="Мобильный телефон:" FontSize="14" Margin="5,0,0,0"/>
+                        <TextBlock Text="{Binding SelectedApplicant.MobilePhone}" FontSize="14" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
+                        <TextBlock Text="Почта:" FontSize="14"/>
+                        <TextBlock Text="{Binding SelectedApplicant.Mail}" FontSize="14" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
+                        <TextBlock Text="Доп. инфо.:" FontSize="14"/>
+                        <TextBlock Text="{Binding  SelectedApplicant.AdditionalInformation}" FontSize="14" Margin="5,0,0,0" TextWrapping="Wrap" MaxWidth="480"/>
+                    </StackPanel>
+
+                    <TextBlock Text="Документы" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
+                    
+                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.Documents}" ItemTemplateSelector="{StaticResource SelectorDocuments}"
+                              BorderBrush="LightGray" BorderThickness="0">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListViewItem">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <StackPanel>
+                                                    <ContentPresenter/>
+                                                    <Line StrokeThickness="1" Stroke="LightGray" Stretch="Fill" X1="1"/>
+                                                </StackPanel>
+                                                <Border.ToolTip>
+                                                    <ToolTip Style="{StaticResource ToolTipDocumentInfo}"/>
+                                                </Border.ToolTip>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="WhiteSmoke"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                    <TextBlock Text="Наведите на документ для доп. инфо." VerticalAlignment="Center" Margin="5,0,0,0" Foreground="Gray"/>
+
+                    <TextBlock Text="Образование" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
+                    <TextBlock Text="Наведите на образование для доп. инфо." VerticalAlignment="Center" Margin="5,0,0,0" Foreground="Gray"/>
+
+                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.Educations}"/>
+
+                    <TextBlock Text="ЕГЭ" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
+
+                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.EGES}"/>
+
+                    <TextBlock Text="Отличительные признаки" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
+
+                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.DistinguishingFeatures}"/>
+
+                    <TextBlock Text="Направления" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
+
+                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.DirectionsOfTraining}"/>
+
+                    <TextBlock Text="Экзамены/испытания" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
+
+                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.Exams}"/>
+
+                </StackPanel>
+                
+            </ScrollViewer>
+            
+            
+            
         </Grid>
         
     </Grid>

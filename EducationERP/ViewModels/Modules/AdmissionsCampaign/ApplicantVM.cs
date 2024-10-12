@@ -154,13 +154,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 
         public void Dispose()
         {
-            if(Documents.Count > 0) Documents.Clear();
-            if(Educations.Count > 0) Educations.Clear();
-            if(EGES.Count > 0) EGES.Clear();
-            if(DistinguishingFeatures.Count > 0) DistinguishingFeatures.Clear();
-            if(DirectionsOfTraining.Count > 0) DirectionsOfTraining.Clear();
-            if(Exams.Count > 0) Exams.Clear();
-
             EGES.CollectionChanged -= ChangeValueTotalPoints;
             DistinguishingFeatures.CollectionChanged -= ChangeValuePointsDistinctiveFeatures;
         }
