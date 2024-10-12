@@ -131,7 +131,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             ApplicantVM.DirectionsOfTraining.Remove(selectedDirectionVM);
 
         void OpenWindowAddExam(ObservableCollection<ExamVM> exams) => 
-            _serviceView.Window<AddExamViewModel>(null, exams).Modal();
+            _serviceView.Window<AddExamViewModel>(null, exams, null, false).Modal();
         void DeleteExam(ExamVM examVM) => ApplicantVM.Exams.Remove(examVM);
 
         async void CreatePersonalFile(ApplicantVM applicantVM)

@@ -74,6 +74,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             OpenWindowAddDirectionCommand = RaketaTCommand<ObservableCollection<SelectedDirectionVM>>.Launch(OpenWindowAddDirection);
             DeleteSelectedDirectionVMCommand = RaketaTCommand<SelectedDirectionVM>.Launch(DeleteSelectedDirection);
 
+            OpenWindowAddExamCommand = RaketaTCommand<ObservableCollection<ExamVM>>.Launch(OpenWindowAddExam);
             DeleteExamCommand = RaketaTCommand<ExamVM>.Launch(DeleteExam);
         }
 
@@ -160,6 +161,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             ApplicantVM.DirectionsOfTraining.Remove(selectedDirection);
         }
 
+        void OpenWindowAddExam(ObservableCollection<ExamVM> exams) =>
+            _serviceView.Window<AddExamViewModel>(null, exams, ApplicantVM.Id, true).Modal();
         async void DeleteExam(ExamVM exam)
         {
             bool idDeleted = await _applicantRepository.Delete<Exam>(exam.Id);
