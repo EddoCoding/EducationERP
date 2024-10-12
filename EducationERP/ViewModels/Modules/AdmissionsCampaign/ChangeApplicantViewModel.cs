@@ -68,7 +68,9 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             OpenWindowAddEGECommand = RaketaTCommand<ObservableCollection<EGEVM>>.Launch(OpenWindowAddEGE);
             DeleteEGECommand = RaketaTCommand<EGEVM>.Launch(DeleteEGE);
 
+            OpenWindowAddDistinctiveFeatureCommand = RaketaTCommand<ObservableCollection<DistinctiveFeatureVM>>.Launch(OpenWindowAddDistinctiveFeature);
             DeleteDistinctiveFeatureCommand = RaketaTCommand<DistinctiveFeatureVM>.Launch(DeleteDistinctiveFeature);
+
             DeleteSelectedDirectionVMCommand = RaketaTCommand<SelectedDirectionVM>.Launch(DeleteSelectedDirection);
             DeleteExamCommand = RaketaTCommand<ExamVM>.Launch(DeleteExam);
         }
@@ -132,7 +134,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             ApplicantVM.Educations.Remove(education);
         }
 
-        async void OpenWindowAddEGE(ObservableCollection<EGEVM> eges) =>
+        void OpenWindowAddEGE(ObservableCollection<EGEVM> eges) =>
             _serviceView.Window<EGEViewModel>(null, eges, ApplicantVM.Id, true).Modal();
         async void DeleteEGE(EGEVM ege)
         {
@@ -140,16 +142,20 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             ApplicantVM.EGES.Remove(ege);
         }
 
+        void OpenWindowAddDistinctiveFeature(ObservableCollection<DistinctiveFeatureVM> distinctiveFeatures) =>
+            _serviceView.Window<DistinctiveFeatureViewModel>(null, distinctiveFeatures, ApplicantVM.Id, true).Modal();
         async void DeleteDistinctiveFeature(DistinctiveFeatureVM distinctiveFeature)
         {
             bool idDeleted = await _applicantRepository.Delete<DistinctiveFeature>(distinctiveFeature.Id);
             ApplicantVM.DistinguishingFeatures.Remove(distinctiveFeature);
         }
+
         async void DeleteSelectedDirection(SelectedDirectionVM selectedDirection)
         {
             bool idDeleted = await _applicantRepository.Delete<SelectedDirection>(selectedDirection.Id);
             ApplicantVM.DirectionsOfTraining.Remove(selectedDirection);
         }
+
         async void DeleteExam(ExamVM exam)
         {
             bool idDeleted = await _applicantRepository.Delete<Exam>(exam.Id);

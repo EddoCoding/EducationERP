@@ -121,7 +121,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         void DeleteEGE(EGEVM ege) => ApplicantVM.EGES.Remove(ege);
 
         void OpenWindowAddDistinctiveFeature(ObservableCollection<DistinctiveFeatureVM> distinctiveFeatures) => 
-            _serviceView.Window<DistinctiveFeatureViewModel>(null, distinctiveFeatures).Modal();
+            _serviceView.Window<DistinctiveFeatureViewModel>(null, distinctiveFeatures, null, false).Modal();
         void DeleteDistinctiveFeature(DistinctiveFeatureVM distinctiveFeature) => 
             ApplicantVM.DistinguishingFeatures.Remove(distinctiveFeature);
 
