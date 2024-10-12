@@ -71,7 +71,9 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             OpenWindowAddDistinctiveFeatureCommand = RaketaTCommand<ObservableCollection<DistinctiveFeatureVM>>.Launch(OpenWindowAddDistinctiveFeature);
             DeleteDistinctiveFeatureCommand = RaketaTCommand<DistinctiveFeatureVM>.Launch(DeleteDistinctiveFeature);
 
+            OpenWindowAddDirectionCommand = RaketaTCommand<ObservableCollection<SelectedDirectionVM>>.Launch(OpenWindowAddDirection);
             DeleteSelectedDirectionVMCommand = RaketaTCommand<SelectedDirectionVM>.Launch(DeleteSelectedDirection);
+
             DeleteExamCommand = RaketaTCommand<ExamVM>.Launch(DeleteExam);
         }
 
@@ -150,6 +152,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             ApplicantVM.DistinguishingFeatures.Remove(distinctiveFeature);
         }
 
+        void OpenWindowAddDirection(ObservableCollection<SelectedDirectionVM> directions) =>
+            _serviceView.Window<AddDirectionViewModel>(null, directions, ApplicantVM.Id, true).Modal();
         async void DeleteSelectedDirection(SelectedDirectionVM selectedDirection)
         {
             bool idDeleted = await _applicantRepository.Delete<SelectedDirection>(selectedDirection.Id);

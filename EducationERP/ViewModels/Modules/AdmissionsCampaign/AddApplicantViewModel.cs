@@ -126,7 +126,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             ApplicantVM.DistinguishingFeatures.Remove(distinctiveFeature);
 
         void OpenWindowAddDirection(ObservableCollection<SelectedDirectionVM> directions) =>
-            _serviceView.Window<AddDirectionViewModel>(null, directions).Modal();
+            _serviceView.Window<AddDirectionViewModel>(null, directions, null, false).Modal();
         void DeleteSelectedDirectionVM(SelectedDirectionVM selectedDirectionVM) => 
             ApplicantVM.DirectionsOfTraining.Remove(selectedDirectionVM);
 
