@@ -15,6 +15,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         string citizenship = "Россия";
         int totalPoints;
         int pointsDistinctiveFeatures;
+        int sumPointsExam;
 
         #region Личная информация
         public Guid Id { get; set; } = Guid.NewGuid();
@@ -67,6 +68,11 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         public ObservableCollection<SelectedDirectionVM> DirectionsOfTraining { get; set; } = new();
         //Добавленные испытания/экзамены
         public ObservableCollection<ExamVM> Exams { get; set; } = new();
+        public int SumPointsExam
+        {
+            get => sumPointsExam;
+            set => SetValue(ref sumPointsExam, value);
+        }
         #endregion
 
         public ApplicantVM()
@@ -93,7 +99,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 foreach (var oldItem in e.OldItems)
                     if (oldItem is DistinctiveFeatureVM distinctiveFeature) PointsDistinctiveFeatures -= distinctiveFeature.FeatureScore;
         }
-
         public bool Validation()
         {
             //Валидация личных данных

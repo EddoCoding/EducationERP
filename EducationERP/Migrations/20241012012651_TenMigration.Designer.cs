@@ -3,6 +3,7 @@ using System;
 using EducationERP.Common.Components;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EducationERP.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241012012651_TenMigration")]
+    partial class TenMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -201,9 +204,6 @@ namespace EducationERP.Migrations
                     b.Property<string>("ResidentialAddress")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int>("SumPointsExam")
-                        .HasColumnType("integer");
 
                     b.Property<string>("SurName")
                         .IsRequired()

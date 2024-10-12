@@ -8,6 +8,7 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:selectors="clr-namespace:EducationERP.Common.Selectors"
              xmlns:viewModelDocuments="clr-namespace:EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents"
+             xmlns:viewModelEducations="clr-namespace:EducationERP.ViewModels.Modules.AdmissionsCampaign.Education"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800" FontFamily="{StaticResource OpenSans}">
     <UserControl.Resources>
         <converters:DateOnlyToDateOnlyConverter x:Key="DateOnlyToDateOnly"/>
@@ -405,6 +406,351 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <DataTemplate DataType="{x:Type viewModelEducations:EducationNineViewModel}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="5,5,0,3" Text="Информация об образовании" FontWeight="Bold"/>
+                    <Line Grid.Row="1" X1="0" X2="1" Y1="0" Y2="0" StrokeThickness="1" Stroke="Black" Stretch="Fill" Margin="5,0"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5,5,5,0">
+                        <TextBlock Text="Удостоверяющий документ:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IdentificationDocument}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Выдан кем:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IssuedBy}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата выдачи:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfIssue, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="С отличием" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <CheckBox IsChecked="{Binding Honours}" Margin="5,0,0,0"/>
+                        <TextBlock Text="Код, серия и номер:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding CodeSeriesNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5,0,5,5">
+                        <TextBlock Text="Дополнительная информация:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding AdditionalInformation}" Margin="3,0,0,0" Width="400" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelEducations:EducationElevenViewModel}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="5,5,0,3" Text="Информация об образовании" FontWeight="Bold"/>
+                    <Line Grid.Row="1" X1="0" X2="1" Y1="0" Y2="0" StrokeThickness="1" Stroke="Black" Stretch="Fill" Margin="5,0"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5,5,5,0">
+                        <TextBlock Text="Удостоверяющий документ:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IdentificationDocument}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Выдан кем:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IssuedBy}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата выдачи:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfIssue, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="С отличием" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <CheckBox IsChecked="{Binding Honours}" Margin="5,0,0,0"/>
+                        <TextBlock Text="Код, серия и номер:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding CodeSeriesNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5,0,5,5">
+                        <TextBlock Text="Дополнительная информация:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding AdditionalInformation}" Margin="3,0,0,0" Width="400" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelEducations:EducationSpoViewModel}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="5,5,0,3" Text="Информация об образовании" FontWeight="Bold"/>
+                    <Line Grid.Row="1" X1="0" X2="1" Y1="0" Y2="0" StrokeThickness="1" Stroke="Black" Stretch="Fill" Margin="5,0"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5,5,5,0">
+                        <TextBlock Text="Удостоверяющий документ:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IdentificationDocument}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Выдан кем:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IssuedBy}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата выдачи:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfIssue, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="С отличием" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <CheckBox IsChecked="{Binding Honours}" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Форма обучения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding FormOfEducation}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Регистрационный номер:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding RegistrationNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Серия диплома:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DiplomaSeries}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Номер диплома:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DiplomaNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Серия приложения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SupplementSeries}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Номер приложения:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SupplementNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="8" Orientation="Horizontal" Margin="5,0,5,5">
+                        <TextBlock Text="Дополнительная информация:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding AdditionalInformation}" Margin="3,0,0,0" Width="400" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelEducations:EducationBakViewModel}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="5,5,0,3" Text="Информация об образовании" FontWeight="Bold"/>
+                    <Line Grid.Row="1" X1="0" X2="1" Y1="0" Y2="0" StrokeThickness="1" Stroke="Black" Stretch="Fill" Margin="5,0"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5,5,5,0">
+                        <TextBlock Text="Удостоверяющий документ:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IdentificationDocument}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Выдан кем:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IssuedBy}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата выдачи:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfIssue, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="С отличием" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <CheckBox IsChecked="{Binding Honours}" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Форма обучения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding FormOfEducation}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Регистрационный номер:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding RegistrationNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Серия диплома:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DiplomaSeries}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Номер диплома:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DiplomaNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Серия приложения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SupplementSeries}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Номер приложения:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SupplementNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="8" Orientation="Horizontal" Margin="5,0,5,5">
+                        <TextBlock Text="Дополнительная информация:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding AdditionalInformation}" Margin="3,0,0,0" Width="400" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelEducations:EducationMagViewModel}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="5,5,0,3" Text="Информация об образовании" FontWeight="Bold"/>
+                    <Line Grid.Row="1" X1="0" X2="1" Y1="0" Y2="0" StrokeThickness="1" Stroke="Black" Stretch="Fill" Margin="5,0"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5,5,5,0">
+                        <TextBlock Text="Удостоверяющий документ:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IdentificationDocument}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Выдан кем:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IssuedBy}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата выдачи:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfIssue, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="С отличием" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <CheckBox IsChecked="{Binding Honours}" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Форма обучения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding FormOfEducation}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Регистрационный номер:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding RegistrationNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Серия диплома:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DiplomaSeries}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Номер диплома:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DiplomaNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Серия приложения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SupplementSeries}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Номер приложения:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SupplementNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="8" Orientation="Horizontal" Margin="5,0,5,5">
+                        <TextBlock Text="Дополнительная информация:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding AdditionalInformation}" Margin="3,0,0,0" Width="400" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelEducations:EducationAspViewModel}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="5,5,0,3" Text="Информация об образовании" FontWeight="Bold"/>
+                    <Line Grid.Row="1" X1="0" X2="1" Y1="0" Y2="0" StrokeThickness="1" Stroke="Black" Stretch="Fill" Margin="5,0"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5,5,5,0">
+                        <TextBlock Text="Удостоверяющий документ:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IdentificationDocument}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Выдан кем:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IssuedBy}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата выдачи:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfIssue, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="С отличием" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <CheckBox IsChecked="{Binding Honours}" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Форма обучения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding FormOfEducation}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Регистрационный номер:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding RegistrationNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Серия диплома:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DiplomaSeries}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Номер диплома:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DiplomaNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Серия приложения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SupplementSeries}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Номер приложения:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SupplementNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="8" Orientation="Horizontal" Margin="5,0,5,5">
+                        <TextBlock Text="Дополнительная информация:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding AdditionalInformation}" Margin="3,0,0,0" Width="400" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <Style x:Key="ToolTipEducationInfo" TargetType="ToolTip">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToolTip">
+                        <ContentPresenter Content="{Binding}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
     </UserControl.Resources>
     
     <Grid Background="White">
@@ -490,35 +836,34 @@
                     <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
                 </ScrollViewer.Effect>
                 
-                <StackPanel Margin="0,0,30,10">
+                <StackPanel Margin="20,0,30,20">
 
                     <TextBlock Text="Личная информация" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
 
                     <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
-                        <TextBlock Text="ФИО:" FontSize="14"/>
+                        <TextBlock Text="ФИО:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding SelectedApplicant.SurName}" FontSize="14" Margin="5,0,0,0"/>
                         <TextBlock Text="{Binding SelectedApplicant.Name}" Margin="5,0,0,0" FontSize="14"/>
                         <TextBlock Text="{Binding SelectedApplicant.MiddleName}" Margin="5,0,0,0" FontSize="14"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
-                        <TextBlock Text="Дата рождения:" FontSize="14"/>
+                        <TextBlock Text="Дата рождения:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding SelectedApplicant.DateOfBirth, StringFormat='dd.MM.yyyy',  Converter={StaticResource DateOnlyToDateOnly}}" 
                             FontSize="14" Margin="5,0,0,0"/>
-                        <TextBlock Text="Пол:" FontSize="14" Margin="5,0,0,0"/>
-                        <TextBlock Text="{Binding SelectedApplicant.Gender}" 
-                            FontSize="14" Margin="5,0,0,0"/>
+                        <TextBlock Text="Пол:" FontSize="13" Margin="5,0,0,0" FontWeight="DemiBold" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding SelectedApplicant.Gender}" FontSize="14" Margin="5,0,0,0"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
-                        <TextBlock Text="Место рождения:" FontSize="14"/>
+                        <TextBlock Text="Место рождения:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding SelectedApplicant.PlaceOfBirth}" FontSize="14" Margin="5,0,0,0"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
-                        <TextBlock Text="Гражданство:" FontSize="14"/>
+                        <TextBlock Text="Гражданство:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding SelectedApplicant.Citizenship}" FontSize="14" Margin="5,0,0,0"/>
-                        <TextBlock Text="Действует с:" FontSize="14" Margin="5,0,0,0"/>
+                        <TextBlock Text="Действует с:" FontSize="13" Margin="5,0,0,0" FontWeight="DemiBold" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding SelectedApplicant.CitizenshipValidFrom, StringFormat='dd.MM.yyyy',  Converter={StaticResource DateOnlyToDateOnly}}" 
                             FontSize="14" Margin="5,0,0,0"/>
                     </StackPanel>
@@ -526,36 +871,47 @@
                     <TextBlock Text="Контактная информация" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
 
                     <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
-                        <TextBlock Text="Адрес проживания:" FontSize="14"/>
+                        <TextBlock Text="Адрес проживания:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding SelectedApplicant.ResidentialAddress}" FontSize="14" Margin="5,0,0,0"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
-                        <TextBlock Text="Адрес по прописке:" FontSize="14"/>
+                        <TextBlock Text="Адрес по прописке:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding SelectedApplicant.AddressOfRegistration}" FontSize="14" Margin="5,0,0,0"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
-                        <TextBlock Text="Домашний телефон:" FontSize="14"/>
+                        <TextBlock Text="Домашний телефон:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding SelectedApplicant.HomePhone}" FontSize="14" Margin="5,0,0,0"/>
-                        <TextBlock Text="Мобильный телефон:" FontSize="14" Margin="5,0,0,0"/>
+                        <TextBlock Text="Мобильный телефон:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center" Margin="5,0,0,0"/>
                         <TextBlock Text="{Binding SelectedApplicant.MobilePhone}" FontSize="14" Margin="5,0,0,0"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
-                        <TextBlock Text="Почта:" FontSize="14"/>
+                        <TextBlock Text="Почта:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Bottom"/>
                         <TextBlock Text="{Binding SelectedApplicant.Mail}" FontSize="14" Margin="5,0,0,0"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
-                        <TextBlock Text="Доп. инфо.:" FontSize="14"/>
+                        <TextBlock Text="Доп. инфо.:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding  SelectedApplicant.AdditionalInformation}" FontSize="14" Margin="5,0,0,0" TextWrapping="Wrap" MaxWidth="480"/>
                     </StackPanel>
 
                     <TextBlock Text="Документы" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
-                    
-                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.Documents}" ItemTemplateSelector="{StaticResource SelectorDocuments}"
-                              BorderBrush="LightGray" BorderThickness="0">
+                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.Documents}" ItemTemplateSelector="{StaticResource SelectorDocuments}" BorderThickness="0">
+                        <ListView.Style>
+                            <Style TargetType="ListView">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListView">
+                                            <ScrollViewer>
+                                                <ItemsPresenter Margin="10,0,0,0"/>
+                                            </ScrollViewer>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.Style>
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="Template">
@@ -563,8 +919,8 @@
                                         <ControlTemplate TargetType="ListViewItem">
                                             <Border Background="{TemplateBinding Background}">
                                                 <StackPanel>
-                                                    <ContentPresenter/>
-                                                    <Line StrokeThickness="1" Stroke="LightGray" Stretch="Fill" X1="1"/>
+                                                    <ContentPresenter Margin="2"/>
+                                                    <Line Stroke="LightGray" X1="1" Stretch="Fill"/>
                                                 </StackPanel>
                                                 <Border.ToolTip>
                                                     <ToolTip Style="{StaticResource ToolTipDocumentInfo}"/>
@@ -580,29 +936,278 @@
                                 </Setter>
                             </Style>
                         </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Grid.Column="0" Text="{Binding TypeDocument}" FontSize="13" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
                     </ListView>
-                    <TextBlock Text="Наведите на документ для доп. инфо." VerticalAlignment="Center" Margin="5,0,0,0" Foreground="Gray"/>
 
                     <TextBlock Text="Образование" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
-                    <TextBlock Text="Наведите на образование для доп. инфо." VerticalAlignment="Center" Margin="5,0,0,0" Foreground="Gray"/>
-
-                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.Educations}"/>
+                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.Educations}" BorderThickness="0">
+                        <ListView.Style>
+                            <Style TargetType="ListView">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListView">
+                                            <ScrollViewer>
+                                                <ItemsPresenter Margin="10,0,0,0"/>
+                                            </ScrollViewer>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.Style>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListViewItem">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <StackPanel>
+                                                    <ContentPresenter Margin="2"/>
+                                                    <Line Stroke="LightGray" X1="1" Stretch="Fill"/>
+                                                </StackPanel>
+                                                <Border.ToolTip>
+                                                    <ToolTip Style="{StaticResource ToolTipEducationInfo}"/>
+                                                </Border.ToolTip>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="WhiteSmoke"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Grid.Column="0" Text="{Binding TypeEducation}" FontSize="13" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
                     <TextBlock Text="ЕГЭ" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
+                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.EGES}" BorderThickness="0">
+                        <ListView.Style>
+                            <Style TargetType="ListView">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListView">
+                                            <ScrollViewer>
+                                                <ItemsPresenter Margin="10,0,0,0"/>
+                                            </ScrollViewer>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.Style>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListViewItem">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <StackPanel>
+                                                    <ContentPresenter Margin="2"/>
+                                                    <Line Stroke="LightGray" X1="1" Stretch="Fill"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="WhiteSmoke"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Grid.Column="0" Text="{Binding AcademicSubject}" FontSize="13"/>
+                                    <TextBlock Grid.Column="0" Text="{Binding SubjectScores}" FontSize="13" Margin="5,0,0,0"/>
+                                    <TextBlock Grid.Column="0" Text="(баллы)" FontSize="13" Margin="5,0,0,0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <TextBlock Text="{Binding SelectedApplicant.TotalPoints, StringFormat='Сумма баллов ЕГЭ: {0}'}" Margin="0,3,5,0" 
+                               HorizontalAlignment="Right" FontSize="13"/>
 
-                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.EGES}"/>
-
-                    <TextBlock Text="Отличительные признаки" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
-
-                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.DistinguishingFeatures}"/>
+                    <TextBlock Text="Отличительные признаки" Foreground="Gray" FontSize="14" Margin="5,0,0,5"/>
+                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.DistinguishingFeatures}" BorderThickness="0">
+                        <ListView.Style>
+                            <Style TargetType="ListView">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListView">
+                                            <ScrollViewer>
+                                                <ItemsPresenter Margin="10,0,0,0"/>
+                                            </ScrollViewer>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.Style>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListViewItem">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <StackPanel>
+                                                    <ContentPresenter Margin="2"/>
+                                                    <Line Stroke="LightGray" X1="1" Stretch="Fill"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="WhiteSmoke"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Grid.Column="0" Text="{Binding NameFeature}" FontSize="13"/>
+                                    <TextBlock Grid.Column="0" Text="{Binding FeatureScore}" FontSize="13" Margin="5,0,0,0"/>
+                                    <TextBlock Grid.Column="0" Text="(баллы)" FontSize="13" Margin="5,0,0,0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <TextBlock Text="{Binding SelectedApplicant.PointsDistinctiveFeatures, StringFormat='Сумма баллов отличительных признаков: {0}'}" Margin="0,3,5,0" 
+                                HorizontalAlignment="Right" FontSize="13"/>
 
                     <TextBlock Text="Направления" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
-
-                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.DirectionsOfTraining}"/>
+                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.DirectionsOfTraining}" BorderThickness="0">
+                        <ListView.Style>
+                            <Style TargetType="ListView">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListView">
+                                            <ScrollViewer>
+                                                <ItemsPresenter Margin="10,0,0,0"/>
+                                            </ScrollViewer>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.Style>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListViewItem">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <StackPanel>
+                                                    <ContentPresenter Margin="2"/>
+                                                    <Line Stroke="LightGray" X1="1" Stretch="Fill"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="WhiteSmoke"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Grid.Column="0" Text="{Binding CodeDirection}" FontSize="13"/>
+                                        <TextBlock Grid.Column="0" Text="{Binding NameDirection}" FontSize="13" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Grid.Column="0" Text="{Binding CodeProfile}" FontSize="13"/>
+                                        <TextBlock Grid.Column="0" Text="{Binding NameProfile}" FontSize="13" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Форма обучения" Foreground="Gray" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="0" Text="{Binding NameFormEducation}" FontSize="13" Margin="5,0,0,0"/>
+                                        <TextBlock Text="Форма оплаты" Foreground="Gray" VerticalAlignment="Bottom" Margin="5,0,0,0"/>
+                                        <TextBlock Grid.Column="0" Text="{Binding NameFormPayment}" FontSize="13" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
                     <TextBlock Text="Экзамены/испытания" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
-
-                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.Exams}"/>
+                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.Exams}" BorderThickness="0">
+                        <ListView.Style>
+                            <Style TargetType="ListView">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListView">
+                                            <ScrollViewer>
+                                                <ItemsPresenter Margin="10,0,0,0"/>
+                                            </ScrollViewer>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.Style>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListViewItem">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <StackPanel>
+                                                    <ContentPresenter Margin="2"/>
+                                                    <Line Stroke="LightGray" X1="1" Stretch="Fill"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="WhiteSmoke"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding AcademicSubject}" FontSize="13"/>
+                                        <TextBlock Text="{Binding DateExam, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}" FontSize="13" Margin="5,0,0,0"/>
+                                        <TextBlock Text="{Binding TimeExam, StringFormat='{}{0:HH\\:mm}'}" FontSize="13" Margin="5,0,0,0"/>
+                                        <TextBlock Text="{Binding LocationExam}" FontSize="13" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox IsChecked="{Binding IsSpecial}" Content="Особенности" VerticalContentAlignment="Center" Padding="5,0,0,0" VerticalAlignment="Top"/>
+                                        <TextBlock Text="Доп. инфо.:" FontSize="13" Margin="5,0,0,0"/>
+                                        <TextBlock Text="{Binding AdditionalInformation}" FontSize="13" Margin="5,0,0,0" TextWrapping="Wrap" Width="300"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding SubjectScores}" FontSize="13"/>
+                                        <TextBlock Text="(баллы)" FontSize="13" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                    <Button Content="Проверка" 
+                                            Command="{Binding DataContext.CheckCommand, RelativeSource={RelativeSource AncestorType=ListView}}" 
+                                            CommandParameter="{Binding}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <TextBlock Text="{Binding SelectedApplicant.SumPointsExam, StringFormat='Сумма баллов отличительных признаков: {0}'}" Margin="0,3,5,0" 
+                                HorizontalAlignment="Right" FontSize="13"/>
 
                 </StackPanel>
                 

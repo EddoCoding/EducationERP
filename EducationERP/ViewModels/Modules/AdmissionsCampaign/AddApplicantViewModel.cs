@@ -159,7 +159,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                     AdditionalInformation = applicantVM.AdditionalInformation,
 
                     TotalPoints = applicantVM.TotalPoints,
-                    PointsDistinctiveFeatures = applicantVM.PointsDistinctiveFeatures
+                    PointsDistinctiveFeatures = applicantVM.PointsDistinctiveFeatures,
+                    SumPointsExam = applicantVM.SumPointsExam
                 };
                 bool isAdded = await _applicantRepository.Create<Applicant>(applicant);
                 if (isAdded)
@@ -437,7 +438,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                             TimeExam = examVM.TimeExam,
                             LocationExam = examVM.LocationExam,
                             IsSpecial = examVM.IsSpecial,
-                            AdditionalIformation = examVM.AdditionalIformation,
+                            AdditionalInformation = examVM.AdditionalInformation,
                             SubjectScores = examVM.SubjectScores,
                             ApplicantId = applicant.Id
                         };

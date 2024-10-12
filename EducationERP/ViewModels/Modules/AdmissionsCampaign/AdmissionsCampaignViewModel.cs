@@ -10,6 +10,7 @@ using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams;
 using Raketa;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 {
@@ -46,6 +47,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             ChangePersonalFileCommand = RaketaCommand.Launch(ChangePersonalFile);
             DeletePersonalFileCommand = RaketaCommand.Launch(DeletePersonalFile);
             UpdatePersonalFileCommand = RaketaCommand.Launch(UpdatePersonalFile);
+
+            CheckCommand = RaketaTCommand<ExamVM>.Launch(check);
         }
 
         void GetApplicant()
@@ -76,6 +79,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 
                     TotalPoints = applicant.TotalPoints,
                     PointsDistinctiveFeatures = applicant.PointsDistinctiveFeatures,
+                    SumPointsExam = applicant.SumPointsExam,
 
                     Documents = new(),
                     Educations = new(),
@@ -329,7 +333,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                         LocationExam = exam.LocationExam,
                         IsSpecial = exam.IsSpecial,
                         SubjectScores = exam.SubjectScores,
-                        AdditionalIformation = exam.AdditionalIformation
+                        AdditionalInformation = exam.AdditionalInformation
                     };
                     applicantVM.Exams.Add(examVM);
                 }
@@ -355,5 +359,13 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         }
 
         void CloseTab() => _tabControl.RemoveTab();
+
+
+        public RaketaTCommand<ExamVM> CheckCommand { get; set; }
+
+        void check(ExamVM examVM)
+        {
+            examVM.SubjectScores += 5;
+        }
     }
 }

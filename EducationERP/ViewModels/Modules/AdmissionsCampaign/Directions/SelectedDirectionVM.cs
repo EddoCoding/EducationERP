@@ -1,6 +1,4 @@
-﻿using EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams;
-using System.Collections.ObjectModel;
-using System.Windows;
+﻿using System.Windows;
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Directions
 {
