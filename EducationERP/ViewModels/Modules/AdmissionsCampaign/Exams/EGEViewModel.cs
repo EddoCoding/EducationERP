@@ -1,4 +1,6 @@
-﻿using Raketa;
+﻿using EducationERP.Common.Components.Repositories;
+using EducationERP.Models.Modules.AdmissionsCampaign.Exams;
+using Raketa;
 using System.Collections.ObjectModel;
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams
@@ -13,23 +15,40 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams
         public RaketaCommand ExitCommand { get; set; }
 
         IServiceView _serviceView;
-        public EGEViewModel(IServiceView serviceView, ObservableCollection<EGEVM> EGES)
+        IApplicantRepository _applicantRepository;
+        Guid _id;
+        bool _useDataBase;
+        public EGEViewModel(IServiceView serviceView, IApplicantRepository applicantRepository, 
+            ObservableCollection<EGEVM> eges, Guid id = default, bool useDataBase = false)
         {
             _serviceView = serviceView;
-            _eges = EGES;
+            _applicantRepository = applicantRepository;
+            _eges = eges;
+            _id = id;
+            _useDataBase = useDataBase;
 
             AddEGECommand = RaketaTCommand<EGEVM>.Launch(AddEGE);
             ExitCommand = RaketaCommand.Launch(CloseWindow);
-
         }
 
-        void AddEGE(EGEVM ege)
+        void AddEGE(EGEVM Ege)
         {
-            var isValidated = ege.Validation();
+            var isValidated = Ege.Validation();
             if (isValidated)
             {
-                _eges.Add(ege);
+                _eges.Add(Ege);
                 _eges = null;
+                if (_useDataBase)
+                {
+                    var ege = new EGE
+                    {
+                        Id = Ege.Id,
+                        AcademicSubject = Ege.AcademicSubject,
+                        SubjectScores = Ege.SubjectScores,
+                        ApplicantId = _id
+                    };
+                    _applicantRepository.Create<EGE>(ege);
+                }
                 _serviceView.Close<EGEViewModel>();
             }
         }

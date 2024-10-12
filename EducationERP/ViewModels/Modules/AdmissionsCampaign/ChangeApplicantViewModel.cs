@@ -62,8 +62,12 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             OpenWindowAddDocumentCommand = RaketaTCommand<ObservableCollection<DocumentBaseViewModel>>.Launch(OpenWindowAddDocument);
             DeleteDocumentCommand = RaketaTCommand<DocumentBaseViewModel>.Launch(DeleteDocument);
 
+            OpenWindowAddEducationCommand = RaketaTCommand<ObservableCollection<EducationBaseViewModel>>.Launch(OpenWindowAddEducation);
             DeleteEducationCommand = RaketaTCommand<EducationBaseViewModel>.Launch(DeleteEducation);
+
+            OpenWindowAddEGECommand = RaketaTCommand<ObservableCollection<EGEVM>>.Launch(OpenWindowAddEGE);
             DeleteEGECommand = RaketaTCommand<EGEVM>.Launch(DeleteEGE);
+
             DeleteDistinctiveFeatureCommand = RaketaTCommand<DistinctiveFeatureVM>.Launch(DeleteDistinctiveFeature);
             DeleteSelectedDirectionVMCommand = RaketaTCommand<SelectedDirectionVM>.Launch(DeleteSelectedDirection);
             DeleteExamCommand = RaketaTCommand<ExamVM>.Launch(DeleteExam);
@@ -106,6 +110,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             ApplicantVM.Documents.Remove(document);
         }
 
+        void OpenWindowAddEducation(ObservableCollection<EducationBaseViewModel> educations) =>
+            _serviceView.Window<EducationDocViewModel>(null, educations, ApplicantVM.Id, true).Modal();
         async void DeleteEducation(EducationBaseViewModel education)
         {
             bool idDeleted = false;
@@ -125,11 +131,15 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 
             ApplicantVM.Educations.Remove(education);
         }
+
+        async void OpenWindowAddEGE(ObservableCollection<EGEVM> eges) =>
+            _serviceView.Window<EGEViewModel>(null, eges, ApplicantVM.Id, true).Modal();
         async void DeleteEGE(EGEVM ege)
         {
             bool idDeleted = await _applicantRepository.Delete<EGE>(ege.Id);
             ApplicantVM.EGES.Remove(ege);
         }
+
         async void DeleteDistinctiveFeature(DistinctiveFeatureVM distinctiveFeature)
         {
             bool idDeleted = await _applicantRepository.Delete<DistinctiveFeature>(distinctiveFeature.Id);

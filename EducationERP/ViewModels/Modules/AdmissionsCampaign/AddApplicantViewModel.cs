@@ -106,15 +106,18 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             }
         }
 
-        void OpenWindowAddDocument(ObservableCollection<DocumentBaseViewModel> documents) => _serviceView.Window<DocumentViewModel>(null, documents).Modal();
+        void OpenWindowAddDocument(ObservableCollection<DocumentBaseViewModel> documents) => 
+            _serviceView.Window<DocumentViewModel>(null, documents).Modal();
         void ChangeDocument(DocumentBaseViewModel document) => _serviceView.Window<ChangeDocumentViewModel>(null, document).Modal();
         void DeleteDocument(DocumentBaseViewModel document) => ApplicantVM.Documents.Remove(document);
 
-        void OpenWindowAddEducation(ObservableCollection<EducationBaseViewModel> educations) => _serviceView.Window<EducationDocViewModel>(null, educations).Modal();
+        void OpenWindowAddEducation(ObservableCollection<EducationBaseViewModel> educations) => 
+            _serviceView.Window<EducationDocViewModel>(null, educations).Modal();
         void ChangeEducation(EducationBaseViewModel education) => _serviceView.Window<ChangeEducationDocViewModel>(null, education).Modal();
         void DeleteEducation(EducationBaseViewModel education) => ApplicantVM.Educations.Remove(education);
 
-        void OpenWindowAddEGE(ObservableCollection<EGEVM> eges) => _serviceView.Window<EGEViewModel>(null, eges).Modal();
+        void OpenWindowAddEGE(ObservableCollection<EGEVM> eges) => 
+            _serviceView.Window<EGEViewModel>(null, eges, null, false).Modal();
         void DeleteEGE(EGEVM ege) => ApplicantVM.EGES.Remove(ege);
 
         void OpenWindowAddDistinctiveFeature(ObservableCollection<DistinctiveFeatureVM> distinctiveFeatures) => 
