@@ -1,0 +1,1391 @@
+﻿<UserControl x:Class="EducationERP.Views.Modules.AdmissionsCampaign.ChangeApplicantView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EducationERP.Views.Modules.AdmissionsCampaign"
+             xmlns:converters="clr-namespace:EducationERP.Common.Converters"
+             xmlns:selectors="clr-namespace:EducationERP.Common.Selectors"
+             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800" 
+             FontFamily="{StaticResource OpenSans}" RenderOptions.BitmapScalingMode="NearestNeighbor"
+             xmlns:viewModelDocuments="clr-namespace:EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents"
+             xmlns:viewModelEducations="clr-namespace:EducationERP.ViewModels.Modules.AdmissionsCampaign.Education">
+    <UserControl.Resources>
+        <converters:DateOnlyToDateOnlyConverter x:Key="DateOnlyToDateOnly"/>
+
+        <DataTemplate x:Key="Passport">
+            <TextBlock Text="{Binding TypeDocument}" Margin="3" FontSize="14"/>
+        </DataTemplate>
+        <DataTemplate x:Key="ForeignPassport">
+            <TextBlock Text="{Binding TypeDocument}" Margin="3" FontSize="14"/>
+        </DataTemplate>
+        <DataTemplate x:Key="Snils">
+            <TextBlock Text="{Binding TypeDocument}" Margin="3" FontSize="14"/>
+        </DataTemplate>
+        <DataTemplate x:Key="Inn">
+            <TextBlock Text="{Binding TypeDocument}" Margin="3" FontSize="14"/>
+        </DataTemplate>
+        <selectors:SelectorDocuments x:Key="SelectorDocuments" 
+                                 TemplatePassport="{StaticResource Passport}"
+                                 TemplateForeignPassport="{StaticResource ForeignPassport}"
+                                 TemplateSnils="{StaticResource Snils}"
+                                 TemplateInn="{StaticResource Inn}"/>
+
+        <Style x:Key="RadioButtonCustom" TargetType="RadioButton">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border x:Name="radioButtonBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="100" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                Margin="1,1,2,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <Grid x:Name="markGrid" Margin="2">
+                                    <Ellipse x:Name="optionMark" Fill="#FFD700" MinWidth="7" MinHeight="7" Opacity="0"/>
+                                </Grid>
+                            </Border>
+                            <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                          Margin="5,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="radioButtonBorder" Value="WhiteSmoke"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Opacity" TargetName="optionMark" Value="1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate DataType="{x:Type viewModelDocuments:PassportViewModel}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="5,5,0,3" Text="Информация о документе" FontWeight="Bold"/>
+                    <Line Grid.Row="1" X1="0" X2="1" Y1="0" Y2="0" StrokeThickness="1" Stroke="Black" Stretch="Fill" Margin="5,0"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5,5,5,0">
+                        <TextBlock Text="ФИО:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SurName}" Margin="3,0,0,0"/>
+                        <TextBlock Text="{Binding Name}" Margin="3,0,0,0"/>
+                        <TextBlock Text="{Binding MiddleName}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата рождения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfBirth, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Пол:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Gender}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Место рождения:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding PlaceOfBirth}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Выдан кем:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IssuedBy}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата выдачи:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfIssue, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Код подразделения:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DepartmentCode}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Серия и номер:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SeriesNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="5,0,5,5">
+                        <TextBlock Text="Дополнительная информация:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding AdditionalInformation}" Margin="3,0,0,0" Width="400" TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelDocuments:SnilsViewModel}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="5,5,0,3" Text="Информация о документе" FontWeight="Bold"/>
+                    <Line Grid.Row="1" X1="0" X2="1" Y1="0" Y2="0" StrokeThickness="1" Stroke="Black" Stretch="Fill" Margin="5,0"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5,5,5,0">
+                        <TextBlock Text="ФИО:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SurName}" Margin="3,0,0,0"/>
+                        <TextBlock Text="{Binding Name}" Margin="3,0,0,0"/>
+                        <TextBlock Text="{Binding MiddleName}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата рождения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfBirth, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Пол:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Gender}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Место рождения:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding PlaceOfBirth}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Номер Снилс:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Number}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата регистрации:" FontWeight="Bold"/>
+                        <TextBlock Margin="3,0,0,0" Width="400" TextWrapping="Wrap"
+                               Text="{Binding RegistrationDate, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="5,0,5,5">
+                        <TextBlock Text="Дополнительная информация:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding AdditionalInformation}" Margin="3,0,0,0" Width="400" TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelDocuments:InnViewModel}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="5,5,0,3" Text="Информация о документе" FontWeight="Bold"/>
+                    <Line Grid.Row="1" X1="0" X2="1" Y1="0" Y2="0" StrokeThickness="1" Stroke="Black" Stretch="Fill" Margin="5,0"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5,5,5,0">
+                        <TextBlock Text="ФИО:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SurName}" Margin="3,0,0,0"/>
+                        <TextBlock Text="{Binding Name}" Margin="3,0,0,0"/>
+                        <TextBlock Text="{Binding MiddleName}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата рождения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfBirth, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Пол:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Gender}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Место рождения:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding PlaceOfBirth}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="ИНН:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding NumberINN}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата назначения:" FontWeight="Bold"/>
+                        <TextBlock Margin="3,0,0,0"
+                               Text="{Binding DateAssigned, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Серия и номер:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SeriesNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="5,0,5,5">
+                        <TextBlock Text="Дополнительная информация:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding AdditionalInformation}" Margin="3,0,0,0" Width="400" TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelDocuments:ForeignPassportViewModel}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="5,5,0,3" Text="Информация о документе" FontWeight="Bold"/>
+                    <Line Grid.Row="1" X1="0" X2="1" Y1="0" Y2="0" StrokeThickness="1" Stroke="Black" Stretch="Fill" Margin="5,0"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5,5,5,0">
+                        <TextBlock Text="ФИО:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SurName}" Margin="3,0,0,0"/>
+                        <TextBlock Text="{Binding Name}" Margin="3,0,0,0"/>
+                        <TextBlock Text="{Binding MiddleName}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата рождения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfBirth, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Пол:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Gender}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Место рождения:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding PlaceOfBirth}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Выдан кем:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IssuedBy}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата выдачи:" FontWeight="Bold"/>
+                        <TextBlock Margin="3,0,0,0"
+                               Text="{Binding DateOfIssue, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Серия и номер:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SeriesNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="5,0,5,5">
+                        <TextBlock Text="Дополнительная информация:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding AdditionalInformation}" Margin="3,0,0,0" Width="400" TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <Style x:Key="ToolTipDocumentInfo" TargetType="ToolTip">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToolTip">
+                        <ContentPresenter Content="{Binding}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate DataType="{x:Type viewModelEducations:EducationNineViewModel}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="5,5,0,3" Text="Информация об образовании" FontWeight="Bold"/>
+                    <Line Grid.Row="1" X1="0" X2="1" Y1="0" Y2="0" StrokeThickness="1" Stroke="Black" Stretch="Fill" Margin="5,0"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5,5,5,0">
+                        <TextBlock Text="Удостоверяющий документ:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IdentificationDocument}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Выдан кем:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IssuedBy}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата выдачи:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfIssue, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="С отличием" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <CheckBox IsChecked="{Binding Honours}" Margin="5,0,0,0"/>
+                        <TextBlock Text="Код, серия и номер:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding CodeSeriesNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5,0,5,5">
+                        <TextBlock Text="Дополнительная информация:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding AdditionalInformation}" Margin="3,0,0,0" Width="400" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelEducations:EducationElevenViewModel}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="5,5,0,3" Text="Информация об образовании" FontWeight="Bold"/>
+                    <Line Grid.Row="1" X1="0" X2="1" Y1="0" Y2="0" StrokeThickness="1" Stroke="Black" Stretch="Fill" Margin="5,0"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5,5,5,0">
+                        <TextBlock Text="Удостоверяющий документ:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IdentificationDocument}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Выдан кем:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IssuedBy}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата выдачи:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfIssue, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="С отличием" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <CheckBox IsChecked="{Binding Honours}" Margin="5,0,0,0"/>
+                        <TextBlock Text="Код, серия и номер:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding CodeSeriesNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5,0,5,5">
+                        <TextBlock Text="Дополнительная информация:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding AdditionalInformation}" Margin="3,0,0,0" Width="400" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelEducations:EducationSpoViewModel}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="5,5,0,3" Text="Информация об образовании" FontWeight="Bold"/>
+                    <Line Grid.Row="1" X1="0" X2="1" Y1="0" Y2="0" StrokeThickness="1" Stroke="Black" Stretch="Fill" Margin="5,0"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5,5,5,0">
+                        <TextBlock Text="Удостоверяющий документ:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IdentificationDocument}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Выдан кем:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IssuedBy}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата выдачи:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfIssue, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="С отличием" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <CheckBox IsChecked="{Binding Honours}" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Форма обучения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding FormOfEducation}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Регистрационный номер:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding RegistrationNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Серия диплома:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DiplomaSeries}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Номер диплома:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DiplomaNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Серия приложения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SupplementSeries}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Номер приложения:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SupplementNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="8" Orientation="Horizontal" Margin="5,0,5,5">
+                        <TextBlock Text="Дополнительная информация:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding AdditionalInformation}" Margin="3,0,0,0" Width="400" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelEducations:EducationBakViewModel}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="5,5,0,3" Text="Информация об образовании" FontWeight="Bold"/>
+                    <Line Grid.Row="1" X1="0" X2="1" Y1="0" Y2="0" StrokeThickness="1" Stroke="Black" Stretch="Fill" Margin="5,0"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5,5,5,0">
+                        <TextBlock Text="Удостоверяющий документ:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IdentificationDocument}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Выдан кем:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IssuedBy}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата выдачи:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfIssue, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="С отличием" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <CheckBox IsChecked="{Binding Honours}" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Форма обучения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding FormOfEducation}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Регистрационный номер:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding RegistrationNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Серия диплома:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DiplomaSeries}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Номер диплома:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DiplomaNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Серия приложения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SupplementSeries}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Номер приложения:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SupplementNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="8" Orientation="Horizontal" Margin="5,0,5,5">
+                        <TextBlock Text="Дополнительная информация:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding AdditionalInformation}" Margin="3,0,0,0" Width="400" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelEducations:EducationMagViewModel}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="5,5,0,3" Text="Информация об образовании" FontWeight="Bold"/>
+                    <Line Grid.Row="1" X1="0" X2="1" Y1="0" Y2="0" StrokeThickness="1" Stroke="Black" Stretch="Fill" Margin="5,0"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5,5,5,0">
+                        <TextBlock Text="Удостоверяющий документ:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IdentificationDocument}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Выдан кем:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IssuedBy}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата выдачи:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfIssue, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="С отличием" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <CheckBox IsChecked="{Binding Honours}" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Форма обучения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding FormOfEducation}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Регистрационный номер:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding RegistrationNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Серия диплома:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DiplomaSeries}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Номер диплома:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DiplomaNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Серия приложения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SupplementSeries}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Номер приложения:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SupplementNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="8" Orientation="Horizontal" Margin="5,0,5,5">
+                        <TextBlock Text="Дополнительная информация:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding AdditionalInformation}" Margin="3,0,0,0" Width="400" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelEducations:EducationAspViewModel}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="5,5,0,3" Text="Информация об образовании" FontWeight="Bold"/>
+                    <Line Grid.Row="1" X1="0" X2="1" Y1="0" Y2="0" StrokeThickness="1" Stroke="Black" Stretch="Fill" Margin="5,0"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5,5,5,0">
+                        <TextBlock Text="Удостоверяющий документ:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IdentificationDocument}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Выдан кем:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding IssuedBy}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Дата выдачи:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DateOfIssue, StringFormat='dd.MM.yyyy'}" Margin="3,0,0,0"/>
+                        <TextBlock Text="С отличием" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <CheckBox IsChecked="{Binding Honours}" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Форма обучения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding FormOfEducation}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Регистрационный номер:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding RegistrationNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Серия диплома:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DiplomaSeries}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Номер диплома:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DiplomaNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="5,0">
+                        <TextBlock Text="Серия приложения:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SupplementSeries}" Margin="3,0,0,0"/>
+                        <TextBlock Text="Номер приложения:" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SupplementNumber}" Margin="3,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="8" Orientation="Horizontal" Margin="5,0,5,5">
+                        <TextBlock Text="Дополнительная информация:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding AdditionalInformation}" Margin="3,0,0,0" Width="400" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <Style x:Key="ToolTipEducationInfo" TargetType="ToolTip">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToolTip">
+                        <ContentPresenter Content="{Binding}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" FontSize="15" Text="ЛИЧНОЕ ДЕЛО АБИТУРИЕНТА" Foreground="Black" VerticalAlignment="Center"/>
+                <Button Grid.Column="1" Content="X" Style="{StaticResource ButtonExitUserControl}" FontSize="14"
+                    Margin="10,0,5,0" RenderOptions.BitmapScalingMode="Fant" Command="{Binding ExitCommand}" ToolTip="Закрыть вкладку"/>
+            </Grid>
+
+            <!--ЛИЧНАЯ ИНФОРМАЦИЯ-->
+            <Grid Grid.Row="1" Margin="10,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="15" Text="Личная информация" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
+
+                <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="550" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Фамилия:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding ApplicantVM.SurName}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"/>
+                </Grid>
+
+                <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="550" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Имя:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding ApplicantVM.Name}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"/>
+                </Grid>
+
+                <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="550" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Отчество:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding ApplicantVM.MiddleName}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"/>
+                </Grid>
+
+                <Grid Grid.Row="5" Grid.Column="0" Background="White" Margin="10,10,0,0" Width="200" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Дата рождения:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14" 
+                         Text="{Binding ApplicantVM.DateOfBirth, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}"/>
+                </Grid>
+
+                <Grid Grid.Row="5" Grid.Column="1" Background="White" Margin="20,10,10,0" Width="110" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="45"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Пол" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <ComboBox Grid.Column="1" Style="{StaticResource ComboBoxCustom}" ItemContainerStyle="{StaticResource ComboBoxItemCustom}"
+                          Text="{Binding ApplicantVM.Gender}">
+                        <ComboBoxItem Content="Муж"/>
+                        <ComboBoxItem Content="Жен"/>
+                    </ComboBox>
+                </Grid>
+
+                <Grid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="550" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Место рождения:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding ApplicantVM.PlaceOfBirth}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"/>
+                </Grid>
+
+                <Grid Grid.Row="7" Grid.ColumnSpan="2" Margin="10,10,10,0" Background="White" Width="550" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <RadioButton Grid.Row="0" Grid.ColumnSpan="2" Content="Гражданин России" Style="{StaticResource RadioButtonCustom}" Margin="10,10,0,5" 
+                             IsChecked="{Binding ApplicantVM.IsCitizenRus}" Command="{Binding CitizenshipCommand}"/>
+                    <RadioButton Grid.Row="1" Grid.ColumnSpan="2" Content="Лицо без гражданства" Style="{StaticResource RadioButtonCustom}" Margin="10,5,0,5" 
+                             IsChecked="{Binding ApplicantVM.NotCitizen}" Command="{Binding CitizenshipCommand}"/>
+                    <RadioButton Grid.Row="2" Grid.Column="0" Content="Иностранный гражданин" Style="{StaticResource RadioButtonCustom}" Margin="10,5,0,10" 
+                             IsChecked="{Binding ApplicantVM.IsForeign}" Command="{Binding CitizenshipCommand}"/>
+
+                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ApplicantVM.Citizenship}" Style="{StaticResource CustomTextBox}" 
+                         Margin="10,5" FontSize="14" VerticalAlignment="Center" IsEnabled="{Binding Visual.IsEnabledTextBox}"/>
+                </Grid>
+
+                <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,0,0" Width="255" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Гражданство действует с:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14" 
+                         Text="{Binding ApplicantVM.CitizenshipValidFrom, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}"/>
+                </Grid>
+
+            </Grid>
+
+            <!--КОНТАКТНАЯ ИНФОРМАЦИЯ-->
+            <Grid Grid.Row="2" Margin="10,10,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="15" Text="Контактная информация" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
+
+                <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="550" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Адрес места проживания:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding ApplicantVM.ResidentialAddress}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"/>
+                </Grid>
+
+                <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="550" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Адрес по прописке:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding ApplicantVM.AddressOfRegistration}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"/>
+                </Grid>
+
+                <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="300" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Домашний телефон:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding ApplicantVM.HomePhone}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"/>
+                </Grid>
+
+                <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="300" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Мобильный телефон:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding ApplicantVM.MobilePhone}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"/>
+                </Grid>
+
+                <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="10,10,10,0" Width="400" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Почта:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding ApplicantVM.Mail}" Style="{StaticResource CustomTextBox}" Margin="10,5" FontSize="14"/>
+                </Grid>
+
+                <Grid Grid.Row="6" Background="White" Grid.ColumnSpan="2" Margin="10,10,10,0" Width="550" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Дополнительная контактная информация" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
+                    <TextBox Grid.Row="1" Text="{Binding ApplicantVM.AdditionalInformation}" Style="{StaticResource CustomTextBox}" 
+                         Margin="10,5" FontSize="14" TextWrapping="Wrap"/>
+                </Grid>
+
+            </Grid>
+
+            <!--ДОКУМЕНТЫ-->
+            <Grid Grid.Row="3" Margin="10,5,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="15" Text="Документы" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
+                <Button Grid.Row="1" Content="Добавить документ" Style="{StaticResource defaultAdd}" Margin="10,10,0,0" HorizontalAlignment="Left"
+                    Command="{Binding OpenWindowAddDocumentCommand}" CommandParameter="{Binding ApplicantVM.Documents}"/>
+                <ListView Grid.Row="2" Margin="10,5,100,0" MaxHeight="160" ItemsSource="{Binding ApplicantVM.Documents}">
+                    <ListView.Style>
+                        <Style TargetType="ListView">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListView">
+                                        <ScrollViewer>
+                                            <Border BorderThickness="0,0,0,0.8" BorderBrush="Black">
+                                                <ItemsPresenter/>
+                                            </Border>
+                                        </ScrollViewer>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.Style>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter/>
+                                            <Border.ToolTip>
+                                                <ToolTip Style="{StaticResource ToolTipDocumentInfo}"/>
+                                            </Border.ToolTip>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="WhiteSmoke"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="{Binding TypeDocument}" FontSize="13" VerticalAlignment="Center"/>
+                                <Button Grid.Column="1" Content="/Common/Resources/Images/changeDocument.png" Style="{StaticResource ButtonImage}"
+                                    HorizontalAlignment="Right" Margin="0,0,5,0" Height="24" Width="24"
+                                    Command="{Binding DataContext.ChangeDocumentCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                    CommandParameter="{Binding}"/>
+                                <Button Grid.Column="2" Content="/Common/Resources/Images/deleteDocument.png" Style="{StaticResource ButtonImage}" 
+                                    Margin="5,0" Height="24" Width="24"
+                                    Command="{Binding DataContext.DeleteDocumentCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                    CommandParameter="{Binding}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <TextBlock Grid.Row="3" Text="{Binding ApplicantVM.Documents.Count, StringFormat='Количество документов: {0}'}" Margin="10,3,0,0" FontSize="13"/>
+            </Grid>
+            
+            <!--ОБРАЗОВАНИЕ-->
+            <Grid Grid.Row="4" Margin="10,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="15" Text="Образование" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
+                <Button Grid.Row="1" Content="Добавить образование" Style="{StaticResource defaultAdd}" Margin="10,10,0,0" HorizontalAlignment="Left"
+                    Command="{Binding OpenWindowAddEducationCommand}" CommandParameter="{Binding ApplicantVM.Educations}"/>
+                <ListView Grid.Row="2" Margin="10,5,100,0" MaxHeight="160" ItemsSource="{Binding ApplicantVM.Educations}">
+                    <ListView.Style>
+                        <Style TargetType="ListView">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListView">
+                                        <ScrollViewer>
+                                            <Border BorderThickness="0,0,0,0.8" BorderBrush="Black">
+                                                <ItemsPresenter/>
+                                            </Border>
+                                        </ScrollViewer>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.Style>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter/>
+                                            <Border.ToolTip>
+                                                <ToolTip Style="{StaticResource ToolTipEducationInfo}"/>
+                                            </Border.ToolTip>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="WhiteSmoke"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="{Binding TypeEducation}" FontSize="13" VerticalAlignment="Center"/>
+                                <Button Grid.Column="1" Content="/Common/Resources/Images/changeDocument.png" Style="{StaticResource ButtonImage}"
+                                    HorizontalAlignment="Right" Margin="0,0,5,0" Height="24" Width="24"
+                                    Command="{Binding DataContext.ChangeEducationCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                    CommandParameter="{Binding}"/>
+                                <Button Grid.Column="2" Content="/Common/Resources/Images/deleteDocument.png" Style="{StaticResource ButtonImage}" 
+                                    Margin="5,0" Height="24" Width="24"
+                                    Command="{Binding DataContext.DeleteEducationCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                    CommandParameter="{Binding}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <TextBlock Grid.Row="3" Text="{Binding ApplicantVM.Educations.Count, StringFormat='Количество образований: {0}'}" Margin="10,3,0,0" FontSize="13"/>
+
+                <Button Grid.Row="4" Content="Добавить ЕГЭ" Style="{StaticResource defaultAdd}" Margin="10,10,0,0" HorizontalAlignment="Left"
+                    Command="{Binding OpenWindowAddEGECommand}" CommandParameter="{Binding ApplicantVM.EGES}"/>
+                <ListView Grid.Row="5" Margin="10,5,100,0" MaxHeight="100" ItemsSource="{Binding ApplicantVM.EGES}">
+                    <ListView.Style>
+                        <Style TargetType="ListView">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListView">
+                                        <ScrollViewer>
+                                            <Border BorderThickness="0,0,0,0.8" BorderBrush="Black">
+                                                <ItemsPresenter/>
+                                            </Border>
+                                        </ScrollViewer>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.Style>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="WhiteSmoke"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="Предмет:" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="1" Text="{Binding AcademicSubject}" FontSize="13" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="2" Text="Балл:" FontSize="13" Margin="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="3" Text="{Binding SubjectScores}" FontSize="13" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                <Button Grid.Column="4" Content="/Common/Resources/Images/deleteDocument.png" Style="{StaticResource ButtonImage}" 
+                                    Margin="5,0" Height="24" Width="24"
+                                    Command="{Binding DataContext.DeleteEGECommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                    CommandParameter="{Binding}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <TextBlock Grid.Row="6" Text="{Binding ApplicantVM.TotalPoints, StringFormat='Общий балл ЕГЭ: {0}'}" Margin="10,3,0,0" FontSize="13"/>
+            </Grid>
+
+            <!--ОТЛИЧИТЕЛЬНЫЕ ПРИЗНАКИ-->
+            <Grid Grid.Row="5" Margin="10,5,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="15" Text="Отличительные признаки" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
+                <Button Grid.Row="1" Content="Добавить признак" Style="{StaticResource defaultAdd}" Margin="10,10,0,0" HorizontalAlignment="Left"
+                    Command="{Binding OpenWindowAddDistinctiveFeatureCommand}" CommandParameter="{Binding ApplicantVM.DistinguishingFeatures}"/>
+                <ListView Grid.Row="2" Margin="10,5,100,0" MaxHeight="100" ItemsSource="{Binding ApplicantVM.DistinguishingFeatures}">
+                    <ListView.Style>
+                        <Style TargetType="ListView">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListView">
+                                        <ScrollViewer>
+                                            <Border BorderThickness="0,0,0,0.8" BorderBrush="Black">
+                                                <ItemsPresenter/>
+                                            </Border>
+                                        </ScrollViewer>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.Style>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="WhiteSmoke"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="Признак:" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="1" Text="{Binding NameFeature}" FontSize="13" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="2" Text="Балл:" FontSize="13" Margin="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="3" Text="{Binding FeatureScore}" FontSize="13" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                <Button Grid.Column="4" Content="/Common/Resources/Images/deleteDocument.png" Style="{StaticResource ButtonImage}" 
+                                    Margin="5,0" Height="24" Width="24"
+                                    Command="{Binding DataContext.DeleteDistinctiveFeatureCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                    CommandParameter="{Binding}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <TextBlock Grid.Row="3" Text="{Binding ApplicantVM.PointsDistinctiveFeatures, StringFormat='Общий балл признаков: {0}'}" Margin="10,3,0,0" FontSize="13"/>
+            </Grid>
+
+            <!--НАПРАВЛЕНИЯ-->
+            <Grid Grid.Row="6" Margin="10,5,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" FontSize="15" Text="Направления подготовки" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
+                <Button Grid.Row="1" Content="Добавить направление" Style="{StaticResource defaultAdd}" Margin="10,10,0,0" HorizontalAlignment="Left"
+                    Command="{Binding OpenWindowAddDirectionCommand}"
+                    CommandParameter="{Binding ApplicantVM.DirectionsOfTraining}"/>
+                <ListView Grid.Row="2" Margin="10,5,100,0" MaxHeight="180" FontSize="12"
+                      ItemsSource="{Binding ApplicantVM.DirectionsOfTraining}">
+                    <ListView.Style>
+                        <Style TargetType="ListView">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListView">
+                                        <ScrollViewer>
+                                            <Border BorderThickness="0,0,0,0.8" BorderBrush="Black">
+                                                <ItemsPresenter/>
+                                            </Border>
+                                        </ScrollViewer>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.Style>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="WhiteSmoke"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                                        <TextBlock Text="Код/Направление:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding CodeDirection}" Margin="5,0" FontSize="14"/>
+                                        <TextBlock Text="{Binding NameDirection}" FontSize="14"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                                        <TextBlock Text="Код/Профиль:" FontWeight="Bold" VerticalAlignment="Top"/>
+                                        <TextBlock Text="{Binding CodeProfile}" Margin="5,0" FontSize="14"/>
+                                        <TextBlock Text="{Binding NameProfile}" FontSize="14" TextWrapping="Wrap" Width="650"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+                                        <TextBlock Text="Факультет:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding NameFaculty}" Margin="5,0,0,0" FontSize="14"/>
+                                        <TextBlock Text="Уровень подготовки:" FontWeight="Bold" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding NameLevel}" Margin="5,0,0,0" FontSize="14"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
+                                        <TextBlock Text="Форма подготовки:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding NameFormEducation}" Margin="5,0,0,0" FontSize="14"/>
+                                        <TextBlock Text="Форма оплаты:" FontWeight="Bold" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding NameFormPayment}" Margin="5,0,0,0" FontSize="14"/>
+                                    </StackPanel>
+
+                                    <Button Grid.RowSpan="4" Grid.Column="1" Content="/Common/Resources/Images/deleteDocument.png" Style="{StaticResource ButtonImage}" 
+                                        Margin="5,0" Height="24" Width="24" ToolTip="Удалить направление"
+                                        Command="{Binding DataContext.DeleteSelectedDirectionVMCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                        CommandParameter="{Binding}"/>
+
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <TextBlock Grid.Row="3" Text="{Binding ApplicantVM.DirectionsOfTraining.Count, StringFormat='Выбрано направлений: {0}'}" Margin="10,3,0,0" FontSize="13"/>
+            </Grid>
+
+            <!--ЭКЗАМЕНЫ/ИСПЫТАНИЯ  -->
+            <Grid Grid.Row="7" Margin="10,5,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" FontSize="15" Text="Испытания/Экзамены" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
+                <Button Grid.Row="1" Content="Добавить испытание/экзамен" Style="{StaticResource defaultAdd}" Margin="10,10,0,0" HorizontalAlignment="Left"
+                    Command="{Binding OpenWindowAddExamCommand}"
+                    CommandParameter="{Binding ApplicantVM.Exams}"/>
+                <ListView Grid.Row="2" Margin="10,5,100,0" MaxHeight="180" FontSize="12"
+                ItemsSource="{Binding ApplicantVM.Exams}">
+                    <ListView.Style>
+                        <Style TargetType="ListView">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListView">
+                                        <ScrollViewer>
+                                            <Border BorderThickness="0,0,0,0.8" BorderBrush="Black">
+                                                <ItemsPresenter/>
+                                            </Border>
+                                        </ScrollViewer>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.Style>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="WhiteSmoke"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding AcademicSubject}" Margin="5,0" FontSize="14" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding DateExam}" Margin="10,0,5,0" FontSize="14" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding TimeExam}" Margin="5,0" FontSize="14" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="3" Text="{Binding LocationExam}" Margin="5,0" FontSize="14" VerticalAlignment="Center"/>
+
+                                    <CheckBox Grid.Row="1" Grid.Column="0" Content="Особенности" VerticalAlignment="Center" VerticalContentAlignment="Bottom" Padding="5,0,0,0" 
+                                          Margin="5,0,0,0" IsEnabled="False" IsChecked="{Binding IsSpecial}"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding AdditionalIformation, StringFormat='Доп. инфа: {0}'}" Margin="10,0,5,0" FontSize="14" VerticalAlignment="Center"/>
+
+                                    <Button Grid.Column="4" Grid.RowSpan="2" Content="/Common/Resources/Images/deleteDocument.png" Style="{StaticResource ButtonImage}" 
+                                        Margin="5,0" Height="24" Width="24" ToolTip="Удалить экзамен/испытание"
+                                        Command="{Binding DataContext.DeleteExamCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                        CommandParameter="{Binding}"/>
+
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <TextBlock Grid.Row="3" Text="{Binding ApplicantVM.Exams.Count, StringFormat='Назначено испытаний/экзаменов: {0}'}" Margin="10,3,0,0" FontSize="13"/>
+            </Grid>
+
+            <!--КНОПКА СФОРМИРОВАТЬ ЛИЧНОЕ ДЕЛО-->
+            <Button Grid.Row="8" Content="Сформировать личное дело" Style="{StaticResource defaultAdd}" HorizontalAlignment="Center" Margin="0,20"
+                Command="{Binding CreatePersonalFileCommand}" CommandParameter="{Binding ApplicantVM}"/>
+
+        </Grid>
+
+    </ScrollViewer>
+
+</UserControl>

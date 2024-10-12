@@ -454,7 +454,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         }
         void CloseTab()
         {
-            ApplicantVM.Dispose();
             ApplicantVM = null;
             _tabControl.RemoveTab();
         }

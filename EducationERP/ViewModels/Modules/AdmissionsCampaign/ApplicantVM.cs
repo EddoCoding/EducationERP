@@ -12,36 +12,118 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 {
     public class ApplicantVM : RaketaViewModel, IDisposable
     {
+        string surName;
+        string name;
+        string middlename;
+        DateOnly dateOfBirth;
+        string gender;
+        string placeOfBirth;
+        bool? isCitizenRus = true;
+        bool? notCitizen;
+        bool? isForeign;
         string citizenship = "Россия";
+        DateOnly citizenshipValidFrom;
+
+        string residentialAddress;
+        string addressOfRegistration;
+        string homePhone;
+        string mobilePhone;
+        string mail;
+        string additionalInformation;
+
         int totalPoints;
         int pointsDistinctiveFeatures;
         int sumPointsExam;
 
         #region Личная информация
         public Guid Id { get; set; } = Guid.NewGuid();
-        public string SurName { get; set; } = string.Empty;
-        public string Name { get; set; } = string.Empty;
-        public string MiddleName { get; set; } = string.Empty;
-        public DateOnly DateOfBirth { get; set; }
-        public string Gender { get; set; } = string.Empty;
-        public string PlaceOfBirth { get; set; } = string.Empty;
-        public bool? IsCitizenRus { get; set; } = true;
-        public bool? NotCitizen { get; set; } = false;
-        public bool? IsForeign { get; set; } = false;
+        public string SurName
+        {
+            get => surName;
+            set => SetValue(ref surName, value);
+        }
+        public string Name
+        {
+            get => name;
+            set => SetValue(ref name, value);
+        }
+        public string MiddleName
+        {
+            get => middlename;
+            set => SetValue(ref middlename, value);
+        }
+        public DateOnly DateOfBirth
+        {
+            get => dateOfBirth;
+            set => SetValue(ref dateOfBirth, value);
+        }
+        public string Gender
+        {
+            get => gender;
+            set => SetValue(ref gender, value);
+        }
+        public string PlaceOfBirth 
+        {
+            get => placeOfBirth;
+            set => SetValue(ref placeOfBirth, value);
+        }
+        public bool? IsCitizenRus 
+        {
+            get => isCitizenRus;
+            set => SetValue(ref isCitizenRus, value);
+        }
+        public bool? NotCitizen 
+        {
+            get => notCitizen;
+            set => SetValue(ref notCitizen, value);
+        }
+        public bool? IsForeign
+        {
+            get => isForeign;
+            set => SetValue(ref isForeign, value);
+        }
         public string Citizenship
         {
             get => citizenship;
             set => SetValue(ref citizenship, value);
         }
-        public DateOnly CitizenshipValidFrom { get; set; }
+        public DateOnly CitizenshipValidFrom
+        {
+            get => citizenshipValidFrom;
+            set => SetValue(ref citizenshipValidFrom, value);
+        }
         #endregion
         #region Контактная информация
-        public string ResidentialAddress { get; set; } = string.Empty;
-        public string AddressOfRegistration { get; set; } = string.Empty;
-        public string HomePhone { get; set; } = string.Empty;
-        public string MobilePhone { get; set; } = string.Empty;
-        public string Mail { get; set; } = string.Empty;
-        public string AdditionalInformation { get; set; } = string.Empty;
+        public string ResidentialAddress
+        {
+            get => residentialAddress;
+            set => SetValue(ref residentialAddress, value);
+        }
+        public string AddressOfRegistration
+        {
+            get => addressOfRegistration;
+            set => SetValue(ref addressOfRegistration, value);
+        }
+        public string HomePhone
+        {
+            get => homePhone;
+            set => SetValue(ref homePhone, value);
+        }
+        public string MobilePhone
+        {
+            get => mobilePhone; 
+            set => SetValue(ref mobilePhone, value);
+        }
+        public string Mail
+        {
+            get => mail;
+            set => SetValue(ref mail, value);
+        }
+        public string AdditionalInformation
+        {
+            get => additionalInformation; 
+            set => SetValue(ref additionalInformation, value);
+        }
         #endregion
         #region Коллекции и доп. свойства
         //Документы

@@ -24,7 +24,7 @@ namespace EducationERP.Models.Modules.AdmissionsCampaign
         #region Контактная информация
         public string ResidentialAddress { get; set; } = string.Empty;
         public string AddressOfRegistration { get; set; } = string.Empty;
-        public string HomePhone { get; set; } = string.Empty;
+        public string? HomePhone { get; set; } = string.Empty;
         public string MobilePhone { get; set; } = string.Empty;
         public string Mail { get; set; } = string.Empty;
         public string AdditionalInformation { get; set; } = string.Empty;

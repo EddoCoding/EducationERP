@@ -819,7 +819,7 @@
 
                 <Button Content="/Common/Resources/Images/changePersonalFile.png" Style="{StaticResource ButtonImage}" Height="24" Width="24"
                         VerticalAlignment="Top" Margin="7" ToolTip="Изменить личное дело"
-                        Command="{Binding ChangePersonalFileCommand}" CommandParameter="{Binding .}"/>
+                        Command="{Binding ChangePersonalFileCommand}" CommandParameter="{Binding SelectedApplicant}"/>
 
                 <Button Content="/Common/Resources/Images/deletePersonalFile.png" Style="{StaticResource ButtonImage}" Height="24" Width="24" 
                         VerticalAlignment="Top" Margin="7" ToolTip="Удалить личное дело"
@@ -835,7 +835,7 @@
                 <ScrollViewer.Effect>
                     <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
                 </ScrollViewer.Effect>
-                
+
                 <StackPanel Margin="20,0,30,20">
 
                     <TextBlock Text="Личная информация" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
@@ -1191,7 +1191,8 @@
                                         <TextBlock Text="{Binding LocationExam}" FontSize="13" Margin="5,0,0,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <CheckBox IsChecked="{Binding IsSpecial}" Content="Особенности" VerticalContentAlignment="Center" Padding="5,0,0,0" VerticalAlignment="Top"/>
+                                        <CheckBox IsChecked="{Binding IsSpecial}" Content="Особенности" VerticalContentAlignment="Center" Padding="5,0,0,0" 
+                                                  VerticalAlignment="Top" IsEnabled="False"/>
                                         <TextBlock Text="Доп. инфо.:" FontSize="13" Margin="5,0,0,0"/>
                                         <TextBlock Text="{Binding AdditionalInformation}" FontSize="13" Margin="5,0,0,0" TextWrapping="Wrap" Width="300"/>
                                     </StackPanel>
@@ -1199,22 +1200,17 @@
                                         <TextBlock Text="{Binding SubjectScores}" FontSize="13"/>
                                         <TextBlock Text="(баллы)" FontSize="13" Margin="5,0,0,0"/>
                                     </StackPanel>
-                                    <Button Content="Проверка" 
-                                            Command="{Binding DataContext.CheckCommand, RelativeSource={RelativeSource AncestorType=ListView}}" 
-                                            CommandParameter="{Binding}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <TextBlock Text="{Binding SelectedApplicant.SumPointsExam, StringFormat='Сумма баллов отличительных признаков: {0}'}" Margin="0,3,5,0" 
+                    <TextBlock Text="{Binding SelectedApplicant.SumPointsExam, StringFormat='Сумма баллов экзаменов/испытаний: {0}'}" Margin="0,3,5,0" 
                                 HorizontalAlignment="Right" FontSize="13"/>
 
                 </StackPanel>
-                
+
             </ScrollViewer>
-            
-            
-            
+
         </Grid>
         
     </Grid>

@@ -10,7 +10,7 @@ using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams;
 using Raketa;
 using System.Collections.ObjectModel;
-using System.Windows;
+using System.Windows.Controls;
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 {
@@ -22,12 +22,22 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         public ApplicantVM SelectedApplicant
         {
             get => _selectedApplicant;
-            set => SetValue(ref _selectedApplicant, value);
+            set
+            {
+                //ПОТОМ ПРОВЕРИТЬ АЛГОРИТМ
+                //if (_selectedApplicant != null)
+                //{
+                //    _selectedApplicant.SumPointsExam = 0;
+                //    foreach (var applicantVM in _selectedApplicant.Exams)
+                //        _selectedApplicant.SumPointsExam += applicantVM.SubjectScores;
+                //}
+                SetValue(ref _selectedApplicant, value);
+            }
         }
 
         public RaketaCommand ExitCommand { get; set; }
         public RaketaTCommand<ObservableCollection<ApplicantVM>> OpenTabPersonalFileCommand { get; set; }
-        public RaketaCommand ChangePersonalFileCommand { get; set; }
+        public RaketaTCommand<ApplicantVM> ChangePersonalFileCommand { get; set; }
         public RaketaCommand DeletePersonalFileCommand { get; set; }
         public RaketaCommand UpdatePersonalFileCommand { get; set; }
 
@@ -44,11 +54,9 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 
             ExitCommand = RaketaCommand.Launch(CloseTab);
             OpenTabPersonalFileCommand = RaketaTCommand<ObservableCollection<ApplicantVM>>.Launch(CreatePersonalFile);
-            ChangePersonalFileCommand = RaketaCommand.Launch(ChangePersonalFile);
+            ChangePersonalFileCommand = RaketaTCommand<ApplicantVM>.Launch(ChangePersonalFile);
             DeletePersonalFileCommand = RaketaCommand.Launch(DeletePersonalFile);
             UpdatePersonalFileCommand = RaketaCommand.Launch(UpdatePersonalFile);
-
-            CheckCommand = RaketaTCommand<ExamVM>.Launch(check);
         }
 
         void GetApplicant()
@@ -188,7 +196,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                     }
                     if (education is EducationEleven educationEleven)
                     {
-                        var educationElevenVM = new EducationNineViewModel
+                        var educationElevenVM = new EducationElevenViewModel
                         {
                             Id = educationEleven.Id,
                             TypeEducation = educationEleven.TypeEducation,
@@ -343,13 +351,21 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         }
         void CreatePersonalFile(ObservableCollection<ApplicantVM> applicants) => 
             _tabControl.CreateTab<AddApplicantViewModel>("Добавление абитуриента", null, applicants);
-        void ChangePersonalFile() => Dev.NotReady("Изменение личного дела");
+        void ChangePersonalFile(ApplicantVM applicantVM)
+        {
+            if (applicantVM != null)
+                _tabControl.CreateTab<ChangeApplicantViewModel>("Изменение личного дела", null, applicantVM);
+        }
         async void DeletePersonalFile()
         {
             if(SelectedApplicant != null)
             {
                 bool isDeleted = await _applicantRepository.Delete<Applicant>(SelectedApplicant.Id);
-                if (isDeleted) Applicants.Remove(SelectedApplicant);
+                if (isDeleted)
+                {
+                    SelectedApplicant.Dispose();
+                    Applicants.Remove(SelectedApplicant);
+                }
             }
         }
         void UpdatePersonalFile()
@@ -359,13 +375,5 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         }
 
         void CloseTab() => _tabControl.RemoveTab();
-
-
-        public RaketaTCommand<ExamVM> CheckCommand { get; set; }
-
-        void check(ExamVM examVM)
-        {
-            examVM.SubjectScores += 5;
-        }
     }
 }
