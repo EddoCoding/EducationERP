@@ -12,7 +12,6 @@ using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams;
 using Raketa;
 using System.Collections.ObjectModel;
-using System.Reflection.Metadata;
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 {
@@ -47,17 +46,22 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         public RaketaTCommand<ObservableCollection<ExamVM>> OpenWindowAddExamCommand { get; set; }
         public RaketaTCommand<ExamVM> DeleteExamCommand { get; set; }
 
+        IServiceView _serviceView;
         ITabControl _tabControl;
         IApplicantRepository _applicantRepository;
         public ApplicantVM ApplicantVM { get; set; }
-        public ChangeApplicantViewModel(ITabControl tabControl, IApplicantRepository applicantRepository, ApplicantVM applicantVM)
+        public ChangeApplicantViewModel(IServiceView serviceView, ITabControl tabControl, IApplicantRepository applicantRepository, ApplicantVM applicantVM)
         {
+            _serviceView = serviceView;
             _tabControl = tabControl;
             _applicantRepository = applicantRepository;
             ApplicantVM = applicantVM;
 
             CitizenshipCommand = RaketaCommand.Launch(Citizenship);
+
+            OpenWindowAddDocumentCommand = RaketaTCommand<ObservableCollection<DocumentBaseViewModel>>.Launch(OpenWindowAddDocument);
             DeleteDocumentCommand = RaketaTCommand<DocumentBaseViewModel>.Launch(DeleteDocument);
+
             DeleteEducationCommand = RaketaTCommand<EducationBaseViewModel>.Launch(DeleteEducation);
             DeleteEGECommand = RaketaTCommand<EGEVM>.Launch(DeleteEGE);
             DeleteDistinctiveFeatureCommand = RaketaTCommand<DistinctiveFeatureVM>.Launch(DeleteDistinctiveFeature);
@@ -83,6 +87,9 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 Visual.IsEnabledTextBox = true;
             }
         }
+
+        void OpenWindowAddDocument(ObservableCollection<DocumentBaseViewModel> documents) =>
+            _serviceView.Window<DocumentViewModel>(null, documents, ApplicantVM.Id, true).Modal();
         async void DeleteDocument(DocumentBaseViewModel document)
         {
             bool idDeleted = false;
@@ -96,8 +103,9 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             else if (document is ForeignPassportViewModel)
                 idDeleted = await _applicantRepository.Delete<ForeignPassport>(document.Id);
 
-            if (idDeleted) ApplicantVM.Documents.Remove(document);
+            ApplicantVM.Documents.Remove(document);
         }
+
         async void DeleteEducation(EducationBaseViewModel education)
         {
             bool idDeleted = false;
@@ -115,27 +123,27 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             else if (education is EducationAspViewModel)
                 idDeleted = await _applicantRepository.Delete<EducationAsp>(education.Id);
 
-            if (idDeleted) ApplicantVM.Educations.Remove(education);
+            ApplicantVM.Educations.Remove(education);
         }
         async void DeleteEGE(EGEVM ege)
         {
             bool idDeleted = await _applicantRepository.Delete<EGE>(ege.Id);
-            if (idDeleted) ApplicantVM.EGES.Remove(ege);
+            ApplicantVM.EGES.Remove(ege);
         }
         async void DeleteDistinctiveFeature(DistinctiveFeatureVM distinctiveFeature)
         {
             bool idDeleted = await _applicantRepository.Delete<DistinctiveFeature>(distinctiveFeature.Id);
-            if (idDeleted) ApplicantVM.DistinguishingFeatures.Remove(distinctiveFeature);
+            ApplicantVM.DistinguishingFeatures.Remove(distinctiveFeature);
         }
         async void DeleteSelectedDirection(SelectedDirectionVM selectedDirection)
         {
             bool idDeleted = await _applicantRepository.Delete<SelectedDirection>(selectedDirection.Id);
-            if (idDeleted) ApplicantVM.DirectionsOfTraining.Remove(selectedDirection);
+            ApplicantVM.DirectionsOfTraining.Remove(selectedDirection);
         }
         async void DeleteExam(ExamVM exam)
         {
             bool idDeleted = await _applicantRepository.Delete<Exam>(exam.Id);
-            if (idDeleted) ApplicantVM.Exams.Remove(exam);
+            ApplicantVM.Exams.Remove(exam);
         }
 
         void CloseTab()
