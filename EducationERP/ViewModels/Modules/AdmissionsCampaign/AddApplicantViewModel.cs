@@ -107,12 +107,12 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         }
 
         void OpenWindowAddDocument(ObservableCollection<DocumentBaseViewModel> documents) => 
-            _serviceView.Window<DocumentViewModel>(null, documents).Modal();
+            _serviceView.Window<DocumentViewModel>(null, documents, null, false).Modal();
         void ChangeDocument(DocumentBaseViewModel document) => _serviceView.Window<ChangeDocumentViewModel>(null, document).Modal();
         void DeleteDocument(DocumentBaseViewModel document) => ApplicantVM.Documents.Remove(document);
 
         void OpenWindowAddEducation(ObservableCollection<EducationBaseViewModel> educations) => 
-            _serviceView.Window<EducationDocViewModel>(null, educations).Modal();
+            _serviceView.Window<EducationDocViewModel>(null, educations, null, false).Modal();
         void ChangeEducation(EducationBaseViewModel education) => _serviceView.Window<ChangeEducationDocViewModel>(null, education).Modal();
         void DeleteEducation(EducationBaseViewModel education) => ApplicantVM.Educations.Remove(education);
 
