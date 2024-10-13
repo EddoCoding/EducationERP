@@ -832,7 +832,7 @@
             </StackPanel>
 
             <!--КАРТОЧКА АБИТУРИЕНТА-->
-            <ScrollViewer Grid.RowSpan="3" Grid.Column="1" Background="White" Margin="0,10,10,20">
+            <ScrollViewer Grid.RowSpan="4" Grid.Column="1" Background="White" Margin="0,10,10,10">
                 <ScrollViewer.Effect>
                     <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
                 </ScrollViewer.Effect>
@@ -1222,6 +1222,27 @@
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="{Binding SubjectScores}" FontSize="13"/>
                                         <TextBlock Text="(баллы)" FontSize="13" Margin="5,0,0,0"/>
+                                        <Button Content="Поставить баллы" Margin="20,0,0,0" FontWeight="DemiBold"
+                                                Command="{Binding DataContext.OpenWindowInsertPointExamCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                CommandParameter="{Binding}">
+                                            <Button.Style>
+                                                <Style TargetType="Button">
+                                                    <Setter Property="FontSize" Value="13"/>
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <ContentPresenter/>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Foreground" Value="#FFD700"/>
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
                                     </StackPanel>
                                 </StackPanel>
                             </DataTemplate>

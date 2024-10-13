@@ -28,6 +28,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         public RaketaTCommand<ApplicantVM> ChangePersonalFileCommand { get; set; }
         public RaketaCommand DeletePersonalFileCommand { get; set; }
         public RaketaCommand UpdatePersonalFileCommand { get; set; }
+        public RaketaTCommand<ExamVM> OpenWindowInsertPointExamCommand { get; set; }
 
         IServiceView _serviceView;
         ITabControl _tabControl;
@@ -45,6 +46,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             ChangePersonalFileCommand = RaketaTCommand<ApplicantVM>.Launch(ChangePersonalFile);
             DeletePersonalFileCommand = RaketaCommand.Launch(DeletePersonalFile);
             UpdatePersonalFileCommand = RaketaCommand.Launch(UpdatePersonalFile);
+            OpenWindowInsertPointExamCommand = RaketaTCommand<ExamVM>.Launch(OpenWindowInsertPointExam);
         }
 
         void GetApplicant()
@@ -378,6 +380,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             Applicants.Clear();
             GetApplicant();
         }
+        void OpenWindowInsertPointExam(ExamVM examVM) =>
+            _serviceView.Window<InsertPointExamViewModel>(null, examVM).Modal();
 
         void CloseTab() => _tabControl.RemoveTab();
     }
