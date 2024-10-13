@@ -959,17 +959,12 @@
                         <DataTemplate>
                             <Grid Margin="5">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Column="0" Text="{Binding TypeDocument}" FontSize="13" VerticalAlignment="Center"/>
-                                <Button Grid.Column="1" Content="/Common/Resources/Images/changeDocument.png" Style="{StaticResource ButtonImage}"
-                                    HorizontalAlignment="Right" Margin="0,0,5,0" Height="24" Width="24"
-                                    Command="{Binding DataContext.ChangeDocumentCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
-                                    CommandParameter="{Binding}"/>
-                                <Button Grid.Column="2" Content="/Common/Resources/Images/deleteDocument.png" Style="{StaticResource ButtonImage}" 
+                                <Button Grid.Column="1" Content="/Common/Resources/Images/deleteDocument.png" Style="{StaticResource ButtonImage}" 
                                     Margin="5,0" Height="24" Width="24"
                                     Command="{Binding DataContext.DeleteDocumentCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                                     CommandParameter="{Binding}"/>
@@ -1036,17 +1031,12 @@
                         <DataTemplate>
                             <Grid Margin="5">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Column="0" Text="{Binding TypeEducation}" FontSize="13" VerticalAlignment="Center"/>
-                                <Button Grid.Column="1" Content="/Common/Resources/Images/changeDocument.png" Style="{StaticResource ButtonImage}"
-                                    HorizontalAlignment="Right" Margin="0,0,5,0" Height="24" Width="24"
-                                    Command="{Binding DataContext.ChangeEducationCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
-                                    CommandParameter="{Binding}"/>
-                                <Button Grid.Column="2" Content="/Common/Resources/Images/deleteDocument.png" Style="{StaticResource ButtonImage}" 
+                                <Button Grid.Column="1" Content="/Common/Resources/Images/deleteDocument.png" Style="{StaticResource ButtonImage}" 
                                     Margin="5,0" Height="24" Width="24"
                                     Command="{Binding DataContext.DeleteEducationCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                                     CommandParameter="{Binding}"/>
@@ -1359,7 +1349,7 @@
 
                                     <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding AcademicSubject}" Margin="5,0" FontSize="14" VerticalAlignment="Center"/>
                                     <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding DateExam}" Margin="10,0,5,0" FontSize="14" VerticalAlignment="Center"/>
-                                    <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding TimeExam}" Margin="5,0" FontSize="14" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding TimeExam, StringFormat='{}{0:HH\\:mm}'}" Margin="5,0" FontSize="14" VerticalAlignment="Center"/>
                                     <TextBlock Grid.Row="0" Grid.Column="3" Text="{Binding LocationExam}" Margin="5,0" FontSize="14" VerticalAlignment="Center"/>
 
                                     <CheckBox Grid.Row="1" Grid.Column="0" Content="Особенности" VerticalAlignment="Center" VerticalContentAlignment="Bottom" Padding="5,0,0,0" 
