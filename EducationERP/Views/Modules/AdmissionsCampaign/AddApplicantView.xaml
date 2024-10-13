@@ -1103,9 +1103,9 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Grid.Column="0" Text="Предмет:" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="0" Text="Предмет:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Column="1" Text="{Binding AcademicSubject}" FontSize="13" Margin="5,0,0,0" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Column="2" Text="Балл:" FontSize="13" Margin="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="2" Text="Балл:" FontSize="13" Margin="10,0,0,0" FontWeight="DemiBold" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Column="3" Text="{Binding SubjectScores}" FontSize="13" Margin="5,0,0,0" VerticalAlignment="Center"/>
                                 <Button Grid.Column="4" Content="/Common/Resources/Images/deleteDocument.png" Style="{StaticResource ButtonImage}" 
                                         Margin="5,0" Height="24" Width="24"
@@ -1175,9 +1175,9 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Grid.Column="0" Text="Признак:" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="0" Text="Признак:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Column="1" Text="{Binding NameFeature}" FontSize="13" Margin="5,0,0,0" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Column="2" Text="Балл:" FontSize="13" Margin="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="2" Text="Балл:" FontSize="13" Margin="10,0,0,0" FontWeight="DemiBold" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Column="3" Text="{Binding FeatureScore}" FontSize="13" Margin="5,0,0,0" VerticalAlignment="Center"/>
                                 <Button Grid.Column="4" Content="/Common/Resources/Images/deleteDocument.png" Style="{StaticResource ButtonImage}" 
                                         Margin="5,0" Height="24" Width="24"
@@ -1254,28 +1254,28 @@
                                     </Grid.ColumnDefinitions>
 
                                     <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
-                                        <TextBlock Text="Код/Направление:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Код/Направление:" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="13"/>
                                         <TextBlock Text="{Binding CodeDirection}" Margin="5,0" FontSize="14"/>
                                         <TextBlock Text="{Binding NameDirection}" FontSize="14"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
-                                        <TextBlock Text="Код/Профиль:" FontWeight="Bold" VerticalAlignment="Top"/>
+                                        <TextBlock Text="Код/Профиль:" FontWeight="DemiBold" VerticalAlignment="Top" FontSize="13"/>
                                         <TextBlock Text="{Binding CodeProfile}" Margin="5,0" FontSize="14"/>
                                         <TextBlock Text="{Binding NameProfile}" FontSize="14" TextWrapping="Wrap" Width="650"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
-                                        <TextBlock Text="Факультет:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Факультет:" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="13"/>
                                         <TextBlock Text="{Binding NameFaculty}" Margin="5,0,0,0" FontSize="14"/>
-                                        <TextBlock Text="Уровень подготовки:" FontWeight="Bold" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Уровень подготовки:" FontWeight="DemiBold" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="13"/>
                                         <TextBlock Text="{Binding NameLevel}" Margin="5,0,0,0" FontSize="14"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
-                                        <TextBlock Text="Форма подготовки:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Форма подготовки:" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="13"/>
                                         <TextBlock Text="{Binding NameFormEducation}" Margin="5,0,0,0" FontSize="14"/>
-                                        <TextBlock Text="Форма оплаты:" FontWeight="Bold" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Форма оплаты:" FontWeight="DemiBold" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="13"/>
                                         <TextBlock Text="{Binding NameFormPayment}" Margin="5,0,0,0" FontSize="14"/>
                                     </StackPanel>
                                     

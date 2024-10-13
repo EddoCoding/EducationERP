@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EducationERP.Views.Modules.AdmissionsCampaign.Documents"
         xmlns:viewDocuments="clr-namespace:EducationERP.Views.Modules.AdmissionsCampaign.Documents"
         xmlns:viewModelDocuments="clr-namespace:EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents"
-        mc:Ignorable="d" Title="Добавление документа" Height="450" Width="670" MouseDown="MoveWindow"
+        mc:Ignorable="d" Title="Изменение документа" Height="450" Width="670" MouseDown="MoveWindow"
         Background="WhiteSmoke" FontFamily="{StaticResource OpenSans}" WindowStyle="None" 
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" RenderOptions.BitmapScalingMode="NearestNeighbor"
         BorderBrush="LightGray" BorderThickness="1">

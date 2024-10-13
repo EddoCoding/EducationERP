@@ -1,4 +1,6 @@
 ﻿using EducationERP.Models.Modules.AdmissionsCampaign;
+using EducationERP.Models.Modules.AdmissionsCampaign.Exams;
+using EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams;
 using Microsoft.EntityFrameworkCore;
 using System.Windows;
 
@@ -110,11 +112,38 @@ namespace EducationERP.Common.Components.Repositories
                 }
                 catch
                 {
-                    MessageBox.Show("Ошибка обновления данных в базе данных");
+                    MessageBox.Show("Ошибка обновления данных в базе данных!");
                     return false;
                 }
             }
             return false;
+        }
+
+        public async Task<bool> Update(Exam exam)
+        {
+            using (var db = new DataContext())
+            {
+                try
+                {
+                    var entity = await db.Exams
+                        .Where(x => x.Id == exam.Id)
+                        .FirstOrDefaultAsync();
+
+                    if (entity != null) 
+                    {
+                        entity.SubjectScores = exam.SubjectScores;
+                        await db.SaveChangesAsync();
+                        return true;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка обновления баллов в базе данных!");
+                    return false;
+                }
+
+                return false;
+            }
         }
     }
 }
