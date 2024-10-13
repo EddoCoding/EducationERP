@@ -9,7 +9,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams
     {
         public EGEVM EGE { get; set; } = new();
 
-        ObservableCollection<EGEVM> _eges;
+        public ObservableCollection<EGEVM> _eges { get; set; }
 
         public RaketaTCommand<EGEVM> AddEGECommand { get; set; }
         public RaketaCommand ExitCommand { get; set; }

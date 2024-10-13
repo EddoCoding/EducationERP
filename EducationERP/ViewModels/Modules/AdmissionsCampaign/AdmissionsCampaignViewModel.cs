@@ -1,6 +1,5 @@
 ﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
-using EducationERP.Common.ToolsDev;
 using EducationERP.Models.Modules.AdmissionsCampaign;
 using EducationERP.Models.Modules.AdmissionsCampaign.Educations;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Directions;
@@ -10,7 +9,7 @@ using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams;
 using Raketa;
 using System.Collections.ObjectModel;
-using System.Windows.Controls;
+using System.Collections.Specialized;
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 {
@@ -22,17 +21,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         public ApplicantVM SelectedApplicant
         {
             get => _selectedApplicant;
-            set
-            {
-                //ПОТОМ ПРОВЕРИТЬ АЛГОРИТМ
-                //if (_selectedApplicant != null)
-                //{
-                //    _selectedApplicant.SumPointsExam = 0;
-                //    foreach (var applicantVM in _selectedApplicant.Exams)
-                //        _selectedApplicant.SumPointsExam += applicantVM.SubjectScores;
-                //}
-                SetValue(ref _selectedApplicant, value);
-            }
+            set => SetValue(ref _selectedApplicant, value);
         }
 
         public RaketaCommand ExitCommand { get; set; }
@@ -85,8 +74,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                     Mail = applicant.Mail,
                     AdditionalInformation = applicant.AdditionalInformation,
 
-                    TotalPoints = applicant.TotalPoints,
-                    PointsDistinctiveFeatures = applicant.PointsDistinctiveFeatures,
                     SumPointsExam = applicant.SumPointsExam,
 
                     Documents = new(),
@@ -96,6 +83,25 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                     DirectionsOfTraining = new(),
                     Exams = new()
                 };
+                applicantVM.EGES.CollectionChanged += (sender, e) =>
+                {
+                    if (e.NewItems != null)
+                        foreach (var newItem in e.NewItems)
+                            if (newItem is EGEVM ege) applicantVM.TotalPoints += ege.SubjectScores;
+                    if (e.OldItems != null)
+                        foreach (var oldItem in e.OldItems)
+                            if (oldItem is EGEVM ege) applicantVM.TotalPoints -= ege.SubjectScores;
+                };
+                applicantVM.DistinguishingFeatures.CollectionChanged += (sender, e) =>
+                {
+                    if (e.NewItems != null)
+                        foreach (var newItem in e.NewItems)
+                            if (newItem is DistinctiveFeatureVM distinctiveFeature) applicantVM.PointsDistinctiveFeatures += distinctiveFeature.FeatureScore;
+                    if (e.OldItems != null)
+                        foreach (var oldItem in e.OldItems)
+                            if (oldItem is DistinctiveFeatureVM distinctiveFeature) applicantVM.PointsDistinctiveFeatures -= distinctiveFeature.FeatureScore;
+                };
+
                 //Перебор документов
                 foreach (var document in applicant.Documents)
                 {

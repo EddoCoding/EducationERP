@@ -7,8 +7,8 @@ namespace EducationERP.Models.Modules.AdmissionsCampaign
 {
     public class Applicant
     {
-        #region Личная информация
         public Guid Id { get; set; }
+        #region Личная информация
         public string SurName { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
         public string MiddleName { get; set; } = string.Empty;

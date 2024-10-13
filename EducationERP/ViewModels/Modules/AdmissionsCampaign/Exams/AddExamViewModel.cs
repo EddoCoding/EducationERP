@@ -1,7 +1,5 @@
 ﻿using EducationERP.Common.Components.Repositories;
-using EducationERP.Models.Modules.AdmissionsCampaign.Directions;
 using EducationERP.Models.Modules.AdmissionsCampaign.Exams;
-using EducationERP.ViewModels.Modules.AdmissionsCampaign.Directions;
 using Raketa;
 using System.Collections.ObjectModel;
 

@@ -46,6 +46,9 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         public RaketaTCommand<ObservableCollection<ExamVM>> OpenWindowAddExamCommand { get; set; }
         public RaketaTCommand<ExamVM> DeleteExamCommand { get; set; }
 
+        //Последняя кнопка
+        public RaketaTCommand<ApplicantVM> CreatePersonalFileCommand { get; set; }
+
         IServiceView _serviceView;
         ITabControl _tabControl;
         IApplicantRepository _applicantRepository;
@@ -76,6 +79,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 
             OpenWindowAddExamCommand = RaketaTCommand<ObservableCollection<ExamVM>>.Launch(OpenWindowAddExam);
             DeleteExamCommand = RaketaTCommand<ExamVM>.Launch(DeleteExam);
+
+            CreatePersonalFileCommand = RaketaTCommand<ApplicantVM>.Launch(CreatePersonalFile);
         }
 
         void Citizenship()
@@ -169,6 +174,40 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             ApplicantVM.Exams.Remove(exam);
         }
 
+        void CreatePersonalFile(ApplicantVM applicantVM)
+        {
+            if (applicantVM != null) 
+            {
+                var applicant = new Applicant
+            {
+                Id = applicantVM.Id,
+                SurName = applicantVM.SurName,
+                Name = applicantVM.Name,
+                MiddleName = applicantVM.MiddleName,
+                DateOfBirth = applicantVM.DateOfBirth,
+                Gender = applicantVM.Gender,
+                PlaceOfBirth = applicantVM.PlaceOfBirth,
+                IsCitizenRus = applicantVM.IsCitizenRus,
+                NotCitizen = applicantVM.NotCitizen,
+                IsForeign = applicantVM.IsForeign,
+                Citizenship = applicantVM.Citizenship,
+                CitizenshipValidFrom = applicantVM.CitizenshipValidFrom,
+
+                ResidentialAddress = applicantVM.ResidentialAddress,
+                AddressOfRegistration = applicantVM.AddressOfRegistration,
+                HomePhone = applicantVM.HomePhone,
+                MobilePhone = applicantVM.MobilePhone,
+                Mail = applicantVM.Mail,
+                AdditionalInformation = applicantVM.AdditionalInformation,
+                
+                TotalPoints = applicantVM.TotalPoints,
+                PointsDistinctiveFeatures = applicantVM.PointsDistinctiveFeatures,
+                SumPointsExam = applicantVM.SumPointsExam
+            };
+                _applicantRepository.Update(applicant);
+                CloseTab();
+            }
+        }
         void CloseTab()
         {
             ApplicantVM = null;

@@ -35,8 +35,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         int pointsDistinctiveFeatures;
         int sumPointsExam;
 
-        #region Личная информация
         public Guid Id { get; set; } = Guid.NewGuid();
+        #region Личная информация
         public string SurName
         {
             get => surName;

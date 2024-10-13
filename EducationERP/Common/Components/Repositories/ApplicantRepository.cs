@@ -66,7 +66,54 @@ namespace EducationERP.Common.Components.Repositories
                 }
                 
             }
+            return false;
+        }
 
+        public async Task<bool> Update(Applicant applicant)
+        {
+            using(var db = new DataContext())
+            {
+                try
+                {
+                    var entity = await db.Applicants
+                        .Where(x => x.Id == applicant.Id)
+                        .FirstOrDefaultAsync();
+
+                    if (entity != null) 
+                    {
+                        entity.SurName = applicant.SurName;
+                        entity.Name = applicant.Name;
+                        entity.MiddleName = applicant.MiddleName;
+                        entity.DateOfBirth = applicant.DateOfBirth;
+                        entity.Gender = applicant.Gender;
+                        entity.PlaceOfBirth = applicant.PlaceOfBirth;
+                        entity.IsCitizenRus = applicant.IsCitizenRus;
+                        entity.NotCitizen = applicant.NotCitizen;
+                        entity.IsForeign = applicant.IsForeign;
+                        entity.Citizenship = applicant.Citizenship;
+                        entity.CitizenshipValidFrom = applicant.CitizenshipValidFrom;
+
+                        entity.ResidentialAddress = applicant.ResidentialAddress;
+                        entity.AddressOfRegistration = applicant.AddressOfRegistration;
+                        entity.HomePhone = applicant.HomePhone;
+                        entity.MobilePhone = applicant.MobilePhone;
+                        entity.Mail = applicant.Mail;
+                        entity.AdditionalInformation = applicant.AdditionalInformation;
+
+                        entity.TotalPoints = applicant.TotalPoints;
+                        entity.PointsDistinctiveFeatures = applicant.PointsDistinctiveFeatures;
+                        entity.SumPointsExam = applicant.SumPointsExam;
+
+                        await db.SaveChangesAsync();
+                        return true;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка обновления данных в базе данных");
+                    return false;
+                }
+            }
             return false;
         }
     }

@@ -102,7 +102,7 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Text="Дополнительная информация" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
-                <TextBox Grid.Row="1" Text="{Binding ExamVM.AdditionalIformation}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,5" TextWrapping="Wrap"/>
+                <TextBox Grid.Row="1" Text="{Binding ExamVM.AdditionalInformation}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,5" TextWrapping="Wrap"/>
             </Grid>
 
         </Grid>
