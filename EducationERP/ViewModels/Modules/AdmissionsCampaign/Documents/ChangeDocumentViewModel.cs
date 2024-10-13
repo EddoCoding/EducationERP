@@ -2,7 +2,7 @@
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents
 {
-    public class ChangeDocumentViewModel : RaketaViewModel, IDisposable
+    public class ChangeDocumentViewModel : RaketaViewModel
     {
         public DocumentBaseViewModel Document { get; set; }
 

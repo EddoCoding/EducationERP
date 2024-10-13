@@ -47,7 +47,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         public RaketaTCommand<ExamVM> DeleteExamCommand { get; set; }
 
         //Последняя кнопка
-        public RaketaTCommand<ApplicantVM> CreatePersonalFileCommand { get; set; }
+        public RaketaTCommand<ApplicantVM> ChangePersonalFileCommand { get; set; }
 
         IServiceView _serviceView;
         ITabControl _tabControl;
@@ -80,7 +80,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             OpenWindowAddExamCommand = RaketaTCommand<ObservableCollection<ExamVM>>.Launch(OpenWindowAddExam);
             DeleteExamCommand = RaketaTCommand<ExamVM>.Launch(DeleteExam);
 
-            CreatePersonalFileCommand = RaketaTCommand<ApplicantVM>.Launch(CreatePersonalFile);
+            ChangePersonalFileCommand = RaketaTCommand<ApplicantVM>.Launch(ChangePersonalFile);
         }
 
         void Citizenship()
@@ -174,7 +174,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             ApplicantVM.Exams.Remove(exam);
         }
 
-        void CreatePersonalFile(ApplicantVM applicantVM)
+        void ChangePersonalFile(ApplicantVM applicantVM)
         {
             if (applicantVM != null) 
             {

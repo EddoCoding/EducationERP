@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents
 {
-    public class DocumentViewModel : RaketaViewModel, IDisposable
+    public class DocumentViewModel : RaketaViewModel
     {
         ObservableCollection<DocumentBaseViewModel> _documents;
 
