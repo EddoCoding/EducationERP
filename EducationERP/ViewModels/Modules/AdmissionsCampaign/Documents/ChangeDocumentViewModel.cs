@@ -2,7 +2,7 @@
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents
 {
-    public class ChangeDocumentViewModel : RaketaViewModel
+    public class ChangeDocumentViewModel : RaketaViewModel, IDisposable
     {
         public DocumentBaseViewModel Document { get; set; }
 
@@ -23,10 +23,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents
         void SaveDocument(DocumentBaseViewModel document)
         {
             var isValidated = document.Validation();
-            if (isValidated)
-            {
-                _serviceView.Close<ChangeDocumentViewModel>();
-            }
+            if (isValidated) CloseWindow();
         }
         void CloseWindow() => _serviceView.Close<ChangeDocumentViewModel>();
     }

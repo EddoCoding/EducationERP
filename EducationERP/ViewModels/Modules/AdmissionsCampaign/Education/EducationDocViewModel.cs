@@ -54,7 +54,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Education
             if (isValidated)
             {
                 _educations.Add(education);
-                _educations = null;
                 if (_useDataBase)
                 {
                     if (education is EducationNineViewModel nineVM)
@@ -174,7 +173,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Education
                         await _applicantRepository.Create<EducationAsp>(asp);
                     }
                 }
-                _serviceView.Close<EducationDocViewModel>();
+                CloseWindow();
             }
         }
         void CloseWindow() => _serviceView.Close<EducationDocViewModel>();

@@ -102,7 +102,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Directions
             if (isValidated)
             {
                 _directions.Add(selectedDirectionVM);
-                _directions = null;
                 if (_useDataBase)
                 {
                     var direction = new SelectedDirection
@@ -120,7 +119,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Directions
                     };
                     _applicantRepository.Create<SelectedDirection>(direction);
                 }
-                _serviceView.Close<AddDirectionViewModel>();
+                CloseWindow();
             }
         }
         void CloseWindow() => _serviceView.Close<AddDirectionViewModel>();

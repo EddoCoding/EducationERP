@@ -37,7 +37,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams
             if (isValidated)
             {
                 _eges.Add(Ege);
-                _eges = null;
                 if (_useDataBase)
                 {
                     var ege = new EGE
@@ -49,7 +48,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams
                     };
                     _applicantRepository.Create<EGE>(ege);
                 }
-                _serviceView.Close<EGEViewModel>();
+                CloseWindow();
             }
         }
         void CloseWindow() => _serviceView.Close<EGEViewModel>();

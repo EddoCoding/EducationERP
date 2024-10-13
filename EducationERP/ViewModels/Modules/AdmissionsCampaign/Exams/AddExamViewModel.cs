@@ -36,7 +36,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams
             if (isValidated)
             {
                 _exams.Add(examVM);
-                _exams = null;
                 if (_useDataBase)
                 {
                     var exam = new Exam
@@ -53,7 +52,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams
                     };
                     _applicantRepository.Create<Exam>(exam);
                 }
-                _serviceView.Close<AddExamViewModel>();
+                CloseWindow();
             }
         }
         void CloseWindow() => _serviceView.Close<AddExamViewModel>();

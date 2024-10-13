@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents
 {
-    public class DocumentViewModel : RaketaViewModel
+    public class DocumentViewModel : RaketaViewModel, IDisposable
     {
         ObservableCollection<DocumentBaseViewModel> _documents;
 
@@ -50,7 +50,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents
             if (isValidated)
             {
                 _documents.Add(document);
-                _documents = null;
                 if (_useDataBase)
                 {
                     if(document is PassportViewModel passportVM)
@@ -134,7 +133,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents
                         await _applicantRepository.Create<ForeignPassport>(foreignPassport);
                     }
                 }
-                _serviceView.Close<DocumentViewModel>();
+                CloseWindow();
             }
         }
         void CloseWindow() => _serviceView.Close<DocumentViewModel>();

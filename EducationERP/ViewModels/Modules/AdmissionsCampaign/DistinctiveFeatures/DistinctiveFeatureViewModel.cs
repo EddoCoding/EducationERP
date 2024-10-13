@@ -39,7 +39,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures
             if (isValidated)
             {
                 _distinctiveFeatures.Add(DistinctiveFeature);
-                _distinctiveFeatures = null;
                 if (_useDataBase)
                 {
                     var distinctiveFeature = new DistinctiveFeature
@@ -51,7 +50,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures
                     };
                     _applicantRepository.Create<DistinctiveFeature>(distinctiveFeature);
                 }
-                _serviceView.Close<DistinctiveFeatureViewModel>();
+                CloseWindow();
             }
         }
         void CloseWindow() => _serviceView.Close<DistinctiveFeatureViewModel>();

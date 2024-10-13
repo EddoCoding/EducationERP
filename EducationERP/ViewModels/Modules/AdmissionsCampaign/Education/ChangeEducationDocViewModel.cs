@@ -23,10 +23,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Education
         void SaveEducation(EducationBaseViewModel education)
         {
             var isValidated = education.Validation();
-            if (isValidated)
-            {
-                _serviceView.Close<ChangeEducationDocViewModel>();
-            }
+            if (isValidated) CloseWindow();
         }
         void CloseWindow() => _serviceView.Close<ChangeEducationDocViewModel>();
     }
