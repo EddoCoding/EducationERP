@@ -9,7 +9,6 @@ using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams;
 using Raketa;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 {
