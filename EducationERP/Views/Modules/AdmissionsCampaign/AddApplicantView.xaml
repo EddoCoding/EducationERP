@@ -30,44 +30,7 @@
                                      TemplateForeignPassport="{StaticResource ForeignPassport}"
                                      TemplateSnils="{StaticResource Snils}"
                                      TemplateInn="{StaticResource Inn}"/>
-
-        <Style x:Key="RadioButtonCustom" TargetType="RadioButton">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Foreground" Value="Gray"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="RadioButton">
-                        <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Border x:Name="radioButtonBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
-                                    BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="100" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                    Margin="1,1,2,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                                <Grid x:Name="markGrid" Margin="2">
-                                    <Ellipse x:Name="optionMark" Fill="#FFD700" MinWidth="7" MinHeight="7" Opacity="0"/>
-                                </Grid>
-                            </Border>
-                            <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                              Margin="5,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="radioButtonBorder" Value="WhiteSmoke"/>
-                            </Trigger>
-                            <Trigger Property="IsChecked" Value="true">
-                                <Setter Property="Opacity" TargetName="optionMark" Value="1"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
+        
         <DataTemplate DataType="{x:Type viewModelDocuments:PassportViewModel}">
             <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
                 <Grid>
@@ -786,11 +749,11 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <RadioButton Grid.Row="0" Grid.ColumnSpan="2" Content="Гражданин России" Style="{StaticResource RadioButtonCustom}" Margin="10,10,0,5" 
+                    <RadioButton Grid.Row="0" Grid.ColumnSpan="2" Content="Гражданин России" Margin="10,10,0,5" 
                                  IsChecked="{Binding ApplicantVM.IsCitizenRus}" Command="{Binding CitizenshipCommand}"/>
-                    <RadioButton Grid.Row="1" Grid.ColumnSpan="2" Content="Лицо без гражданства" Style="{StaticResource RadioButtonCustom}" Margin="10,5,0,5" 
+                    <RadioButton Grid.Row="1" Grid.ColumnSpan="2" Content="Лицо без гражданства" Margin="10,5,0,5" 
                                  IsChecked="{Binding ApplicantVM.NotCitizen}" Command="{Binding CitizenshipCommand}"/>
-                    <RadioButton Grid.Row="2" Grid.Column="0" Content="Иностранный гражданин" Style="{StaticResource RadioButtonCustom}" Margin="10,5,0,10" 
+                    <RadioButton Grid.Row="2" Grid.Column="0" Content="Иностранный гражданин" Margin="10,5,0,10" 
                                  IsChecked="{Binding ApplicantVM.IsForeign}" Command="{Binding CitizenshipCommand}"/>
                     
                     <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ApplicantVM.Citizenship}" Style="{StaticResource CustomTextBox}" 
@@ -822,10 +785,8 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="Нуждаемость в общежитии" Foreground="Gray" FontSize="13" Margin="10,5,0,5"/>
-                    <RadioButton Grid.Column="1" Content="Да" Style="{StaticResource RadioButtonCustom}" VerticalAlignment="Center" 
-                                 Margin="10,0,0,0" IsChecked="{Binding ApplicantVM.IsNeedHostel}"/>
-                    <RadioButton Grid.Column="2" Content="Нет" Style="{StaticResource RadioButtonCustom}" VerticalAlignment="Center" 
-                                 Margin="10,0" IsChecked="{Binding ApplicantVM.IsNotNeedHostel}"/>
+                    <RadioButton Grid.Column="1" Content="Да" VerticalAlignment="Center" Margin="10,0,0,0" IsChecked="{Binding ApplicantVM.IsNeedHostel}"/>
+                    <RadioButton Grid.Column="2" Content="Нет" VerticalAlignment="Center" Margin="10,0" IsChecked="{Binding ApplicantVM.IsNotNeedHostel}"/>
 
                 </Grid>
 
@@ -1417,8 +1378,30 @@
             </Grid>
 
             <!--КНОПКА СФОРМИРОВАТЬ ЛИЧНОЕ ДЕЛО-->
-            <Button Grid.Row="9" Content="Сформировать личное дело" Style="{StaticResource defaultAdd}" HorizontalAlignment="Center" Margin="0,20"
-                    Command="{Binding CreatePersonalFileCommand}" CommandParameter="{Binding ApplicantVM}"/>
+            <Grid Grid.Row="9" Margin="10,20,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <Grid Grid.Column="0" Background="#FFD700">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Ответственный за принятие абитуриента:" FontSize="14" Margin="5" FontWeight="DemiBold"/>
+                    <TextBlock Grid.Column="1" Text="{Binding _userSystem.FullName}" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0"/>
+
+                </Grid>
+
+                <Button Grid.Column="1" Content="Сформировать личное дело" Style="{StaticResource defaultAdd}" HorizontalAlignment="Center" FontSize="14"
+                        Margin="20,0" Command="{Binding CreatePersonalFileCommand}" CommandParameter="{Binding ApplicantVM}"/>
+
+            </Grid>
 
         </Grid>
         

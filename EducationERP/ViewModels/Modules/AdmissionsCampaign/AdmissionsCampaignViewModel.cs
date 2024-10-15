@@ -79,6 +79,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 
                     SumPointsExam = applicant.SumPointsExam,
                     AdditionalInformation = applicant.AdditionalInformation,
+                    Accepted = applicant.Accepted,
 
                     Documents = new(),
                     Educations = new(),

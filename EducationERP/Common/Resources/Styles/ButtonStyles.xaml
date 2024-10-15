@@ -89,7 +89,6 @@
                         <Border.Effect>
                             <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
                         </Border.Effect>
-
                         <ContentPresenter Margin="5"/>
                     </Border>
                     <ControlTemplate.Triggers>
