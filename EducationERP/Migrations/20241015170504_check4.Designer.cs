@@ -3,6 +3,7 @@ using System;
 using EducationERP.Common.Components;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EducationERP.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241015170504_check4")]
+    partial class check4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -163,9 +166,6 @@ namespace EducationERP.Migrations
                     b.Property<DateOnly>("CitizenshipValidFrom")
                         .HasColumnType("date");
 
-                    b.Property<DateOnly>("DateAccepted")
-                        .HasColumnType("date");
-
                     b.Property<DateOnly>("DateOfBirth")
                         .HasColumnType("date");
 
@@ -224,9 +224,6 @@ namespace EducationERP.Migrations
                     b.Property<string>("SurName")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<TimeOnly>("TimeAccepted")
-                        .HasColumnType("time without time zone");
 
                     b.Property<int>("TotalPoints")
                         .HasColumnType("integer");

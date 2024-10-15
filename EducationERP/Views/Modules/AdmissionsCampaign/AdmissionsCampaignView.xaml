@@ -12,6 +12,7 @@
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800" FontFamily="{StaticResource OpenSans}">
     <UserControl.Resources>
         <converters:DateOnlyToDateOnlyConverter x:Key="DateOnlyToDateOnly"/>
+        <converters:TimeOnlyToTimeOnlyConverter x:Key="TimeOnlyToTimeOnly"/>
         
         <Style x:Key="RepeatButtonTransparent" TargetType="RepeatButton">
             <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -849,6 +850,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     
                     <!--ЛИЧНАЯ ИНФОРМАЦИЯ-->
@@ -1034,10 +1036,10 @@
                     </StackPanel>
 
                     <!--ЕГЭ-->
-                    <StackPanel Grid.Row="4" Margin="5,5,0,5">
+                    <StackPanel Grid.Row="4" Margin="5,5,0,0">
                         <TextBlock Text="ЕГЭ" Foreground="Gray" FontSize="14"/>
                         <ListView Margin="5,0,5,5" ItemsSource="{Binding SelectedApplicant.EGES}" BorderThickness="0">
-                        <ListView.Style>
+                            <ListView.Style>
                             <Style TargetType="ListView">
                                 <Setter Property="Template">
                                     <Setter.Value>
@@ -1050,7 +1052,7 @@
                                 </Setter>
                             </Style>
                         </ListView.Style>
-                        <ListView.ItemContainerStyle>
+                            <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="Template">
                                     <Setter.Value>
@@ -1071,7 +1073,7 @@
                                 </Setter>
                             </Style>
                         </ListView.ItemContainerStyle>
-                        <ListView.ItemTemplate>
+                            <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Grid.Column="0" Text="{Binding AcademicSubject}" FontSize="13"/>
@@ -1080,41 +1082,44 @@
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
-                    </ListView>
+                        </ListView>
                         <TextBlock Margin="0,3,5,0" HorizontalAlignment="Right" FontSize="13">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="Text" Value="{Binding SelectedApplicant.TotalPoints, StringFormat='Сумма баллов ЕГЭ: {0}'}"/>
-                                <Setter Property="Visibility" Value="Visible"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SelectedApplicant.EGES.Count}" Value="0">
-                                        <Setter Property="Visibility" Value="Collapsed" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="{Binding SelectedApplicant.TotalPoints, StringFormat='Сумма баллов ЕГЭ: {0}'}"/>
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedApplicant.EGES}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding SelectedApplicant.EGES.Count}" Value="0">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
                     </StackPanel>
 
                     <!--ОТЛИЧИТЕЛЬНЫЕ ПРИЗНАКИ-->
-                    <StackPanel Grid.Row="5" Margin="5,5,0,5">
-                        <TextBlock Text="Отличительные признаки" Foreground="Gray" FontSize="14" Margin="5,0,0,5"/>
+                    <StackPanel Grid.Row="5" Margin="5,5,0,0">
+                        <TextBlock Text="Отличительные признаки" Foreground="Gray" FontSize="14" Margin="0,0,0,5"/>
                         <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.DistinguishingFeatures}" BorderThickness="0">
-                        <ListView.Style>
-                            <Style TargetType="ListView">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="ListView">
-                                            <ScrollViewer>
-                                                <ItemsPresenter Margin="10,0,0,0"/>
-                                            </ScrollViewer>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
+                            <ListView.Style>
+                                <Style TargetType="ListView">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListView">
+                                                <ScrollViewer>
+                                                    <ItemsPresenter Margin="10,0,0,0"/>
+                                                </ScrollViewer>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
                         </ListView.Style>
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="ListViewItem">
@@ -1134,24 +1139,27 @@
                                 </Setter>
                             </Style>
                         </ListView.ItemContainerStyle>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Grid.Column="0" Text="{Binding NameFeature}" FontSize="13"/>
-                                    <TextBlock Grid.Column="0" Text="{Binding FeatureScore}" FontSize="13" Margin="5,0,0,0"/>
-                                    <TextBlock Grid.Column="0" Text="(баллы)" FontSize="13" Margin="5,0,0,0"/>
-                                </StackPanel>
-                            </DataTemplate>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Grid.Column="0" Text="{Binding NameFeature}" FontSize="13"/>
+                                        <TextBlock Grid.Column="0" Text="{Binding FeatureScore}" FontSize="13" Margin="5,0,0,0"/>
+                                        <TextBlock Grid.Column="0" Text="(баллы)" FontSize="13" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                </DataTemplate>
                         </ListView.ItemTemplate>
-                    </ListView>
+                        </ListView>
                         <TextBlock Margin="0,3,5,0" HorizontalAlignment="Right" FontSize="13">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="Text" Value="{Binding SelectedApplicant.PointsDistinctiveFeatures, StringFormat='Сумма баллов отличительных признаков: {0}'}"/>
                                     <Setter Property="Visibility" Value="Visible"/>
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedApplicant.DistinguishingFeatures}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
                                         <DataTrigger Binding="{Binding SelectedApplicant.DistinguishingFeatures.Count}" Value="0">
-                                            <Setter Property="Visibility" Value="Collapsed" />
+                                            <Setter Property="Visibility" Value="Collapsed"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -1160,8 +1168,8 @@
                     </StackPanel>
 
                     <!--НАПРАВЛЕНИЯ-->
-                    <StackPanel Grid.Row="6" Margin="5,5,0,5">
-                        <TextBlock Text="Направления" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
+                    <StackPanel Grid.Row="6" Margin="5,0,0,0">
+                        <TextBlock Text="Направления" Foreground="Gray" FontSize="14" Margin="0,5"/>
                         <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.DirectionsOfTraining}" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                             <ListView.Style>
                                 <Style TargetType="ListView">
@@ -1221,8 +1229,8 @@
                     </StackPanel>
 
                     <!--ЭКЗАМЕНЫ/ИСПЫТАНИЯ-->
-                    <StackPanel Grid.Row="7" Margin="5,5,0,5">
-                        <TextBlock Text="Экзамены/испытания" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
+                    <StackPanel Grid.Row="7" Margin="5,0,0,0">
+                        <TextBlock Text="Экзамены/испытания" Foreground="Gray" FontSize="14" Margin="0,5"/>
                         <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.Exams}" BorderThickness="0">
                         <ListView.Style>
                             <Style TargetType="ListView">
@@ -1308,8 +1316,11 @@
                                     <Setter Property="Text" Value="{Binding SelectedApplicant.SumPointsExam, StringFormat='Сумма баллов экзаменов/испытаний: {0}'}"/>
                                     <Setter Property="Visibility" Value="Visible"/>
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedApplicant.Exams}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
                                         <DataTrigger Binding="{Binding SelectedApplicant.Exams.Count}" Value="0">
-                                            <Setter Property="Visibility" Value="Collapsed" />
+                                            <Setter Property="Visibility" Value="Collapsed"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -1318,8 +1329,8 @@
                     </StackPanel>
 
                     <!--ДОП. ИНФО.-->
-                    <StackPanel Grid.Row="8" Margin="5,5,0,5">
-                        <TextBlock Text="Дополнительная информация" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
+                    <StackPanel Grid.Row="8" Margin="5,0,0,5">
+                        <TextBlock Text="Дополнительная информация" Foreground="Gray" FontSize="14" Margin="0,5"/>
                         <TextBlock Text="{Binding SelectedApplicant.AdditionalInformation}" Margin="10,0,0,0" HorizontalAlignment="Left"
                                    FontSize="14" TextWrapping="Wrap" MaxWidth="600"/>
                     </StackPanel>
@@ -1327,9 +1338,18 @@
                     <!--ОТВЕТСТВЕННЫЙ-->
                     <StackPanel Grid.Row="9" Orientation="Horizontal" Margin="5,30,0,5">
                         <TextBlock Text="Принят ответственным" Foreground="Gray" FontSize="14"/>
-                        <TextBlock Text="{Binding SelectedApplicant.Accepted}" Margin="10,0,0,0" FontSize="14"/>
+                        <TextBlock Text="{Binding SelectedApplicant.Accepted}" Margin="5,0,0,0" FontSize="14"/>
                     </StackPanel>
-                    
+
+                    <!--ДАТА И ВРЕМЯ ПРИНЯТИЯ-->
+                    <StackPanel Grid.Row="10" Orientation="Horizontal" Margin="5,0,0,5">
+                        <TextBlock Text="Дата и время:" Foreground="Gray" FontSize="14"/>
+                        <TextBlock Text="{Binding SelectedApplicant.TimeAccepted, StringFormat='{}{0:HH\\:mm:ss}', Converter={StaticResource TimeOnlyToTimeOnly}}" 
+                                   Margin="5,0,0,0" FontSize="14"/>
+                        <TextBlock Text="{Binding SelectedApplicant.DateAccepted, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}" 
+                                   Margin="3,0,0,0" FontSize="14"/>
+                    </StackPanel>
+
                 </Grid>
 
             </ScrollViewer>
