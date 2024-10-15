@@ -3,6 +3,7 @@ using System;
 using EducationERP.Common.Components;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EducationERP.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241015090117_AddPropertyForApplicant")]
+    partial class AddPropertyForApplicant
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,10 +143,6 @@ namespace EducationERP.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AdditionalContactInformation")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("AdditionalInformation")
                         .IsRequired()
                         .HasColumnType("text");
@@ -176,9 +175,6 @@ namespace EducationERP.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<bool>("IsNeedHostel")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("IsNotNeedHostel")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Mail")

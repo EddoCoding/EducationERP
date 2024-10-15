@@ -179,31 +179,34 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             if (applicantVM != null) 
             {
                 var applicant = new Applicant
-            {
-                Id = applicantVM.Id,
-                SurName = applicantVM.SurName,
-                Name = applicantVM.Name,
-                MiddleName = applicantVM.MiddleName,
-                DateOfBirth = applicantVM.DateOfBirth,
-                Gender = applicantVM.Gender,
-                PlaceOfBirth = applicantVM.PlaceOfBirth,
-                IsCitizenRus = applicantVM.IsCitizenRus,
-                NotCitizen = applicantVM.NotCitizen,
-                IsForeign = applicantVM.IsForeign,
-                Citizenship = applicantVM.Citizenship,
-                CitizenshipValidFrom = applicantVM.CitizenshipValidFrom,
+                {
+                    Id = applicantVM.Id,
+                    SurName = applicantVM.SurName,
+                    Name = applicantVM.Name,
+                    MiddleName = applicantVM.MiddleName,
+                    DateOfBirth = applicantVM.DateOfBirth,
+                    Gender = applicantVM.Gender,
+                    PlaceOfBirth = applicantVM.PlaceOfBirth,
+                    IsCitizenRus = applicantVM.IsCitizenRus,
+                    NotCitizen = applicantVM.NotCitizen,
+                    IsForeign = applicantVM.IsForeign,
+                    Citizenship = applicantVM.Citizenship,
+                    CitizenshipValidFrom = applicantVM.CitizenshipValidFrom,
+                    IsNeedHostel = applicantVM.IsNeedHostel,
+                    IsNotNeedHostel = applicantVM.IsNotNeedHostel,
 
-                ResidentialAddress = applicantVM.ResidentialAddress,
-                AddressOfRegistration = applicantVM.AddressOfRegistration,
-                HomePhone = applicantVM.HomePhone,
-                MobilePhone = applicantVM.MobilePhone,
-                Mail = applicantVM.Mail,
-                AdditionalInformation = applicantVM.AdditionalInformation,
-                
-                TotalPoints = applicantVM.TotalPoints,
-                PointsDistinctiveFeatures = applicantVM.PointsDistinctiveFeatures,
-                SumPointsExam = applicantVM.SumPointsExam
-            };
+                    ResidentialAddress = applicantVM.ResidentialAddress,
+                    AddressOfRegistration = applicantVM.AddressOfRegistration,
+                    HomePhone = applicantVM.HomePhone,
+                    MobilePhone = applicantVM.MobilePhone,
+                    Mail = applicantVM.Mail,
+                    AdditionalContactInformation = applicantVM.AdditionalContactInformation,
+                    
+                    TotalPoints = applicantVM.TotalPoints,
+                    PointsDistinctiveFeatures = applicantVM.PointsDistinctiveFeatures,
+                    SumPointsExam = applicantVM.SumPointsExam,
+                    AdditionalInformation = applicantVM.AdditionalInformation
+                };
                 _applicantRepository.Update(applicant);
                 CloseTab();
             }

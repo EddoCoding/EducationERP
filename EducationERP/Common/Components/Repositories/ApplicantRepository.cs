@@ -1,6 +1,5 @@
 ﻿using EducationERP.Models.Modules.AdmissionsCampaign;
 using EducationERP.Models.Modules.AdmissionsCampaign.Exams;
-using EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams;
 using Microsoft.EntityFrameworkCore;
 using System.Windows;
 
@@ -70,7 +69,6 @@ namespace EducationERP.Common.Components.Repositories
             }
             return false;
         }
-
         public async Task<bool> Update(Applicant applicant)
         {
             using(var db = new DataContext())
@@ -94,13 +92,16 @@ namespace EducationERP.Common.Components.Repositories
                         entity.IsForeign = applicant.IsForeign;
                         entity.Citizenship = applicant.Citizenship;
                         entity.CitizenshipValidFrom = applicant.CitizenshipValidFrom;
+                        entity.IsNeedHostel = applicant.IsNeedHostel;
+                        entity.IsNotNeedHostel = applicant.IsNotNeedHostel;
+                        entity.AdditionalInformation = applicant.AdditionalInformation;
 
                         entity.ResidentialAddress = applicant.ResidentialAddress;
                         entity.AddressOfRegistration = applicant.AddressOfRegistration;
                         entity.HomePhone = applicant.HomePhone;
                         entity.MobilePhone = applicant.MobilePhone;
                         entity.Mail = applicant.Mail;
-                        entity.AdditionalInformation = applicant.AdditionalInformation;
+                        entity.AdditionalContactInformation = applicant.AdditionalContactInformation;
 
                         entity.TotalPoints = applicant.TotalPoints;
                         entity.PointsDistinctiveFeatures = applicant.PointsDistinctiveFeatures;
@@ -118,7 +119,6 @@ namespace EducationERP.Common.Components.Repositories
             }
             return false;
         }
-
         public async Task<bool> Update(Exam exam)
         {
             using (var db = new DataContext())

@@ -20,6 +20,8 @@ namespace EducationERP.Models.Modules.AdmissionsCampaign
         public bool? IsForeign { get; set; }
         public string Citizenship { get; set; } = string.Empty;
         public DateOnly CitizenshipValidFrom { get; set; }
+        public bool IsNeedHostel { get; set; }
+        public bool IsNotNeedHostel { get; set; }
         #endregion
         #region Контактная информация
         public string ResidentialAddress { get; set; } = string.Empty;
@@ -27,7 +29,7 @@ namespace EducationERP.Models.Modules.AdmissionsCampaign
         public string? HomePhone { get; set; } = string.Empty;
         public string MobilePhone { get; set; } = string.Empty;
         public string Mail { get; set; } = string.Empty;
-        public string AdditionalInformation { get; set; } = string.Empty;
+        public string AdditionalContactInformation { get; set; } = string.Empty;
         #endregion
 
         public ICollection<Document> Documents { get; set; }
@@ -39,5 +41,6 @@ namespace EducationERP.Models.Modules.AdmissionsCampaign
         public ICollection<SelectedDirection> DirectionsOfTraining { get; set; }
         public ICollection<Exam> Exams { get; set; }
         public int SumPointsExam { get; set; }
+        public string AdditionalInformation { get; set; } = string.Empty;
     }
 }

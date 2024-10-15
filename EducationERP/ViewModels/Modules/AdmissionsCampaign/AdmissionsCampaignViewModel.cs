@@ -67,15 +67,18 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                     IsForeign = applicant.IsForeign,
                     Citizenship = applicant.Citizenship,
                     CitizenshipValidFrom = applicant.CitizenshipValidFrom,
+                    IsNeedHostel = applicant.IsNeedHostel,
+                    IsNotNeedHostel = applicant.IsNotNeedHostel,
 
                     ResidentialAddress = applicant.ResidentialAddress,
                     AddressOfRegistration = applicant.AddressOfRegistration,
                     HomePhone = applicant.HomePhone,
                     MobilePhone = applicant.MobilePhone,
                     Mail = applicant.Mail,
-                    AdditionalInformation = applicant.AdditionalInformation,
+                    AdditionalContactInformation = applicant.AdditionalContactInformation,
 
                     SumPointsExam = applicant.SumPointsExam,
+                    AdditionalInformation = applicant.AdditionalInformation,
 
                     Documents = new(),
                     Educations = new(),

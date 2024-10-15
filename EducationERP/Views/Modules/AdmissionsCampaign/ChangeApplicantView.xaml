@@ -654,6 +654,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,10,0,0">
@@ -674,6 +675,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -809,6 +811,23 @@
                          Text="{Binding ApplicantVM.CitizenshipValidFrom, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}"/>
                 </Grid>
 
+                <Grid Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,10,10,0" Background="White" HorizontalAlignment="Left">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Нуждаемость в общежитии" Foreground="Gray" FontSize="13" Margin="10,5,0,5"/>
+                    <RadioButton Grid.Column="1" Content="Да" Style="{StaticResource RadioButtonCustom}" VerticalAlignment="Center" 
+                        Margin="10,0,0,0" IsChecked="{Binding ApplicantVM.IsNeedHostel}"/>
+                    <RadioButton Grid.Column="2" Content="Нет" Style="{StaticResource RadioButtonCustom}" VerticalAlignment="Center" 
+                        Margin="10,0" IsChecked="{Binding ApplicantVM.IsNotNeedHostel}"/>
+                </Grid>
+
             </Grid>
 
             <!--КОНТАКТНАЯ ИНФОРМАЦИЯ-->
@@ -900,7 +919,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Text="Дополнительная контактная информация" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
-                    <TextBox Grid.Row="1" Text="{Binding ApplicantVM.AdditionalInformation}" Style="{StaticResource CustomTextBox}" 
+                    <TextBox Grid.Row="1" Text="{Binding ApplicantVM.AdditionalContactInformation}" Style="{StaticResource CustomTextBox}" 
                          Margin="10,5" FontSize="14" TextWrapping="Wrap"/>
                 </Grid>
 
@@ -1370,8 +1389,23 @@
                 <TextBlock Grid.Row="3" Text="{Binding ApplicantVM.Exams.Count, StringFormat='Назначено испытаний/экзаменов: {0}'}" Margin="10,3,0,0" FontSize="13"/>
             </Grid>
 
+            <!--БЛОК ДОПОЛНИТЕЛЬНОЙ ИНФОРМАЦИИ-->
+            <Grid Grid.Row="8" Background="White" Margin="20,20,10,0" Width="600" HorizontalAlignment="Left">
+                <Grid.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </Grid.Effect>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Дополнительная информация:" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Top"/>
+                <TextBox Grid.Column="1" Text="{Binding ApplicantVM.AdditionalInformation}" Style="{StaticResource CustomTextBox}" Margin="10,5" 
+             FontSize="14" TextWrapping="Wrap"/>
+            </Grid>
+
             <!--КНОПКА СФОРМИРОВАТЬ ЛИЧНОЕ ДЕЛО-->
-            <Button Grid.Row="8" Content="Сохранить изменения" Style="{StaticResource defaultAdd}" HorizontalAlignment="Center" Margin="0,20"
+            <Button Grid.Row="9" Content="Сохранить изменения" Style="{StaticResource defaultAdd}" HorizontalAlignment="Center" Margin="0,20"
                 Command="{Binding ChangePersonalFileCommand}" CommandParameter="{Binding ApplicantVM}"/>
 
         </Grid>
