@@ -837,18 +837,32 @@
                     <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
                 </ScrollViewer.Effect>
 
-                <StackPanel Margin="20,0,30,20">
+                <Grid Margin="20,0,30,20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!--ЛИЧНАЯ ИНФОРМАЦИЯ-->
+                    <StackPanel Grid.Row="0" Margin="5,5,0,5">
+                        <TextBlock Text="Личная информация" Foreground="Gray" FontSize="14"/>
 
-                    <TextBlock Text="Личная информация" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
-
-                    <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
+                        <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
                         <TextBlock Text="ФИО:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding SelectedApplicant.SurName}" FontSize="14" Margin="5,0,0,0"/>
                         <TextBlock Text="{Binding SelectedApplicant.Name}" Margin="5,0,0,0" FontSize="14"/>
                         <TextBlock Text="{Binding SelectedApplicant.MiddleName}" Margin="5,0,0,0" FontSize="14"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
+                        <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
                         <TextBlock Text="Дата рождения:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding SelectedApplicant.DateOfBirth, StringFormat='dd.MM.yyyy',  Converter={StaticResource DateOnlyToDateOnly}}" 
                             FontSize="14" Margin="5,0,0,0"/>
@@ -856,12 +870,12 @@
                         <TextBlock Text="{Binding SelectedApplicant.Gender}" FontSize="14" Margin="5,0,0,0"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
+                        <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
                         <TextBlock Text="Место рождения:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding SelectedApplicant.PlaceOfBirth}" FontSize="14" Margin="5,0,0,0"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
+                        <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
                         <TextBlock Text="Гражданство:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding SelectedApplicant.Citizenship}" FontSize="14" Margin="5,0,0,0"/>
                         <TextBlock Text="Действует с:" FontSize="13" Margin="5,0,0,0" FontWeight="DemiBold" VerticalAlignment="Center"/>
@@ -869,148 +883,160 @@
                             FontSize="14" Margin="5,0,0,0"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
-                        <TextBlock Text="Нуждаемость в общежитии:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
-                        <TextBlock FontSize="14" Margin="5,0,0,0">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Text" Value="Нет"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding SelectedApplicant.IsNeedHostel}" Value="True">
-                                            <Setter Property="Text" Value="Да" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding SelectedApplicant.IsNeedHostel}" Value="False">
-                                            <Setter Property="Text" Value="Нет" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
+                        <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
+                            <TextBlock Text="Нуждаемость в общежитии:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
+                            <TextBlock FontSize="14" Margin="5,0,0,0">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Text" Value="Нет"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedApplicant.IsNeedHostel}" Value="True">
+                                                <Setter Property="Text" Value="Да" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding SelectedApplicant.IsNeedHostel}" Value="False">
+                                                <Setter Property="Text" Value="Нет" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </StackPanel>
                     </StackPanel>
 
-                    <TextBlock Text="Контактная информация" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
+                    <!--КОНТАКТНАЯ ИНФОРМАЦИЯ-->
+                    <StackPanel Grid.Row="1" Margin="5,5,0,5">
+                        <TextBlock Text="Контактная информация" Foreground="Gray" FontSize="14"/>
 
-                    <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
+                        <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
                         <TextBlock Text="Адрес проживания:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding SelectedApplicant.ResidentialAddress}" FontSize="14" Margin="5,0,0,0"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
+                        <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
                         <TextBlock Text="Адрес по прописке:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding SelectedApplicant.AddressOfRegistration}" FontSize="14" Margin="5,0,0,0"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
+                        <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
                         <TextBlock Text="Домашний телефон:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding SelectedApplicant.HomePhone}" FontSize="14" Margin="5,0,0,0"/>
                         <TextBlock Text="Мобильный телефон:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center" Margin="5,0,0,0"/>
                         <TextBlock Text="{Binding SelectedApplicant.MobilePhone}" FontSize="14" Margin="5,0,0,0"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
+                        <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
                         <TextBlock Text="Почта:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Bottom"/>
                         <TextBlock Text="{Binding SelectedApplicant.Mail}" FontSize="14" Margin="5,0,0,0"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
-                        <TextBlock Text="Доп. инфо.:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
-                        <TextBlock Text="{Binding  SelectedApplicant.AdditionalContactInformation}" FontSize="14" Margin="5,0,0,0" TextWrapping="Wrap" MaxWidth="480"/>
+                        <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
+                            <TextBlock Text="Доп. инфо.:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding  SelectedApplicant.AdditionalContactInformation}" FontSize="14" Margin="5,0,0,0" TextWrapping="Wrap" MaxWidth="480"/>
+                        </StackPanel>
                     </StackPanel>
 
-                    <TextBlock Text="Документы" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
-                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.Documents}" ItemTemplateSelector="{StaticResource SelectorDocuments}" BorderThickness="0">
-                        <ListView.Style>
-                            <Style TargetType="ListView">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="ListView">
-                                            <ScrollViewer>
-                                                <ItemsPresenter Margin="10,0,0,0"/>
-                                            </ScrollViewer>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ListView.Style>
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="ListViewItem">
-                                            <Border Background="{TemplateBinding Background}">
-                                                <StackPanel>
-                                                    <ContentPresenter Margin="2"/>
-                                                    <Line Stroke="LightGray" X1="1" Stretch="Fill"/>
-                                                </StackPanel>
-                                                <Border.ToolTip>
-                                                    <ToolTip Style="{StaticResource ToolTipDocumentInfo}"/>
-                                                </Border.ToolTip>
-                                            </Border>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="WhiteSmoke"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Grid.Column="0" Text="{Binding TypeDocument}" FontSize="13" VerticalAlignment="Center"/>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                    <!--ДОКУМЕНТЫ-->
+                    <StackPanel Grid.Row="2" Margin="5,5,0,5">
+                        <TextBlock Text="Документы" Foreground="Gray" FontSize="14"/>
+                        <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.Documents}" ItemTemplateSelector="{StaticResource SelectorDocuments}" BorderThickness="0">
+                            <ListView.Style>
+                                <Style TargetType="ListView">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListView">
+                                                <ScrollViewer>
+                                                    <ItemsPresenter Margin="10,0,0,0"/>
+                                                </ScrollViewer>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.Style>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListViewItem">
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <StackPanel>
+                                                        <ContentPresenter Margin="2"/>
+                                                        <Line Stroke="LightGray" X1="1" Stretch="Fill"/>
+                                                    </StackPanel>
+                                                    <Border.ToolTip>
+                                                        <ToolTip Style="{StaticResource ToolTipDocumentInfo}"/>
+                                                    </Border.ToolTip>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="WhiteSmoke"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Grid.Column="0" Text="{Binding TypeDocument}" FontSize="13" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
 
-                    <TextBlock Text="Образование" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
-                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.Educations}" BorderThickness="0">
-                        <ListView.Style>
-                            <Style TargetType="ListView">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="ListView">
-                                            <ScrollViewer>
-                                                <ItemsPresenter Margin="10,0,0,0"/>
-                                            </ScrollViewer>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ListView.Style>
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="ListViewItem">
-                                            <Border Background="{TemplateBinding Background}">
-                                                <StackPanel>
-                                                    <ContentPresenter Margin="2"/>
-                                                    <Line Stroke="LightGray" X1="1" Stretch="Fill"/>
-                                                </StackPanel>
-                                                <Border.ToolTip>
-                                                    <ToolTip Style="{StaticResource ToolTipEducationInfo}"/>
-                                                </Border.ToolTip>
-                                            </Border>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="WhiteSmoke"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Grid.Column="0" Text="{Binding TypeEducation}" FontSize="13" VerticalAlignment="Center"/>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                    <!--ОБРАЗОВАНИЕ-->
+                    <StackPanel Grid.Row="3" Margin="5,5,0,5">
+                        <TextBlock Text="Образование" Foreground="Gray" FontSize="14"/>
+                        <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.Educations}" BorderThickness="0">
+                            <ListView.Style>
+                                <Style TargetType="ListView">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListView">
+                                                <ScrollViewer>
+                                                    <ItemsPresenter Margin="10,0,0,0"/>
+                                                </ScrollViewer>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.Style>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListViewItem">
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <StackPanel>
+                                                        <ContentPresenter Margin="2"/>
+                                                        <Line Stroke="LightGray" X1="1" Stretch="Fill"/>
+                                                    </StackPanel>
+                                                    <Border.ToolTip>
+                                                        <ToolTip Style="{StaticResource ToolTipEducationInfo}"/>
+                                                    </Border.ToolTip>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="WhiteSmoke"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Grid.Column="0" Text="{Binding TypeEducation}" FontSize="13" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
 
-                    <TextBlock Text="ЕГЭ" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
-                    <ListView Margin="5,0,5,5" ItemsSource="{Binding SelectedApplicant.EGES}" BorderThickness="0">
+                    <!--ЕГЭ-->
+                    <StackPanel Grid.Row="4" Margin="5,5,0,5">
+                        <TextBlock Text="ЕГЭ" Foreground="Gray" FontSize="14"/>
+                        <ListView Margin="5,0,5,5" ItemsSource="{Binding SelectedApplicant.EGES}" BorderThickness="0">
                         <ListView.Style>
                             <Style TargetType="ListView">
                                 <Setter Property="Template">
@@ -1055,7 +1081,7 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <TextBlock Margin="0,3,5,0" HorizontalAlignment="Right" FontSize="13">
+                        <TextBlock Margin="0,3,5,0" HorizontalAlignment="Right" FontSize="13">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Text" Value="{Binding SelectedApplicant.TotalPoints, StringFormat='Сумма баллов ЕГЭ: {0}'}"/>
@@ -1068,9 +1094,12 @@
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
+                    </StackPanel>
 
-                    <TextBlock Text="Отличительные признаки" Foreground="Gray" FontSize="14" Margin="5,0,0,5"/>
-                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.DistinguishingFeatures}" BorderThickness="0">
+                    <!--ОТЛИЧИТЕЛЬНЫЕ ПРИЗНАКИ-->
+                    <StackPanel Grid.Row="5" Margin="5,5,0,5">
+                        <TextBlock Text="Отличительные признаки" Foreground="Gray" FontSize="14" Margin="5,0,0,5"/>
+                        <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.DistinguishingFeatures}" BorderThickness="0">
                         <ListView.Style>
                             <Style TargetType="ListView">
                                 <Setter Property="Template">
@@ -1115,80 +1144,86 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <TextBlock Margin="0,3,5,0" HorizontalAlignment="Right" FontSize="13">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="Text" Value="{Binding SelectedApplicant.PointsDistinctiveFeatures, StringFormat='Сумма баллов отличительных признаков: {0}'}"/>
-                                <Setter Property="Visibility" Value="Visible"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SelectedApplicant.DistinguishingFeatures.Count}" Value="0">
-                                        <Setter Property="Visibility" Value="Collapsed" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
+                        <TextBlock Margin="0,3,5,0" HorizontalAlignment="Right" FontSize="13">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="{Binding SelectedApplicant.PointsDistinctiveFeatures, StringFormat='Сумма баллов отличительных признаков: {0}'}"/>
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedApplicant.DistinguishingFeatures.Count}" Value="0">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </StackPanel>
 
-                    <TextBlock Text="Направления" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
-                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.DirectionsOfTraining}" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
-                        <ListView.Style>
-                            <Style TargetType="ListView">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="ListView">
-                                            <ScrollViewer>
-                                                <ItemsPresenter Margin="10,0,0,0"/>
-                                            </ScrollViewer>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ListView.Style>
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="ListViewItem">
-                                            <Border Background="{TemplateBinding Background}">
-                                                <StackPanel>
-                                                    <ContentPresenter Margin="2"/>
-                                                    <Line Stroke="LightGray" X1="1" Stretch="Fill"/>
-                                                </StackPanel>
-                                            </Border>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="WhiteSmoke"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Grid.Column="0" Text="{Binding CodeDirection}" FontSize="13"/>
-                                        <TextBlock Grid.Column="0" Text="{Binding NameDirection}" FontSize="13" Margin="5,0,0,0"/>
+                    <!--НАПРАВЛЕНИЯ-->
+                    <StackPanel Grid.Row="6" Margin="5,5,0,5">
+                        <TextBlock Text="Направления" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
+                        <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.DirectionsOfTraining}" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                            <ListView.Style>
+                                <Style TargetType="ListView">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListView">
+                                                <ScrollViewer>
+                                                    <ItemsPresenter Margin="10,0,0,0"/>
+                                                </ScrollViewer>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.Style>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListViewItem">
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <StackPanel>
+                                                        <ContentPresenter Margin="2"/>
+                                                        <Line Stroke="LightGray" X1="1" Stretch="Fill"/>
+                                                    </StackPanel>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="WhiteSmoke"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Grid.Column="0" Text="{Binding CodeDirection}" FontSize="13"/>
+                                            <TextBlock Grid.Column="0" Text="{Binding NameDirection}" FontSize="13" Margin="5,0,0,0"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Grid.Column="0" Text="{Binding CodeProfile}" FontSize="13"/>
+                                            <TextBlock Grid.Column="0" Text="{Binding NameProfile}" FontSize="13" Margin="5,0,0,0"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Форма обучения" Foreground="Gray" VerticalAlignment="Center"/>
+                                            <TextBlock Grid.Column="0" Text="{Binding NameFormEducation}" FontSize="13" Margin="5,0,0,0"/>
+                                            <TextBlock Text="Форма оплаты" Foreground="Gray" VerticalAlignment="Bottom" Margin="5,0,0,0"/>
+                                            <TextBlock Grid.Column="0" Text="{Binding NameFormPayment}" FontSize="13" Margin="5,0,0,0"/>
+                                        </StackPanel>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Grid.Column="0" Text="{Binding CodeProfile}" FontSize="13"/>
-                                        <TextBlock Grid.Column="0" Text="{Binding NameProfile}" FontSize="13" Margin="5,0,0,0"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Форма обучения" Foreground="Gray" VerticalAlignment="Center"/>
-                                        <TextBlock Grid.Column="0" Text="{Binding NameFormEducation}" FontSize="13" Margin="5,0,0,0"/>
-                                        <TextBlock Text="Форма оплаты" Foreground="Gray" VerticalAlignment="Bottom" Margin="5,0,0,0"/>
-                                        <TextBlock Grid.Column="0" Text="{Binding NameFormPayment}" FontSize="13" Margin="5,0,0,0"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
 
-                    <TextBlock Text="Экзамены/испытания" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
-                    <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.Exams}" BorderThickness="0">
+                    <!--ЭКЗАМЕНЫ/ИСПЫТАНИЯ-->
+                    <StackPanel Grid.Row="7" Margin="5,5,0,5">
+                        <TextBlock Text="Экзамены/испытания" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
+                        <ListView Margin="5,0" ItemsSource="{Binding SelectedApplicant.Exams}" BorderThickness="0">
                         <ListView.Style>
                             <Style TargetType="ListView">
                                 <Setter Property="Template">
@@ -1267,25 +1302,35 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <TextBlock Margin="0,3,5,0" HorizontalAlignment="Right" FontSize="13">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="Text" Value="{Binding SelectedApplicant.SumPointsExam, StringFormat='Сумма баллов экзаменов/испытаний: {0}'}"/>
-                                <Setter Property="Visibility" Value="Visible"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SelectedApplicant.Exams.Count}" Value="0">
-                                        <Setter Property="Visibility" Value="Collapsed" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
+                        <TextBlock Margin="0,3,5,0" HorizontalAlignment="Right" FontSize="13">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="{Binding SelectedApplicant.SumPointsExam, StringFormat='Сумма баллов экзаменов/испытаний: {0}'}"/>
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedApplicant.Exams.Count}" Value="0">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </StackPanel>
 
-                    <TextBlock Text="Дополнительная информация" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
-                    <TextBlock Text="{Binding SelectedApplicant.AdditionalInformation}" Margin="10,0,0,0" HorizontalAlignment="Left"
-                               FontSize="14" TextWrapping="Wrap" MaxWidth="600"/>
+                    <!--ДОП. ИНФО.-->
+                    <StackPanel Grid.Row="8" Margin="5,5,0,5">
+                        <TextBlock Text="Дополнительная информация" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
+                        <TextBlock Text="{Binding SelectedApplicant.AdditionalInformation}" Margin="10,0,0,0" HorizontalAlignment="Left"
+                                   FontSize="14" TextWrapping="Wrap" MaxWidth="600"/>
+                    </StackPanel>
 
-                </StackPanel>
+                    <!--ОТВЕТСТВЕННЫЙ-->
+                    <StackPanel Grid.Row="9" Orientation="Horizontal" Margin="5,30,0,5">
+                        <TextBlock Text="Принят ответственным" Foreground="Gray" FontSize="14"/>
+                        <TextBlock Text="{Binding SelectedApplicant.Accepted}" Margin="10,0,0,0" FontSize="14"/>
+                    </StackPanel>
+                    
+                </Grid>
 
             </ScrollViewer>
 
