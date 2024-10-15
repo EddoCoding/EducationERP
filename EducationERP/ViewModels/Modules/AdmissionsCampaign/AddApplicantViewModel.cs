@@ -12,6 +12,7 @@ using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams;
 using Raketa;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 {
@@ -20,8 +21,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         public ApplicantVM ApplicantVM { get; set; } = new();
         public VisualAddApplicant Visual { get; set; } = new();
 
-        public RaketaCommand ExitCommand { get; set; }
         public RaketaCommand CitizenshipCommand { get; set; }
+        public RaketaCommand ExitCommand { get; set; }
         public RaketaTCommand<ApplicantVM> CreatePersonalFileCommand { get; set; }
 
         //ДОКУМЕНТЫ
@@ -62,8 +63,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             _applicantRepository = applicantRepository;
             _applicants = applicants;
 
-            ExitCommand = RaketaCommand.Launch(CloseTab);
             CitizenshipCommand = RaketaCommand.Launch(Citizenship);
+            ExitCommand = RaketaCommand.Launch(CloseTab);
             CreatePersonalFileCommand = RaketaTCommand<ApplicantVM>.Launch(CreatePersonalFile);
 
             OpenWindowAddDocumentCommand = RaketaTCommand<ObservableCollection<DocumentBaseViewModel>>.Launch(OpenWindowAddDocument);
@@ -105,7 +106,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 Visual.IsEnabledTextBox = true;
             }
         }
-
         void OpenWindowAddDocument(ObservableCollection<DocumentBaseViewModel> documents) => 
             _serviceView.Window<DocumentViewModel>(null, documents, null, false).Modal();
         void ChangeDocument(DocumentBaseViewModel document) => _serviceView.Window<ChangeDocumentViewModel>(null, document).Modal();
@@ -153,17 +153,20 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                     IsForeign = applicantVM.IsForeign,
                     Citizenship = applicantVM.Citizenship,
                     CitizenshipValidFrom = applicantVM.CitizenshipValidFrom,
+                    IsNeedHostel = applicantVM.IsNeedHostel,
+                    IsNotNeedHostel = applicantVM.IsNotNeedHostel,
 
                     ResidentialAddress = applicantVM.ResidentialAddress,
                     AddressOfRegistration = applicantVM.AddressOfRegistration,
                     HomePhone = applicantVM.HomePhone,
                     MobilePhone = applicantVM.MobilePhone,
                     Mail = applicantVM.Mail,
-                    AdditionalInformation = applicantVM.AdditionalInformation,
+                    AdditionalContactInformation = applicantVM.AdditionalContactInformation,
 
                     TotalPoints = applicantVM.TotalPoints,
                     PointsDistinctiveFeatures = applicantVM.PointsDistinctiveFeatures,
-                    SumPointsExam = applicantVM.SumPointsExam
+                    SumPointsExam = applicantVM.SumPointsExam,
+                    AdditionalInformation = applicantVM.AdditionalInformation
                 };
                 bool isAdded = await _applicantRepository.Create<Applicant>(applicant);
                 if (isAdded)

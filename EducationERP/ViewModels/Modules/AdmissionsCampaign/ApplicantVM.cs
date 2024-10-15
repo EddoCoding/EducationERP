@@ -23,17 +23,20 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         bool? isForeign;
         string citizenship = "Россия";
         DateOnly citizenshipValidFrom;
+        bool isNeedHostel = true;
+        bool isNotNeedHostel = true;
 
         string residentialAddress;
         string addressOfRegistration;
         string homePhone;
         string mobilePhone;
         string mail;
-        string additionalInformation;
+        string additionalContactInformation;
 
         int totalPoints;
         int pointsDistinctiveFeatures;
         int sumPointsExam;
+        string additionalInformation;
 
         public Guid Id { get; set; } = Guid.NewGuid();
         #region Личная информация
@@ -92,6 +95,17 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             get => citizenshipValidFrom;
             set => SetValue(ref citizenshipValidFrom, value);
         }
+        public bool IsNeedHostel
+        {
+            get => isNeedHostel;
+            set => SetValue(ref isNeedHostel, value);
+        }
+        public bool IsNotNeedHostel
+        {
+            get => isNotNeedHostel;
+            set => SetValue(ref isNotNeedHostel, value);
+        }
+        //public string 
         #endregion
         #region Контактная информация
         public string ResidentialAddress
@@ -119,10 +133,10 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             get => mail;
             set => SetValue(ref mail, value);
         }
-        public string AdditionalInformation
+        public string AdditionalContactInformation
         {
-            get => additionalInformation; 
-            set => SetValue(ref additionalInformation, value);
+            get => additionalContactInformation; 
+            set => SetValue(ref additionalContactInformation, value);
         }
         #endregion
         #region Коллекции и доп. свойства
@@ -154,6 +168,11 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         {
             get => sumPointsExam;
             set => SetValue(ref sumPointsExam, value);
+        }
+        public string AdditionalInformation
+        {
+            get => additionalInformation;
+            set => SetValue(ref additionalInformation, value);
         }
         #endregion
 

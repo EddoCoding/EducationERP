@@ -813,20 +813,20 @@
                 </StackPanel.Effect>
 
                 <Button Content="/Common/Resources/Images/addPersonalFile.png" Style="{StaticResource ButtonImage}" Height="24" Width="24" 
-                        VerticalAlignment="Top" Margin="7" ToolTip="Создать личное дело абитуриента"
+                        VerticalAlignment="Top" Margin="6" ToolTip="Создать личное дело абитуриента"
                         Command="{Binding OpenTabPersonalFileCommand}"
                         CommandParameter="{Binding Applicants}"/>
 
                 <Button Content="/Common/Resources/Images/changePersonalFile.png" Style="{StaticResource ButtonImage}" Height="24" Width="24"
-                        VerticalAlignment="Top" Margin="7" ToolTip="Изменить личное дело"
+                        VerticalAlignment="Top" Margin="6" ToolTip="Изменить личное дело"
                         Command="{Binding ChangePersonalFileCommand}" CommandParameter="{Binding SelectedApplicant}"/>
 
                 <Button Content="/Common/Resources/Images/deletePersonalFile.png" Style="{StaticResource ButtonImage}" Height="24" Width="24" 
-                        VerticalAlignment="Top" Margin="7" ToolTip="Удалить личное дело"
+                        VerticalAlignment="Top" Margin="6" ToolTip="Удалить личное дело"
                         Command="{Binding DeletePersonalFileCommand}"/>
 
                 <Button Content="/Common/Resources/Images/update.png" Style="{StaticResource ButtonImage}" Height="24" Width="24" 
-                        VerticalAlignment="Top" Margin="7" ToolTip="Обновить список абитуриентов"
+                        VerticalAlignment="Top" Margin="6" ToolTip="Обновить список абитуриентов"
                         Command="{Binding UpdatePersonalFileCommand}"/>
 
             </StackPanel>
@@ -869,6 +869,25 @@
                             FontSize="14" Margin="5,0,0,0"/>
                     </StackPanel>
 
+                    <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
+                        <TextBlock Text="Нуждаемость в общежитии:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
+                        <TextBlock FontSize="14" Margin="5,0,0,0">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="Нет"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedApplicant.IsNeedHostel}" Value="True">
+                                            <Setter Property="Text" Value="Да" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding SelectedApplicant.IsNeedHostel}" Value="False">
+                                            <Setter Property="Text" Value="Нет" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </StackPanel>
+
                     <TextBlock Text="Контактная информация" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
 
                     <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
@@ -895,7 +914,7 @@
 
                     <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
                         <TextBlock Text="Доп. инфо.:" FontSize="13" FontWeight="DemiBold" VerticalAlignment="Center"/>
-                        <TextBlock Text="{Binding  SelectedApplicant.AdditionalInformation}" FontSize="14" Margin="5,0,0,0" TextWrapping="Wrap" MaxWidth="480"/>
+                        <TextBlock Text="{Binding  SelectedApplicant.AdditionalContactInformation}" FontSize="14" Margin="5,0,0,0" TextWrapping="Wrap" MaxWidth="480"/>
                     </StackPanel>
 
                     <TextBlock Text="Документы" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
@@ -1261,6 +1280,10 @@
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
+
+                    <TextBlock Text="Дополнительная информация" Foreground="Gray" FontSize="14" Margin="5,5,0,5"/>
+                    <TextBlock Text="{Binding SelectedApplicant.AdditionalInformation}" Margin="10,0,0,0" HorizontalAlignment="Left"
+                               FontSize="14" TextWrapping="Wrap" MaxWidth="600"/>
 
                 </StackPanel>
 
