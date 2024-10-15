@@ -37,6 +37,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         int pointsDistinctiveFeatures;
         int sumPointsExam;
         string additionalInformation;
+        string accepted;
+        
 
         public Guid Id { get; set; } = Guid.NewGuid();
         #region Личная информация
@@ -173,6 +175,11 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         {
             get => additionalInformation;
             set => SetValue(ref additionalInformation, value);
+        }
+        public string Accepted
+        {
+            get => accepted;
+            set => SetValue(ref accepted, value);
         }
         #endregion
 

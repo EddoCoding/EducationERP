@@ -42,5 +42,6 @@ namespace EducationERP.Models.Modules.AdmissionsCampaign
         public ICollection<Exam> Exams { get; set; }
         public int SumPointsExam { get; set; }
         public string AdditionalInformation { get; set; } = string.Empty;
+        public string Accepted { get; set; } = string.Empty;
     }
 }

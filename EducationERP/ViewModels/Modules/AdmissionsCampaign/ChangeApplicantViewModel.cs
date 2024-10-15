@@ -53,7 +53,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         ITabControl _tabControl;
         IApplicantRepository _applicantRepository;
         public ApplicantVM ApplicantVM { get; set; }
-        public ChangeApplicantViewModel(IServiceView serviceView, ITabControl tabControl, IApplicantRepository applicantRepository, ApplicantVM applicantVM)
+        public ChangeApplicantViewModel(IServiceView serviceView, ITabControl tabControl, IApplicantRepository applicantRepository, 
+            ApplicantVM applicantVM)
         {
             _serviceView = serviceView;
             _tabControl = tabControl;

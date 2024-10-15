@@ -1,4 +1,5 @@
-﻿using EducationERP.Common.Components.Repositories;
+﻿using EducationERP.Common.Components;
+using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
 using EducationERP.Models.Modules.AdmissionsCampaign;
 using EducationERP.Models.Modules.AdmissionsCampaign.Directions;
@@ -55,13 +56,15 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         ITabControl _tabControl;
         IApplicantRepository _applicantRepository;
         ObservableCollection<ApplicantVM> _applicants;
+        public UserSystem _userSystem { get; set; }
         public AddApplicantViewModel(IServiceView serviceView, ITabControl tabControl, IApplicantRepository applicantRepository,
-            ObservableCollection<ApplicantVM> applicants)
+            ObservableCollection<ApplicantVM> applicants, UserSystem userSystem)
         {
             _serviceView = serviceView;
             _tabControl = tabControl;
             _applicantRepository = applicantRepository;
             _applicants = applicants;
+            _userSystem = userSystem;
 
             CitizenshipCommand = RaketaCommand.Launch(Citizenship);
             ExitCommand = RaketaCommand.Launch(CloseTab);
@@ -166,7 +169,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                     TotalPoints = applicantVM.TotalPoints,
                     PointsDistinctiveFeatures = applicantVM.PointsDistinctiveFeatures,
                     SumPointsExam = applicantVM.SumPointsExam,
-                    AdditionalInformation = applicantVM.AdditionalInformation
+                    AdditionalInformation = applicantVM.AdditionalInformation,
+                    Accepted = _userSystem.FullName
                 };
                 bool isAdded = await _applicantRepository.Create<Applicant>(applicant);
                 if (isAdded)

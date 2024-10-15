@@ -1405,8 +1405,30 @@
             </Grid>
 
             <!--КНОПКА СФОРМИРОВАТЬ ЛИЧНОЕ ДЕЛО-->
-            <Button Grid.Row="9" Content="Сохранить изменения" Style="{StaticResource defaultAdd}" HorizontalAlignment="Center" Margin="0,20"
-                Command="{Binding ChangePersonalFileCommand}" CommandParameter="{Binding ApplicantVM}"/>
+            <Grid Grid.Row="9" Margin="10,20,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" Background="#FFD700">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Принят ответственным:" FontSize="14" Margin="5" FontWeight="DemiBold"/>
+                    <TextBlock Grid.Column="1" Text="{Binding ApplicantVM.Accepted}" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0"/>
+
+                </Grid>
+
+                <Button Grid.Column="1" Content="Сохранить изменения" Style="{StaticResource defaultAdd}" HorizontalAlignment="Center" FontSize="14"
+                        Margin="20,0" Command="{Binding ChangePersonalFileCommand}" CommandParameter="{Binding ApplicantVM}"/>
+
+            </Grid>
 
         </Grid>
 
