@@ -142,6 +142,10 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             bool isValidated = applicantVM.Validation();
             if (isValidated)
             {
+                DateTime now = DateTime.Now;
+                applicantVM.DateAccepted = DateOnly.FromDateTime(now);
+                applicantVM.TimeAccepted = TimeOnly.FromDateTime(now);
+
                 var applicant = new Applicant
                 {
                     Id = applicantVM.Id,
@@ -170,7 +174,9 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                     PointsDistinctiveFeatures = applicantVM.PointsDistinctiveFeatures,
                     SumPointsExam = applicantVM.SumPointsExam,
                     AdditionalInformation = applicantVM.AdditionalInformation,
-                    Accepted = _userSystem.FullName
+                    Accepted = _userSystem.FullName,
+                    DateAccepted = applicantVM.DateAccepted,
+                    TimeAccepted = applicantVM.TimeAccepted
                 };
                 bool isAdded = await _applicantRepository.Create<Applicant>(applicant);
                 if (isAdded)

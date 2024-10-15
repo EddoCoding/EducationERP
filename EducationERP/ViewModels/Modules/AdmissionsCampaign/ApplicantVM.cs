@@ -38,8 +38,9 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         int sumPointsExam;
         string additionalInformation;
         string accepted;
+        DateOnly dateAccepted;
+        TimeOnly timeAccepted;
         
-
         public Guid Id { get; set; } = Guid.NewGuid();
         #region Личная информация
         public string SurName
@@ -180,6 +181,16 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         {
             get => accepted;
             set => SetValue(ref accepted, value);
+        }
+        public DateOnly DateAccepted
+        {
+            get => dateAccepted;
+            set => SetValue(ref dateAccepted, value);
+        }
+        public TimeOnly TimeAccepted
+        {
+            get => timeAccepted;
+            set => SetValue(ref timeAccepted, value);
         }
         #endregion
 
