@@ -379,17 +379,33 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         void ChangePersonalFile(ApplicantVM applicantVM)
         {
             if (applicantVM != null)
-                _tabControl.CreateTab<ChangeApplicantViewModel>("Изменение личного дела", null, applicantVM);
+            {
+                if (SelectedApplicant.ForEnrollment)
+                {
+                    MessageBox.Show("Личное дело нельзя изменить!");
+                    return;
+                }
+                else if(!SelectedApplicant.ForEnrollment)
+                    _tabControl.CreateTab<ChangeApplicantViewModel>("Изменение личного дела", null, applicantVM);
+            }
         }
         async void DeletePersonalFile()
         {
-            if(SelectedApplicant != null)
+            if (SelectedApplicant != null)
             {
-                bool isDeleted = await _applicantRepository.Delete<Applicant>(SelectedApplicant.Id);
-                if (isDeleted)
+                if (SelectedApplicant.ForEnrollment)
                 {
-                    SelectedApplicant.Dispose();
-                    Applicants.Remove(SelectedApplicant);
+                    MessageBox.Show("Личное дело нельзя удалить!");
+                    return;
+                }
+                else if (!SelectedApplicant.ForEnrollment)
+                {
+                    bool isDeleted = await _applicantRepository.Delete<Applicant>(SelectedApplicant.Id);
+                    if (isDeleted)
+                    {
+                        SelectedApplicant.Dispose();
+                        Applicants.Remove(SelectedApplicant);
+                    }
                 }
             }
         }
