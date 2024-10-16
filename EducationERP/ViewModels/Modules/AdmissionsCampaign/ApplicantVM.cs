@@ -1,4 +1,5 @@
-﻿using EducationERP.ViewModels.Modules.AdmissionsCampaign.Directions;
+﻿using EducationERP.Models.Modules.AdmissionsCampaign;
+using EducationERP.ViewModels.Modules.AdmissionsCampaign.Directions;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
@@ -218,6 +219,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 foreach (var oldItem in e.OldItems)
                     if (oldItem is DistinctiveFeatureVM distinctiveFeature) PointsDistinctiveFeatures -= distinctiveFeature.FeatureScore;
         }
+
         public bool Validation()
         {
             //Валидация личных данных
