@@ -41,7 +41,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         string accepted;
         DateOnly dateAccepted;
         TimeOnly timeAccepted;
-        
+        bool forEnrollment;
+
         public Guid Id { get; set; } = Guid.NewGuid();
         #region Личная информация
         public string SurName
@@ -193,6 +194,12 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             get => timeAccepted;
             set => SetValue(ref timeAccepted, value);
         }
+        public bool ForEnrollment
+        {
+            get => forEnrollment;
+            set => SetValue(ref forEnrollment, value);
+        }
+
         #endregion
 
         public ApplicantVM()

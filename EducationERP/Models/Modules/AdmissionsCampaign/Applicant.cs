@@ -45,5 +45,6 @@ namespace EducationERP.Models.Modules.AdmissionsCampaign
         public string Accepted { get; set; } = string.Empty;
         public DateOnly DateAccepted { get; set; }
         public TimeOnly TimeAccepted { get; set; }
+        public bool ForEnrollment { get; set; }
     }
 }

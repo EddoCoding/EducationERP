@@ -145,5 +145,30 @@ namespace EducationERP.Common.Components.Repositories
                 return false;
             }
         }
+        public async Task<bool> UpdateSatatus(Guid id)
+        {
+            using (var db = new DataContext()) 
+            {
+                try
+                {
+                    var entity = await db.Applicants
+                        .Where(x => x.Id == id)
+                        .FirstOrDefaultAsync();
+
+                    if (entity != null)
+                    {
+                        entity.ForEnrollment = !entity.ForEnrollment;
+                        await db.SaveChangesAsync();
+                        return true;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка обновления статуса в базе данных!");
+                    return false;
+                }
+            }
+            return false;
+        }
     }
 }

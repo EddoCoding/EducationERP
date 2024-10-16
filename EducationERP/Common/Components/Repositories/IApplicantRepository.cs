@@ -10,5 +10,6 @@ namespace EducationERP.Common.Components.Repositories
         Task<bool> Delete<T>(Guid id) where T: class;
         Task<bool> Update(Applicant applicant);
         Task<bool> Update(Exam exam);
+        Task<bool> UpdateSatatus(Guid id);
     }
 }
