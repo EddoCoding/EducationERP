@@ -187,6 +187,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                     SurName = applicantVM.SurName,
                     Name = applicantVM.Name,
                     MiddleName = applicantVM.MiddleName,
+                    FullName = $"{applicantVM.SurName} {applicantVM.Name} {applicantVM.MiddleName}",
                     DateOfBirth = applicantVM.DateOfBirth,
                     Gender = applicantVM.Gender,
                     PlaceOfBirth = applicantVM.PlaceOfBirth,

@@ -84,6 +84,7 @@ namespace EducationERP.Common.Components.Repositories
                         entity.SurName = applicant.SurName;
                         entity.Name = applicant.Name;
                         entity.MiddleName = applicant.MiddleName;
+                        entity.FullName = $"{applicant.SurName} {applicant.Name} {applicant.MiddleName}";
                         entity.DateOfBirth = applicant.DateOfBirth;
                         entity.Gender = applicant.Gender;
                         entity.PlaceOfBirth = applicant.PlaceOfBirth;

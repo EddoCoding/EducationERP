@@ -16,6 +16,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         string surName;
         string name;
         string middlename;
+        string fullName;
         DateOnly dateOfBirth;
         string gender;
         string placeOfBirth;
@@ -59,6 +60,11 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         {
             get => middlename;
             set => SetValue(ref middlename, value);
+        }
+        public string FullName
+        {
+            get => fullName;
+            set => SetValue(ref fullName, value);
         }
         public DateOnly DateOfBirth
         {

@@ -15,22 +15,38 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 {
     public class AdmissionsCampaignViewModel : RaketaViewModel
     {
+        string textSearch;
         ApplicantVM _selectedApplicant;
 
+        public string TextSearch
+        {
+            get => textSearch;
+            set 
+            {
+                SetValue(ref textSearch, value); 
+                if (String.IsNullOrWhiteSpace(TextSearch))
+                {
+                    Applicants.Clear();
+                    foreach(var applicant in applicantsFilter) Applicants.Add(applicant);
+                }
+            }
+        }
         public ObservableCollection<ApplicantVM> Applicants { get; set; } = new();
+        List<ApplicantVM> applicantsFilter = new(); 
         public ApplicantVM SelectedApplicant
         {
             get => _selectedApplicant;
             set => SetValue(ref _selectedApplicant, value);
-        }
+    }
 
-        public RaketaCommand ExitCommand { get; set; }
+        public RaketaTCommand<string> SearchCommand { get; set; }
         public RaketaTCommand<ObservableCollection<ApplicantVM>> OpenTabPersonalFileCommand { get; set; }
         public RaketaTCommand<ApplicantVM> ChangePersonalFileCommand { get; set; }
         public RaketaCommand DeletePersonalFileCommand { get; set; }
         public RaketaCommand UpdatePersonalFileCommand { get; set; }
         public RaketaTCommand<ExamVM> OpenWindowInsertPointExamCommand { get; set; }
         public RaketaTCommand<bool> ChangeStatusCommand { get; set; }
+        public RaketaCommand ExitCommand { get; set; }
 
         IServiceView _serviceView;
         ITabControl _tabControl;
@@ -41,19 +57,32 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             _tabControl = tabControl;
             _applicantRepository = applicantRepository;
 
-            GetApplicant();
+            foreach(var applicant in GetApplicant()) Applicants.Add(applicant);
 
-            ExitCommand = RaketaCommand.Launch(CloseTab);
+            applicantsFilter.AddRange(Applicants);
+
+            SearchCommand = RaketaTCommand<string>.Launch(Search);
             OpenTabPersonalFileCommand = RaketaTCommand<ObservableCollection<ApplicantVM>>.Launch(CreatePersonalFile);
             ChangePersonalFileCommand = RaketaTCommand<ApplicantVM>.Launch(ChangePersonalFile);
             DeletePersonalFileCommand = RaketaCommand.Launch(DeletePersonalFile);
             UpdatePersonalFileCommand = RaketaCommand.Launch(UpdatePersonalFile);
             OpenWindowInsertPointExamCommand = RaketaTCommand<ExamVM>.Launch(OpenWindowInsertPointExam);
             ChangeStatusCommand = RaketaTCommand<bool>.Launch(ChangeStatus);
+            ExitCommand = RaketaCommand.Launch(CloseTab);
         }
 
-        void GetApplicant()
+        void Search(string textSearch)
         {
+            var filteredApplicants = applicantsFilter
+                .Where(x => x.FullName.Contains(textSearch))
+                .ToList();
+            Applicants.Clear();
+            foreach (var applicant in filteredApplicants) Applicants.Add(applicant);
+        }
+        List<ApplicantVM> GetApplicant()
+        {
+            List<ApplicantVM> applicants = new();
+
             foreach (var applicant in _applicantRepository.Read())
             {
                 var applicantVM = new ApplicantVM
@@ -62,6 +91,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                     SurName = applicant.SurName,
                     Name = applicant.Name,
                     MiddleName = applicant.MiddleName,
+                    FullName = applicant.FullName,
                     DateOfBirth = applicant.DateOfBirth,
                     Gender = applicant.Gender,
                     PlaceOfBirth = applicant.PlaceOfBirth,
@@ -371,8 +401,10 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                     applicantVM.Exams.Add(examVM);
                 }
 
-                Applicants.Add(applicantVM);
+                applicants.Add(applicantVM);
             }
+
+            return applicants;
         }
         void CreatePersonalFile(ObservableCollection<ApplicantVM> applicants) => 
             _tabControl.CreateTab<AddApplicantViewModel>("Добавление абитуриента", null, applicants);
@@ -412,7 +444,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         void UpdatePersonalFile()
         {
             Applicants.Clear();
-            GetApplicant();
+            foreach (var applicant in GetApplicant()) Applicants.Add(applicant);
         }
         void OpenWindowInsertPointExam(ExamVM examVM)
         {

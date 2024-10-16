@@ -787,10 +787,12 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 
-                <TextBlock Grid.Column="0" Text="Список абитуриентов" FontSize="15" Foreground="Gray" Margin="10,0,0,0" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" Text="{Binding UserViewModel.TextSearch, UpdateSourceTrigger=PropertyChanged}" Margin="10,0" Foreground="Black" FontSize="14" VerticalContentAlignment="Center">
+                <TextBlock Grid.Column="0" Text="Абитуриенты" FontSize="15" Foreground="Gray" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1" Text="{Binding TextSearch, UpdateSourceTrigger=PropertyChanged}" Margin="10,0" Foreground="Black" 
+                         FontSize="14" VerticalContentAlignment="Center">
                     <TextBox.Template>
                         <ControlTemplate TargetType="TextBox">
                             <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" SnapsToDevicePixels="True">
@@ -799,6 +801,8 @@
                         </ControlTemplate>
                     </TextBox.Template>
                 </TextBox>
+                <Button Grid.Column="2" Content="Поиск" Style="{StaticResource defaultAdd}" Margin="0,0,10,0"
+                        Command="{Binding SearchCommand}" CommandParameter="{Binding TextSearch}"/>
 
             </Grid>
 
