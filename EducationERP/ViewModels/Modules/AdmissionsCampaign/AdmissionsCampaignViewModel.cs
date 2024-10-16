@@ -9,6 +9,7 @@ using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams;
 using Raketa;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
 {
@@ -29,6 +30,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         public RaketaCommand DeletePersonalFileCommand { get; set; }
         public RaketaCommand UpdatePersonalFileCommand { get; set; }
         public RaketaTCommand<ExamVM> OpenWindowInsertPointExamCommand { get; set; }
+        public RaketaTCommand<bool> ChangeStatusCommand { get; set; }
 
         IServiceView _serviceView;
         ITabControl _tabControl;
@@ -47,6 +49,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             DeletePersonalFileCommand = RaketaCommand.Launch(DeletePersonalFile);
             UpdatePersonalFileCommand = RaketaCommand.Launch(UpdatePersonalFile);
             OpenWindowInsertPointExamCommand = RaketaTCommand<ExamVM>.Launch(OpenWindowInsertPointExam);
+            ChangeStatusCommand = RaketaTCommand<bool>.Launch(ChangeStatus);
         }
 
         void GetApplicant()
@@ -82,6 +85,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                     Accepted = applicant.Accepted,
                     DateAccepted = applicant.DateAccepted,
                     TimeAccepted = applicant.TimeAccepted,
+                    ForEnrollment = applicant.ForEnrollment,
 
                     Documents = new(),
                     Educations = new(),
@@ -375,17 +379,33 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
         void ChangePersonalFile(ApplicantVM applicantVM)
         {
             if (applicantVM != null)
-                _tabControl.CreateTab<ChangeApplicantViewModel>("Изменение личного дела", null, applicantVM);
+            {
+                if (SelectedApplicant.ForEnrollment)
+                {
+                    MessageBox.Show("Личное дело нельзя изменить!");
+                    return;
+                }
+                else if(!SelectedApplicant.ForEnrollment)
+                    _tabControl.CreateTab<ChangeApplicantViewModel>("Изменение личного дела", null, applicantVM);
+            }
         }
         async void DeletePersonalFile()
         {
-            if(SelectedApplicant != null)
+            if (SelectedApplicant != null)
             {
-                bool isDeleted = await _applicantRepository.Delete<Applicant>(SelectedApplicant.Id);
-                if (isDeleted)
+                if (SelectedApplicant.ForEnrollment)
                 {
-                    SelectedApplicant.Dispose();
-                    Applicants.Remove(SelectedApplicant);
+                    MessageBox.Show("Личное дело нельзя удалить!");
+                    return;
+                }
+                else if (!SelectedApplicant.ForEnrollment)
+                {
+                    bool isDeleted = await _applicantRepository.Delete<Applicant>(SelectedApplicant.Id);
+                    if (isDeleted)
+                    {
+                        SelectedApplicant.Dispose();
+                        Applicants.Remove(SelectedApplicant);
+                    }
                 }
             }
         }
@@ -399,7 +419,11 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             _serviceView.Window<InsertPointExamViewModel>(null, examVM).Modal();
             SelectedApplicant.SumPointsExam = SelectedApplicant.Exams.Sum(x => x.SubjectScores);
         }
-
+        async void ChangeStatus(bool status)
+        {
+            bool isStatus = await _applicantRepository.UpdateSatatus(SelectedApplicant.Id);
+            if(isStatus) SelectedApplicant.ForEnrollment = !status;
+        }
 
         void CloseTab() => _tabControl.RemoveTab();
     }

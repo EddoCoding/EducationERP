@@ -82,6 +82,8 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             DeleteExamCommand = RaketaTCommand<ExamVM>.Launch(DeleteExam);
 
             ChangePersonalFileCommand = RaketaTCommand<ApplicantVM>.Launch(ChangePersonalFile);
+
+            ExitCommand = RaketaCommand.Launch(CloseTab);
         }
 
         void Citizenship()
