@@ -1,6 +1,7 @@
 ﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Models.Modules.AdmissionsCampaign.Exams;
 using Raketa;
+using System.Windows;
 
 namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams
 {
@@ -8,7 +9,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams
     {
         public string AcademicSubject { get; set; } = string.Empty;
         public int SubjectScores { get; set; }
-
 
         public RaketaCommand InsertPointExamCommand { get; set; }
         public RaketaCommand ExitCommand { get; set; }
@@ -31,6 +31,12 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams
 
         async void InsertPointExam()
         {
+            if (SubjectScores < 0)
+            {
+                MessageBox.Show("Балл не может быть отрицательным!");
+                return;
+            }
+
             var exam = new Exam
             {
                 Id = _examVM.Id,

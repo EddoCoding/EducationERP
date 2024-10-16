@@ -108,7 +108,15 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                         foreach (var oldItem in e.OldItems)
                             if (oldItem is DistinctiveFeatureVM distinctiveFeature) applicantVM.PointsDistinctiveFeatures -= distinctiveFeature.FeatureScore;
                 };
-
+                applicantVM.Exams.CollectionChanged += (sender, e) =>
+                {
+                    if (e.NewItems != null)
+                        foreach (var newItem in e.NewItems)
+                            if (newItem is ExamVM examVM) applicantVM.SumPointsExam += examVM.SubjectScores;
+                    if (e.OldItems != null)
+                        foreach (var oldItem in e.OldItems)
+                            if (oldItem is ExamVM examVM) applicantVM.SumPointsExam -= examVM.SubjectScores;
+                };
                 //Перебор документов
                 foreach (var document in applicant.Documents)
                 {
@@ -386,8 +394,12 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
             Applicants.Clear();
             GetApplicant();
         }
-        void OpenWindowInsertPointExam(ExamVM examVM) =>
+        void OpenWindowInsertPointExam(ExamVM examVM)
+        {
             _serviceView.Window<InsertPointExamViewModel>(null, examVM).Modal();
+            SelectedApplicant.SumPointsExam = SelectedApplicant.Exams.Sum(x => x.SubjectScores);
+        }
+
 
         void CloseTab() => _tabControl.RemoveTab();
     }

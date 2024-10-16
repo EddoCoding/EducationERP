@@ -855,6 +855,7 @@
                     
                     <!--ЛИЧНАЯ ИНФОРМАЦИЯ-->
                     <StackPanel Grid.Row="0" Margin="5,5,0,5">
+                        
                         <TextBlock Text="Личная информация" Foreground="Gray" FontSize="14"/>
 
                         <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
@@ -892,17 +893,21 @@
                                     <Style TargetType="TextBlock">
                                         <Setter Property="Text" Value="Нет"/>
                                         <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedApplicant.IsNeedHostel}" Value="{x:Null}">
+                                                <Setter Property="Text" Value=""/>
+                                            </DataTrigger>
                                             <DataTrigger Binding="{Binding SelectedApplicant.IsNeedHostel}" Value="True">
-                                                <Setter Property="Text" Value="Да" />
+                                                <Setter Property="Text" Value="Да"/>
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding SelectedApplicant.IsNeedHostel}" Value="False">
-                                                <Setter Property="Text" Value="Нет" />
+                                                <Setter Property="Text" Value="Нет"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
                         </StackPanel>
+                        
                     </StackPanel>
 
                     <!--КОНТАКТНАЯ ИНФОРМАЦИЯ-->
@@ -1337,7 +1342,7 @@
 
                     <!--ОТВЕТСТВЕННЫЙ-->
                     <StackPanel Grid.Row="9" Orientation="Horizontal" Margin="5,30,0,5">
-                        <TextBlock Text="Принят ответственным" Foreground="Gray" FontSize="14"/>
+                        <TextBlock Text="Принят ответственным:" Foreground="Gray" FontSize="14"/>
                         <TextBlock Text="{Binding SelectedApplicant.Accepted}" Margin="5,0,0,0" FontSize="14"/>
                     </StackPanel>
 
