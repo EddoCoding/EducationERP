@@ -26,3 +26,7 @@ EducationERP - Программа для автоматизирования пр
 
 1. Страница модуля "Приёмная кампания" с карточкой абитуриента.
 <img src="https://github.com/EddoCoding/EducationERP/blob/master/AdmissionCampaign.png">
+2. Страница приёма абитуриента первая часть.
+<img src="https://github.com/EddoCoding/EducationERP/blob/master/AdmissionApplicant1.png">
+3. Страница приёма абитуриента вторая часть.
+<img src="https://github.com/EddoCoding/EducationERP/blob/master/AdmissionApplicant2.png">
