@@ -160,6 +160,7 @@
                     <DropShadowEffect Color="LightGray" Opacity="1" ShadowDepth="2"/>
                 </StackPanel.Effect>
 
+                <!--Приёмная кампания-->
                 <Grid Margin="10,5,0,5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -173,6 +174,21 @@
 
                 </Grid>
 
+                <!--Деканат-->
+                <Grid Margin="10,5,0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Модуль - Деканат" Style="{StaticResource AccessTextBlock}"/>
+                    <ToggleButton Grid.Column="1" Style="{StaticResource AccessToggleButton}" IsThreeState="True" Margin="10,0"
+                        Content="{Binding Visual.RoleDeanRoom}" IsChecked="{Binding UserVM.ModuleDeanRoom}"
+                        Command="{Binding ChangeRoleAccessDeanRoomCommand}" CommandParameter="{Binding Visual.RoleDeanRoom}"/>
+
+                </Grid>
+                
+                <!--Администрирование-->
                 <Grid Margin="10,5,0,5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>

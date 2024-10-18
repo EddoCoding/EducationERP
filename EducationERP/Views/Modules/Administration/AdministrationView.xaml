@@ -93,13 +93,15 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding FullName}" Padding="10,5"/>
                             <TextBlock Grid.Column="1" Text="{Binding Identifier}" Padding="10,5"/>
                             <TextBlock Grid.Column="2" Text="{Binding Password}" Padding="10,5"/>
                             <TextBlock Grid.Column="3" Text="{Binding ModuleAdministration, Converter={StaticResource BoolToString}}" Padding="10,5"/>
-                            <TextBlock Grid.Column="4" Text="{Binding ModuleAdmissionsCampaign, Converter={StaticResource BoolToString}}" Padding="10,5"/>
+                            <TextBlock Grid.Column="4" Text="{Binding ModuleDeanRoom, Converter={StaticResource BoolToString}}" Padding="10,5"/>
+                            <TextBlock Grid.Column="5" Text="{Binding ModuleAdmissionsCampaign, Converter={StaticResource BoolToString}}" Padding="10,5"/>
 
                         </Grid>
                     </ControlTemplate>
@@ -328,6 +330,7 @@
                                 <DataGridTextColumn Header="Идентификатор" Width="*" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Пароль" Width="*" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Администрирование" Width="*" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Деканат" Width="*" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Приёмная кампания" Width="*" IsReadOnly="True"/>
                             </DataGrid.Columns>
                         </DataGrid>
@@ -337,21 +340,21 @@
                                 <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
                             </StackPanel.Effect>
 
-                            <Button Content="/Common/Resources/Images/addUser.png" Style="{StaticResource ButtonImage}" Height="23" Width="23" 
-                                    VerticalAlignment="Top" Margin="7" ToolTip="Создать пользователя"
-                                    Command="{Binding UserViewModel.OpenWindowAddUserCommand}"/>
+                            <Button Content="/Common/Resources/Images/addUser.png" Style="{StaticResource ButtonImage}" Height="21" Width="21" 
+                                    Margin="7" ToolTip="Создать пользователя" Command="{Binding UserViewModel.OpenWindowAddUserCommand}"
+                                    RenderOptions.BitmapScalingMode="Fant"/>
 
                             <Button Content="/Common/Resources/Images/changeUser.png" Style="{StaticResource ButtonImage}" Height="23" Width="23"
-                                    VerticalAlignment="Top" Margin="7" ToolTip="Изменить данные пользователя системы"
+                                    Margin="7" ToolTip="Изменить данные пользователя системы" RenderOptions.BitmapScalingMode="Fant"
                                     Command="{Binding UserViewModel.ChangeUserCommand}" CommandParameter="{Binding UserViewModel.SelectedUser}"/>
 
-                            <Button Content="/Common/Resources/Images/deleteUser.png" Style="{StaticResource ButtonImage}" Height="23" Width="23" 
-                                    VerticalAlignment="Top" Margin="7" ToolTip="Удалить пользователя из системы"
+                            <Button Content="/Common/Resources/Images/deleteUser.png" Style="{StaticResource ButtonImage}" Height="19" Width="19" 
+                                    Margin="7" ToolTip="Удалить пользователя из системы" RenderOptions.BitmapScalingMode="Fant"
                                     Command="{Binding UserViewModel.DeleteUserCommand}" CommandParameter="{Binding UserViewModel.SelectedUser}"/>
 
-                            <Button Content="/Common/Resources/Images/update.png" Style="{StaticResource ButtonImage}" Height="23" Width="23" 
-                                    VerticalAlignment="Top" Margin="7" ToolTip="Обновить список пользователей"
-                                    Command="{Binding UserViewModel.UpdateUserCommand}"/>
+                            <Button Content="/Common/Resources/Images/update.png" Style="{StaticResource ButtonImage}" Height="22" Width="22" 
+                                    Margin="7" ToolTip="Обновить список пользователей" Command="{Binding UserViewModel.UpdateUserCommand}"
+                                    RenderOptions.BitmapScalingMode="Fant"/>
 
                         </StackPanel>
                     </Grid>

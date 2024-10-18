@@ -21,6 +21,7 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
         public RaketaCommand ExitCommand { get; set; }
 
         public RaketaTCommand<string> ChangeRoleAccessAdmissionsCampaignCommand { get; set; }
+        public RaketaTCommand<string> ChangeRoleAccessDeanRoomCommand { get; set; }
         public RaketaTCommand<string> ChangeRoleAccessAdministrationCommand { get; set; }
 
         IServiceView _serviceView;
@@ -38,6 +39,7 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
             ExitCommand = RaketaCommand.Launch(CloseWindow);
 
             ChangeRoleAccessAdmissionsCampaignCommand = RaketaTCommand<string>.Launch(RoleAccessAdmissionsCampaign);
+            ChangeRoleAccessDeanRoomCommand = RaketaTCommand<string>.Launch(ChangeRoleAccessDeanRoom);
             ChangeRoleAccessAdministrationCommand = RaketaTCommand<string>.Launch(RoleAccessAdministration);
         }
 
@@ -60,6 +62,7 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
                 Identifier = userVM.Identifier,
                 Password = userVM.Password,
                 ModuleAdmissionsCampaign = userVM.ModuleAdmissionsCampaign,
+                ModuleDeanRoom = userVM.ModuleDeanRoom,
                 ModuleAdministration = userVM.ModuleAdministration
             };
             bool isAdded = await _userRepository.AddUser(user);
@@ -86,6 +89,24 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
             {
                 UserVM.ModuleAdmissionsCampaign = null;
                 Visual.RoleAdmissionsCampaign = "Без доступа";
+            }
+        }
+        void ChangeRoleAccessDeanRoom(string roleAccess)
+        {
+            if (roleAccess == "Без доступа")
+            {
+                UserVM.ModuleDeanRoom = false;
+                Visual.RoleDeanRoom = "Ограниченный";
+            }
+            else if (roleAccess == "Ограниченный")
+            {
+                UserVM.ModuleDeanRoom = true;
+                Visual.RoleDeanRoom = "Полный";
+            }
+            else
+            {
+                UserVM.ModuleDeanRoom = null;
+                Visual.RoleDeanRoom = "Без доступа";
             }
         }
         void RoleAccessAdministration(string roleAccess)

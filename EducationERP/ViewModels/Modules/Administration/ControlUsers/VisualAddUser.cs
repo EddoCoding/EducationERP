@@ -17,5 +17,12 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
             get => roleAdmissionsCampaign;
             set => SetValue(ref roleAdmissionsCampaign, value);
         }
+
+        string roleDeanRoom = "Без доступа";
+        public string RoleDeanRoom
+        {
+            get => roleDeanRoom;
+            set => SetValue(ref roleDeanRoom, value);
+        }
     }
 }

@@ -13,5 +13,6 @@ namespace EducationERP.Models.Modules.Administration.SettingUser
 
         public bool? ModuleAdmissionsCampaign { get; set; } = null;
         public bool? ModuleAdministration { get; set; } = null;
+        public bool? ModuleDeanRoom { get; set; } = null;
     }
 }
