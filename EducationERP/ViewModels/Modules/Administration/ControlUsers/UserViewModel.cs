@@ -42,22 +42,16 @@ namespace EducationERP.ViewModels.Modules.Administration
             _serviceView = serviceView;
             _userRepository = userRepository;
 
-            userRepository.Users.CollectionChanged += (sender, e) =>
-            {
-                if (e.OldItems != null) foreach (UserVM item in e.OldItems) Users.Remove(item);
-                if (e.NewItems != null) foreach (UserVM item in e.NewItems) Users.Add(item);
-            };
-
             OpenWindowAddUserCommand = RaketaCommand.Launch(OpenWindowAddUser);
             ChangeUserCommand = RaketaTCommand<UserVM>.Launch(ChangeUser);
             DeleteUserCommand = RaketaTCommand<UserVM>.Launch(DeleteUser);
             UpdateUserCommand = RaketaCommand.Launch(UpdateCollectionAsync);
         }
 
-        void OpenWindowAddUser() => _serviceView.Window<AddUserViewModel>().Modal();
-        void ChangeUser(UserVM user)
+        void OpenWindowAddUser() => _serviceView.Window<AddUserViewModel>(null, Users).Modal();
+        void ChangeUser(UserVM userVM)
         {
-            if(SelectedUser != null) _serviceView.Window<ChangeUserViewModel>(null, user).Modal();
+            if(SelectedUser != null) _serviceView.Window<ChangeUserViewModel>(null, userVM).Modal();
         }
         void DeleteUser(UserVM user) 
         {
@@ -67,17 +61,27 @@ namespace EducationERP.ViewModels.Modules.Administration
                 Users.Remove(user);
             }
         }
-        async void UpdateCollectionAsync()
+        void UpdateCollectionAsync()
         {
-            var users = await _userRepository.GetUsersAsync();
+            var users = _userRepository.GetUsers();
             usersFilter.Clear();
             if (users != null)
             {
                 Users.Clear();
                 foreach (var user in users)
                 {
-                    Users.Add(user);
-                    usersFilter.Add(user);
+                    var userVM = new UserVM
+                    {
+                        Id = user.Id,
+                        FullName = $"{user.SurName} {user.Name} {user.MiddleName}",
+                        Identifier = user.Identifier,
+                        Password = user.Password,
+                        ModuleAdmissionsCampaign = user.ModuleAdmissionsCampaign,
+                        ModuleAdministration = user.ModuleAdministration
+                    };
+
+                    Users.Add(userVM);
+                    usersFilter.Add(userVM);
                 }
             }
         }

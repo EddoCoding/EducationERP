@@ -338,19 +338,19 @@
                             </StackPanel.Effect>
 
                             <Button Content="/Common/Resources/Images/addUser.png" Style="{StaticResource ButtonImage}" Height="23" Width="23" 
-                                    VerticalAlignment="Top" Margin="10" ToolTip="Создать пользователя"
+                                    VerticalAlignment="Top" Margin="7" ToolTip="Создать пользователя"
                                     Command="{Binding UserViewModel.OpenWindowAddUserCommand}"/>
 
                             <Button Content="/Common/Resources/Images/changeUser.png" Style="{StaticResource ButtonImage}" Height="23" Width="23"
-                                    VerticalAlignment="Top" Margin="10" ToolTip="Изменить данные пользователя системы"
+                                    VerticalAlignment="Top" Margin="7" ToolTip="Изменить данные пользователя системы"
                                     Command="{Binding UserViewModel.ChangeUserCommand}" CommandParameter="{Binding UserViewModel.SelectedUser}"/>
 
                             <Button Content="/Common/Resources/Images/deleteUser.png" Style="{StaticResource ButtonImage}" Height="23" Width="23" 
-                                    VerticalAlignment="Top" Margin="10" ToolTip="Удалить пользователя из системы"
+                                    VerticalAlignment="Top" Margin="7" ToolTip="Удалить пользователя из системы"
                                     Command="{Binding UserViewModel.DeleteUserCommand}" CommandParameter="{Binding UserViewModel.SelectedUser}"/>
 
                             <Button Content="/Common/Resources/Images/update.png" Style="{StaticResource ButtonImage}" Height="23" Width="23" 
-                                    VerticalAlignment="Top" Margin="10" ToolTip="Обновить список пользователей"
+                                    VerticalAlignment="Top" Margin="7" ToolTip="Обновить список пользователей"
                                     Command="{Binding UserViewModel.UpdateUserCommand}"/>
 
                         </StackPanel>

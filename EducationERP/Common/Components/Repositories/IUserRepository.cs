@@ -6,11 +6,10 @@ namespace EducationERP.Common.Components.Repositories
 {
     public interface IUserRepository
     {
-        ObservableCollection<UserVM> Users { get; set; }
-
-        Task<UserVM[]> GetUsersAsync();
+        IEnumerable<User> GetUsers();
         Task<User> GetUserAsync(string identifier, string password);
-        void AddUser(User user);
-        void DeleteUser(UserVM user);
+        Task<bool> AddUser(User user);
+        Task<bool> DeleteUser(UserVM user);
+        Task<bool> UpdateUser(User user);
     }
 }

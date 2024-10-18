@@ -1,20 +1,23 @@
 ﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Models.Modules.Administration.SettingUser;
 using Raketa;
+using System.Collections.ObjectModel;
 using System.Text;
-using System.Windows;
 
 namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
 {
     public class AddUserViewModel : RaketaViewModel
     {
-        public User User { get; set; } = new();
+        public string SurName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public string MiddleName { get; set; } = string.Empty;
+
         public UserVM UserVM { get; set; } = new();
         public VisualAddUser Visual { get; set; } = new();
 
         public RaketaCommand GenerationIdentifierCommand { get; set; }
         public RaketaCommand GenerationPasswordCommand { get; set; }
-        public RaketaTCommand<User> AddUserCommand { get; set; }
+        public RaketaTCommand<UserVM> AddUserCommand { get; set; }
         public RaketaCommand ExitCommand { get; set; }
 
         public RaketaTCommand<string> ChangeRoleAccessAdmissionsCampaignCommand { get; set; }
@@ -22,59 +25,66 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
 
         IServiceView _serviceView;
         IUserRepository _userRepository;
-        public AddUserViewModel(IServiceView serviceView, IUserRepository userRepository)
+        ObservableCollection<UserVM> _users;
+        public AddUserViewModel(IServiceView serviceView, IUserRepository userRepository, ObservableCollection<UserVM> users)
         {
             _serviceView = serviceView;
             _userRepository = userRepository;
+            _users = users;
 
             GenerationIdentifierCommand = RaketaCommand.Launch(GenerationIdentifier);
             GenerationPasswordCommand = RaketaCommand.Launch(GenerationPassword);
-            AddUserCommand = RaketaTCommand<User>.Launch(AddUser);
+            AddUserCommand = RaketaTCommand<UserVM>.Launch(AddUser);
             ExitCommand = RaketaCommand.Launch(CloseWindow);
 
             ChangeRoleAccessAdmissionsCampaignCommand = RaketaTCommand<string>.Launch(RoleAccessAdmissionsCampaign);
             ChangeRoleAccessAdministrationCommand = RaketaTCommand<string>.Launch(RoleAccessAdministration);
         }
 
-        void GenerationIdentifier() => User.Identifier = Generation();
-        void GenerationPassword() => User.Password = Generation();
+        void GenerationIdentifier() => UserVM.Identifier = Generation();
+        void GenerationPassword() => UserVM.Password = Generation();
 
-        void AddUser(User user)
+        async void AddUser(UserVM userVM)
         {
-            if (String.IsNullOrWhiteSpace(User.SurName) || String.IsNullOrWhiteSpace(User.Name)
-                 || String.IsNullOrWhiteSpace(User.Identifier) || String.IsNullOrWhiteSpace(User.Password))
-            {
-                MessageBox.Show("Есть незаполненные поля!");
-                return;
-            }
+            bool isValidated = userVM.Validation();
+            if (!isValidated) return;
+            
+            userVM.FullName = $"{SurName} {Name} {MiddleName}";
 
-            _userRepository.AddUser(user);
-            _userRepository.Users.Add(new UserVM()
+            var user = new User
             {
-                Id = user.Id,
-                FullName = $"{user.SurName} {user.Name} {user.MiddleName}",
-                Identifier = user.Identifier,
-                Password = user.Password,
-                ModuleAdministration = user.ModuleAdministration
-            });
-            _serviceView.Close<AddUserViewModel>();
+                Id = userVM.Id,
+                SurName = SurName,
+                Name = Name,
+                MiddleName = MiddleName,
+                Identifier = userVM.Identifier,
+                Password = userVM.Password,
+                ModuleAdmissionsCampaign = userVM.ModuleAdmissionsCampaign,
+                ModuleAdministration = userVM.ModuleAdministration
+            };
+            bool isAdded = await _userRepository.AddUser(user);
+            if (isAdded)
+            {
+                _users.Add(userVM);
+                _serviceView.Close<AddUserViewModel>();
+            }
         }
 
         void RoleAccessAdmissionsCampaign(string roleAccess)
         {
             if (roleAccess == "Без доступа")
             {
-                User.ModuleAdmissionsCampaign = false;
+                UserVM.ModuleAdmissionsCampaign = false;
                 Visual.RoleAdmissionsCampaign = "Ограниченный";
             }
             else if (roleAccess == "Ограниченный")
             {
-                User.ModuleAdmissionsCampaign = true;
+                UserVM.ModuleAdmissionsCampaign = true;
                 Visual.RoleAdmissionsCampaign = "Полный";
             }
             else
             {
-                User.ModuleAdmissionsCampaign = null;
+                UserVM.ModuleAdmissionsCampaign = null;
                 Visual.RoleAdmissionsCampaign = "Без доступа";
             }
         }
@@ -82,17 +92,17 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
         {
             if(roleAccess == "Без доступа")
             {
-                User.ModuleAdministration = false;
+                UserVM.ModuleAdministration = false;
                 Visual.RoleAdministration = "Ограниченный";
             }
             else if(roleAccess == "Ограниченный")
             {
-                User.ModuleAdministration = true;
+                UserVM.ModuleAdministration = true;
                 Visual.RoleAdministration = "Полный";
             }
             else
             {
-                User.ModuleAdministration = null;
+                UserVM.ModuleAdministration = null;
                 Visual.RoleAdministration = "Без доступа";
             }
         }

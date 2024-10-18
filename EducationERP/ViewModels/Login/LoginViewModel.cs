@@ -38,7 +38,6 @@ namespace EducationERP.ViewModels.Login
                 _serviceView.Window<EducationViewModel>().NonModal();
                 _serviceView.Close<LoginViewModel>();
             }
-            else MessageBox.Show("Ошибка соединения!");
         }
 
         void CloseWindow() => _serviceView.Close<LoginViewModel>();

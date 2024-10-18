@@ -2,22 +2,11 @@
 
 namespace EducationERP.Models.Modules.Administration.SettingUser
 {
-    public class User : RaketaViewModel
+    public class User
     {
-        string identifier = string.Empty;
-        string password = string.Empty;
-
         public Guid Id { get; set; } = Guid.NewGuid();
-        public string Identifier
-        {
-            get => identifier;
-            set => SetValue(ref identifier, value);
-        }
-        public string Password
-        {
-            get => password;
-            set => SetValue(ref password, value);
-        }
+        public string Identifier { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
         public string SurName { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
         public string MiddleName { get; set; } = string.Empty;

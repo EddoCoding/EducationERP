@@ -75,7 +75,6 @@ namespace EducationERP
             //Модуль "Деканат"
             _serviceView.RegisterTypeView<DeanRoomViewModel, DeanRoomView>();
 
-
             //Модуль "Администрирование"
             _serviceView.RegisterTypeView<AddUserViewModel, WindowAddUser>();
             _serviceView.RegisterTypeView<ChangeUserViewModel, WindowChangeUser>();
@@ -91,7 +90,7 @@ namespace EducationERP
             _container.RegisterTransient<Config, IConfig>();
             _container.RegisterSingleton<UserSystem, UserSystem>();
             _container.RegisterSingleton<MainTabControl, ITabControl>();
-            _container.RegisterSingleton<UserRepository, IUserRepository>();
+            _container.RegisterTransient<UserRepository, IUserRepository>();
             _container.RegisterTransient<ApplicantRepository, IApplicantRepository>();
             _container.RegisterTransient<SettingFacultyRepository, ISettingFacultyRepository>();
         }

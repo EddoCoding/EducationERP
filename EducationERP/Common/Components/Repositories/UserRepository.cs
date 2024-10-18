@@ -1,58 +1,111 @@
 ﻿using EducationERP.Models.Modules.Administration.SettingUser;
 using EducationERP.ViewModels.Modules.Administration.ControlUsers;
-using System.Collections.ObjectModel;
+using Microsoft.EntityFrameworkCore;
 using System.Windows;
 
 namespace EducationERP.Common.Components.Repositories
 {
     public class UserRepository(DataContext context) : IUserRepository
     {
-        public ObservableCollection<UserVM> Users { get; set; } = new();
-
-        public async Task<UserVM[]> GetUsersAsync()
+        public IEnumerable<User> GetUsers()
         {
-            if (!context.CanConnect()) return null;
-
-            try
+            using(var db = new DataContext())
             {
-                var users = await Task.Run(() => context.Users.Select(x => new UserVM()
+                try
                 {
-                    Id = x.Id,
-                    Identifier = x.Identifier,
-                    Password = x.Password,
-                    FullName = $"{x.SurName} {x.Name} {x.MiddleName}",
-                    ModuleAdministration = x.ModuleAdministration,
-                    ModuleAdmissionsCampaign = x.ModuleAdmissionsCampaign
-                }).ToArray());
+                    return db.Users.ToArray();
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка получения пользователей из базы данных!");
+                    return Enumerable.Empty<User>();
+                }
+            }
 
-                return users;
-            }
-            catch 
-            {
-                MessageBox.Show("Ошибка получения данных");
-                return null;
-            }
+            return null;
         }
         public async Task<User> GetUserAsync(string identifier, string password)
         {
-            if (!context.CanConnect()) return null;
-            var user = await Task.Run(() => context?.Users.FirstOrDefault(x => x.Identifier == identifier && x.Password == password));
-            return user;
-        }
-        public void AddUser(User user)
-        {
-            if (!context.CanConnect()) return;
-            context.Users.Add(user);
-            context.SaveChanges();
-        }
-        public void DeleteUser(UserVM user)
-        {
-            if (!context.CanConnect()) return;
-            var remoteUser = context.Users.FirstOrDefault(x => x.Id == user.Id);
-            if (remoteUser != null)
+            using(var db = new DataContext())
             {
-                context.Users.Remove(remoteUser);
-                context.SaveChanges();
+                try
+                {
+                    var user = await db.Users
+                        .FirstOrDefaultAsync(x => x.Identifier == identifier && x.Password == password);
+                    if(user != null) return user;
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка получения данных о пользователе!");
+                    return null;
+                }
+
+                return null;
+            }
+        }
+        public async Task<bool> AddUser(User user)
+        {
+            using(var db = new DataContext())
+            {
+                try
+                {
+                    db.Users.Add(user);
+                    await db.SaveChangesAsync();
+                    return true;
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка добавления пользователя в базу данных!");
+                    return false;
+                }
+            }
+        }
+        public async Task<bool> DeleteUser(UserVM userVM)
+        {
+            using(var db = new DataContext())
+            {
+                try
+                {
+                    var user = await db.Users.FirstOrDefaultAsync(x => x.Id == userVM.Id);
+                    if(user != null)
+                    {
+                        db.Users.Remove(user);
+                        await db.SaveChangesAsync();
+                    }
+                    return true;
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка удаления пользователя из базы данных!");
+                    return false;
+                }
+            }
+        }
+        public async Task<bool> UpdateUser(User user)
+        {
+            using(var db = new DataContext())
+            {
+                try
+                {
+                    var entity = await db.Users.FirstOrDefaultAsync(x => x.Id == user.Id);
+                    if(entity != null)
+                    {
+                        entity.SurName = user.SurName;
+                        entity.Name = user.Name;
+                        entity.MiddleName = user.MiddleName;
+                        entity.Identifier = user.Identifier;
+                        entity.Password = user.Password;
+                        entity.ModuleAdmissionsCampaign = user.ModuleAdmissionsCampaign;
+                        entity.ModuleAdministration = user.ModuleAdministration;
+                    }
+                    await db.SaveChangesAsync();
+                    return true;
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка обновления данных пользователя в базе данных!");
+                    return false;
+                }
             }
         }
     }
