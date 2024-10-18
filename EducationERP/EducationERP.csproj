@@ -18,6 +18,7 @@
     <None Remove="Common\Resources\Images\changeSize.png" />
     <None Remove="Common\Resources\Images\changeUser.png" />
     <None Remove="Common\Resources\Images\createBaseData.png" />
+    <None Remove="Common\Resources\Images\deanRoom.png" />
     <None Remove="Common\Resources\Images\deleteDocument.png" />
     <None Remove="Common\Resources\Images\deletePersonalFile.png" />
     <None Remove="Common\Resources\Images\deleteUser.png" />
@@ -60,6 +61,9 @@
     <Resource Include="Common\Resources\Images\changeUser.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Common\Resources\Images\deanRoom.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Common\Resources\Images\deleteDocument.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -84,13 +88,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.7">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.122" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.8" />
   </ItemGroup>
 
   <ItemGroup>
@@ -125,6 +129,10 @@
     <Resource Include="Common\Resources\Fonts\OpenSansBold.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Modules\DeanRoom\" />
   </ItemGroup>
 
 </Project>

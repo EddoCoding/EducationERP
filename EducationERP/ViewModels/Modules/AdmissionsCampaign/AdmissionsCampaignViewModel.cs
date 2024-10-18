@@ -110,7 +110,6 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                     Mail = applicant.Mail,
                     AdditionalContactInformation = applicant.AdditionalContactInformation,
 
-                    SumPointsExam = applicant.SumPointsExam,
                     AdditionalInformation = applicant.AdditionalInformation,
                     Accepted = applicant.Accepted,
                     DateAccepted = applicant.DateAccepted,

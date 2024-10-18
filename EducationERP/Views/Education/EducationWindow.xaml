@@ -197,14 +197,22 @@
                 <DropShadowEffect Color="LightGray" ShadowDepth="2"/>
             </Grid.Effect>
 
+            <!--Меню-->
             <Button Grid.Row="0" Style="{StaticResource ButtonModuleSize}" Tag="/Common/Resources/Images/changeSize.png" ToolTip="{Binding Visual.ToolTipChangeSize}"
                     Command="{Binding Visual.ChangeWidthButtonPanelCommand}" CommandParameter="{Binding Visual.WidthButtonPanel}"/>
 
-            <Line Grid.Row="1" X1="0" Y1="0" X2="135" Y2="0" StrokeThickness="0.3"  Stroke="Black" HorizontalAlignment="Center"/>
+            <!--Приёмная кампания-->
+            <Line Grid.Row="1" X1="0" Y1="0" X2="135" Y2="0" StrokeThickness="0.3" Stroke="Black" HorizontalAlignment="Center"/>
             <Button Grid.Row="2" Style="{StaticResource ButtonModule}" Content="Приёмная кампания" Tag="/Common/Resources/Images/admissionCampaign.png" 
                     IsEnabled="{Binding Visual.ModuleAdmissionCampaign}" Command="{Binding ModuleCommand}" CommandParameter="Приёмная кампания"/>
 
-            <Line Grid.Row="7" X1="0" Y1="0" X2="135" Y2="0" StrokeThickness="0.3"  Stroke="Black" HorizontalAlignment="Center"/>
+            <!--Деканат-->
+            <Line Grid.Row="3" X1="0" Y1="0" X2="135" Y2="0" StrokeThickness="0.3" Stroke="Black" HorizontalAlignment="Center"/>
+            <Button Grid.Row="4" Style="{StaticResource ButtonModule}" Content="Деканат" Tag="/Common/Resources/Images/deanRoom.png" 
+                IsEnabled="{Binding Visual.ModuleAdmissionCampaign}" Command="{Binding ModuleCommand}" CommandParameter="Деканат"/>
+
+            <!--Администрирование-->
+            <Line Grid.Row="7" X1="0" Y1="0" X2="135" Y2="0" StrokeThickness="0.3" Stroke="Black" HorizontalAlignment="Center"/>
             <Button Grid.Row="8" Style="{StaticResource ButtonModule}" Content="Администрирование" Tag="/Common/Resources/Images/settingModule.png" 
                     IsEnabled="{Binding Visual.ModuleAdministration}" Command="{Binding ModuleCommand}" CommandParameter="Администрирование"/>
             

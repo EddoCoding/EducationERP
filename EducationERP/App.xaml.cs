@@ -13,6 +13,7 @@ using EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams;
+using EducationERP.ViewModels.Modules.DeanRoom;
 using EducationERP.Views;
 using EducationERP.Views.Modules.Administration;
 using EducationERP.Views.Modules.Administration.ControlUsers;
@@ -23,6 +24,7 @@ using EducationERP.Views.Modules.AdmissionsCampaign.DistinctiveFeatures;
 using EducationERP.Views.Modules.AdmissionsCampaign.Documents;
 using EducationERP.Views.Modules.AdmissionsCampaign.Education;
 using EducationERP.Views.Modules.AdmissionsCampaign.Exams;
+using EducationERP.Views.Modules.DeanRoom;
 using Raketa;
 using System.Windows;
 
@@ -50,11 +52,13 @@ namespace EducationERP
 
         void RegisterView()
         {
+            //Вход
             _serviceView.RegisterTypeView<LoginViewModel, LoginWindow>();
+
+            //Главное окно
             _serviceView.RegisterTypeView<EducationViewModel, EducationWindow>();
-            _serviceView.RegisterTypeView<AddUserViewModel, WindowAddUser>();
-            _serviceView.RegisterTypeView<ChangeUserViewModel, WindowChangeUser>();
-            _serviceView.RegisterTypeView<AdministrationViewModel, AdministrationView>();
+
+            //Модуль "Приёмная кампания"
             _serviceView.RegisterTypeView<AdmissionsCampaignViewModel, AdmissionsCampaignView>();
             _serviceView.RegisterTypeView<AddApplicantViewModel, AddApplicantView>();
             _serviceView.RegisterTypeView<DocumentViewModel, DocumentWindow>();
@@ -63,13 +67,22 @@ namespace EducationERP
             _serviceView.RegisterTypeView<ChangeEducationDocViewModel, ChangeEducationDocWindow>();
             _serviceView.RegisterTypeView<EGEViewModel, EGEWindow>();
             _serviceView.RegisterTypeView<DistinctiveFeatureViewModel, DistinctiveFeaturesWindow>();
-            _serviceView.RegisterTypeView<AddSettingFacultyViewModel, AddSettingFacultyWindow>();
-            _serviceView.RegisterTypeView<AddSettingLevelViewModel, AddSettingLevelWindow>();
-            _serviceView.RegisterTypeView<AddSettingDirectionViewModel, AddSettingDirectionWindow>();
             _serviceView.RegisterTypeView<AddDirectionViewModel, AddDirectionWindow>();
             _serviceView.RegisterTypeView<AddExamViewModel, AddExamWindow>();
             _serviceView.RegisterTypeView<ChangeApplicantViewModel, ChangeApplicantView>();
             _serviceView.RegisterTypeView<InsertPointExamViewModel, InsertPointExamWindow>();
+
+            //Модуль "Деканат"
+            _serviceView.RegisterTypeView<DeanRoomViewModel, DeanRoomView>();
+
+
+            //Модуль "Администрирование"
+            _serviceView.RegisterTypeView<AddUserViewModel, WindowAddUser>();
+            _serviceView.RegisterTypeView<ChangeUserViewModel, WindowChangeUser>();
+            _serviceView.RegisterTypeView<AdministrationViewModel, AdministrationView>();
+            _serviceView.RegisterTypeView<AddSettingFacultyViewModel, AddSettingFacultyWindow>();
+            _serviceView.RegisterTypeView<AddSettingLevelViewModel, AddSettingLevelWindow>();
+            _serviceView.RegisterTypeView<AddSettingDirectionViewModel, AddSettingDirectionWindow>();
         }
 
         void RegisterDependency()

@@ -145,6 +145,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign
                 DateTime now = DateTime.Now;
                 applicantVM.DateAccepted = DateOnly.FromDateTime(now);
                 applicantVM.TimeAccepted = TimeOnly.FromDateTime(now);
+                applicantVM.Accepted = _userSystem.FullName;
 
                 var applicant = new Applicant
                 {

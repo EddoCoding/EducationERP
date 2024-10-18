@@ -3,6 +3,7 @@ using EducationERP.Common.Components.Services;
 using EducationERP.ViewModels.Education;
 using EducationERP.ViewModels.Modules.Administration;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign;
+using EducationERP.ViewModels.Modules.DeanRoom;
 using Raketa;
 
 namespace EducationERP.ViewModels
@@ -35,10 +36,13 @@ namespace EducationERP.ViewModels
             switch(module)
             {
                 case "Приёмная кампания":
-                    TabControl.CreateTab<AdmissionsCampaignViewModel>("Приёмная кампания");
+                    TabControl.CreateTab<AdmissionsCampaignViewModel>(module);
                     break;
                 case "Администрирование":
-                    TabControl.CreateTab<AdministrationViewModel>("Администрирование");
+                    TabControl.CreateTab<AdministrationViewModel>(module);
+                    break;
+                case "Деканат":
+                    TabControl.CreateTab<DeanRoomViewModel>(module);
                     break;
             }
         }

@@ -46,14 +46,20 @@ namespace EducationERP.ViewModels.Education
         #region Видимость кнопок по роли
         public bool ModuleAdmissionCampaign { get; set; } = false;
         public bool ModuleAdministration { get; set; } = false;
+        public bool ModuleDeanRoom { get; set; } = false;
+
         public void GetAccess(UserSystem userSystem) 
         {
             //Приёмная кампания
             if (userSystem.AdmissionsCampaign == true) ModuleAdmissionCampaign = true;
             else if (userSystem.AdmissionsCampaign == false) ModuleAdmissionCampaign = true;
 
+            //Деканат
+            if (userSystem.DeanRoom == true) ModuleDeanRoom = true;
+            else if (userSystem.DeanRoom == false) ModuleDeanRoom = true;
+
             //Администрирование
-            if(userSystem.Administration == true) ModuleAdministration = true;
+            if (userSystem.Administration == true) ModuleAdministration = true;
             else if(userSystem.Administration == false) ModuleAdministration = true;
         }
         #endregion
