@@ -96,6 +96,7 @@ namespace EducationERP.Common.Components.Repositories
                         entity.Identifier = user.Identifier;
                         entity.Password = user.Password;
                         entity.ModuleAdmissionsCampaign = user.ModuleAdmissionsCampaign;
+                        entity.ModuleDeanRoom = user.ModuleDeanRoom;
                         entity.ModuleAdministration = user.ModuleAdministration;
                     }
                     await db.SaveChangesAsync();

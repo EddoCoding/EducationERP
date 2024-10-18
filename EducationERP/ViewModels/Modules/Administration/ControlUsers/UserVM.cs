@@ -8,7 +8,7 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
         string identifier = string.Empty;
         string password = string.Empty;
 
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string FullName { get; set; } = string.Empty;
         public string Identifier
         {
@@ -23,6 +23,7 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
 
         public bool? ModuleAdmissionsCampaign { get; set; } = null;
         public bool? ModuleAdministration { get; set; } = null;
+        public bool? ModuleDeanRoom { get; set; } = null;
 
         public bool Validation()
         {

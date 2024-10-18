@@ -77,6 +77,7 @@ namespace EducationERP.ViewModels.Modules.Administration
                         Identifier = user.Identifier,
                         Password = user.Password,
                         ModuleAdmissionsCampaign = user.ModuleAdmissionsCampaign,
+                        ModuleDeanRoom = user.ModuleDeanRoom,
                         ModuleAdministration = user.ModuleAdministration
                     };
 
