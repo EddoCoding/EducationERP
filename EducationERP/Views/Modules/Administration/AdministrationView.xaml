@@ -288,10 +288,86 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Expander Grid.Row="1" FontSize="15" Style="{StaticResource CustomExpander}" Header="Управление пользователями" Padding="2,0"
-                          IsEnabled="{Binding Visual.ControlUsers}">
+                <Expander Grid.Row="1" FontSize="15" Style="{StaticResource CustomExpander}" Header="Настройка структуры учебного заведения" 
+                          Margin="0,5,5,0" Padding="2,0">
+                    <Grid Background="White">
+                        <Grid.Effect>
+                            <DropShadowEffect Color="LightGray" ShadowDepth="0"/>
+                        </Grid.Effect>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="Управление учебным заведением" Foreground="Gray" Margin="10,10,0,0"/>
+
+                        <Grid Grid.Row="1" Background="White" Margin="10,10,10,0">
+                            <Grid.Effect>
+                                <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                            </Grid.Effect>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Text="Название учебного заведения" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
+                            <TextBox Grid.Row="1" Text="{Binding SettingStructEducationalViewModel.StructEducationalInstitutionVM.NameVUZ}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,10"/>
+                        </Grid>
+
+                        <Grid Grid.Row="2" Background="White" Margin="10,10,10,0">
+                            <Grid.Effect>
+                                <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                            </Grid.Effect>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Text="Сокращенное название учебного заведения" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
+                            <TextBox Grid.Row="1" Text="{Binding SettingStructEducationalViewModel.StructEducationalInstitutionVM.ShortNameVUZ}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,10"/>
+                        </Grid>
+
+                        <TreeView x:Name="q" Grid.Row="3" Margin="5,10,0,0" BorderThickness="0" FontSize="14">
+                            <TreeViewItem ItemsSource="{Binding SettingStructEducationalViewModel.StructEducationalInstitutionVM.Faculties}" IsExpanded="True">
+                                <TreeViewItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Факультеты"/>
+                                        <Button Content="добавить" Style="{StaticResource ButtonAdd}" Margin="5,0" ToolTip="Добавить факультет"
+                                            Command="{Binding DataContext.SettingStructEducationalViewModel.OpenWindowAddFacultyCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
+                                            CommandParameter="{Binding DataContext.SettingStructEducationalViewModel.StructEducationalInstitutionVM.Faculties, RelativeSource={RelativeSource AncestorType=TreeView}}"/>
+                                    </StackPanel>
+                                </TreeViewItem.Header>
+                                <TreeViewItem.ItemTemplate>
+                                    <HierarchicalDataTemplate ItemsSource="{Binding .}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding .}"/>
+                                        </StackPanel>
+                                    </HierarchicalDataTemplate>
+                                </TreeViewItem.ItemTemplate>
+                            </TreeViewItem>
+                        </TreeView>
+
+                        <Button Grid.Row="10" Content="Сохранить" Style="{StaticResource defaultAdd}" HorizontalAlignment="Right" Margin="10"
+                                Command="{Binding SettingStructEducationalViewModel.SaveStructEducationCommand}"
+                                CommandParameter="{Binding SettingStructEducationalViewModel.StructEducationalInstitutionVM}"/>
+
+                    </Grid>
+                </Expander>
+                
+                <Expander Grid.Row="2" FontSize="15" Style="{StaticResource CustomExpander}" Header="Управление пользователями" Padding="2,0"
+                          Margin="0,5,5,0" IsEnabled="{Binding Visual.ControlUsers}">
                     <Grid Background="White">
                         <Grid.Effect>
                             <DropShadowEffect Color="LightGray" ShadowDepth="0"/>
@@ -360,9 +436,9 @@
                     </Grid>
                 </Expander>
 
-                <Expander Grid.Row="2" FontSize="15" Style="{StaticResource CustomExpander}" Header="Настройка модуля - Учебный отдел" Margin="0,5,0,0" Padding="2,0"/>
+                <Expander Grid.Row="3" FontSize="15" Style="{StaticResource CustomExpander}" Header="Настройка модуля - Учебный отдел" Margin="0,5,5,0" Padding="2,0"/>
 
-                <Expander Grid.Row="3" FontSize="15" Style="{StaticResource CustomExpander}" Header="Настройка модуля - Приёмная кампания" Margin="0,5,0,0" Padding="2,0">
+                <Expander Grid.Row="4" FontSize="15" Style="{StaticResource CustomExpander}" Header="Настройка модуля - Приёмная кампания" Margin="0,5,5,0" Padding="2,0">
                     <Grid Background="White">
                         <Grid.Effect>
                             <DropShadowEffect Color="LightGray" ShadowDepth="0"/>
@@ -373,7 +449,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="0" Text="Управление образованием приёмной кампании" Margin="10,10,0,0" Foreground="Gray" FontSize="14"/>
+                        <TextBlock Grid.Row="0" Text="Управление организацией приёмной кампании" Margin="10,10,0,0" Foreground="Gray" FontSize="14"/>
 
                         <TreeView x:Name="qwe" Grid.Row="1" Margin="10,5" BorderThickness="0" FontSize="14">
                             <TreeViewItem ItemsSource="{Binding SettingAdmissionCampaignViewModel.Faculties}" IsExpanded="True">
@@ -461,9 +537,9 @@
                     </Grid>
                 </Expander>
 
-                <Expander Grid.Row="4" FontSize="15" Style="{StaticResource CustomExpander}" Header="Настройка модуля - Деканат" Margin="0,5,0,0" Padding="2,0"/>
+                <Expander Grid.Row="5" FontSize="15" Style="{StaticResource CustomExpander}" Header="Настройка модуля - Деканат" Margin="0,5,5,0" Padding="2,0"/>
 
-                <Expander Grid.Row="5" FontSize="15" Style="{StaticResource CustomExpander}" Header="Настройка базы данны" Margin="0,5,0,0" Padding="2,0"
+                <Expander Grid.Row="6" FontSize="15" Style="{StaticResource CustomExpander}" Header="Настройка базы данны" Margin="0,5,5,0" Padding="2,0"
                           IsEnabled="{Binding Visual.SettingBD}">
                     <Grid Background="White">
                         <Grid.Effect>

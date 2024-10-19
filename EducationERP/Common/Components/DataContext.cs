@@ -6,6 +6,7 @@ using EducationERP.Models.Modules.AdmissionsCampaign.Directions;
 using EducationERP.Models.Modules.AdmissionsCampaign.DistinctiveFeatures;
 using EducationERP.Models.Modules.AdmissionsCampaign.Educations;
 using EducationERP.Models.Modules.AdmissionsCampaign.Exams;
+using EducationERP.Models.Modules.EducationalInstitution;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using System.Windows;
@@ -38,7 +39,14 @@ namespace EducationERP.Common.Components
         public DbSet<Exam> Exams { get; set; }
         #endregion
         #region АДМИНИСТРИРОВАНИЕ
+        // -- Настройка пользователей --
+        public DbSet<StructEducationalInstitution> StructEducationalInstitution { get; set; }
+        public DbSet<Faculty> MainFaculties { get; set; }
+
+        // -- Настройка пользователей --
         public DbSet<User> Users { get; set; }
+
+        // -- Настройка образования для приёмной кампании --
         public DbSet<SettingFaculty> Faculties { get; set; }
         public DbSet<SettingLevel> Levels { get; set; }
         public DbSet<SettingDirection> Directions { get; set; }
@@ -122,6 +130,7 @@ namespace EducationERP.Common.Components
             modelBuilder.ApplyConfiguration(new FacultyConfiguration());
             modelBuilder.ApplyConfiguration(new LevelConfiguration());
             modelBuilder.ApplyConfiguration(new ApplicantConfiguration());
+            modelBuilder.ApplyConfiguration(new StructEducationConfiguration());
 
             modelBuilder.Entity<Document>().UseTpcMappingStrategy();
             modelBuilder.Entity<EducationBase>().UseTpcMappingStrategy();

@@ -7,6 +7,7 @@ using EducationERP.ViewModels.Login;
 using EducationERP.ViewModels.Modules.Administration;
 using EducationERP.ViewModels.Modules.Administration.ControlUsers;
 using EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaign;
+using EducationERP.ViewModels.Modules.Administration.SettingStructEducational;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Directions;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures;
@@ -18,6 +19,7 @@ using EducationERP.Views;
 using EducationERP.Views.Modules.Administration;
 using EducationERP.Views.Modules.Administration.ControlUsers;
 using EducationERP.Views.Modules.Administration.SettingAdmissionCampaign;
+using EducationERP.Views.Modules.Administration.SettingEducationalInstitution;
 using EducationERP.Views.Modules.AdmissionsCampaign;
 using EducationERP.Views.Modules.AdmissionsCampaign.Directions;
 using EducationERP.Views.Modules.AdmissionsCampaign.DistinctiveFeatures;
@@ -82,6 +84,7 @@ namespace EducationERP
             _serviceView.RegisterTypeView<AddSettingFacultyViewModel, AddSettingFacultyWindow>();
             _serviceView.RegisterTypeView<AddSettingLevelViewModel, AddSettingLevelWindow>();
             _serviceView.RegisterTypeView<AddSettingDirectionViewModel, AddSettingDirectionWindow>();
+            _serviceView.RegisterTypeView<AddMainFacultyViewModel, AddMainFacultyWindow>();
         }
 
         void RegisterDependency()
@@ -93,6 +96,7 @@ namespace EducationERP
             _container.RegisterTransient<UserRepository, IUserRepository>();
             _container.RegisterTransient<ApplicantRepository, IApplicantRepository>();
             _container.RegisterTransient<SettingFacultyRepository, ISettingFacultyRepository>();
+            _container.RegisterTransient<StructEducationRepository, IStructEducationRepository>();
         }
     }
 }

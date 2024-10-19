@@ -209,7 +209,7 @@
             <!--Деканат-->
             <Line Grid.Row="3" X1="0" Y1="0" X2="135" Y2="0" StrokeThickness="0.3" Stroke="Black" HorizontalAlignment="Center"/>
             <Button Grid.Row="4" Style="{StaticResource ButtonModule}" Content="Деканат" Tag="/Common/Resources/Images/deanRoom.png" 
-                IsEnabled="{Binding Visual.ModuleAdmissionCampaign}" Command="{Binding ModuleCommand}" CommandParameter="Деканат"/>
+                IsEnabled="{Binding Visual.ModuleDeanRoom}" Command="{Binding ModuleCommand}" CommandParameter="Деканат"/>
 
             <!--Администрирование-->
             <Line Grid.Row="7" X1="0" Y1="0" X2="135" Y2="0" StrokeThickness="0.3" Stroke="Black" HorizontalAlignment="Center"/>
