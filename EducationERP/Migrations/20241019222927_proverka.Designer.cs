@@ -3,6 +3,7 @@ using System;
 using EducationERP.Common.Components;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EducationERP.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241019222927_proverka")]
+    partial class proverka
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -469,30 +472,6 @@ namespace EducationERP.Migrations
                     b.ToTable("Exams");
                 });
 
-            modelBuilder.Entity("EducationERP.Models.Modules.EducationalInstitution.Faculty", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("NameFaculty")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("PasswordFaculty")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("StructEducationalInstitutionId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StructEducationalInstitutionId");
-
-                    b.ToTable("MainFaculties");
-                });
-
             modelBuilder.Entity("EducationERP.Models.Modules.EducationalInstitution.StructEducationalInstitution", b =>
                 {
                     b.Property<Guid>("Id")
@@ -818,17 +797,6 @@ namespace EducationERP.Migrations
                     b.Navigation("Applicant");
                 });
 
-            modelBuilder.Entity("EducationERP.Models.Modules.EducationalInstitution.Faculty", b =>
-                {
-                    b.HasOne("EducationERP.Models.Modules.EducationalInstitution.StructEducationalInstitution", "StructEducationalInstitution")
-                        .WithMany("Faculties")
-                        .HasForeignKey("StructEducationalInstitutionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("StructEducationalInstitution");
-                });
-
             modelBuilder.Entity("EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign.SettingFaculty", b =>
                 {
                     b.Navigation("Levels");
@@ -852,11 +820,6 @@ namespace EducationERP.Migrations
                     b.Navigation("Educations");
 
                     b.Navigation("Exams");
-                });
-
-            modelBuilder.Entity("EducationERP.Models.Modules.EducationalInstitution.StructEducationalInstitution", b =>
-                {
-                    b.Navigation("Faculties");
                 });
 #pragma warning restore 612, 618
         }

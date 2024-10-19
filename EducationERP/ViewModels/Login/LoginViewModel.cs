@@ -1,7 +1,6 @@
 ﻿using EducationERP.Common.Components;
 using EducationERP.Common.Components.Repositories;
 using Raketa;
-using System.Windows;
 
 namespace EducationERP.ViewModels.Login
 {
@@ -33,6 +32,7 @@ namespace EducationERP.ViewModels.Login
             {
                 _userSystem.FullName = $"{user.SurName} {user.Name} {user.MiddleName}";
                 _userSystem.Administration = user.ModuleAdministration;
+                _userSystem.DeanRoom = user.ModuleDeanRoom;
                 _userSystem.AdmissionsCampaign = user.ModuleAdmissionsCampaign;
 
                 _serviceView.Window<EducationViewModel>().NonModal();
