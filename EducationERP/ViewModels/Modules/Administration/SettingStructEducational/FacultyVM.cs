@@ -1,4 +1,5 @@
 ﻿using Raketa;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace EducationERP.ViewModels.Modules.Administration.SettingStructEducational
@@ -19,7 +20,7 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingStructEducationa
             get => passwordFaculty;
             set => SetValue(ref passwordFaculty, value);
         }
-        //public ObservableCollection<string> Departments { get; set; } = new();
+        public ObservableCollection<DepartmentVM> Departments { get; set; } = new();
 
         public bool Validation()
         {

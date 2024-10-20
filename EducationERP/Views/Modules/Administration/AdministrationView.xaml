@@ -360,20 +360,23 @@
                                 </TreeViewItem.Header>
                                 <TreeViewItem.ItemTemplate>
                                     <HierarchicalDataTemplate ItemsSource="{Binding .}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding NameFaculty}"/>
-                                            <TextBlock Text="пароль:" Foreground="Gray" Margin="10,0,0,0"/>
-                                            <TextBlock Text="{Binding PasswordFaculty}" Margin="5,0,0,0" FontWeight="DemiBold"/>
-
-                                            <Button Content="добавить" Style="{StaticResource ButtonAdd}" Margin="5,0,0,0" ToolTip="Добавить кафедру"
-                                                Command="{Binding DataContext.SettingStructEducationalViewModel.OpenWindowAddFacultyCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
-                                                CommandParameter="{Binding DataContext.SettingStructEducationalViewModel.StructEducationalInstitutionVM, RelativeSource={RelativeSource AncestorType=TreeView}}"/>
-                                            <Button Content="изменить" Style="{StaticResource ButtonChange}" Margin="5,0,0,0" ToolTip="Изменить данные факультета"
-                                                Command="{Binding DataContext.SettingStructEducationalViewModel.OpenWindowChangeFacultyCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
-                                                CommandParameter="{Binding}"/>
-                                            <Button Content="удалить" Style="{StaticResource ButtonDelete}" Margin="5,0,0,0" ToolTip="Удалить факультет"
-                                                Command="{Binding DataContext.SettingStructEducationalViewModel.DeleteFacultyCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
-                                                CommandParameter="{Binding}"/>
+                                        <StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding NameFaculty}"/>
+                                                <Button Content="добавить" Style="{StaticResource ButtonAdd}" Margin="5,0,0,0" ToolTip="Добавить кафедру"
+                                                    Command="{Binding DataContext.SettingStructEducationalViewModel.OpenWindowAddFacultyCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
+                                                    CommandParameter="{Binding DataContext.SettingStructEducationalViewModel.StructEducationalInstitutionVM, RelativeSource={RelativeSource AncestorType=TreeView}}"/>
+                                                <Button Content="изменить" Style="{StaticResource ButtonChange}" Margin="5,0,0,0" ToolTip="Изменить данные факультета"
+                                                    Command="{Binding DataContext.SettingStructEducationalViewModel.OpenWindowChangeFacultyCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
+                                                    CommandParameter="{Binding}"/>
+                                                <Button Content="удалить" Style="{StaticResource ButtonDelete}" Margin="5,0,0,0" ToolTip="Удалить факультет"
+                                                    Command="{Binding DataContext.SettingStructEducationalViewModel.DeleteFacultyCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
+                                                    CommandParameter="{Binding}"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="пароль:" Foreground="Gray" Margin="10,0,0,0"/>
+                                                <TextBlock Text="{Binding PasswordFaculty}" Margin="5,0,0,0" FontWeight="DemiBold"/>
+                                            </StackPanel>
                                         </StackPanel>
                                     </HierarchicalDataTemplate>
                                 </TreeViewItem.ItemTemplate>

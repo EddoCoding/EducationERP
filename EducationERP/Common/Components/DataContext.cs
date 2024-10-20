@@ -39,9 +39,10 @@ namespace EducationERP.Common.Components
         public DbSet<Exam> Exams { get; set; }
         #endregion
         #region АДМИНИСТРИРОВАНИЕ
-        // -- Настройка пользователей --
+        // -- Настройка структуры учебного заведения --
         public DbSet<StructEducationalInstitution> StructEducationalInstitution { get; set; }
         public DbSet<Faculty> MainFaculties { get; set; }
+        public DbSet<Department> MainDepartments { get; set; }
 
         // -- Настройка пользователей --
         public DbSet<User> Users { get; set; }
@@ -131,6 +132,7 @@ namespace EducationERP.Common.Components
             modelBuilder.ApplyConfiguration(new LevelConfiguration());
             modelBuilder.ApplyConfiguration(new ApplicantConfiguration());
             modelBuilder.ApplyConfiguration(new StructEducationConfiguration());
+            modelBuilder.ApplyConfiguration(new MainFacultyConfiguration());
 
             modelBuilder.Entity<Document>().UseTpcMappingStrategy();
             modelBuilder.Entity<EducationBase>().UseTpcMappingStrategy();
