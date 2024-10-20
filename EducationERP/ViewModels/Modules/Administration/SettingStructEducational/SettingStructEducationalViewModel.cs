@@ -1,7 +1,6 @@
 ﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Models.Modules.EducationalInstitution;
 using Raketa;
-using System.Collections.ObjectModel;
 
 namespace EducationERP.ViewModels.Modules.Administration.SettingStructEducational
 {
@@ -9,8 +8,10 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingStructEducationa
     {
         public StructEducationalInstitutionVM StructEducationalInstitutionVM { get; set; } = new();
 
-        public RaketaTCommand<ObservableCollection<FacultyVM>> OpenWindowAddFacultyCommand { get; set; }
+        public RaketaTCommand<StructEducationalInstitutionVM> OpenWindowAddFacultyCommand { get; set; }
         public RaketaTCommand<StructEducationalInstitutionVM> SaveStructEducationCommand { get; set; }
+        public RaketaTCommand<FacultyVM> OpenWindowChangeFacultyCommand { get; set; }
+        public RaketaTCommand<FacultyVM> DeleteFacultyCommand { get; set; }
 
         IServiceView _serviceView;
         IStructEducationRepository _structEducationRepository;
@@ -21,12 +22,14 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingStructEducationa
 
             Mapp(structEducationRepository.GetStructEducation());
 
-            OpenWindowAddFacultyCommand = RaketaTCommand<ObservableCollection<FacultyVM>>.Launch(OpenWindowAddFaculty);
+            OpenWindowAddFacultyCommand = RaketaTCommand<StructEducationalInstitutionVM>.Launch(OpenWindowAddFaculty);
             SaveStructEducationCommand = RaketaTCommand<StructEducationalInstitutionVM>.Launch(SaveStructEducation);
+            OpenWindowChangeFacultyCommand = RaketaTCommand<FacultyVM>.Launch(OpenWindowChangeFaculty);
+            DeleteFacultyCommand = RaketaTCommand<FacultyVM>.Launch(DeleteFaculty);
         }
 
-        void OpenWindowAddFaculty(ObservableCollection<FacultyVM> faculties) =>
-            _serviceView.Window<AddMainFacultyViewModel>(null, faculties).Modal();
+        void OpenWindowAddFaculty(StructEducationalInstitutionVM structVM) =>
+            _serviceView.Window<AddMainFacultyViewModel>(null, structVM).Modal();
         void Mapp(StructEducationalInstitution structModel)
         {
             if(structModel != null)
@@ -35,8 +38,19 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingStructEducationa
                 {
                     Id = structModel.Id,
                     NameVUZ = structModel.NameVUZ,
-                    ShortNameVUZ = structModel.ShortNameVUZ
+                    ShortNameVUZ = structModel.ShortNameVUZ,
+                    Faculties = new()
                 };
+                foreach(var faculty in structModel.Faculties)
+                {
+                    var facultyVM = new FacultyVM
+                    {
+                        Id = faculty.Id,
+                        NameFaculty = faculty.NameFaculty,
+                        PasswordFaculty = faculty.PasswordFaculty
+                    };
+                    structVM.Faculties.Add(facultyVM);
+                }
                 StructEducationalInstitutionVM = structVM;
             }
         }
@@ -50,6 +64,13 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingStructEducationa
             };
 
             await _structEducationRepository.SaveStructEducation(structModel);
+        }
+        void OpenWindowChangeFaculty(FacultyVM facultyVM) =>
+            _serviceView.Window<ChangeMainFacultyViewModel>(null, facultyVM).Modal();
+        async void DeleteFaculty(FacultyVM facultyVM)
+        {
+            bool isDeleted = await _structEducationRepository.DeleteFaculty(facultyVM.Id);
+            if(isDeleted) StructEducationalInstitutionVM.Faculties.Remove(facultyVM);
         }
     }
 }

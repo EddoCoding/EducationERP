@@ -246,6 +246,21 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="ButtonChange" TargetType="Button">
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="#FFD700"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style x:Key="ButtonDelete" TargetType="Button">
             <Setter Property="Foreground" Value="Gray"/>
             <Setter Property="Template">
@@ -303,12 +318,6 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0" Text="Управление учебным заведением" Foreground="Gray" Margin="10,10,0,0"/>
@@ -346,20 +355,32 @@
                                         <TextBlock Text="Факультеты"/>
                                         <Button Content="добавить" Style="{StaticResource ButtonAdd}" Margin="5,0" ToolTip="Добавить факультет"
                                             Command="{Binding DataContext.SettingStructEducationalViewModel.OpenWindowAddFacultyCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
-                                            CommandParameter="{Binding DataContext.SettingStructEducationalViewModel.StructEducationalInstitutionVM.Faculties, RelativeSource={RelativeSource AncestorType=TreeView}}"/>
+                                            CommandParameter="{Binding DataContext.SettingStructEducationalViewModel.StructEducationalInstitutionVM, RelativeSource={RelativeSource AncestorType=TreeView}}"/>
                                     </StackPanel>
                                 </TreeViewItem.Header>
                                 <TreeViewItem.ItemTemplate>
                                     <HierarchicalDataTemplate ItemsSource="{Binding .}">
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding .}"/>
+                                            <TextBlock Text="{Binding NameFaculty}"/>
+                                            <TextBlock Text="пароль:" Foreground="Gray" Margin="10,0,0,0"/>
+                                            <TextBlock Text="{Binding PasswordFaculty}" Margin="5,0,0,0" FontWeight="DemiBold"/>
+
+                                            <Button Content="добавить" Style="{StaticResource ButtonAdd}" Margin="5,0,0,0" ToolTip="Добавить кафедру"
+                                                Command="{Binding DataContext.SettingStructEducationalViewModel.OpenWindowAddFacultyCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
+                                                CommandParameter="{Binding DataContext.SettingStructEducationalViewModel.StructEducationalInstitutionVM, RelativeSource={RelativeSource AncestorType=TreeView}}"/>
+                                            <Button Content="изменить" Style="{StaticResource ButtonChange}" Margin="5,0,0,0" ToolTip="Изменить данные факультета"
+                                                Command="{Binding DataContext.SettingStructEducationalViewModel.OpenWindowChangeFacultyCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
+                                                CommandParameter="{Binding}"/>
+                                            <Button Content="удалить" Style="{StaticResource ButtonDelete}" Margin="5,0,0,0" ToolTip="Удалить факультет"
+                                                Command="{Binding DataContext.SettingStructEducationalViewModel.DeleteFacultyCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
+                                                CommandParameter="{Binding}"/>
                                         </StackPanel>
                                     </HierarchicalDataTemplate>
                                 </TreeViewItem.ItemTemplate>
                             </TreeViewItem>
                         </TreeView>
 
-                        <Button Grid.Row="10" Content="Сохранить" Style="{StaticResource defaultAdd}" HorizontalAlignment="Right" Margin="10"
+                        <Button Grid.Row="4" Content="Сохранить" Style="{StaticResource defaultAdd}" HorizontalAlignment="Right" Margin="10"
                                 Command="{Binding SettingStructEducationalViewModel.SaveStructEducationCommand}"
                                 CommandParameter="{Binding SettingStructEducationalViewModel.StructEducationalInstitutionVM}"/>
 
