@@ -1,4 +1,5 @@
 ﻿using EducationERP.Models.Modules.EducationalInstitution;
+using EducationERP.ViewModels.Modules.Administration.SettingStructEducational;
 using Microsoft.EntityFrameworkCore;
 using System.Windows;
 
@@ -12,7 +13,9 @@ namespace EducationERP.Common.Components.Repositories
             {
                 try
                 {
-                    return db.StructEducationalInstitution.FirstOrDefault();
+                    return db.StructEducationalInstitution
+                        .Include(x => x.Faculties)
+                        .FirstOrDefault();
                 }
                 catch
                 {
@@ -46,6 +49,71 @@ namespace EducationERP.Common.Components.Repositories
                 {
                     MessageBox.Show("Ошибка сохранения данных об учебном заведении в базу данных!");
                 }
+            }
+        }
+
+        public async Task<bool> CreateFaculty(Faculty faculty)
+        {
+            using (var db = new DataContext())
+            {
+                try
+                {
+                    db.MainFaculties.Add(faculty);
+                    await db.SaveChangesAsync();
+                    return true;
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка добавления факультета в базу данных!");
+                    return false;
+                }
+            }
+        }
+        public async Task<bool> UpdateFaculty(FacultyVM facultyVM)
+        {
+            using(var db = new DataContext())
+            {
+                try 
+                {
+                    var faculty = db.MainFaculties.FirstOrDefault(x => x.Id == facultyVM.Id);
+                    if(faculty != null)
+                    {
+                        faculty.NameFaculty = facultyVM.NameFaculty;
+                        faculty.PasswordFaculty = facultyVM.PasswordFaculty;
+                        await db.SaveChangesAsync();
+                        return true;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка изменения данных факультета в базе данных!");
+                    return false;
+                }
+
+                return false;
+            }
+        }
+        public async Task<bool> DeleteFaculty(Guid id)
+        {
+            using(var db = new DataContext())
+            {
+                try
+                {
+                    var faculty = await db.MainFaculties.FirstOrDefaultAsync(x => x.Id == id);
+                    if(faculty != null)
+                    {
+                        db.MainFaculties.Remove(faculty);
+                        await db.SaveChangesAsync();
+                        return true;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка удаления факультета из базы данных!");
+                    return false;
+                }
+
+                return false;
             }
         }
     }

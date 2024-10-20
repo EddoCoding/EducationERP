@@ -1,30 +1,26 @@
 ﻿using EducationERP.Common.Components.Repositories;
-using EducationERP.Models.Modules.EducationalInstitution;
 using Raketa;
 using System.Text;
 
 namespace EducationERP.ViewModels.Modules.Administration.SettingStructEducational
 {
-    public class AddMainFacultyViewModel : RaketaViewModel
+    public class ChangeMainFacultyViewModel : RaketaViewModel
     {
-        public FacultyVM FacultyVM { get; set; } = new();
-
         public RaketaCommand GenerationPasswordCommand { get; set; }
-        public RaketaTCommand<FacultyVM> AddFacultyCommand { get; set; }
+        public RaketaTCommand<FacultyVM> ChangeFacultyCommand { get; set; }
         public RaketaCommand ExitCommand { get; set; }
 
         IServiceView _serviceView;
         IStructEducationRepository _structEducationRepository;
-        StructEducationalInstitutionVM _structVM;
-        public AddMainFacultyViewModel(IServiceView serviceView, IStructEducationRepository structEducationRepository, 
-            StructEducationalInstitutionVM structVM)
+        public FacultyVM FacultyVM { get; set; }
+        public ChangeMainFacultyViewModel(IServiceView serviceView, IStructEducationRepository structEducationRepository, FacultyVM facultyVM)
         {
             _serviceView = serviceView;
             _structEducationRepository = structEducationRepository;
-            _structVM = structVM;
+            FacultyVM = facultyVM;
 
             GenerationPasswordCommand = RaketaCommand.Launch(GenerationPassword);
-            AddFacultyCommand = RaketaTCommand<FacultyVM>.Launch(AddFaculty);
+            ChangeFacultyCommand = RaketaTCommand<FacultyVM>.Launch(ChangeFaculty);
             ExitCommand = RaketaCommand.Launch(CloseWindow);
         }
 
@@ -41,26 +37,14 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingStructEducationa
 
             FacultyVM.PasswordFaculty = sb.ToString();
         }
-        async void AddFaculty(FacultyVM facultyVM)
+        async void ChangeFaculty(FacultyVM facultyVM)
         {
             bool isValidated = facultyVM.Validation();
             if (!isValidated) return;
 
-            var faculty = new Faculty
-            {
-                Id = facultyVM.Id,
-                NameFaculty = facultyVM.NameFaculty,
-                PasswordFaculty = facultyVM.PasswordFaculty,
-                StructEducationalInstitutionId = _structVM.Id
-            };
-            bool isAdded = await _structEducationRepository.CreateFaculty(faculty);
-            if (isAdded)
-            {
-                _structVM.Faculties.Add(facultyVM);
-                CloseWindow();
-            }
-
+            bool isUpdated = await _structEducationRepository.UpdateFaculty(facultyVM);
+            if(isUpdated) CloseWindow();
         }
-        void CloseWindow() => _serviceView.Close<AddMainFacultyViewModel>();
+        void CloseWindow() => _serviceView.Close<ChangeMainFacultyViewModel>();
     }
 }
