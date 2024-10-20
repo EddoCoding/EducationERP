@@ -39,6 +39,9 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingStructEducationa
         }
         async void ChangeFaculty(FacultyVM facultyVM)
         {
+            bool isValidated = facultyVM.Validation();
+            if (!isValidated) return;
+
             bool isUpdated = await _structEducationRepository.UpdateFaculty(facultyVM);
             if(isUpdated) CloseWindow();
         }

@@ -43,6 +43,9 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingStructEducationa
         }
         async void AddFaculty(FacultyVM facultyVM)
         {
+            bool isValidated = facultyVM.Validation();
+            if (!isValidated) return;
+
             var faculty = new Faculty
             {
                 Id = facultyVM.Id,

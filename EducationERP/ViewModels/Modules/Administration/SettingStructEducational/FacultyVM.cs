@@ -1,4 +1,5 @@
 ﻿using Raketa;
+using System.Windows;
 
 namespace EducationERP.ViewModels.Modules.Administration.SettingStructEducational
 {
@@ -19,5 +20,21 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingStructEducationa
             set => SetValue(ref passwordFaculty, value);
         }
         //public ObservableCollection<string> Departments { get; set; } = new();
+
+        public bool Validation()
+        {
+            if (String.IsNullOrWhiteSpace(NameFaculty))
+            {
+                MessageBox.Show("Введите название факультета!");
+                return false;
+            }
+            if (String.IsNullOrWhiteSpace(PasswordFaculty))
+            {
+                MessageBox.Show("Введите пароль доступа к факультету!");
+                return false;
+            }
+
+            return true;
+        }
     }
 }
