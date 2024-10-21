@@ -68,7 +68,6 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-
             <Grid.Effect>
                 <DropShadowEffect Opacity="0.3" ShadowDepth="2" BlurRadius="10" />
             </Grid.Effect>

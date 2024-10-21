@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationERP.Views.Modules.Administration.ControlUsers"
-        mc:Ignorable="d" Title="Добавление факультета" Height="95" Width="500" MouseDown="MoveWindow"
+        mc:Ignorable="d" Title="Добавление факультета" Height="110" Width="500" MouseDown="MoveWindow"
         Background="WhiteSmoke" FontFamily="{StaticResource OpenSans}" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         RenderOptions.BitmapScalingMode="NearestNeighbor" BorderBrush="LightGray" BorderThickness="1">
     <Window.Resources>
@@ -51,14 +51,15 @@
                     <TextBlock Text="Например: Факультет управления" Margin="5,0,0,0" VerticalAlignment="Center"/>
                 </StackPanel>
                 
-                <TextBox Grid.Row="1" Text="{Binding FacultyVM.NameFaculty}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,5"/>
+                <TextBox Grid.Row="1" Text="{Binding FacultyVM.NameFaculty}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,5" 
+                         TextWrapping="Wrap" Width="460"/>
             </Grid>
         </Grid>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0,10,10">
-            <Button Content="Добавить факультет" Style="{StaticResource ButtonTextCreate}" Margin="10,0"
+            <Button Content="Добавить факультет" Style="{StaticResource ButtonTextCreate}" Margin="10,0" FontSize="13"
                     Command="{Binding AddFacultyCommand}" CommandParameter="{Binding FacultyVM}"/>
-            <Button Content="Отменить" Style="{StaticResource ButtonTextCancel}" Command="{Binding ExitCommand}"/>
+            <Button Content="Отменить" Style="{StaticResource ButtonTextCancel}" Command="{Binding ExitCommand}" FontSize="13"/>
         </StackPanel>
     </Grid>
 

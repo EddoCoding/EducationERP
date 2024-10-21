@@ -49,9 +49,9 @@
         </Grid>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0,10,10">
-            <Button Content="Добавить" Style="{StaticResource ButtonTextCreate}" Margin="10,0" 
+            <Button Content="Добавить" Style="{StaticResource ButtonTextCreate}" Margin="10,0" FontSize="13"
                     Command="{Binding AddDistinctiveFeatureCommand}" CommandParameter="{Binding DistinctiveFeature}"/>
-            <Button Content="Отменить" Style="{StaticResource ButtonTextCancel}" Command="{Binding ExitCommand}"/>
+            <Button Content="Отменить" Style="{StaticResource ButtonTextCancel}" Command="{Binding ExitCommand}" FontSize="13"/>
         </StackPanel>
     </Grid>
 
