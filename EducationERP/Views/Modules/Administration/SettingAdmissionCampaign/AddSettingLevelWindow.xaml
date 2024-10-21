@@ -61,9 +61,9 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0,10,10">
-            <Button Content="Добавить уровень" Style="{StaticResource ButtonTextCreate}" Margin="10,0" 
+            <Button Content="Добавить уровень" Style="{StaticResource ButtonTextCreate}" Margin="10,0" FontSize="13" 
                     Command="{Binding AddLevelCommand}" CommandParameter="{Binding LevelVM}"/>
-            <Button Content="Отменить" Style="{StaticResource ButtonTextCancel}" Command="{Binding ExitCommand}"/>
+            <Button Content="Отменить" Style="{StaticResource ButtonTextCancel}" Command="{Binding ExitCommand}" FontSize="13"/>
         </StackPanel>
     </Grid>
 

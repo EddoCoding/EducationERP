@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationERP.Views.Modules.Administration.ControlUsers"
-        mc:Ignorable="d" Title="Добавление пользователя" Height="500" Width="600" MouseDown="MoveWindow"
+        mc:Ignorable="d" Title="Изменение данных пользователя" Height="500" Width="600" MouseDown="MoveWindow"
         Background="WhiteSmoke" FontFamily="{StaticResource OpenSans}" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         RenderOptions.BitmapScalingMode="NearestNeighbor" BorderBrush="LightGray" BorderThickness="1">
     <Window.Resources>
@@ -209,10 +209,10 @@
                     <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
                 </StackPanel.Effect>
 
-                <Button Content="Сохранить" Style="{StaticResource ButtonTextCreate}" FontSize="14" Margin="10,0,0,0" 
+                <Button Content="Сохранить" Style="{StaticResource ButtonTextCreate}" FontSize="13" Margin="10,0,0,0" 
                         Command="{Binding SaveUserCommand}" CommandParameter="{Binding UserVM}"/>
 
-                <Button Content="Отменить" Style="{StaticResource ButtonTextCancel}" FontSize="14" Margin="10" Command="{Binding ExitCommand}"/>
+                <Button Content="Отменить" Style="{StaticResource ButtonTextCancel}" FontSize="13" Margin="10" Command="{Binding ExitCommand}"/>
 
             </StackPanel>
 
