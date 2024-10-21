@@ -15,5 +15,8 @@ namespace EducationERP.Common.Components.Repositories
         Task<bool> CreateDepartment(Department department);
         Task<bool> UpdateDepartment(DepartmentVM departmentVM);
         Task<bool> DeleteDepartment(Guid id);
+
+        Task<Guid> GetAccessFaculty(string passwordFaculty);
+        Faculty GetFacultyById(Guid id);
     }
 }

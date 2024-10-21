@@ -1,4 +1,5 @@
 ﻿using EducationERP.Common.Components;
+using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
 using EducationERP.ViewModels.Education;
 using EducationERP.ViewModels.Modules.Administration;
@@ -38,11 +39,11 @@ namespace EducationERP.ViewModels
                 case "Приёмная кампания":
                     TabControl.CreateTab<AdmissionsCampaignViewModel>(module);
                     break;
+                case "Деканат":
+                    _serviceView.Window<InputPasswordFacultyViewModel>().Modal();
+                    break;
                 case "Администрирование":
                     TabControl.CreateTab<AdministrationViewModel>(module);
-                    break;
-                case "Деканат":
-                    TabControl.CreateTab<DeanRoomViewModel>(module);
                     break;
             }
         }
