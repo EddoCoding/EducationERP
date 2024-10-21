@@ -359,13 +359,13 @@
                                     </StackPanel>
                                 </TreeViewItem.Header>
                                 <TreeViewItem.ItemTemplate>
-                                    <HierarchicalDataTemplate ItemsSource="{Binding .}">
+                                    <HierarchicalDataTemplate ItemsSource="{Binding Departments}">
                                         <StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="{Binding NameFaculty}"/>
                                                 <Button Content="добавить" Style="{StaticResource ButtonAdd}" Margin="5,0,0,0" ToolTip="Добавить кафедру"
-                                                    Command="{Binding DataContext.SettingStructEducationalViewModel.OpenWindowAddFacultyCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
-                                                    CommandParameter="{Binding DataContext.SettingStructEducationalViewModel.StructEducationalInstitutionVM, RelativeSource={RelativeSource AncestorType=TreeView}}"/>
+                                                    Command="{Binding DataContext.SettingStructEducationalViewModel.OpenWindowAddDepartmentCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
+                                                    CommandParameter="{Binding}"/>
                                                 <Button Content="изменить" Style="{StaticResource ButtonChange}" Margin="5,0,0,0" ToolTip="Изменить данные факультета"
                                                     Command="{Binding DataContext.SettingStructEducationalViewModel.OpenWindowChangeFacultyCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
                                                     CommandParameter="{Binding}"/>
@@ -378,6 +378,20 @@
                                                 <TextBlock Text="{Binding PasswordFaculty}" Margin="5,0,0,0" FontWeight="DemiBold"/>
                                             </StackPanel>
                                         </StackPanel>
+                                        <HierarchicalDataTemplate.ItemTemplate>
+                                            <HierarchicalDataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding NameDepartment}" Margin="5,0,0,0"/>
+
+                                                    <Button Content="изменить" Style="{StaticResource ButtonChange}" Margin="5,0,0,0" ToolTip="Изменить данные кафедры"
+                                                        Command="{Binding DataContext.SettingStructEducationalViewModel.OpenWindowChangeDepartmentCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
+                                                        CommandParameter="{Binding}"/>
+                                                    <Button Content="удалить" Style="{StaticResource ButtonDelete}" Margin="5,0,0,0" ToolTip="Удалить кафедру"
+                                                        Command="{Binding DataContext.SettingStructEducationalViewModel.DeleteDepartmentCommand, RelativeSource={RelativeSource AncestorType=TreeView}}" 
+                                                        CommandParameter="{Binding}"/>
+                                                </StackPanel>
+                                            </HierarchicalDataTemplate>
+                                        </HierarchicalDataTemplate.ItemTemplate>
                                     </HierarchicalDataTemplate>
                                 </TreeViewItem.ItemTemplate>
                             </TreeViewItem>
