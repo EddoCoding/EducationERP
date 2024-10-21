@@ -76,6 +76,7 @@ namespace EducationERP
 
             //Модуль "Деканат"
             _serviceView.RegisterTypeView<DeanRoomViewModel, DeanRoomView>();
+            _serviceView.RegisterTypeView<InputPasswordFacultyViewModel, InputPasswordFacultyWindow>();
 
             //Модуль "Администрирование"
             _serviceView.RegisterTypeView<AddUserViewModel, WindowAddUser>();

@@ -1,7 +1,7 @@
-﻿using EducationERP.Common.Components;
-using EducationERP.Models.Modules.EducationalInstitution;
+﻿using EducationERP.Models.Modules.EducationalInstitution;
 using EducationERP.ViewModels.Modules.Administration.SettingStructEducational;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace EducationERP.Common.Components.Repositories
@@ -179,6 +179,46 @@ namespace EducationERP.Common.Components.Repositories
                 }
 
                 return false;
+            }
+        }
+
+        public async Task<Guid> GetAccessFaculty(string passwordFaculty)
+        {
+            using(var db = new DataContext())
+            {
+                try
+                {
+                    var faculty = await db.MainFaculties.FirstOrDefaultAsync(x => x.PasswordFaculty == passwordFaculty);
+                    if (faculty != null) return faculty.Id;
+                    else
+                    {
+                        MessageBox.Show("Отказано в доступе!");
+                        return Guid.Empty;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Отказано в доступе!");
+                    return Guid.Empty;
+                }
+            }
+        }
+        public Faculty GetFacultyById(Guid id)
+        {
+            using(var db = new DataContext())
+            {
+                try
+                {
+                    var faculty = db.MainFaculties
+                        .Include(x => x.Departments)
+                        .FirstOrDefault(x => x.Id == id);
+                    return faculty;
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка получения данных о факультете!");
+                    return null;
+                }
             }
         }
     }

@@ -7,7 +7,32 @@
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800" 
              FontFamily="{StaticResource OpenSans}" RenderOptions.BitmapScalingMode="NearestNeighbor">
 
-    <Grid>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="10,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" FontSize="15" Text="Деканат -" Foreground="Gray" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="1" Text="{Binding FacultyVM.NameFaculty}" Margin="6,0,0,0" FontSize="15" VerticalAlignment="Center"/>
+            <Button Grid.Column="2" Content="X" Style="{StaticResource ButtonExitUserControl}" FontSize="14"
+                Margin="10,0,5,0" RenderOptions.BitmapScalingMode="Fant" Command="{Binding ExitCommand}" ToolTip="Закрыть вкладку"/>
+        </Grid>
+
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding FacultyVM.Departments}" Margin="10,10,0,0">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding NameDepartment}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
     </Grid>
 
