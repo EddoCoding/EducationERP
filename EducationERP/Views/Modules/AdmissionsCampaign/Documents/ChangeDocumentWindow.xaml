@@ -34,7 +34,7 @@
         <ContentPresenter Grid.Row="0" Content="{Binding Document}" Margin="10"/>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,0,10,10">
-            <Button Content="Изменить" Style="{StaticResource ButtonTextCreate}" Margin="10,0" FontSize="13"
+            <Button Content="Изменить данные" Style="{StaticResource ButtonTextCreate}" Margin="10,0" FontSize="13"
                     Command="{Binding SaveDocumentCommand}" CommandParameter="{Binding Document}"/>
             <Button Content="Отменить" Style="{StaticResource ButtonTextCancel}" Command="{Binding ExitCommand}" FontSize="13"/>
         </StackPanel>

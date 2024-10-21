@@ -209,7 +209,7 @@
                     <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
                 </StackPanel.Effect>
 
-                <Button Content="Создать" Style="{StaticResource ButtonTextCreate}" FontSize="13" Margin="10,0,0,0" 
+                <Button Content="Создать пользователя" Style="{StaticResource ButtonTextCreate}" FontSize="13" Margin="10,0,0,0" 
                         Command="{Binding AddUserCommand}" CommandParameter="{Binding UserVM}"/>
 
                 <Button Content="Отменить" Style="{StaticResource ButtonTextCancel}" FontSize="13" Margin="10" Command="{Binding ExitCommand}"/>
