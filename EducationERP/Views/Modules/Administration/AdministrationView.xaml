@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EducationERP.Views.Modules.Administration"
+             xmlns:VM="clr-namespace:EducationERP.ViewModels.Modules.Administration.ControlUsers"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:converters="clr-namespace:EducationERP.Common.Converters"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800" FontFamily="{StaticResource OpenSans}">
@@ -69,75 +70,108 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="ColumnHeaderUsers" TargetType="DataGridColumnHeader">
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="DataGridColumnHeader">
-                        <Border BorderThickness="1" BorderBrush="Gray" Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="ToggleButton" TargetType="ToggleButton">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ToggleButton">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" Text="{Binding FullName}" Padding="10,5"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Identifier}" Padding="10,5"/>
-                            <TextBlock Grid.Column="2" Text="{Binding Password}" Padding="10,5"/>
-                            <TextBlock Grid.Column="3" Text="{Binding ModuleAdministration, Converter={StaticResource BoolToString}}" Padding="10,5"/>
-                            <TextBlock Grid.Column="4" Text="{Binding ModuleDeanRoom, Converter={StaticResource BoolToString}}" Padding="10,5"/>
-                            <TextBlock Grid.Column="5" Text="{Binding ModuleAdmissionsCampaign, Converter={StaticResource BoolToString}}" Padding="10,5"/>
+        <DataTemplate DataType="{x:Type VM:UserVM}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Grid.Row="0" Text="{Binding FullName}" Margin="10,10,10,0" FontSize="13"/>
+                    
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,5,0,0">
 
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="UserRowStyle" TargetType="DataGridRow">
-            <Setter Property="FontSize" Value="13"/>
+                        <TextBlock Text="Идентификатор: " FontWeight="DemiBold" FontSize="13"/>
+                        <TextBlock Text="{Binding Identifier}" Margin="5,0,0,0" FontSize="13"/>
+                        <TextBlock Text="Пароль: " Margin="5,0,0,0" FontWeight="DemiBold" FontSize="13"/>
+                        <TextBlock Text="{Binding Password}" Margin="5,0,10,0" FontSize="13"/>
+                        
+                    </StackPanel>
+
+                    <Grid Grid.Row="2" Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Приёмная кампания" FontSize="13" FontWeight="DemiBold"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Деканат" FontSize="13" FontWeight="DemiBold"/>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Администрирование" FontSize="13" FontWeight="DemiBold"/>
+
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="Доступ" FontSize="13" FontWeight="DemiBold" Margin="10,0,0,0"/>
+
+                        <TextBlock Grid.Column="1" Grid.Row="1" FontSize="13" Margin="10,0,0,0">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ModuleAdmissionsCampaign}" Value="True">
+                                            <Setter Property="Text" Value="Полный"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ModuleAdmissionsCampaign}" Value="False">
+                                            <Setter Property="Text" Value="Ограниченный"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ModuleAdmissionsCampaign}" Value="{x:Null}">
+                                            <Setter Property="Text" Value="Без доступа"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="2" FontSize="13" Margin="10,0,0,0">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ModuleDeanRoom}" Value="True">
+                                            <Setter Property="Text" Value="Полный"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ModuleDeanRoom}" Value="False">
+                                            <Setter Property="Text" Value="Ограниченный"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ModuleDeanRoom}" Value="{x:Null}">
+                                            <Setter Property="Text" Value="Без доступа"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="3" FontSize="13" Margin="10,0,0,0">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ModuleAdministration}" Value="True">
+                                            <Setter Property="Text" Value="Полный"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ModuleAdministration}" Value="False">
+                                            <Setter Property="Text" Value="Ограниченный"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ModuleAdministration}" Value="{x:Null}">
+                                            <Setter Property="Text" Value="Без доступа"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                    </Grid>
+                    
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <Style x:Key="ToolTipUser" TargetType="ToolTip">
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="DataGridRow">
-                        <Border Margin="0,1" BorderThickness="0,0,0,1" BorderBrush="LightGray" Background="{TemplateBinding Background}">
-                            <Grid>
-                                <ToggleButton IsChecked="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected, Mode=TwoWay}"
-                                              HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Style="{StaticResource ToggleButton}">
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="MouseDoubleClick">
-                                            <i:InvokeCommandAction Command="{Binding DataContext.UserViewModel.ChangeUserCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                                                   CommandParameter="{Binding DataContext.UserViewModel.SelectedUser, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </ToggleButton>
-                            </Grid>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Effect">
-                                    <Setter.Value>
-                                        <DropShadowEffect Color="LightGray" ShadowDepth="2"/>
-                                    </Setter.Value>
-                                </Setter>
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="WhiteSmoke"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
+                    <ControlTemplate TargetType="ToolTip">
+                        <ContentPresenter Content="{Binding}"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -442,20 +476,38 @@
                             </TextBox>
                         </Grid>
 
-                        <DataGrid Grid.Row="1" Margin="10,0" Height="350" Background="White" ItemsSource="{Binding UserViewModel.Users}" AutoGenerateColumns="False"
-                                  SelectedItem="{Binding UserViewModel.SelectedUser}" ColumnHeaderStyle="{StaticResource ColumnHeaderUsers}" CanUserAddRows="False"
-                                  CanUserDeleteRows="False" CanUserResizeRows="False" RowHeaderWidth="0" BorderBrush="Gray" BorderThickness="1,0,1,1" SelectionMode="Single" 
-                                  CanUserReorderColumns="False" CanUserResizeColumns="False" RowStyle="{StaticResource UserRowStyle}" TextOptions.TextFormattingMode="Display"
-                                  HorizontalScrollBarVisibility="Disabled" EnableRowVirtualization="True" VirtualizingPanel.VirtualizationMode="Recycling">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="ФИО" Width="*" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Идентификатор" Width="*" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Пароль" Width="*" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Администрирование" Width="*" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Деканат" Width="*" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Приёмная кампания" Width="*" IsReadOnly="True"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                        <ListView Grid.Row="1" ItemsSource="{Binding UserViewModel.Users}" Margin="10,0" Height="300" Background="White" SelectedItem="{Binding UserViewModel.SelectedUser}"
+                                  TextOptions.TextFormattingMode="Display">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListViewItem">
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <StackPanel>
+                                                        <ContentPresenter Margin="2"/>
+                                                        <Line Stroke="LightGray" X1="1" Stretch="Fill"/>
+                                                    </StackPanel>
+                                                    <Border.ToolTip>
+                                                        <ToolTip Style="{StaticResource ToolTipUser}"/>
+                                                    </Border.ToolTip>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="WhiteSmoke"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Grid.Column="0" Text="{Binding FullName}" Margin="3" FontSize="13" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
 
                         <StackPanel Grid.Row="2" Background="White" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
                             <StackPanel.Effect>

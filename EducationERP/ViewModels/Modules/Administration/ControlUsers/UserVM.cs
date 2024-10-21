@@ -22,8 +22,8 @@ namespace EducationERP.ViewModels.Modules.Administration.ControlUsers
         }
 
         public bool? ModuleAdmissionsCampaign { get; set; } = null;
-        public bool? ModuleAdministration { get; set; } = null;
         public bool? ModuleDeanRoom { get; set; } = null;
+        public bool? ModuleAdministration { get; set; } = null;
 
         public bool Validation()
         {
