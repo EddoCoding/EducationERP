@@ -35,14 +35,13 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
             ExitCommand = RaketaCommand.Launch(CloseTab);
         }
 
-
-
         void OpenWindowAddEducationGroup(ObservableCollection<EducationGroupVM> educationGroups) =>
             _serviceView.Window<AddEducationGroupViewModel>(null, educationGroups).Modal();
 
         void GetFaculty(Guid id)
         {
             var faculty = _facultyRepository.GetFacultyById(id);
+            if (faculty == null) return;
 
             FacultyVM = new FacultyVM
             {

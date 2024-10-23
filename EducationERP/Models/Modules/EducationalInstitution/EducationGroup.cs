@@ -1,4 +1,6 @@
-﻿namespace EducationERP.Models.Modules.EducationalInstitution
+﻿using static EducationERP.ViewModels.Modules.DeanRoom.AddEducationGroupViewModel;
+
+namespace EducationERP.Models.Modules.EducationalInstitution
 {
     public class EducationGroup
     {
@@ -12,13 +14,13 @@
         public string NameHeadmanGroup { get; set; } = string.Empty;
         public int Course { get; set; }
         public int MaxNumberStudents { get; set; }
-        public DateOnly YearOfRecruitment { get; set; }
         public string CodeDirection { get; set; } = string.Empty;
         public string NameDirection { get; set; } = string.Empty;
         public string CodeProfile { get; set; } = string.Empty;
         public string NameProfile { get; set; } = string.Empty;
         public ICollection<Student> Students { get; set; }
-
+        public string Formed { get; set; } = string.Empty;
+        public DateOnly DateOfFormed { get; set; }
 
         // Расписание (Объект один к одному)
         // Журнал посещений (Объект один к одному)
@@ -28,12 +30,5 @@
 
         public Guid FacultyId { get; set; }
         public Faculty Faculty { get; set; }
-
-        public enum GroupTypes
-        {
-            Общая,
-            Бюджетная,
-            Платная
-        }
     }
 }
