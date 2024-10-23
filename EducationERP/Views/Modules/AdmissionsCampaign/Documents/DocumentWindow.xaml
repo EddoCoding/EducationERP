@@ -50,7 +50,7 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-            </Grid>
+        </Grid>
 
         <ContentPresenter Grid.Row="1" Content="{Binding SelectedDocument}" Margin="10"/>
 
