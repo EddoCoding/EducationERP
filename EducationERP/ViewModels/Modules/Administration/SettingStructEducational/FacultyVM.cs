@@ -21,6 +21,7 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingStructEducationa
             set => SetValue(ref passwordFaculty, value);
         }
         public ObservableCollection<DepartmentVM> Departments { get; set; } = new();
+        public ObservableCollection<EducationGroupVM> EducationGroups { get; set; } = new();
 
         public bool Validation()
         {

@@ -17,6 +17,5 @@ namespace EducationERP.Common.Components.Repositories
         Task<bool> DeleteDepartment(Guid id);
 
         Task<Guid> GetAccessFaculty(string passwordFaculty);
-        Faculty GetFacultyById(Guid id);
     }
 }
