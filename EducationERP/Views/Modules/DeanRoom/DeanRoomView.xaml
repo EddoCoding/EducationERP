@@ -62,31 +62,33 @@
 
                 </Grid>
 
-                <ListView Grid.Row="1" Margin="0,10,0,0"/>
+                <ListView Grid.Row="1" Margin="0,10,0,0" ItemsSource="{Binding FacultyVM.EducationGroups}" SelectedItem="{Binding SelectedEducationGroup}"
+                          ScrollViewer.HorizontalScrollBarVisibility="Hidden"/>
                 
                 <!-- ПРОФИЛЬ/КАРТОЧКА ГРУППЫ -->
                 <Grid Grid.Row="2" Margin="0,10,0,0">
                     
                 </Grid>
 
-                    <StackPanel Grid.Row="3" Orientation="Horizontal" Background="White" HorizontalAlignment="Right" Margin="0,0,0,10">
+                <StackPanel Grid.Row="3" Orientation="Horizontal" Background="White" HorizontalAlignment="Right" Margin="0,0,0,10">
                         <StackPanel.Effect>
                             <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
                         </StackPanel.Effect>
 
                         <Button Content="/Common/Resources/Images/plus.png" Style="{StaticResource ButtonImage}" Height="20" Width="20" 
                             Margin="7" ToolTip="Формирование группы" Command="{Binding OpenWindowAddEducationGroupCommand}" 
-                                CommandParameter="{Binding FacultyVM.EducationGroups}" RenderOptions.BitmapScalingMode="Fant"/>
+                            CommandParameter="{Binding FacultyVM}" RenderOptions.BitmapScalingMode="Fant"/>
 
                         <Button Content="/Common/Resources/Images/changeEducationGroup.png" Style="{StaticResource ButtonImage}" Height="23" Width="23" 
                             Margin="7" ToolTip="Изменить данные группы" Command="{Binding .}" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
 
                         <Button Content="/Common/Resources/Images/minus.png" Style="{StaticResource ButtonImage}" Height="21" Width="21" 
-                            Margin="7" ToolTip="Ликвидация группы" Command="{Binding .}" RenderOptions.BitmapScalingMode="Fant"/>
+                                Margin="7" ToolTip="Ликвидация группы" RenderOptions.BitmapScalingMode="Fant"
+                                Command="{Binding DeleteEducationGroupCommand}" CommandParameter="{Binding SelectedEducationGroup}"/>
 
                     </StackPanel>
 
-                </Grid>
+            </Grid>
 
             <Grid Grid.Column="1" Margin="20,10,0,0">
                 <Grid.RowDefinitions>
@@ -121,8 +123,6 @@
 
             </Grid>
             
-            
-
         </Grid>
 
     </Grid>

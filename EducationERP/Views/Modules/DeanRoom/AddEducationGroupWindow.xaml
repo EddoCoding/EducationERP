@@ -263,7 +263,7 @@
         
         <StackPanel Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,0,10,10">
             <Button Content="Сформировать группу" Style="{StaticResource ButtonTextCreate}" Margin="10,0" FontSize="13"
-                    Command="{Binding .}" CommandParameter="{Binding .}"/>
+                    Command="{Binding FormEducationGroupCommand}" CommandParameter="{Binding EducationGroupVM}"/>
             <Button Content="Отменить" Style="{StaticResource ButtonTextCancel}" Command="{Binding ExitCommand}" FontSize="13"/>
         </StackPanel>
         

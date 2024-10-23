@@ -2,21 +2,27 @@
 using EducationERP.Common.Components.Services;
 using EducationERP.ViewModels.Modules.Administration.SettingStructEducational;
 using Raketa;
-using System.Collections.ObjectModel;
 
 namespace EducationERP.ViewModels.Modules.DeanRoom
 {
     public class DeanRoomViewModel : RaketaViewModel
     {
-        FacultyVM facultyVM;
+        FacultyVM _facultyVM;
+        EducationGroupVM _selectedEducationGroup;
+
         public FacultyVM FacultyVM
         {
-            get => facultyVM;
-            set => SetValue(ref facultyVM, value);
+            get => _facultyVM;
+            set => SetValue(ref _facultyVM, value);
+        }
+        public EducationGroupVM SelectedEducationGroup
+        {
+            get => _selectedEducationGroup;
+            set => SetValue(ref _selectedEducationGroup, value);
         }
 
-
-        public RaketaTCommand<ObservableCollection<EducationGroupVM>> OpenWindowAddEducationGroupCommand { get; set; }
+        public RaketaTCommand<FacultyVM> OpenWindowAddEducationGroupCommand { get; }
+        public RaketaTCommand<EducationGroupVM> DeleteEducationGroupCommand { get; }
         public RaketaCommand ExitCommand { get; set; }
 
         IServiceView _serviceView;
@@ -31,12 +37,18 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
 
             GetFaculty(id);
 
-            OpenWindowAddEducationGroupCommand = RaketaTCommand<ObservableCollection<EducationGroupVM>>.Launch(OpenWindowAddEducationGroup);
+            OpenWindowAddEducationGroupCommand = RaketaTCommand<FacultyVM>.Launch(OpenWindowAddEducationGroup);
+            DeleteEducationGroupCommand = RaketaTCommand<EducationGroupVM>.Launch(DeleteEducationGroup);
             ExitCommand = RaketaCommand.Launch(CloseTab);
         }
 
-        void OpenWindowAddEducationGroup(ObservableCollection<EducationGroupVM> educationGroups) =>
-            _serviceView.Window<AddEducationGroupViewModel>(null, educationGroups).Modal();
+        void OpenWindowAddEducationGroup(FacultyVM facultyVM) =>
+            _serviceView.Window<AddEducationGroupViewModel>(null, facultyVM).Modal();
+        async void DeleteEducationGroup(EducationGroupVM educationGroupVM)
+        {
+            bool isDeleted = await _facultyRepository.DeleteEducationGroup(educationGroupVM.Id);
+            if (isDeleted) FacultyVM.EducationGroups.Remove(educationGroupVM);
+        }
 
         void GetFaculty(Guid id)
         {
