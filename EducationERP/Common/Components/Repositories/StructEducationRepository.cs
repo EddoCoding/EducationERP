@@ -203,23 +203,5 @@ namespace EducationERP.Common.Components.Repositories
                 }
             }
         }
-        public Faculty GetFacultyById(Guid id)
-        {
-            using(var db = new DataContext())
-            {
-                try
-                {
-                    var faculty = db.MainFaculties
-                        .Include(x => x.Departments)
-                        .FirstOrDefault(x => x.Id == id);
-                    return faculty;
-                }
-                catch
-                {
-                    MessageBox.Show("Ошибка получения данных о факультете!");
-                    return null;
-                }
-            }
-        }
     }
 }

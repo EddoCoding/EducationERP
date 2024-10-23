@@ -26,13 +26,104 @@
                 Margin="10,0,5,0" RenderOptions.BitmapScalingMode="Fant" Command="{Binding ExitCommand}" ToolTip="Закрыть вкладку"/>
         </Grid>
 
-        <ItemsControl Grid.Row="1" ItemsSource="{Binding FacultyVM.Departments}" Margin="10,10,0,0">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding NameDepartment}"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="400"/>
+            </Grid.ColumnDefinitions>
+
+            
+            <Grid Grid.Column="0" Margin="10,10,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBlock Grid.Column="0" Text="Группы" VerticalAlignment="Center" FontSize="14"/>
+                    <TextBox Grid.Column="1" Text="{Binding ., UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,0" Foreground="Black" FontSize="14" VerticalContentAlignment="Center">
+                        <TextBox.Template>
+                            <ControlTemplate TargetType="TextBox">
+                                <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" SnapsToDevicePixels="True">
+                                    <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Height="20"/>
+                                </Border>
+                            </ControlTemplate>
+                        </TextBox.Template>
+                    </TextBox>
+                    <Button Grid.Column="2" Content="Поиск" Style="{StaticResource defaultAdd}" Margin="10,0,0,0"/>
+
+                </Grid>
+
+                <ListView Grid.Row="1" Margin="0,10,0,0"/>
+                
+                <!-- ПРОФИЛЬ/КАРТОЧКА ГРУППЫ -->
+                <Grid Grid.Row="2" Margin="0,10,0,0">
+                    
+                </Grid>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Background="White" HorizontalAlignment="Right" Margin="0,0,0,10">
+                        <StackPanel.Effect>
+                            <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                        </StackPanel.Effect>
+
+                        <Button Content="/Common/Resources/Images/plus.png" Style="{StaticResource ButtonImage}" Height="20" Width="20" 
+                            Margin="7" ToolTip="Формирование группы" Command="{Binding OpenWindowAddEducationGroupCommand}" 
+                                CommandParameter="{Binding FacultyVM.EducationGroups}" RenderOptions.BitmapScalingMode="Fant"/>
+
+                        <Button Content="/Common/Resources/Images/changeEducationGroup.png" Style="{StaticResource ButtonImage}" Height="23" Width="23" 
+                            Margin="7" ToolTip="Изменить данные группы" Command="{Binding .}" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+
+                        <Button Content="/Common/Resources/Images/minus.png" Style="{StaticResource ButtonImage}" Height="21" Width="21" 
+                            Margin="7" ToolTip="Ликвидация группы" Command="{Binding .}" RenderOptions.BitmapScalingMode="Fant"/>
+
+                    </StackPanel>
+
+                </Grid>
+
+            <Grid Grid.Column="1" Margin="20,10,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Студенты" VerticalAlignment="Center" FontSize="14"/>
+                    <TextBox Grid.Column="1" Text="{Binding ., UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,0" Foreground="Black" FontSize="14" VerticalContentAlignment="Center">
+                        <TextBox.Template>
+                            <ControlTemplate TargetType="TextBox">
+                                <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" SnapsToDevicePixels="True">
+                                    <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Height="20"/>
+                                </Border>
+                            </ControlTemplate>
+                        </TextBox.Template>
+                    </TextBox>
+                    <Button Grid.Column="2" Content="Поиск" Style="{StaticResource defaultAdd}" Margin="10,0,0,0"/>
+
+                </Grid>
+
+                <ListView Grid.Row="1" Margin="0,10,0,0" Height="400"/>
+
+            </Grid>
+            
+            
+
+        </Grid>
 
     </Grid>
 

@@ -52,6 +52,10 @@ namespace EducationERP.Common.Components
         public DbSet<SettingLevel> Levels { get; set; }
         public DbSet<SettingDirection> Directions { get; set; }
         #endregion
+        #region ДЕКАНАТ
+        public DbSet<EducationGroup> EducationGroups { get; set; }
+        public DbSet<Student> Students { get; set; }
+        #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder.UseNpgsql(ConfigurationManager.ConnectionStrings["StrConnection"].ToString());
@@ -133,6 +137,7 @@ namespace EducationERP.Common.Components
             modelBuilder.ApplyConfiguration(new ApplicantConfiguration());
             modelBuilder.ApplyConfiguration(new StructEducationConfiguration());
             modelBuilder.ApplyConfiguration(new MainFacultyConfiguration());
+            modelBuilder.ApplyConfiguration(new EducationGroupConfiguration());
 
             modelBuilder.Entity<Document>().UseTpcMappingStrategy();
             modelBuilder.Entity<EducationBase>().UseTpcMappingStrategy();
