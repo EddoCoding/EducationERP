@@ -31,7 +31,8 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
 
         async void FormEducationGroup(EducationGroupVM educationGroupVM)
         {
-            //Валидацию сделать
+            bool isValidated = educationGroupVM.Validation();
+            if (!isValidated) return;
 
             var educationGroup = new EducationGroup
             {

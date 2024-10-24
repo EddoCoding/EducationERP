@@ -254,7 +254,7 @@
                 <TextBlock Text="{Binding EducationGroupVM.Formed}" FontSize="14" Margin="5,0,0,0" TextWrapping="Wrap" Width="300"/>
             </StackPanel>
 
-            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,5">
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,0,10,5">
                 <TextBlock Text="Дата формирования группы -" FontSize="14" FontWeight="DemiBold"/>
                 <TextBlock Text="{Binding EducationGroupVM.DateOfFormed, StringFormat='dd.MM.yyyy'}" FontSize="14" Margin="5,0,0,0"/>
             </StackPanel>
