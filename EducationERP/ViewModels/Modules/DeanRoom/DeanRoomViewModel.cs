@@ -1,5 +1,6 @@
 ﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
+using EducationERP.Common.ToolsDev;
 using EducationERP.ViewModels.Modules.Administration.SettingStructEducational;
 using Raketa;
 
@@ -24,6 +25,11 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
         public RaketaTCommand<FacultyVM> OpenWindowAddEducationGroupCommand { get; }
         public RaketaTCommand<EducationGroupVM> OpenWindowChangeEducationGroupCommand { get; }
         public RaketaTCommand<EducationGroupVM> DeleteEducationGroupCommand { get; }
+
+        public RaketaCommand ShowScheduleCommand { get; }
+        public RaketaCommand ShowVisitorLogCommand { get; }
+        public RaketaCommand ShowSyllabusCommand { get; }
+
         public RaketaCommand ExitCommand { get; }
 
         IServiceView _serviceView;
@@ -41,6 +47,11 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
             OpenWindowAddEducationGroupCommand = RaketaTCommand<FacultyVM>.Launch(OpenWindowAddEducationGroup);
             OpenWindowChangeEducationGroupCommand = RaketaTCommand<EducationGroupVM>.Launch(OpenWindowChangeEducationGroup);
             DeleteEducationGroupCommand = RaketaTCommand<EducationGroupVM>.Launch(DeleteEducationGroup);
+
+            ShowScheduleCommand = RaketaCommand.Launch(ShowSchedule);
+            ShowVisitorLogCommand = RaketaCommand.Launch(ShowVisitorLog);
+            ShowSyllabusCommand = RaketaCommand.Launch(ShowSyllabus);
+
             ExitCommand = RaketaCommand.Launch(CloseTab);
         }
 
@@ -51,7 +62,6 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
             if (educationGroupVM == null) return;
             _serviceView.Window<ChangeEducationGroupViewModel>(null, educationGroupVM).Modal();
         }
-
         async void DeleteEducationGroup(EducationGroupVM educationGroupVM)
         {
             if (educationGroupVM == null) return;
@@ -59,6 +69,10 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
             bool isDeleted = await _facultyRepository.DeleteEducationGroup(educationGroupVM.Id);
             if (isDeleted) FacultyVM.EducationGroups.Remove(educationGroupVM);
         }
+
+        void ShowSchedule() => Dev.NotReady("Расписание");
+        void ShowVisitorLog() => Dev.NotReady("Журнал посещаемости");
+        void ShowSyllabus() => Dev.NotReady("Учебный план");
 
         void GetFaculty(Guid id)
         {
