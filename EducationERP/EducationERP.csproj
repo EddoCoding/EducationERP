@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="Common\Resources\Images\addPersonalFile.png" />
+    <None Remove="Common\Resources\Images\addStudent.png" />
     <None Remove="Common\Resources\Images\addUser.png" />
     <None Remove="Common\Resources\Images\admissionCampaign.png" />
     <None Remove="Common\Resources\Images\calendar.png" />
@@ -17,6 +18,7 @@
     <None Remove="Common\Resources\Images\changeEducationGroup.png" />
     <None Remove="Common\Resources\Images\changePersonalFile.png" />
     <None Remove="Common\Resources\Images\changeSize.png" />
+    <None Remove="Common\Resources\Images\changeStudent.png" />
     <None Remove="Common\Resources\Images\changeUser.png" />
     <None Remove="Common\Resources\Images\createBaseData.png" />
     <None Remove="Common\Resources\Images\deanRoom.png" />
@@ -41,6 +43,9 @@
     <Resource Include="Common\Resources\Images\addPersonalFile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Common\Resources\Images\addStudent.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Common\Resources\Images\addUser.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -60,6 +65,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Common\Resources\Images\changeSize.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Resources\Images\changeStudent.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Common\Resources\Images\changeUser.png">

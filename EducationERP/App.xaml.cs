@@ -91,6 +91,7 @@ namespace EducationERP
             _serviceView.RegisterTypeView<ChangeMainDepartmentViewModel, ChangeMainDepartmentWindow>();
             _serviceView.RegisterTypeView<AddEducationGroupViewModel, AddEducationGroupWindow>();
             _serviceView.RegisterTypeView<ChangeEducationGroupViewModel, ChangeEducationGroupWindow>();
+            _serviceView.RegisterTypeView<AddStudentViewModel, AddStudentView>();
         }
 
         void RegisterDependency()
