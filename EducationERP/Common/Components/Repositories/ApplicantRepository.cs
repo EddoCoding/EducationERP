@@ -76,8 +76,7 @@ namespace EducationERP.Common.Components.Repositories
                 try
                 {
                     var entity = await db.Applicants
-                        .Where(x => x.Id == applicant.Id)
-                        .FirstOrDefaultAsync();
+                        .FirstOrDefaultAsync(x => x.Id == applicant.Id);
 
                     if (entity != null) 
                     {

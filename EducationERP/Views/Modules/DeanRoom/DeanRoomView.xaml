@@ -103,7 +103,8 @@
                             CommandParameter="{Binding FacultyVM}" RenderOptions.BitmapScalingMode="Fant"/>
 
                         <Button Content="/Common/Resources/Images/changeEducationGroup.png" Style="{StaticResource ButtonImage}" Height="23" Width="23" 
-                            Margin="7" ToolTip="Изменить данные группы" Command="{Binding .}" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+                            Margin="7" ToolTip="Изменить данные группы" RenderOptions.BitmapScalingMode="NearestNeighbor"
+                            Command="{Binding OpenWindowChangeEducationGroupCommand}" CommandParameter="{Binding SelectedEducationGroup}"/>
 
                         <Button Content="/Common/Resources/Images/minus.png" Style="{StaticResource ButtonImage}" Height="21" Width="21" 
                                 Margin="7" ToolTip="Ликвидация группы" RenderOptions.BitmapScalingMode="Fant"

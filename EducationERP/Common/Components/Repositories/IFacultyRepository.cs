@@ -1,4 +1,5 @@
 ﻿using EducationERP.Models.Modules.EducationalInstitution;
+using EducationERP.ViewModels.Modules.Administration.SettingStructEducational;
 
 namespace EducationERP.Common.Components.Repositories
 {
@@ -6,6 +7,7 @@ namespace EducationERP.Common.Components.Repositories
     {
         Faculty GetFacultyById(Guid id);
         Task<bool> CreateEducationGroup(EducationGroup group);
+        Task<bool> UpdateEducationGroup(EducationGroupVM groupVM);
         Task<bool> DeleteEducationGroup(Guid id);
     }
 }
