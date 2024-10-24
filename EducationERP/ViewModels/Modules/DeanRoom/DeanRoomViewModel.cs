@@ -22,6 +22,7 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
             set => SetValue(ref _selectedEducationGroup, value);
         }
 
+        #region Блок команд групп
         public RaketaTCommand<FacultyVM> OpenWindowAddEducationGroupCommand { get; }
         public RaketaTCommand<EducationGroupVM> OpenWindowChangeEducationGroupCommand { get; }
         public RaketaTCommand<EducationGroupVM> DeleteEducationGroupCommand { get; }
@@ -29,6 +30,11 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
         public RaketaCommand ShowScheduleCommand { get; }
         public RaketaCommand ShowVisitorLogCommand { get; }
         public RaketaCommand ShowSyllabusCommand { get; }
+        #endregion
+        #region Блок команд студентов
+        public RaketaTCommand<EducationGroupVM> OpenWindowAddStudentCommand { get; }
+
+        #endregion
 
         public RaketaCommand ExitCommand { get; }
 
@@ -47,33 +53,14 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
             OpenWindowAddEducationGroupCommand = RaketaTCommand<FacultyVM>.Launch(OpenWindowAddEducationGroup);
             OpenWindowChangeEducationGroupCommand = RaketaTCommand<EducationGroupVM>.Launch(OpenWindowChangeEducationGroup);
             DeleteEducationGroupCommand = RaketaTCommand<EducationGroupVM>.Launch(DeleteEducationGroup);
-
             ShowScheduleCommand = RaketaCommand.Launch(ShowSchedule);
             ShowVisitorLogCommand = RaketaCommand.Launch(ShowVisitorLog);
             ShowSyllabusCommand = RaketaCommand.Launch(ShowSyllabus);
 
+            OpenWindowAddStudentCommand = RaketaTCommand<EducationGroupVM>.Launch(OpenWindowAddStudent);
+
             ExitCommand = RaketaCommand.Launch(CloseTab);
         }
-
-        void OpenWindowAddEducationGroup(FacultyVM facultyVM) =>
-            _serviceView.Window<AddEducationGroupViewModel>(null, facultyVM).Modal();
-        void OpenWindowChangeEducationGroup(EducationGroupVM educationGroupVM)
-        {
-            if (educationGroupVM == null) return;
-            _serviceView.Window<ChangeEducationGroupViewModel>(null, educationGroupVM).Modal();
-        }
-        async void DeleteEducationGroup(EducationGroupVM educationGroupVM)
-        {
-            if (educationGroupVM == null) return;
-
-            bool isDeleted = await _facultyRepository.DeleteEducationGroup(educationGroupVM.Id);
-            if (isDeleted) FacultyVM.EducationGroups.Remove(educationGroupVM);
-        }
-
-        void ShowSchedule() => Dev.NotReady("Расписание");
-        void ShowVisitorLog() => Dev.NotReady("Журнал посещаемости");
-        void ShowSyllabus() => Dev.NotReady("Учебный план");
-
         void GetFaculty(Guid id)
         {
             var faculty = _facultyRepository.GetFacultyById(id);
@@ -111,6 +98,36 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
                 FacultyVM.EducationGroups.Add(educationGroupVM);
             }
         }
+
+        #region Блок методов для групп
+        void OpenWindowAddEducationGroup(FacultyVM facultyVM) =>
+            _serviceView.Window<AddEducationGroupViewModel>(null, facultyVM).Modal();
+        void OpenWindowChangeEducationGroup(EducationGroupVM educationGroupVM)
+        {
+            if (educationGroupVM == null) return;
+            _serviceView.Window<ChangeEducationGroupViewModel>(null, educationGroupVM).Modal();
+        }
+        async void DeleteEducationGroup(EducationGroupVM educationGroupVM)
+        {
+            if (educationGroupVM == null) return;
+
+            bool isDeleted = await _facultyRepository.DeleteEducationGroup(educationGroupVM.Id);
+            if (isDeleted) FacultyVM.EducationGroups.Remove(educationGroupVM);
+        }
+        void ShowSchedule() => Dev.NotReady("Расписание");
+        void ShowVisitorLog() => Dev.NotReady("Журнал посещаемости");
+        void ShowSyllabus() => Dev.NotReady("Учебный план");
+
+        #endregion
+        #region Блок методов для студентов
+        void OpenWindowAddStudent(EducationGroupVM educationGroupVM)
+        {
+            if (educationGroupVM == null) return;
+
+            _tabControl.CreateTab<AddStudentViewModel>("Добавление студента", null, educationGroupVM);
+        }
+        #endregion
+
         void CloseTab() => _tabControl.RemoveTab();
     }
 }
