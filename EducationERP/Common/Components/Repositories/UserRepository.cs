@@ -49,7 +49,7 @@ namespace EducationERP.Common.Components.Repositories
             {
                 try
                 {
-                    db.Users.Add(user);
+                    await db.Users.AddAsync(user);
                     await db.SaveChangesAsync();
                     return true;
                 }

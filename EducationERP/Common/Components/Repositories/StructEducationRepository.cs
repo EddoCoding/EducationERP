@@ -36,7 +36,7 @@ namespace EducationERP.Common.Components.Repositories
                     var entity = await db.StructEducationalInstitution.FirstOrDefaultAsync();
                     if(entity == null)
                     {
-                        db.StructEducationalInstitution.Add(structEducation);
+                        await db.StructEducationalInstitution.AddAsync(structEducation);
                         await db.SaveChangesAsync();
                         MessageBox.Show("Данные об учебном заведении добавлены в базу данных!");
                         return;
@@ -60,7 +60,7 @@ namespace EducationERP.Common.Components.Repositories
             {
                 try
                 {
-                    db.MainFaculties.Add(faculty);
+                    await db.MainFaculties.AddAsync(faculty);
                     await db.SaveChangesAsync();
                     return true;
                 }
@@ -125,7 +125,7 @@ namespace EducationERP.Common.Components.Repositories
             {
                 try
                 {
-                    db.MainDepartments.Add(department);
+                    await db.MainDepartments.AddAsync(department);
                     await db.SaveChangesAsync();
                     return true;
                 }

@@ -2,22 +2,29 @@
 using EducationERP.Common.Components.Services;
 using EducationERP.ViewModels.Modules.Administration.SettingStructEducational;
 using Raketa;
-using System.Collections.ObjectModel;
 
 namespace EducationERP.ViewModels.Modules.DeanRoom
 {
     public class DeanRoomViewModel : RaketaViewModel
     {
-        FacultyVM facultyVM;
+        FacultyVM _facultyVM;
+        EducationGroupVM _selectedEducationGroup;
+
         public FacultyVM FacultyVM
         {
-            get => facultyVM;
-            set => SetValue(ref facultyVM, value);
+            get => _facultyVM;
+            set => SetValue(ref _facultyVM, value);
+        }
+        public EducationGroupVM SelectedEducationGroup
+        {
+            get => _selectedEducationGroup;
+            set => SetValue(ref _selectedEducationGroup, value);
         }
 
-
-        public RaketaTCommand<ObservableCollection<EducationGroupVM>> OpenWindowAddEducationGroupCommand { get; set; }
-        public RaketaCommand ExitCommand { get; set; }
+        public RaketaTCommand<FacultyVM> OpenWindowAddEducationGroupCommand { get; }
+        public RaketaTCommand<EducationGroupVM> OpenWindowChangeEducationGroupCommand { get; }
+        public RaketaTCommand<EducationGroupVM> DeleteEducationGroupCommand { get; }
+        public RaketaCommand ExitCommand { get; }
 
         IServiceView _serviceView;
         ITabControl _tabControl;
@@ -31,12 +38,27 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
 
             GetFaculty(id);
 
-            OpenWindowAddEducationGroupCommand = RaketaTCommand<ObservableCollection<EducationGroupVM>>.Launch(OpenWindowAddEducationGroup);
+            OpenWindowAddEducationGroupCommand = RaketaTCommand<FacultyVM>.Launch(OpenWindowAddEducationGroup);
+            OpenWindowChangeEducationGroupCommand = RaketaTCommand<EducationGroupVM>.Launch(OpenWindowChangeEducationGroup);
+            DeleteEducationGroupCommand = RaketaTCommand<EducationGroupVM>.Launch(DeleteEducationGroup);
             ExitCommand = RaketaCommand.Launch(CloseTab);
         }
 
-        void OpenWindowAddEducationGroup(ObservableCollection<EducationGroupVM> educationGroups) =>
-            _serviceView.Window<AddEducationGroupViewModel>(null, educationGroups).Modal();
+        void OpenWindowAddEducationGroup(FacultyVM facultyVM) =>
+            _serviceView.Window<AddEducationGroupViewModel>(null, facultyVM).Modal();
+        void OpenWindowChangeEducationGroup(EducationGroupVM educationGroupVM)
+        {
+            if (educationGroupVM == null) return;
+            _serviceView.Window<ChangeEducationGroupViewModel>(null, educationGroupVM).Modal();
+        }
+
+        async void DeleteEducationGroup(EducationGroupVM educationGroupVM)
+        {
+            if (educationGroupVM == null) return;
+
+            bool isDeleted = await _facultyRepository.DeleteEducationGroup(educationGroupVM.Id);
+            if (isDeleted) FacultyVM.EducationGroups.Remove(educationGroupVM);
+        }
 
         void GetFaculty(Guid id)
         {
@@ -55,7 +77,22 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
                 var educationGroupVM = new EducationGroupVM
                 {
                     Id = educationGroup.Id,
-                    NameEducationGroup = educationGroup.NameEducationGroup
+                    CodeEducationGroup = educationGroup.CodeEducationGroup,
+                    NameEducationGroup = educationGroup.NameEducationGroup,
+                    LevelGroup = educationGroup.LevelGroup,
+                    FormGroup = educationGroup.FormGroup,
+                    TypeGroup = educationGroup.TypeGroup,
+                    Course = educationGroup.Course,
+                    MaxNumberStudents = educationGroup.MaxNumberStudents,
+                    CodeDirection = educationGroup.CodeDirection,
+                    NameDirection = educationGroup.NameDirection,
+                    CodeProfile = educationGroup.CodeProfile,
+                    NameProfile = educationGroup.NameProfile,
+                    NameCuratorGroup = educationGroup.NameCuratorGroup,
+                    NameHeadmanGroup = educationGroup.NameHeadmanGroup,
+                    Formed = educationGroup.Formed,
+                    DateOfFormed = educationGroup.DateOfFormed,
+                    Students = new()
                 };
                 FacultyVM.EducationGroups.Add(educationGroupVM);
             }
