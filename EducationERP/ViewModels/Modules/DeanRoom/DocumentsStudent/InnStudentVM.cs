@@ -1,5 +1,4 @@
-﻿using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
-using System.Windows;
+﻿using System.Windows;
 
 namespace EducationERP.ViewModels.Modules.DeanRoom.DocumentsStudent
 {
@@ -8,6 +7,7 @@ namespace EducationERP.ViewModels.Modules.DeanRoom.DocumentsStudent
         public string NumberINN { get; set; } = string.Empty;
         public DateOnly DateAssigned { get; set; }
         public string SeriesNumber { get; set; } = string.Empty;
+
         public InnStudentVM() { TypeDocument = "Инн"; }
 
         public override bool Validation()

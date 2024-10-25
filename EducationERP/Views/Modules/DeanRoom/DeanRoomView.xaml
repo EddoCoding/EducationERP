@@ -293,8 +293,8 @@
                         CommandParameter="{Binding .}" RenderOptions.BitmapScalingMode="Fant"/>
 
                     <Button Content="/Common/Resources/Images/update.png" Style="{StaticResource ButtonImage}" Height="22" Width="22" 
-                        Margin="6" ToolTip="Обновить" Command="{Binding .}" 
-                        CommandParameter="{Binding .}" RenderOptions.BitmapScalingMode="Fant"/>
+                        Margin="6" ToolTip="Обновить" RenderOptions.BitmapScalingMode="Fant"
+                        Command="{Binding UpdateStudentsCommand}" CommandParameter="{Binding SelectedEducationGroup}"/>
 
                 </StackPanel>
 
