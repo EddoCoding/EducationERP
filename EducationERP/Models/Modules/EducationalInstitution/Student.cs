@@ -1,4 +1,5 @@
 ﻿using EducationERP.Models.Modules.DeanRoom.DocumentsStudent;
+using static EducationERP.ViewModels.Modules.DeanRoom.AddEducationGroupViewModel;
 
 namespace EducationERP.Models.Modules.EducationalInstitution
 {
@@ -28,6 +29,17 @@ namespace EducationERP.Models.Modules.EducationalInstitution
         #region Доп. свойства, коллекции
         public string Accepted { get; set; } = string.Empty;
         public ICollection<DocumentStudentBase> Documents { get; set; }
+        #endregion
+        #region Где учится
+        public string NameEducationGroup { get; set; } = string.Empty;
+        public string LevelGroup { get; set; } = string.Empty;
+        public string FormGroup { get; set; } = string.Empty;
+        public GroupTypes TypeGroup { get; set; }
+        public int Course { get; set; }
+        public string CodeDirection { get; set; } = string.Empty;
+        public string NameDirection { get; set; } = string.Empty;
+        public string CodeProfile { get; set; } = string.Empty;
+        public string NameProfile { get; set; } = string.Empty;
         #endregion
 
         public Guid EducationGroupId { get; set; }

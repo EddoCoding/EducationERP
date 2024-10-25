@@ -120,6 +120,16 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
                         AdditionalContactInformation = student.AdditionalContactInformation,
                         Accepted = student.Accepted,
 
+                        NameEducationGroup = student.NameEducationGroup,
+                        LevelGroup = student.LevelGroup,
+                        FormGroup = student.FormGroup,
+                        TypeGroup = student.TypeGroup,
+                        Course = student.Course,
+                        CodeDirection = student.CodeDirection,
+                        NameDirection = student.NameDirection,
+                        CodeProfile = student.CodeProfile,
+                        NameProfile = student.NameProfile,
+
                         Documents = new()
                     };
                     educationGroupVM.Students.Add(studentVM);
