@@ -36,6 +36,9 @@ namespace EducationERP.ViewModels.Modules.DeanRoom.DocumentsStudent
 
         void AddDocument(DocumentStudentBaseVM document)
         {
+            bool isValidated = document.Validation();
+            if (!isValidated) return;
+            
             _documents.Add(document);
             CloseWindow();
         }

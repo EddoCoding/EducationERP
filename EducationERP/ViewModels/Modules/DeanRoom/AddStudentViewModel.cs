@@ -1,12 +1,9 @@
 ﻿using EducationERP.Common.Components;
 using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
-using EducationERP.Models.Modules.AdmissionsCampaign;
 using EducationERP.Models.Modules.DeanRoom.DocumentsStudent;
 using EducationERP.Models.Modules.EducationalInstitution;
 using EducationERP.ViewModels.Modules.Administration.SettingStructEducational;
-using EducationERP.ViewModels.Modules.AdmissionsCampaign;
-using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using EducationERP.ViewModels.Modules.DeanRoom.DocumentsStudent;
 using Raketa;
 using System.Collections.ObjectModel;
@@ -18,6 +15,8 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
         public StudentVM StudentVM { get; set; } = new();
 
         public RaketaTCommand<ObservableCollection<DocumentStudentBaseVM>> AddDocumentCommand { get; }
+        public RaketaTCommand<DocumentStudentBaseVM> ChangeDocumentCommand { get; }
+        public RaketaTCommand<DocumentStudentBaseVM> DeleteDocumentCommand { get; }
 
         public RaketaTCommand<StudentVM> AddStudentCommand { get; }
         public RaketaCommand ExitCommand { get; }
@@ -37,6 +36,8 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
             EducationGroupVM = educationGroupVM;
 
             AddDocumentCommand = RaketaTCommand<ObservableCollection<DocumentStudentBaseVM>>.Launch(AddDocument);
+            ChangeDocumentCommand = RaketaTCommand<DocumentStudentBaseVM>.Launch(ChangeDocument);
+            DeleteDocumentCommand = RaketaTCommand<DocumentStudentBaseVM>.Launch(DeleteDocument);
 
             AddStudentCommand = RaketaTCommand<StudentVM>.Launch(AddStudent);
             ExitCommand = RaketaCommand.Launch(CloseTab);
@@ -44,6 +45,10 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
 
         void AddDocument(ObservableCollection<DocumentStudentBaseVM> documents) =>
             _serviceView.Window<AddDocumentStudentViewModel>(null, documents).Modal();
+        void ChangeDocument(DocumentStudentBaseVM document) =>
+            _serviceView.Window<ChangeDocumentStudentViewModel>(null, document).Modal();
+        void DeleteDocument(DocumentStudentBaseVM document) => StudentVM.Documents.Remove(document);
+
 
         async void AddStudent(StudentVM studentVM)
         {

@@ -9,6 +9,36 @@
              FontFamily="{StaticResource OpenSans}" RenderOptions.BitmapScalingMode="NearestNeighbor">
     <UserControl.Resources>
         <converters:DateOnlyToDateOnlyConverter x:Key="DateOnlyToDateOnly"/>
+
+        <Style x:Key="ButtonDelete" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="Red"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonChange" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="#FFD700"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </UserControl.Resources>
 
     <ScrollViewer>
@@ -112,7 +142,7 @@
                         <TextBlock Text="Фамилия" Foreground="Gray" FontSize="13" Margin="10,5" VerticalAlignment="Center"/>
                     </Border>
                     <TextBox Grid.Column="1" Text="{Binding StudentVM.SurName}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,2" FontSize="14"
-                    VerticalAlignment="Bottom"/>
+                        VerticalAlignment="Bottom"/>
                 </Grid>
 
                 <Grid Grid.Row="2" Background="White" Margin="20,10,0,0">
@@ -346,7 +376,7 @@
 
                     <TextBlock Grid.Row="0" Text="Дополнительная контактная информация" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
                     <TextBox Grid.Row="1" Text="{Binding StudentVM.AdditionalContactInformation}" Style="{StaticResource CustomTextBox}" 
-                    Margin="10,5,10,2" FontSize="14" TextWrapping="Wrap"/>
+                        Margin="10,5,10,2" FontSize="14" TextWrapping="Wrap"/>
                 </Grid>
 
             </Grid>
@@ -409,12 +439,11 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Column="0" Text="{Binding TypeDocument}" FontSize="13" VerticalAlignment="Center"/>
-                                <Button Grid.Column="1" Content="/Common/Resources/Images/changeDocument.png" Style="{StaticResource ButtonImage}"
-                                    HorizontalAlignment="Right" Margin="0,0,5,0" Height="24" Width="24"
+                                <Button Grid.Column="1" Content="изменить" Style="{StaticResource ButtonChange}"
+                                    HorizontalAlignment="Right" Margin="0,0,5,0"
                                     Command="{Binding DataContext.ChangeDocumentCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                                     CommandParameter="{Binding}"/>
-                                <Button Grid.Column="2" Content="/Common/Resources/Images/deleteDocument.png" Style="{StaticResource ButtonImage}" 
-                                    Margin="5,0" Height="24" Width="24"
+                                <Button Grid.Column="2" Content="удалить" Style="{StaticResource ButtonDelete}" Margin="5,0" VerticalAlignment="Center"
                                     Command="{Binding DataContext.DeleteDocumentCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                                     CommandParameter="{Binding}"/>
                             </Grid>
