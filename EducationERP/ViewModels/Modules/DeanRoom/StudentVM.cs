@@ -23,5 +23,8 @@
         public string Mail { get; set; } = string.Empty;
         public string AdditionalContactInformation { get; set; } = string.Empty;
         #endregion
+        #region Доп. свойства, коллекции
+        public string Accepted { get; set; } = string.Empty;
+        #endregion
     }
 }
