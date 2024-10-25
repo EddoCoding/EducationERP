@@ -15,6 +15,7 @@ using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams;
 using EducationERP.ViewModels.Modules.DeanRoom;
+using EducationERP.ViewModels.Modules.DeanRoom.DocumentsStudent;
 using EducationERP.Views;
 using EducationERP.Views.Modules.Administration;
 using EducationERP.Views.Modules.Administration.ControlUsers;
@@ -27,6 +28,7 @@ using EducationERP.Views.Modules.AdmissionsCampaign.Documents;
 using EducationERP.Views.Modules.AdmissionsCampaign.Education;
 using EducationERP.Views.Modules.AdmissionsCampaign.Exams;
 using EducationERP.Views.Modules.DeanRoom;
+using EducationERP.Views.Modules.DeanRoom.DocumentsStudent;
 using Raketa;
 using System.Windows;
 
@@ -92,6 +94,7 @@ namespace EducationERP
             _serviceView.RegisterTypeView<AddEducationGroupViewModel, AddEducationGroupWindow>();
             _serviceView.RegisterTypeView<ChangeEducationGroupViewModel, ChangeEducationGroupWindow>();
             _serviceView.RegisterTypeView<AddStudentViewModel, AddStudentView>();
+            _serviceView.RegisterTypeView<AddDocumentStudentViewModel, AddDocumentStudentWindow>();
         }
 
         void RegisterDependency()

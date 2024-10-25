@@ -48,7 +48,6 @@
                 <ColumnDefinition Width="400"/>
             </Grid.ColumnDefinitions>
 
-            
             <Grid Grid.Column="0" Margin="10,10,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -210,12 +209,12 @@
                             Command="{Binding OpenWindowChangeEducationGroupCommand}" CommandParameter="{Binding SelectedEducationGroup}"/>
 
                     <Button Content="/Common/Resources/Images/minus.png" Style="{StaticResource ButtonImage}" Height="21" Width="21" 
-                                Margin="7" ToolTip="Ликвидация группы" RenderOptions.BitmapScalingMode="Fant"
-                                Command="{Binding DeleteEducationGroupCommand}" CommandParameter="{Binding SelectedEducationGroup}"/>
+                            Margin="7" ToolTip="Ликвидация группы" RenderOptions.BitmapScalingMode="Fant"
+                            Command="{Binding DeleteEducationGroupCommand}" CommandParameter="{Binding SelectedEducationGroup}"/>
 
                     <Button Content="/Common/Resources/Images/update.png" Style="{StaticResource ButtonImage}" Height="21" Width="21" 
-                        Margin="7" ToolTip="Обновить" RenderOptions.BitmapScalingMode="Fant"
-                        Command="{Binding .}" CommandParameter="{Binding .}"/>
+                            Margin="7" ToolTip="Обновить" RenderOptions.BitmapScalingMode="Fant"
+                            Command="{Binding .}" CommandParameter="{Binding .}"/>
 
                 </StackPanel>
 

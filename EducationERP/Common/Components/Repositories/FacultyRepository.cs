@@ -15,6 +15,7 @@ namespace EducationERP.Common.Components.Repositories
                 {
                     var faculty = db.MainFaculties
                         .Include(x => x.EducationGroups)
+                        .ThenInclude(x => x.Students)
                         .FirstOrDefault(x => x.Id == id);
                     return faculty;
                 }

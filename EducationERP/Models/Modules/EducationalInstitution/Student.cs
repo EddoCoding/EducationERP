@@ -1,4 +1,6 @@
-﻿namespace EducationERP.Models.Modules.EducationalInstitution
+﻿using EducationERP.Models.Modules.DeanRoom.DocumentsStudent;
+
+namespace EducationERP.Models.Modules.EducationalInstitution
 {
     public class Student
     {
@@ -25,6 +27,7 @@
         #endregion
         #region Доп. свойства, коллекции
         public string Accepted { get; set; } = string.Empty;
+        public ICollection<DocumentStudentBase> Documents { get; set; }
         #endregion
 
         public Guid EducationGroupId { get; set; }

@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace EducationERP.ViewModels.Modules.DeanRoom.DocumentsStudent
 {
-    public class InnStudentVM : DocumentBaseViewModel
+    public class InnStudentVM : DocumentStudentBaseVM
     {
         public string NumberINN { get; set; } = string.Empty;
         public DateOnly DateAssigned { get; set; }

@@ -1,6 +1,7 @@
 ﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
 using EducationERP.Common.ToolsDev;
+using EducationERP.Models.Modules.EducationalInstitution;
 using EducationERP.ViewModels.Modules.Administration.SettingStructEducational;
 using Raketa;
 
@@ -95,6 +96,34 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
                     DateOfFormed = educationGroup.DateOfFormed,
                     Students = new()
                 };
+                foreach(var student in educationGroup.Students)
+                {
+                    var studentVM = new StudentVM
+                    {
+                        Id = student.Id,
+                        SurName = student.SurName,
+                        Name = student.Name,
+                        MiddleName = student.MiddleName,
+                        DateOfBirth = student.DateOfBirth,
+                        Gender = student.Gender,
+                        PlaceOfBirth = student.PlaceOfBirth,
+                        Citizenship = student.Citizenship,
+                        CitizenshipValidFrom = student.CitizenshipValidFrom,
+                        IsNeedHostel = student.IsNeedHostel,
+                        IsNotNeedHostel = student.IsNotNeedHostel,
+
+                        ResidentialAddress = student.ResidentialAddress,
+                        AddressOfRegistration = student.AddressOfRegistration,
+                        HomePhone = student.HomePhone,
+                        MobilePhone = student.MobilePhone,
+                        Mail = student.Mail,
+                        AdditionalContactInformation = student.AdditionalContactInformation,
+                        Accepted = student.Accepted,
+
+                        Documents = new()
+                    };
+                    educationGroupVM.Students.Add(studentVM);
+                }
                 FacultyVM.EducationGroups.Add(educationGroupVM);
             }
         }
