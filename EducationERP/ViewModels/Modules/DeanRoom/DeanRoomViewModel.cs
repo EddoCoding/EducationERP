@@ -1,8 +1,11 @@
 ﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
 using EducationERP.Common.ToolsDev;
+using EducationERP.Models.Modules.DeanRoom.DocumentsStudent;
 using EducationERP.Models.Modules.EducationalInstitution;
 using EducationERP.ViewModels.Modules.Administration.SettingStructEducational;
+using EducationERP.ViewModels.Modules.DeanRoom.DocumentsStudent;
+using EducationERP.Views.Modules.DeanRoom.DocumentsStudent;
 using Raketa;
 
 namespace EducationERP.ViewModels.Modules.DeanRoom
@@ -34,7 +37,7 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
         #endregion
         #region Блок команд студентов
         public RaketaTCommand<EducationGroupVM> OpenWindowAddStudentCommand { get; }
-
+        public RaketaTCommand<EducationGroupVM> UpdateStudentsCommand { get; }
         #endregion
 
         public RaketaCommand ExitCommand { get; }
@@ -42,12 +45,15 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
         IServiceView _serviceView;
         ITabControl _tabControl;
         IFacultyRepository _facultyRepository;
+        IEducationGroupRepository _educationGroupRepository;
         Guid _id;
-        public DeanRoomViewModel(IServiceView serviceView, ITabControl tabControl, IFacultyRepository facultyRepository, Guid id)
+        public DeanRoomViewModel(IServiceView serviceView, ITabControl tabControl, IFacultyRepository facultyRepository, 
+            IEducationGroupRepository educationGroupRepository, Guid id)
         {
             _serviceView = serviceView;
             _tabControl = tabControl;
             _facultyRepository = facultyRepository;
+            _educationGroupRepository = educationGroupRepository;
 
             GetFaculty(id);
 
@@ -59,6 +65,7 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
             ShowSyllabusCommand = RaketaCommand.Launch(ShowSyllabus);
 
             OpenWindowAddStudentCommand = RaketaTCommand<EducationGroupVM>.Launch(OpenWindowAddStudent);
+            UpdateStudentsCommand = RaketaTCommand<EducationGroupVM>.Launch(UpdateStudents);
 
             ExitCommand = RaketaCommand.Launch(CloseTab);
         }
@@ -164,6 +171,130 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
             if (educationGroupVM == null) return;
 
             _tabControl.CreateTab<AddStudentViewModel>("Добавление студента", null, educationGroupVM);
+        }
+        async void UpdateStudents(EducationGroupVM educationGroupVM) 
+        {
+            var students = await _educationGroupRepository.Update(educationGroupVM.Id);
+            if(students == null || !students.Any()) return;
+
+            educationGroupVM.Students.Clear();
+            foreach (var student in students) 
+            {
+                var studentVM = new StudentVM
+                {
+                    Id = student.Id,
+                    SurName = student.SurName,
+                    Name = student.Name,
+                    MiddleName = student.MiddleName,
+                    DateOfBirth = student.DateOfBirth,
+                    Gender = student.Gender,
+                    PlaceOfBirth = student.PlaceOfBirth,
+                    Citizenship = student.Citizenship,
+                    CitizenshipValidFrom = student.CitizenshipValidFrom,
+                    IsNeedHostel = student.IsNeedHostel,
+                    IsNotNeedHostel = student.IsNotNeedHostel,
+
+                    ResidentialAddress = student.ResidentialAddress,
+                    AddressOfRegistration = student.AddressOfRegistration,
+                    HomePhone = student.HomePhone,
+                    MobilePhone = student.MobilePhone,
+                    Mail = student.Mail,
+                    AdditionalContactInformation = student.AdditionalContactInformation,
+                    Accepted = student.Accepted,
+
+                    NameEducationGroup = student.NameEducationGroup,
+                    LevelGroup = student.LevelGroup,
+                    FormGroup = student.FormGroup,
+                    TypeGroup = student.TypeGroup,
+                    Course = student.Course,
+                    CodeDirection = student.CodeDirection,
+                    NameDirection = student.NameDirection,
+                    CodeProfile = student.CodeProfile,
+                    NameProfile = student.NameProfile,
+                    Documents = new()
+                };
+                foreach(var document in student.Documents)
+                {
+                    if(document is PassportStudent passport)
+                    {
+                        var passportVM = new PassportStudentVM
+                        {
+                            Id = passport.Id,
+                            TypeDocument = passport.TypeDocument,
+                            SurName = passport.SurName,
+                            Name = passport.Name,
+                            MiddleName = passport.MiddleName,
+                            DateOfBirth = passport.DateOfBirth,
+                            Gender = passport.Gender,
+                            PlaceOfBirth = passport.PlaceOfBirth,
+                            IssuedBy = passport.IssuedBy,
+                            DateOfIssue = passport.DateOfIssue,
+                            DepartmentCode = passport.DepartmentCode,
+                            SeriesNumber = passport.SeriesNumber,
+                            AdditionalInformation = passport.AdditionalInformation
+                        };
+                        studentVM.Documents.Add(passportVM);
+                    }
+                    else if (document is SnilsStudent snils)
+                    {
+                        var snilsVM = new SnilsStudentVM
+                        {
+                            Id = snils.Id,
+                            TypeDocument = snils.TypeDocument,
+                            SurName = snils.SurName,
+                            Name = snils.Name,
+                            MiddleName = snils.MiddleName,
+                            DateOfBirth = snils.DateOfBirth,
+                            Gender = snils.Gender,
+                            PlaceOfBirth = snils.PlaceOfBirth,
+                            Number = snils.Number,
+                            RegistrationDate = snils.RegistrationDate,
+                            AdditionalInformation = snils.AdditionalInformation
+                        };
+                        studentVM.Documents.Add(snilsVM);
+                    }
+                    else if (document is InnStudent inn)
+                    {
+                        var innVM = new InnStudentVM
+                        {
+                            Id = inn.Id,
+                            TypeDocument = inn.TypeDocument,
+                            SurName = inn.SurName,
+                            Name = inn.Name,
+                            MiddleName = inn.MiddleName,
+                            DateOfBirth = inn.DateOfBirth,
+                            Gender = inn.Gender,
+                            PlaceOfBirth = inn.PlaceOfBirth,
+                            NumberINN = inn.NumberINN,
+                            DateAssigned = inn.DateAssigned,
+                            SeriesNumber = inn.SeriesNumber,
+                            AdditionalInformation = inn.AdditionalInformation
+                        };
+                        studentVM.Documents.Add(innVM);
+                    }
+                    else if (document is ForeignPassportStudent foreignPassport)
+                    {
+                        var foreignPassportVM = new ForeignPassportStudentVM
+                        {
+                            Id = foreignPassport.Id,
+                            TypeDocument = foreignPassport.TypeDocument,
+                            SurName = foreignPassport.SurName,
+                            Name = foreignPassport.Name,
+                            MiddleName = foreignPassport.MiddleName,
+                            DateOfBirth = foreignPassport.DateOfBirth,
+                            Gender = foreignPassport.Gender,
+                            PlaceOfBirth = foreignPassport.PlaceOfBirth,
+                            IssuedBy = foreignPassport.IssuedBy,
+                            DateOfIssue = foreignPassport.DateOfIssue,
+                            SeriesNumber = foreignPassport.SeriesNumber,
+                            AdditionalInformation = foreignPassport.AdditionalInformation
+                        };
+                        studentVM.Documents.Add(foreignPassportVM);
+                    }
+                }
+
+                educationGroupVM.Students.Add(studentVM);
+            }
         }
         #endregion
 

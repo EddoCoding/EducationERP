@@ -8,6 +8,7 @@ namespace EducationERP.ViewModels.Modules.DeanRoom.DocumentsStudent
         public string IssuedBy { get; set; } = string.Empty;
         public DateOnly DateOfIssue { get; set; }
         public string SeriesNumber { get; set; } = string.Empty;
+
         public ForeignPassportStudentVM() { TypeDocument = "Иностранный паспорт"; }
 
         public override bool Validation()
