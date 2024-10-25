@@ -105,6 +105,7 @@ namespace EducationERP
             _container.RegisterTransient<SettingFacultyRepository, ISettingFacultyRepository>();
             _container.RegisterTransient<StructEducationRepository, IStructEducationRepository>();
             _container.RegisterTransient<FacultyRepository, IFacultyRepository>();
+            _container.RegisterTransient<EducationGroupRepository, IEducationGroupRepository>();
         }
     }
 }
