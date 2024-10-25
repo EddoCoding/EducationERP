@@ -55,6 +55,7 @@ namespace EducationERP.Common.Components
         #region ДЕКАНАТ
         public DbSet<EducationGroup> EducationGroups { get; set; }
         public DbSet<Student> Students { get; set; }
+
         #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>

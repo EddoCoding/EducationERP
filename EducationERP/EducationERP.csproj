@@ -143,8 +143,4 @@
     </Resource>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Modules\DeanRoom\" />
-  </ItemGroup>
-
 </Project>

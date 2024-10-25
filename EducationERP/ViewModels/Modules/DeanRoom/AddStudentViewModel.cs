@@ -55,7 +55,7 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
                 MobilePhone = studentVM.MobilePhone,
                 Mail = studentVM.Mail,
                 AdditionalContactInformation = studentVM.AdditionalContactInformation,
-                Accepted = studentVM.Accepted,
+                Accepted = UserSystem.FullName,
 
                 EducationGroupId = EducationGroupVM.Id
             };

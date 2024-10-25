@@ -23,8 +23,9 @@
         public string Mail { get; set; } = string.Empty;
         public string AdditionalContactInformation { get; set; } = string.Empty;
         #endregion
-
+        #region Доп. свойства, коллекции
         public string Accepted { get; set; } = string.Empty;
+        #endregion
 
         public Guid EducationGroupId { get; set; }
         public EducationGroup EducationGroup { get; set; }
