@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace EducationERP.ViewModels.Modules.DeanRoom.DocumentsStudent
 {
-    class ForeignPassportStudentVM : DocumentBaseViewModel
+    class ForeignPassportStudentVM : DocumentStudentBaseVM
     {
         public string IssuedBy { get; set; } = string.Empty;
         public DateOnly DateOfIssue { get; set; }

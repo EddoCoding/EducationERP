@@ -1,4 +1,7 @@
-﻿namespace EducationERP.ViewModels.Modules.DeanRoom
+﻿using EducationERP.ViewModels.Modules.DeanRoom.DocumentsStudent;
+using System.Collections.ObjectModel;
+
+namespace EducationERP.ViewModels.Modules.DeanRoom
 {
     public class StudentVM
     {
@@ -25,6 +28,7 @@
         #endregion
         #region Доп. свойства, коллекции
         public string Accepted { get; set; } = string.Empty;
+        public ObservableCollection<DocumentStudentBaseVM> Documents { get; set; } = new();
         #endregion
     }
 }

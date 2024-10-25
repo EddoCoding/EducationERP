@@ -6,6 +6,7 @@ using EducationERP.Models.Modules.AdmissionsCampaign.Directions;
 using EducationERP.Models.Modules.AdmissionsCampaign.DistinctiveFeatures;
 using EducationERP.Models.Modules.AdmissionsCampaign.Educations;
 using EducationERP.Models.Modules.AdmissionsCampaign.Exams;
+using EducationERP.Models.Modules.DeanRoom.DocumentsStudent;
 using EducationERP.Models.Modules.EducationalInstitution;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
@@ -55,7 +56,10 @@ namespace EducationERP.Common.Components
         #region ДЕКАНАТ
         public DbSet<EducationGroup> EducationGroups { get; set; }
         public DbSet<Student> Students { get; set; }
-
+        public DbSet<PassportStudent> PassportsStudent { get; set; }
+        public DbSet<SnilsStudent> SnilssStudent { get; set; }
+        public DbSet<InnStudent> InnsStudent { get; set; }
+        public DbSet<ForeignPassportStudent> ForeignPassportsStudent { get; set; }
         #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
@@ -142,6 +146,8 @@ namespace EducationERP.Common.Components
 
             modelBuilder.Entity<Document>().UseTpcMappingStrategy();
             modelBuilder.Entity<EducationBase>().UseTpcMappingStrategy();
+
+            modelBuilder.Entity<DocumentStudentBase>().UseTpcMappingStrategy();
 
             base.OnModelCreating(modelBuilder);
         }

@@ -3,6 +3,7 @@ using System;
 using EducationERP.Common.Components;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EducationERP.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241025011740_AddTablesDocumentsToStudent")]
+    partial class AddTablesDocumentsToStudent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1115,7 +1118,7 @@ namespace EducationERP.Migrations
             modelBuilder.Entity("EducationERP.Models.Modules.DeanRoom.DocumentsStudent.DocumentStudentBase", b =>
                 {
                     b.HasOne("EducationERP.Models.Modules.EducationalInstitution.Student", "Student")
-                        .WithMany("Documents")
+                        .WithMany()
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1207,11 +1210,6 @@ namespace EducationERP.Migrations
             modelBuilder.Entity("EducationERP.Models.Modules.EducationalInstitution.StructEducationalInstitution", b =>
                 {
                     b.Navigation("Faculties");
-                });
-
-            modelBuilder.Entity("EducationERP.Models.Modules.EducationalInstitution.Student", b =>
-                {
-                    b.Navigation("Documents");
                 });
 #pragma warning restore 612, 618
         }
