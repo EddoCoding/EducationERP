@@ -5,7 +5,7 @@
 namespace EducationERP.Migrations
 {
     /// <inheritdoc />
-    public partial class sadfvedw : Migration
+    public partial class djshf : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
