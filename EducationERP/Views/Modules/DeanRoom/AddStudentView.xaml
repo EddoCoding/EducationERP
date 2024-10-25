@@ -24,7 +24,21 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+        <Style x:Key="ButtonChange" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="#FFD700"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </UserControl.Resources>
 
     <ScrollViewer>
@@ -425,8 +439,8 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Column="0" Text="{Binding TypeDocument}" FontSize="13" VerticalAlignment="Center"/>
-                                <Button Grid.Column="1" Content="/Common/Resources/Images/changeDocument.png" Style="{StaticResource ButtonImage}"
-                                    HorizontalAlignment="Right" Margin="0,0,5,0" Height="24" Width="24"
+                                <Button Grid.Column="1" Content="изменить" Style="{StaticResource ButtonChange}"
+                                    HorizontalAlignment="Right" Margin="0,0,5,0"
                                     Command="{Binding DataContext.ChangeDocumentCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                                     CommandParameter="{Binding}"/>
                                 <Button Grid.Column="2" Content="удалить" Style="{StaticResource ButtonDelete}" Margin="5,0" VerticalAlignment="Center"

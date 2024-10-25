@@ -15,6 +15,7 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
         public StudentVM StudentVM { get; set; } = new();
 
         public RaketaTCommand<ObservableCollection<DocumentStudentBaseVM>> AddDocumentCommand { get; }
+        public RaketaTCommand<DocumentStudentBaseVM> ChangeDocumentCommand { get; }
         public RaketaTCommand<DocumentStudentBaseVM> DeleteDocumentCommand { get; }
 
         public RaketaTCommand<StudentVM> AddStudentCommand { get; }
@@ -35,6 +36,7 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
             EducationGroupVM = educationGroupVM;
 
             AddDocumentCommand = RaketaTCommand<ObservableCollection<DocumentStudentBaseVM>>.Launch(AddDocument);
+            ChangeDocumentCommand = RaketaTCommand<DocumentStudentBaseVM>.Launch(ChangeDocument);
             DeleteDocumentCommand = RaketaTCommand<DocumentStudentBaseVM>.Launch(DeleteDocument);
 
             AddStudentCommand = RaketaTCommand<StudentVM>.Launch(AddStudent);
@@ -43,6 +45,8 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
 
         void AddDocument(ObservableCollection<DocumentStudentBaseVM> documents) =>
             _serviceView.Window<AddDocumentStudentViewModel>(null, documents).Modal();
+        void ChangeDocument(DocumentStudentBaseVM document) =>
+            _serviceView.Window<ChangeDocumentStudentViewModel>(null, document).Modal();
         void DeleteDocument(DocumentStudentBaseVM document) => StudentVM.Documents.Remove(document);
 
 
