@@ -28,8 +28,7 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
         IEducationGroupRepository _educationGroupRepository;
         public EducationGroupVM EducationGroupVM { get; set; }
         public AddStudentViewModel(IServiceView serviceView, ITabControl tabControl, UserSystem userSystem,
-            IEducationGroupRepository educationGroupRepository, 
-            EducationGroupVM educationGroupVM)
+            IEducationGroupRepository educationGroupRepository, EducationGroupVM educationGroupVM)
         {
             _serviceView = serviceView;
             _tabControl = tabControl;
@@ -48,10 +47,8 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
 
         async void AddStudent(StudentVM studentVM)
         {
-            // СДЕЛАТЬ ВАЛИДАЦИЮ СТУДЕНТА
-            // СДЕЛАТЬ ВАЛИДАЦИЮ СТУДЕНТА
-            // СДЕЛАТЬ ВАЛИДАЦИЮ СТУДЕНТА
-            // СДЕЛАТЬ ВАЛИДАЦИЮ СТУДЕНТА
+            bool isValidated = studentVM.Validation();
+            if(!isValidated) return;
             
             var student = new Student
             {
@@ -74,6 +71,16 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
                 Mail = studentVM.Mail,
                 AdditionalContactInformation = studentVM.AdditionalContactInformation,
                 Accepted = UserSystem.FullName,
+
+                NameEducationGroup = EducationGroupVM.NameEducationGroup,
+                LevelGroup = EducationGroupVM.LevelGroup,
+                FormGroup = EducationGroupVM.FormGroup,
+                TypeGroup = EducationGroupVM.TypeGroup,
+                Course = EducationGroupVM.Course,
+                CodeDirection = EducationGroupVM.CodeDirection,
+                NameDirection = EducationGroupVM.NameDirection,
+                CodeProfile = EducationGroupVM.CodeProfile,
+                NameProfile = EducationGroupVM.NameProfile,
 
                 EducationGroupId = EducationGroupVM.Id
             };
