@@ -16,63 +16,31 @@ EducationERP - Программа для автоматизирования и �
 Скриншоты того, что пока готово.
 1. Модуль "Администрирование".
 
-Управление структурой вуза.
+Управление структурой вуза; Управление пользователями системы; Добавление пользователя системы; Управление приёмной кампанией; Управление использования бд;
 <div>
-  <img src="https://github.com/EddoCoding/EducationERP/blob/main/AdministrationStruct.png" Height="500" Width="700"/>
-</div>
-
-Управление пользователями системы.
-<div>
-  <img src="https://github.com/EddoCoding/EducationERP/blob/main/AdministrationUsers.png" Height="500" Width="700"/>
-</div>
-
-Добавление пользователя системы.
-<div>
-  <img src="https://github.com/EddoCoding/EducationERP/blob/main/AdministrationAddUser.png" Height="500" Width="700"/>
-</div>
-
-Управление приёмной кампанией.
-<div>
-  <img src="https://github.com/EddoCoding/EducationERP/blob/main/AdministrationAdmissionsCampaign.png" Height="500" Width="700"/>
-</div>
-
-Управление использования бд.
-<div>
-  <img src="https://github.com/EddoCoding/EducationERP/blob/main/AdministrationBD.png" Height="500" Width="700"/>
+  <img src="https://github.com/EddoCoding/EducationERP/blob/main/AdministrationStruct.png" Height="300" Width="500"/>
+  <img src="https://github.com/EddoCoding/EducationERP/blob/main/AdministrationUsers.png" Height="300" Width="500"/>
+  <img src="https://github.com/EddoCoding/EducationERP/blob/main/AdministrationAddUser.png" Height="300" Width="500"/>
+  <img src="https://github.com/EddoCoding/EducationERP/blob/main/AdministrationAdmissionsCampaign.png" Height="300" Width="500"/>
+  <img src="https://github.com/EddoCoding/EducationERP/blob/main/AdministrationBD.png" Height="300" Width="500"/>
 </div>
 
 2. Модуль "Приёмная кампания".
 
-Главная страница модуля "Приёмная кампания" с карточкой абитуриента.
+Главная страница модуля с карточкой абитуриента; Добавление абитуриента перчая часть; Добавление абитуриента вторая часть;
 <div>
-  <img src="https://github.com/EddoCoding/EducationERP/blob/main/AdmisionCampaign.png" Height="500" Width="700"/>
-</div>
-
-Добавление абитуриента перчая часть.
-<div>
-  <img src="https://github.com/EddoCoding/EducationERP/blob/main/AdmissionCampaignAddApplicant1.png" Height="500" Width="700"/>
-</div>
-
-Добавление абитуриента вторая часть.
-<div>
-  <img src="https://github.com/EddoCoding/EducationERP/blob/main/AdmissionCampaignAddApplicant2.png" Height="500" Width="700"/>
+  <img src="https://github.com/EddoCoding/EducationERP/blob/main/AdmisionCampaign.png" Height="300" Width="500"/>
+  <img src="https://github.com/EddoCoding/EducationERP/blob/main/AdmissionCampaignAddApplicant1.png" Height="300" Width="500"/>
+  <img src="https://github.com/EddoCoding/EducationERP/blob/main/AdmissionCampaignAddApplicant2.png" Height="300" Width="500"/>
 </div>
 
 3. Модуль "Деканат".
 
-Доступ к факультету по паролю.
+Доступ к факультету по паролю; Добавление группы; Добавление студента;
 <div>
-  <img src="https://github.com/EddoCoding/EducationERP/blob/main/DeanRoomAccess.png" Height="500" Width="700"/>
-</div>
-
-Деканат. Добавление группы.
-<div>
-  <img src="https://github.com/EddoCoding/EducationERP/blob/main/DeanRoomAndAddGroup.png" Height="500" Width="700"/>
-</div>
-
-Деканат. Добавление студента.
-<div>
-  <img src="https://github.com/EddoCoding/EducationERP/blob/main/DeanRoomAcceptStudent.png" Height="500" Width="700"/>
+  <img src="https://github.com/EddoCoding/EducationERP/blob/main/DeanRoomAccess.png" Height="300" Width="500"/>
+  <img src="https://github.com/EddoCoding/EducationERP/blob/main/DeanRoomAndAddGroup.png" Height="300" Width="500"/>
+  <img src="https://github.com/EddoCoding/EducationERP/blob/main/DeanRoomAcceptStudent.png" Height="300" Width="500"/>
 </div>
 
 Запланировано, написание модулей:
