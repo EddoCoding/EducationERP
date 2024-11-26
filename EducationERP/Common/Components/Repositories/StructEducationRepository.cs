@@ -1,7 +1,6 @@
 ﻿using EducationERP.Models.Modules.EducationalInstitution;
 using EducationERP.ViewModels.Modules.Administration.SettingStructEducational;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace EducationERP.Common.Components.Repositories
@@ -19,10 +18,7 @@ namespace EducationERP.Common.Components.Repositories
                         .ThenInclude(x => x.Departments)
                         .FirstOrDefault();
                 }
-                catch
-                {
-                    MessageBox.Show("Ошибка получения данных об учебном заведении из базы данных!");
-                }
+                catch { }
             }
 
             return null;

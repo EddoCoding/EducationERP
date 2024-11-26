@@ -6,6 +6,7 @@ using EducationERP.Models.Modules.DeanRoom.DocumentsStudent;
 using EducationERP.Models.Modules.EducationalInstitution;
 using EducationERP.ViewModels.Modules.Administration.SettingStructEducational;
 using EducationERP.ViewModels.Modules.DeanRoom.DocumentsStudent;
+using EducationERP.ViewModels.Modules.DeanRoom.TakeData;
 using Raketa;
 using System.Collections.ObjectModel;
 
@@ -50,7 +51,8 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
             ExitCommand = RaketaCommand.Launch(CloseTab);
         }
 
-        void TakeFromApplicants(StudentVM studentVM) => Dev.NotReady();
+        void TakeFromApplicants(StudentVM studentVM) =>
+            _tabControl.CreateTab<TakeFromApplicantsViewModel>("Список абитуриентов", null, studentVM, EducationGroupVM);
         void TakeFromArchive(StudentVM studentVM) => Dev.NotReady();
 
         void AddDocument(ObservableCollection<DocumentStudentBaseVM> documents) =>
@@ -58,7 +60,6 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
         void ChangeDocument(DocumentStudentBaseVM document) =>
             _serviceView.Window<ChangeDocumentStudentViewModel>(null, document).Modal();
         void DeleteDocument(DocumentStudentBaseVM document) => StudentVM.Documents.Remove(document);
-
 
         async void AddStudent(StudentVM studentVM)
         {

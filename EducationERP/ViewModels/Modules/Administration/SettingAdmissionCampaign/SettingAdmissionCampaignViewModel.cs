@@ -1,4 +1,5 @@
 ﻿using EducationERP.Common.Components.Repositories;
+using EducationERP.Common.Components.Services;
 using EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign;
 using Raketa;
 using System.Collections.ObjectModel;
@@ -9,19 +10,23 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaig
     {
         public ObservableCollection<SettingFacultyVM> Faculties { get; set; } = new();
 
-        public RaketaTCommand<ObservableCollection<SettingFacultyVM>> OpenWindowAddFacultyCommand { get; set; }
-        public RaketaTCommand<SettingFacultyVM> DeleteFacultyCommand { get; set; }
-        public RaketaTCommand<SettingFacultyVM> OpenWindowAddLevelCommand { get; set; }
+        public RaketaCommand ExitCommand { get; set; }
+
+        public RaketaTCommand<ObservableCollection<SettingFacultyVM>> OpenWindowAddFacultyCommand { get; }
+        public RaketaTCommand<SettingFacultyVM> DeleteFacultyCommand { get; }
+        public RaketaTCommand<SettingFacultyVM> OpenWindowAddLevelCommand { get; }
         public RaketaTCommand<SettingLevelVM> DeleteLevelCommand { get; set; }
-        public RaketaTCommand<SettingLevelVM> OpenWindowAddDirectionCommand { get; set; }
-        public RaketaTCommand<SettingDirectionVM> DeleteDirectionCommand { get; set; }
+        public RaketaTCommand<SettingLevelVM> OpenWindowAddDirectionCommand { get; }
+        public RaketaTCommand<SettingDirectionVM> DeleteDirectionCommand { get; }
 
         IServiceView _serviceView;
         ISettingFacultyRepository _facultyRepository;
-        public SettingAdmissionCampaignViewModel(IServiceView serviceView, ISettingFacultyRepository facultyRepository)
+        ITabControl _tabControl;
+        public SettingAdmissionCampaignViewModel(IServiceView serviceView, ISettingFacultyRepository facultyRepository, ITabControl tabControl)
         {
             _serviceView = serviceView;
             _facultyRepository = facultyRepository;
+            _tabControl = tabControl;
 
             foreach (var faculty in facultyRepository.Read())
             {
@@ -58,6 +63,8 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaig
                 Faculties.Add(facultyVM);
             }
 
+            ExitCommand = RaketaCommand.Launch(CloseTab);
+
             OpenWindowAddFacultyCommand = RaketaTCommand<ObservableCollection<SettingFacultyVM>>.Launch(OpenWindowAddFaculty);
             DeleteFacultyCommand = RaketaTCommand<SettingFacultyVM>.Launch(DeleteFaculty);
             OpenWindowAddLevelCommand = RaketaTCommand<SettingFacultyVM>.Launch(OpenWindowAddLevel);
@@ -65,6 +72,8 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaig
             OpenWindowAddDirectionCommand = RaketaTCommand<SettingLevelVM>.Launch(OpenWindowAddDirection);
             DeleteDirectionCommand = RaketaTCommand<SettingDirectionVM>.Launch(DeleteDirection);
         }
+
+        void CloseTab() => _tabControl.RemoveTab();
 
         void OpenWindowAddFaculty(ObservableCollection<SettingFacultyVM> faculties) => 
             _serviceView.Window<AddSettingFacultyViewModel>(null, faculties).Modal();

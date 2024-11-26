@@ -1,12 +1,15 @@
 ﻿using EducationERP.Common.Components.Repositories;
+using EducationERP.Common.Components.Services;
 using EducationERP.Models.Modules.EducationalInstitution;
 using Raketa;
 
 namespace EducationERP.ViewModels.Modules.Administration.SettingStructEducational
 {
-    public class SettingStructEducationalViewModel
+    public class SettingStructEducationalViewModel : RaketaViewModel
     {
         public StructEducationalInstitutionVM StructEducationalInstitutionVM { get; set; } = new();
+
+        public RaketaCommand ExitCommand { get; }
 
         public RaketaTCommand<StructEducationalInstitutionVM> OpenWindowAddFacultyCommand { get; set; }
         public RaketaTCommand<FacultyVM> OpenWindowChangeFacultyCommand { get; set; }
@@ -20,12 +23,16 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingStructEducationa
 
         IServiceView _serviceView;
         IStructEducationRepository _structEducationRepository;
-        public SettingStructEducationalViewModel(IServiceView serviceView, IStructEducationRepository structEducationRepository)
+        ITabControl _tabControl;
+        public SettingStructEducationalViewModel(IServiceView serviceView, IStructEducationRepository structEducationRepository, ITabControl tabControl)
         {
             _serviceView = serviceView;
             _structEducationRepository = structEducationRepository;
+            _tabControl = tabControl;
 
             Mapp(structEducationRepository.GetStructEducation());
+
+            ExitCommand = RaketaCommand.Launch(CloseTab);
 
             OpenWindowAddFacultyCommand = RaketaTCommand<StructEducationalInstitutionVM>.Launch(OpenWindowAddFaculty);
             OpenWindowChangeFacultyCommand = RaketaTCommand<FacultyVM>.Launch(OpenWindowChangeFaculty);
@@ -117,5 +124,7 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingStructEducationa
 
             await _structEducationRepository.SaveStructEducation(structModel);
         }
+
+        void CloseTab() => _tabControl.RemoveTab();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using EducationERP.Common.Components.Repositories;
+using EducationERP.Common.Components.Services;
 using EducationERP.ViewModels.Modules.Administration.ControlUsers;
 using Raketa;
 using System.Collections.ObjectModel;
@@ -30,17 +31,23 @@ namespace EducationERP.ViewModels.Modules.Administration
             set => SetValue(ref selectedUser, value);
         }
 
-        public RaketaCommand OpenWindowAddUserCommand { get; set; }
-        public RaketaTCommand<UserVM> ChangeUserCommand { get; set; }
-        public RaketaTCommand<UserVM> DeleteUserCommand { get; set; }
-        public RaketaCommand UpdateUserCommand { get; set; }
+        public RaketaCommand ExitCommand { get; }
+
+        public RaketaCommand OpenWindowAddUserCommand { get; }
+        public RaketaTCommand<UserVM> ChangeUserCommand { get; }
+        public RaketaTCommand<UserVM> DeleteUserCommand { get; }
+        public RaketaCommand UpdateUserCommand { get; }
 
         IServiceView _serviceView;
         IUserRepository _userRepository;
-        public UserViewModel(IServiceView serviceView, IUserRepository userRepository)
+        ITabControl _tabControl;
+        public UserViewModel(IServiceView serviceView, IUserRepository userRepository, ITabControl tabControl)
         {
             _serviceView = serviceView;
             _userRepository = userRepository;
+            _tabControl = tabControl;
+
+            ExitCommand = RaketaCommand.Launch(CloseTab);
 
             OpenWindowAddUserCommand = RaketaCommand.Launch(OpenWindowAddUser);
             ChangeUserCommand = RaketaTCommand<UserVM>.Launch(ChangeUser);
@@ -95,5 +102,6 @@ namespace EducationERP.ViewModels.Modules.Administration
                 foreach (var user in users) Users.Add(user);
             });
         }
+        void CloseTab() => _tabControl.RemoveTab();
     }
 }

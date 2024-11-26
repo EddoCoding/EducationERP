@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaign;
+using System.Collections.ObjectModel;
 
 namespace EducationERP.ViewModels.Modules.Administration.SettingStructEducational
 {
@@ -8,5 +9,6 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingStructEducationa
         public string NameVUZ { get; set; } = string.Empty;
         public string ShortNameVUZ { get; set; } = string.Empty;
         public ObservableCollection<FacultyVM> Faculties { get; set; } = new();
+        public ObservableCollection<SettingFacultyVM> ACFaculties { get; set; } = new();
     }
 }

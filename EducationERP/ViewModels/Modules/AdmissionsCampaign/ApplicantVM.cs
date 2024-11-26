@@ -1,5 +1,4 @@
-﻿using EducationERP.Models.Modules.AdmissionsCampaign;
-using EducationERP.ViewModels.Modules.AdmissionsCampaign.Directions;
+﻿using EducationERP.ViewModels.Modules.AdmissionsCampaign.Directions;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.DistinctiveFeatures;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
