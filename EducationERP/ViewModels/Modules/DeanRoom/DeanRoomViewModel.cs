@@ -2,10 +2,8 @@
 using EducationERP.Common.Components.Services;
 using EducationERP.Common.ToolsDev;
 using EducationERP.Models.Modules.DeanRoom.DocumentsStudent;
-using EducationERP.Models.Modules.EducationalInstitution;
 using EducationERP.ViewModels.Modules.Administration.SettingStructEducational;
 using EducationERP.ViewModels.Modules.DeanRoom.DocumentsStudent;
-using EducationERP.Views.Modules.DeanRoom.DocumentsStudent;
 using Raketa;
 
 namespace EducationERP.ViewModels.Modules.DeanRoom

@@ -49,9 +49,9 @@ namespace EducationERP.Common.Components
         public DbSet<User> Users { get; set; }
 
         // -- Настройка образования для приёмной кампании --
-        public DbSet<SettingFaculty> Faculties { get; set; }
-        public DbSet<SettingLevel> Levels { get; set; }
-        public DbSet<SettingDirection> Directions { get; set; }
+        public DbSet<SettingFaculty> ACFaculties { get; set; }
+        public DbSet<SettingLevel> ACLevels { get; set; }
+        public DbSet<SettingDirection> ACDirections { get; set; }
         #endregion
         #region ДЕКАНАТ
         public DbSet<EducationGroup> EducationGroups { get; set; }

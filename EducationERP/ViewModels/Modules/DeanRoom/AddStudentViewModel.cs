@@ -1,10 +1,12 @@
 ﻿using EducationERP.Common.Components;
 using EducationERP.Common.Components.Repositories;
 using EducationERP.Common.Components.Services;
+using EducationERP.Common.ToolsDev;
 using EducationERP.Models.Modules.DeanRoom.DocumentsStudent;
 using EducationERP.Models.Modules.EducationalInstitution;
 using EducationERP.ViewModels.Modules.Administration.SettingStructEducational;
 using EducationERP.ViewModels.Modules.DeanRoom.DocumentsStudent;
+using EducationERP.ViewModels.Modules.DeanRoom.TakeData;
 using Raketa;
 using System.Collections.ObjectModel;
 
@@ -13,6 +15,9 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
     public class AddStudentViewModel : RaketaViewModel
     {
         public StudentVM StudentVM { get; set; } = new();
+
+        public RaketaTCommand<StudentVM> TakeFromApplicantsCommand { get; }
+        public RaketaTCommand<StudentVM> TakeFromArchiveCommand { get; }
 
         public RaketaTCommand<ObservableCollection<DocumentStudentBaseVM>> AddDocumentCommand { get; }
         public RaketaTCommand<DocumentStudentBaseVM> ChangeDocumentCommand { get; }
@@ -35,6 +40,9 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
             _educationGroupRepository = educationGroupRepository;
             EducationGroupVM = educationGroupVM;
 
+            TakeFromApplicantsCommand = RaketaTCommand<StudentVM>.Launch(TakeFromApplicants);
+            TakeFromArchiveCommand = RaketaTCommand<StudentVM>.Launch(TakeFromArchive);
+
             AddDocumentCommand = RaketaTCommand<ObservableCollection<DocumentStudentBaseVM>>.Launch(AddDocument);
             ChangeDocumentCommand = RaketaTCommand<DocumentStudentBaseVM>.Launch(ChangeDocument);
             DeleteDocumentCommand = RaketaTCommand<DocumentStudentBaseVM>.Launch(DeleteDocument);
@@ -43,12 +51,15 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
             ExitCommand = RaketaCommand.Launch(CloseTab);
         }
 
+        void TakeFromApplicants(StudentVM studentVM) =>
+            _tabControl.CreateTab<TakeFromApplicantsViewModel>("Список абитуриентов", null, studentVM, EducationGroupVM);
+        void TakeFromArchive(StudentVM studentVM) => Dev.NotReady();
+
         void AddDocument(ObservableCollection<DocumentStudentBaseVM> documents) =>
             _serviceView.Window<AddDocumentStudentViewModel>(null, documents).Modal();
         void ChangeDocument(DocumentStudentBaseVM document) =>
             _serviceView.Window<ChangeDocumentStudentViewModel>(null, document).Modal();
         void DeleteDocument(DocumentStudentBaseVM document) => StudentVM.Documents.Remove(document);
-
 
         async void AddStudent(StudentVM studentVM)
         {

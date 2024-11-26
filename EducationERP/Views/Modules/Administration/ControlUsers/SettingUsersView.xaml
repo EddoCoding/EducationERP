@@ -1,0 +1,220 @@
+﻿<UserControl x:Class="EducationERP.Views.Modules.Administration.ControlUsers.SettingUsersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EducationERP.Views.Modules.Administration.ControlUsers"
+             xmlns:VM="clr-namespace:EducationERP.ViewModels.Modules.Administration.ControlUsers"
+             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type VM:UserVM}">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" MaxWidth="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="{Binding FullName}" Margin="10,10,10,0" FontSize="13"/>
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,5,0,0">
+
+                        <TextBlock Text="Идентификатор: " FontWeight="DemiBold" FontSize="13"/>
+                        <TextBlock Text="{Binding Identifier}" Margin="5,0,0,0" FontSize="13"/>
+                        <TextBlock Text="Пароль: " Margin="5,0,0,0" FontWeight="DemiBold" FontSize="13"/>
+                        <TextBlock Text="{Binding Password}" Margin="5,0,10,0" FontSize="13"/>
+
+                    </StackPanel>
+
+                    <Grid Grid.Row="2" Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Приёмная кампания" FontSize="13" FontWeight="DemiBold"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Деканат" FontSize="13" FontWeight="DemiBold"/>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Администрирование" FontSize="13" FontWeight="DemiBold"/>
+
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="Доступ" FontSize="13" FontWeight="DemiBold" Margin="10,0,0,0"/>
+
+                        <TextBlock Grid.Column="1" Grid.Row="1" FontSize="13" Margin="10,0,0,0">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ModuleAdmissionsCampaign}" Value="True">
+                                            <Setter Property="Text" Value="Полный"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ModuleAdmissionsCampaign}" Value="False">
+                                            <Setter Property="Text" Value="Ограниченный"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ModuleAdmissionsCampaign}" Value="{x:Null}">
+                                            <Setter Property="Text" Value="Без доступа"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="2" FontSize="13" Margin="10,0,0,0">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ModuleDeanRoom}" Value="True">
+                                            <Setter Property="Text" Value="Полный"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ModuleDeanRoom}" Value="False">
+                                            <Setter Property="Text" Value="Ограниченный"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ModuleDeanRoom}" Value="{x:Null}">
+                                            <Setter Property="Text" Value="Без доступа"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="3" FontSize="13" Margin="10,0,0,0">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ModuleAdministration}" Value="True">
+                                            <Setter Property="Text" Value="Полный"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ModuleAdministration}" Value="False">
+                                            <Setter Property="Text" Value="Ограниченный"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ModuleAdministration}" Value="{x:Null}">
+                                            <Setter Property="Text" Value="Без доступа"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                    </Grid>
+
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <Style x:Key="ToolTipUser" TargetType="ToolTip">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToolTip">
+                        <ContentPresenter Content="{Binding}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="10,10,0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" FontSize="15" Text="Управление пользователями" Foreground="Gray" VerticalAlignment="Center"/>
+            <Button Grid.Column="1" Content="X" Style="{StaticResource ButtonExitUserControl}" FontSize="14"
+                Margin="10,0,5,0" RenderOptions.BitmapScalingMode="Fant" Command="{Binding ExitCommand}" ToolTip="Закрыть вкладку"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Список пользователей" VerticalAlignment="Center" FontSize="14"/>
+                <TextBox Grid.Column="1" Text="{Binding TextSearch, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,0" Foreground="Black" FontSize="14" VerticalContentAlignment="Center">
+                    <TextBox.Template>
+                        <ControlTemplate TargetType="TextBox">
+                            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" SnapsToDevicePixels="True">
+                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Height="20"/>
+                            </Border>
+                        </ControlTemplate>
+                    </TextBox.Template>
+                </TextBox>
+            </Grid>
+
+            <ListView Grid.Row="1" ItemsSource="{Binding Users}" Margin="10,0" Height="300" Background="White" SelectedItem="{Binding SelectedUser}"
+                TextOptions.TextFormattingMode="Display">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListViewItem">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <StackPanel>
+                                            <ContentPresenter Margin="2"/>
+                                            <Line Stroke="LightGray" X1="1" Stretch="Fill"/>
+                                        </StackPanel>
+                                        <Border.ToolTip>
+                                            <ToolTip Style="{StaticResource ToolTipUser}"/>
+                                        </Border.ToolTip>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="WhiteSmoke"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Grid.Column="0" Text="{Binding FullName}" Margin="3" FontSize="13" VerticalAlignment="Center"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackPanel Grid.Row="2" Background="White" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
+                <StackPanel.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                </StackPanel.Effect>
+
+                <Button Content="/Common/Resources/Images/addUser.png" Style="{StaticResource ButtonImage}" Height="21" Width="21" 
+                    Margin="7" ToolTip="Создать пользователя" Command="{Binding OpenWindowAddUserCommand}"
+                    RenderOptions.BitmapScalingMode="Fant"/>
+
+                <Button Content="/Common/Resources/Images/changeUser.png" Style="{StaticResource ButtonImage}" Height="23" Width="23"
+                    Margin="7" ToolTip="Изменить данные пользователя системы" RenderOptions.BitmapScalingMode="Fant"
+                    Command="{Binding ChangeUserCommand}" CommandParameter="{Binding SelectedUser}"/>
+
+                <Button Content="/Common/Resources/Images/deleteUser.png" Style="{StaticResource ButtonImage}" Height="19" Width="19" 
+                    Margin="7" ToolTip="Удалить пользователя из системы" RenderOptions.BitmapScalingMode="Fant"
+                    Command="{Binding DeleteUserCommand}" CommandParameter="{Binding SelectedUser}"/>
+
+                <Button Content="/Common/Resources/Images/update.png" Style="{StaticResource ButtonImage}" Height="22" Width="22" 
+                    Margin="7" ToolTip="Обновить список пользователей" Command="{Binding UpdateUserCommand}"
+                    RenderOptions.BitmapScalingMode="Fant"/>
+
+            </StackPanel>
+            
+        </Grid>
+
+    </Grid>
+    
+
+</UserControl>

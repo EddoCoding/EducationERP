@@ -10,28 +10,44 @@
     <UserControl.Resources>
         <converters:DateOnlyToDateOnlyConverter x:Key="DateOnlyToDateOnly"/>
 
-        <Style x:Key="ButtonDelete" TargetType="Button">
+        <Style x:Key="ButtonChange" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <ContentPresenter/>
+                        <ContentPresenter VerticalAlignment="Center"/>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Foreground" Value="Red"/>
+                                <Setter Property="Foreground" Value="Gray"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="ButtonChange" TargetType="Button">
+        <Style x:Key="ButtonDelete" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <ContentPresenter/>
+                        <ContentPresenter VerticalAlignment="Center"/>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Foreground" Value="#FFD700"/>
+                                <Setter Property="Foreground" Value="OrangeRed"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonDefaultGetStudent" TargetType="Button">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter HorizontalAlignment="Left"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="Gray"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -105,6 +121,19 @@
                     <TextBlock Text="Курс:" FontSize="13" Margin="5,0,0,0" FontWeight="DemiBold" VerticalAlignment="Center"/>
                     <TextBlock Text="{Binding EducationGroupVM.Course}" FontSize="14" Margin="5,0,0,0"/>
                 </StackPanel>
+
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="1" Margin="10,5,0,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Row="0" Content="Взять из абитуриентов" Style="{StaticResource ButtonDefaultGetStudent}" TextOptions.TextFormattingMode="Display"
+                        Margin="0,5,0,0" Command="{Binding TakeFromApplicantsCommand}" CommandParameter="{Binding StudentVM}"/>
+                <Button Grid.Row="1" Content="Взять из архива" Style="{StaticResource ButtonDefaultGetStudent}" TextOptions.TextFormattingMode="Display"
+                        Margin="0,5,0,0" Command="{Binding TakeFromArchiveCommand}" CommandParameter="{Binding StudentVM}"/>
 
             </Grid>
 
@@ -474,9 +503,32 @@
 
                 </Grid>
 
-                <Button Grid.Column="1" Content="Принять студента" Style="{StaticResource ButtonTextCreate}" Margin="10,0" FontSize="14"
+                <Button Grid.Column="1" Content="Принять студента" Style="{StaticResource defaultAdd}" Margin="10,0" FontSize="14"
                     Command="{Binding AddStudentCommand}" CommandParameter="{Binding StudentVM}"/>
-                <Button Grid.Column="2" Content="Отменить" Style="{StaticResource ButtonTextCancel}" Command="{Binding ExitCommand}" FontSize="14"/>
+                <Button Grid.Column="2" Content="Отменить" Command="{Binding ExitCommand}" FontSize="14">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border BorderThickness="0" Background="{TemplateBinding Background}">
+                                            <Border.Effect>
+                                                <DropShadowEffect Opacity="0.3" ShadowDepth="1"/>
+                                            </Border.Effect>
+                                            <ContentPresenter Margin="5"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="LightGray"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
 
             </Grid>
 

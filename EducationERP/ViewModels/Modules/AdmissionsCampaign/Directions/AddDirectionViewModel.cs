@@ -1,6 +1,5 @@
 ﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Models.Modules.AdmissionsCampaign.Directions;
-using EducationERP.Models.Modules.AdmissionsCampaign.DistinctiveFeatures;
 using EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaign;
 using Raketa;
 using System.Collections.ObjectModel;
@@ -31,6 +30,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Directions
         public RaketaCommand ExitCommand { get; set; }
 
         IServiceView _serviceView;
+        ISettingFacultyRepository _facultyRepository;
         IApplicantRepository _applicantRepository;
         ObservableCollection<SelectedDirectionVM> _directions;
         Guid _id;
@@ -39,13 +39,21 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Directions
             ObservableCollection<SelectedDirectionVM> directions, Guid id = default, bool useDataBase = false)
         {
             _serviceView = serviceView;
+            _facultyRepository = facultyRepository;
             _applicantRepository = applicantRepository;
             _directions = directions;
             _id = id;
             _useDataBase = useDataBase;
 
-            //Получаю факультеты с иерархией данных(уровни и направления)
-            foreach (var faculty in facultyRepository.Read())
+            GetData();
+
+            AddDirectionCommand = RaketaTCommand<SelectedDirectionVM>.Launch(AddDirection);
+            ExitCommand = RaketaCommand.Launch(CloseWindow);
+        }
+
+        void GetData()
+        {
+            foreach (var faculty in _facultyRepository.Read())
             {
                 var facultyVM = new SettingFacultyVM
                 {
@@ -61,11 +69,11 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Directions
                         NameLevel = level.NameLevel,
                         Directions = new()
                     };
-                    foreach(var direction in level.Directions)
+                    foreach (var direction in level.Directions)
                     {
                         var directionVM = new SettingDirectionVM
                         {
-                            Id= direction.Id,
+                            Id = direction.Id,
                             CodeDirection = direction.CodeDirection,
                             NameDirection = direction.NameDirection,
                             CodeProfile = direction.CodeProfile,
@@ -79,11 +87,7 @@ namespace EducationERP.ViewModels.Modules.AdmissionsCampaign.Directions
                 }
                 Faculties.Add(facultyVM);
             }
-
-            AddDirectionCommand = RaketaTCommand<SelectedDirectionVM>.Launch(AddDirection);
-            ExitCommand = RaketaCommand.Launch(CloseWindow);
         }
-
         void AddDirection(SelectedDirectionVM selectedDirectionVM)
         {
             if(FacultyVM != null || LevelVM != null || DirectionVM != null)

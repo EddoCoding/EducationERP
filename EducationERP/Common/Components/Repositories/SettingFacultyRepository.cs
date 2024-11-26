@@ -12,18 +12,18 @@ namespace EducationERP.Common.Components.Repositories
             {
                 try
                 {
-                    return db.Faculties
+                    return db.ACFaculties
                         .Include(x => x.Levels)
                         .ThenInclude(x => x.Directions)
                         .ToArray()
                         .Select(faculty =>
-                    {
-                        foreach (var level in faculty.Levels)
                         {
-                            level.Directions = level.Directions.OrderBy(x => x.NameDirection).ToArray();
-                        }
-                        return faculty;
-                    });
+                            foreach (var level in faculty.Levels)
+                            {
+                                level.Directions = level.Directions.OrderBy(x => x.NameDirection).ToArray();
+                            }
+                            return faculty;
+                        });
                 }
                 catch
                 {
@@ -72,6 +72,15 @@ namespace EducationERP.Common.Components.Repositories
             }
 
             return false;
+        }
+        public async Task<Guid> GetIdVuz()
+        {
+            using (var db = new DataContext())
+            {
+                return await db.StructEducationalInstitution
+                    .Select(x => x.Id)
+                    .FirstOrDefaultAsync();
+            }
         }
     }
 }

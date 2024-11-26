@@ -1,4 +1,5 @@
 ﻿using EducationERP.Common.Components;
+using EducationERP.Common.Components.Services;
 using EducationERP.Models.Modules.Administration.SettingUser;
 using Raketa;
 
@@ -44,26 +45,28 @@ namespace EducationERP.ViewModels.LoginSetting
             set => SetValue(ref pathTemporaryData, value);
         }
 
+        public RaketaCommand ExitCommand { get; }
         public RaketaCommand SaveConfigCommand { get; }
         public RaketaCommand RemoveConfigCommand { get; }
         public RaketaCommand CreateISCommand { get; }
-        public RaketaCommand ExitCommand { get; }
 
         IServiceView _serviceView;
         IConfig _config;
         DataContext _context;
-        public SettingBDViewModel(IServiceView serviceView, IConfig config, DataContext context)
+        ITabControl _tabControl;
+        public SettingBDViewModel(IServiceView serviceView, IConfig config, DataContext context, ITabControl tabControl)
         {
             _serviceView = serviceView;
             _config = config;
             _context = context;
+            _tabControl = tabControl;
 
             GetConfigValues();
 
             SaveConfigCommand = RaketaCommand.Launch(SaveConfig);
             RemoveConfigCommand = RaketaCommand.Launch(RemoveConfig);
             CreateISCommand = RaketaCommand.Launch(CreateIS);
-            ExitCommand = RaketaCommand.Launch(CloseWindow);
+            ExitCommand = RaketaCommand.Launch(CloseTab);
         }
 
         void SaveConfig() => _config.SaveConfig(Host, Port, Username, Password, Database, PathTemporaryData);
@@ -101,6 +104,6 @@ namespace EducationERP.ViewModels.LoginSetting
             Database = _config.GetValueConnect("Database");
             PathTemporaryData = _config.GetValueConfig("PathTemporaryData");
         }
-        void CloseWindow() => _serviceView.Close<SettingBDViewModel>();
+        void CloseTab() => _tabControl.RemoveTab();
     }
 }

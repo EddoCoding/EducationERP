@@ -4,6 +4,7 @@ using EducationERP.Common.Components.Services;
 using EducationERP.Modules.Login.View;
 using EducationERP.ViewModels;
 using EducationERP.ViewModels.Login;
+using EducationERP.ViewModels.LoginSetting;
 using EducationERP.ViewModels.Modules.Administration;
 using EducationERP.ViewModels.Modules.Administration.ControlUsers;
 using EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaign;
@@ -16,11 +17,14 @@ using EducationERP.ViewModels.Modules.AdmissionsCampaign.Education;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Exams;
 using EducationERP.ViewModels.Modules.DeanRoom;
 using EducationERP.ViewModels.Modules.DeanRoom.DocumentsStudent;
+using EducationERP.ViewModels.Modules.DeanRoom.TakeData;
 using EducationERP.Views;
 using EducationERP.Views.Modules.Administration;
 using EducationERP.Views.Modules.Administration.ControlUsers;
 using EducationERP.Views.Modules.Administration.SettingAdmissionCampaign;
+using EducationERP.Views.Modules.Administration.SettingBD;
 using EducationERP.Views.Modules.Administration.SettingEducationalInstitution;
+using EducationERP.Views.Modules.Administration.StructVUZ;
 using EducationERP.Views.Modules.AdmissionsCampaign;
 using EducationERP.Views.Modules.AdmissionsCampaign.Directions;
 using EducationERP.Views.Modules.AdmissionsCampaign.DistinctiveFeatures;
@@ -29,6 +33,7 @@ using EducationERP.Views.Modules.AdmissionsCampaign.Education;
 using EducationERP.Views.Modules.AdmissionsCampaign.Exams;
 using EducationERP.Views.Modules.DeanRoom;
 using EducationERP.Views.Modules.DeanRoom.DocumentsStudent;
+using EducationERP.Views.Modules.DeanRoom.TakeData;
 using Raketa;
 using System.Windows;
 
@@ -79,6 +84,12 @@ namespace EducationERP
             //Модуль "Деканат"
             _serviceView.RegisterTypeView<DeanRoomViewModel, DeanRoomView>();
             _serviceView.RegisterTypeView<InputPasswordFacultyViewModel, InputPasswordFacultyWindow>();
+            _serviceView.RegisterTypeView<AddEducationGroupViewModel, AddEducationGroupWindow>();
+            _serviceView.RegisterTypeView<ChangeEducationGroupViewModel, ChangeEducationGroupWindow>();
+            _serviceView.RegisterTypeView<AddStudentViewModel, AddStudentView>();
+            _serviceView.RegisterTypeView<AddDocumentStudentViewModel, AddDocumentStudentWindow>();
+            _serviceView.RegisterTypeView<ChangeDocumentStudentViewModel, ChangeDocumentStudentWindow>();
+            _serviceView.RegisterTypeView<TakeFromApplicantsViewModel, TakeFromApplicantsView>();
 
             //Модуль "Администрирование"
             _serviceView.RegisterTypeView<AddUserViewModel, WindowAddUser>();
@@ -91,13 +102,11 @@ namespace EducationERP
             _serviceView.RegisterTypeView<ChangeMainFacultyViewModel, ChangeMainFacultyWindow>();
             _serviceView.RegisterTypeView<AddMainDepartmentViewModel, AddMainDepartmentWindow>();
             _serviceView.RegisterTypeView<ChangeMainDepartmentViewModel, ChangeMainDepartmentWindow>();
-            _serviceView.RegisterTypeView<AddEducationGroupViewModel, AddEducationGroupWindow>();
-            _serviceView.RegisterTypeView<ChangeEducationGroupViewModel, ChangeEducationGroupWindow>();
-            _serviceView.RegisterTypeView<AddStudentViewModel, AddStudentView>();
-            _serviceView.RegisterTypeView<AddDocumentStudentViewModel, AddDocumentStudentWindow>();
-            _serviceView.RegisterTypeView<ChangeDocumentStudentViewModel, ChangeDocumentStudentWindow>();
+            _serviceView.RegisterTypeView<SettingStructEducationalViewModel, StructVuzView>();
+            _serviceView.RegisterTypeView<UserViewModel, SettingUsersView>();
+            _serviceView.RegisterTypeView<SettingAdmissionCampaignViewModel, SettingAdmissionCampaignView>();
+            _serviceView.RegisterTypeView<SettingBDViewModel, SettingBDView>();
         }
-
         void RegisterDependency()
         {
             _container.RegisterSingleton<DataContext, DataContext>();

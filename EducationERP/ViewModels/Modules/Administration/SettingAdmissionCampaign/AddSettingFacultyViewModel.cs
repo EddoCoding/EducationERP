@@ -1,6 +1,5 @@
 ﻿using EducationERP.Common.Components.Repositories;
 using EducationERP.Models.Modules.Administration.SettingAdmissionsCampaign;
-using EducationERP.ViewModels.Modules.AdmissionsCampaign.Documents;
 using Raketa;
 using System.Collections.ObjectModel;
 
@@ -35,7 +34,8 @@ namespace EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaig
                 bool isAdded = await _facultyRepository.Create<SettingFaculty>(new SettingFaculty
                 {
                     Id = facultyVM.Id,
-                    NameFaculty = facultyVM.NameFaculty
+                    NameFaculty = facultyVM.NameFaculty,
+                    StructEducationalInstitutionId = await _facultyRepository.GetIdVuz()
                 });
                 if (isAdded)
                 {
