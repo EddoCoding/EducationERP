@@ -26,6 +26,26 @@ namespace EducationERP.Common.Components.Repositories
                 }
             }
         }
+        public async Task<IEnumerable<EducationGroup>> GetGroups(Guid Id)
+        {
+            using (var db = new DataContext())
+            {
+                try
+                {
+                    var groups = await db.EducationGroups
+                        .Where(x => x.FacultyId == Id)
+                        .Include(x => x.Students)
+                        .ToArrayAsync();
+
+                    return groups;
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка получения групп из базы данных!");
+                    return Enumerable.Empty<EducationGroup>();
+                }
+            }
+        }
         public async Task<bool> CreateEducationGroup(EducationGroup group)
         {
             using(var db = new DataContext())

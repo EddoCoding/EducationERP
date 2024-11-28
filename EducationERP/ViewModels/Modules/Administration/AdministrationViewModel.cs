@@ -4,6 +4,7 @@ using EducationERP.Common.Components.Services;
 using EducationERP.Common.ToolsDev;
 using EducationERP.ViewModels.LoginSetting;
 using EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaign;
+using EducationERP.ViewModels.Modules.Administration.SettingDeanRoom;
 using EducationERP.ViewModels.Modules.Administration.SettingStructEducational;
 using Raketa;
 
@@ -46,7 +47,7 @@ namespace EducationERP.ViewModels.Modules.Administration
         void SettingUsers() => _tabControl.CreateTab<UserViewModel>("Управление пользователями");
         void SettingDepartment() => Dev.NotReady();
         void SettingAdmissionCampaign() => _tabControl.CreateTab<SettingAdmissionCampaignViewModel>("Настройка приёмной кампании");
-        void SettingDeanRoom() => Dev.NotReady();
+        void SettingDeanRoom() => _serviceView.Window<InputPasswordSettingFacultyViewModel>().Modal();
         void SettingBD() => _tabControl.CreateTab<SettingBDViewModel>("Настройка базы данных");
     }
 }

@@ -2,13 +2,15 @@
 using EducationERP.Common.Components.Services;
 using EducationERP.Common.ToolsDev;
 using EducationERP.Models.Modules.DeanRoom.DocumentsStudent;
+using EducationERP.Models.Modules.EducationalInstitution;
 using EducationERP.ViewModels.Modules.Administration.SettingStructEducational;
+using EducationERP.ViewModels.Modules.DeanRoom;
 using EducationERP.ViewModels.Modules.DeanRoom.DocumentsStudent;
 using Raketa;
 
-namespace EducationERP.ViewModels.Modules.DeanRoom
+namespace EducationERP.ViewModels.Modules.Administration.SettingDeanRoom
 {
-    public class DeanRoomViewModel : RaketaViewModel
+    public class SettingDeanRoomViewModel : RaketaViewModel
     {
         FacultyVM _facultyVM;
         EducationGroupVM _selectedEducationGroup;
@@ -24,49 +26,47 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
             set => SetValue(ref _selectedEducationGroup, value);
         }
 
+        public RaketaCommand ExitCommand { get; }
+
         #region Блок команд групп
         public RaketaTCommand<FacultyVM> OpenWindowAddEducationGroupCommand { get; }
         public RaketaTCommand<EducationGroupVM> OpenWindowChangeEducationGroupCommand { get; }
         public RaketaTCommand<EducationGroupVM> DeleteEducationGroupCommand { get; }
-
-        public RaketaCommand ShowScheduleCommand { get; }
-        public RaketaCommand ShowVisitorLogCommand { get; }
-        public RaketaCommand ShowSyllabusCommand { get; }
+        public RaketaCommand UpdateGroupsCommand { get; }
         #endregion
         #region Блок команд студентов
         public RaketaTCommand<EducationGroupVM> OpenWindowAddStudentCommand { get; }
         public RaketaTCommand<EducationGroupVM> UpdateStudentsCommand { get; }
         #endregion
 
-        public RaketaCommand ExitCommand { get; }
-
         IServiceView _serviceView;
         ITabControl _tabControl;
         IFacultyRepository _facultyRepository;
         IEducationGroupRepository _educationGroupRepository;
         Guid _id;
-        public DeanRoomViewModel(IServiceView serviceView, ITabControl tabControl, IFacultyRepository facultyRepository, 
+        public SettingDeanRoomViewModel(IServiceView serviceView, ITabControl tabControl, IFacultyRepository facultyRepository,
             IEducationGroupRepository educationGroupRepository, Guid id)
         {
             _serviceView = serviceView;
             _tabControl = tabControl;
             _facultyRepository = facultyRepository;
             _educationGroupRepository = educationGroupRepository;
+            _id = id;
 
             GetFaculty(id);
+
+            ExitCommand = RaketaCommand.Launch(CloseTab);
 
             OpenWindowAddEducationGroupCommand = RaketaTCommand<FacultyVM>.Launch(OpenWindowAddEducationGroup);
             OpenWindowChangeEducationGroupCommand = RaketaTCommand<EducationGroupVM>.Launch(OpenWindowChangeEducationGroup);
             DeleteEducationGroupCommand = RaketaTCommand<EducationGroupVM>.Launch(DeleteEducationGroup);
-            ShowScheduleCommand = RaketaCommand.Launch(ShowSchedule);
-            ShowVisitorLogCommand = RaketaCommand.Launch(ShowVisitorLog);
-            ShowSyllabusCommand = RaketaCommand.Launch(ShowSyllabus);
+            UpdateGroupsCommand = RaketaCommand.Launch(UpdateGroup);
 
             OpenWindowAddStudentCommand = RaketaTCommand<EducationGroupVM>.Launch(OpenWindowAddStudent);
             UpdateStudentsCommand = RaketaTCommand<EducationGroupVM>.Launch(UpdateStudents);
-
-            ExitCommand = RaketaCommand.Launch(CloseTab);
         }
+
+        void CloseTab() => _tabControl.RemoveTab();
         void GetFaculty(Guid id)
         {
             var faculty = _facultyRepository.GetFacultyById(id);
@@ -79,7 +79,7 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
                 PasswordFaculty = faculty.PasswordFaculty,
                 EducationGroups = new()
             };
-            foreach(var educationGroup in faculty.EducationGroups)
+            foreach (var educationGroup in faculty.EducationGroups)
             {
                 var educationGroupVM = new EducationGroupVM
                 {
@@ -101,7 +101,7 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
                     DateOfFormed = educationGroup.DateOfFormed,
                     Students = new()
                 };
-                foreach(var student in educationGroup.Students)
+                foreach (var student in educationGroup.Students)
                 {
                     var studentVM = new StudentVM
                     {
@@ -143,7 +143,7 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
             }
         }
 
-        #region Блок методов для групп
+        #region Блок методов групп
         void OpenWindowAddEducationGroup(FacultyVM facultyVM) =>
             _serviceView.Window<AddEducationGroupViewModel>(null, facultyVM).Modal();
         void OpenWindowChangeEducationGroup(EducationGroupVM educationGroupVM)
@@ -158,25 +158,90 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
             bool isDeleted = await _facultyRepository.DeleteEducationGroup(educationGroupVM.Id);
             if (isDeleted) FacultyVM.EducationGroups.Remove(educationGroupVM);
         }
-        void ShowSchedule() => Dev.NotReady("Расписание");
-        void ShowVisitorLog() => Dev.NotReady("Журнал посещаемости");
-        void ShowSyllabus() => Dev.NotReady("Учебный план");
+        async void UpdateGroup()
+        {
+            var groups = await _facultyRepository.GetGroups(_id);
+            FacultyVM.EducationGroups.Clear();
+            foreach(var educationGroup in groups)
+            {
+                var educationGroupVM = new EducationGroupVM
+                {
+                    Id = educationGroup.Id,
+                    CodeEducationGroup = educationGroup.CodeEducationGroup,
+                    NameEducationGroup = educationGroup.NameEducationGroup,
+                    LevelGroup = educationGroup.LevelGroup,
+                    FormGroup = educationGroup.FormGroup,
+                    TypeGroup = educationGroup.TypeGroup,
+                    Course = educationGroup.Course,
+                    MaxNumberStudents = educationGroup.MaxNumberStudents,
+                    CodeDirection = educationGroup.CodeDirection,
+                    NameDirection = educationGroup.NameDirection,
+                    CodeProfile = educationGroup.CodeProfile,
+                    NameProfile = educationGroup.NameProfile,
+                    NameCuratorGroup = educationGroup.NameCuratorGroup,
+                    NameHeadmanGroup = educationGroup.NameHeadmanGroup,
+                    Formed = educationGroup.Formed,
+                    DateOfFormed = educationGroup.DateOfFormed,
+                    Students = new()
+                };
+                foreach (var student in educationGroup.Students)
+                {
+                    var studentVM = new StudentVM
+                    {
+                        Id = student.Id,
+                        SurName = student.SurName,
+                        Name = student.Name,
+                        MiddleName = student.MiddleName,
+                        DateOfBirth = student.DateOfBirth,
+                        Gender = student.Gender,
+                        PlaceOfBirth = student.PlaceOfBirth,
+                        Citizenship = student.Citizenship,
+                        CitizenshipValidFrom = student.CitizenshipValidFrom,
+                        IsNeedHostel = student.IsNeedHostel,
+                        IsNotNeedHostel = student.IsNotNeedHostel,
 
+                        ResidentialAddress = student.ResidentialAddress,
+                        AddressOfRegistration = student.AddressOfRegistration,
+                        HomePhone = student.HomePhone,
+                        MobilePhone = student.MobilePhone,
+                        Mail = student.Mail,
+                        AdditionalContactInformation = student.AdditionalContactInformation,
+                        Accepted = student.Accepted,
+
+                        NameEducationGroup = student.NameEducationGroup,
+                        LevelGroup = student.LevelGroup,
+                        FormGroup = student.FormGroup,
+                        TypeGroup = student.TypeGroup,
+                        Course = student.Course,
+                        CodeDirection = student.CodeDirection,
+                        NameDirection = student.NameDirection,
+                        CodeProfile = student.CodeProfile,
+                        NameProfile = student.NameProfile,
+
+                        Documents = new()
+                    };
+                    educationGroupVM.Students.Add(studentVM);
+                }
+                FacultyVM.EducationGroups.Add(educationGroupVM);
+            }
+        }
         #endregion
-        #region Блок методов для студентов
+        #region Блок методов студентов
         void OpenWindowAddStudent(EducationGroupVM educationGroupVM)
         {
             if (educationGroupVM == null) return;
 
             _tabControl.CreateTab<AddStudentViewModel>("Добавление студента", null, educationGroupVM);
         }
-        async void UpdateStudents(EducationGroupVM educationGroupVM) 
+        async void UpdateStudents(EducationGroupVM educationGroupVM)
         {
+            if(educationGroupVM == null) return;
+
             var students = await _educationGroupRepository.Update(educationGroupVM.Id);
-            if(students == null || !students.Any()) return;
+            if (students == null || !students.Any()) return;
 
             educationGroupVM.Students.Clear();
-            foreach (var student in students) 
+            foreach (var student in students)
             {
                 var studentVM = new StudentVM
                 {
@@ -211,9 +276,9 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
                     NameProfile = student.NameProfile,
                     Documents = new()
                 };
-                foreach(var document in student.Documents)
+                foreach (var document in student.Documents)
                 {
-                    if(document is PassportStudent passport)
+                    if (document is PassportStudent passport)
                     {
                         var passportVM = new PassportStudentVM
                         {
@@ -295,7 +360,5 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
             }
         }
         #endregion
-
-        void CloseTab() => _tabControl.RemoveTab();
     }
 }
