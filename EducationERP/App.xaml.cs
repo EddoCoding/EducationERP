@@ -8,7 +8,6 @@ using EducationERP.ViewModels.LoginSetting;
 using EducationERP.ViewModels.Modules.Administration;
 using EducationERP.ViewModels.Modules.Administration.ControlUsers;
 using EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaign;
-using EducationERP.ViewModels.Modules.Administration.SettingDeanRoom;
 using EducationERP.ViewModels.Modules.Administration.SettingStructEducational;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign;
 using EducationERP.ViewModels.Modules.AdmissionsCampaign.Directions;
@@ -24,7 +23,6 @@ using EducationERP.Views.Modules.Administration;
 using EducationERP.Views.Modules.Administration.ControlUsers;
 using EducationERP.Views.Modules.Administration.SettingAdmissionCampaign;
 using EducationERP.Views.Modules.Administration.SettingBD;
-using EducationERP.Views.Modules.Administration.SettingDeanRoom;
 using EducationERP.Views.Modules.Administration.SettingEducationalInstitution;
 using EducationERP.Views.Modules.Administration.StructVUZ;
 using EducationERP.Views.Modules.AdmissionsCampaign;
@@ -88,10 +86,11 @@ namespace EducationERP
             _serviceView.RegisterTypeView<InputPasswordFacultyViewModel, InputPasswordFacultyWindow>();
             _serviceView.RegisterTypeView<AddEducationGroupViewModel, AddEducationGroupWindow>();
             _serviceView.RegisterTypeView<ChangeEducationGroupViewModel, ChangeEducationGroupWindow>();
-            _serviceView.RegisterTypeView<AddStudentViewModel, AddStudentView>();
             _serviceView.RegisterTypeView<AddDocumentStudentViewModel, AddDocumentStudentWindow>();
             _serviceView.RegisterTypeView<ChangeDocumentStudentViewModel, ChangeDocumentStudentWindow>();
             _serviceView.RegisterTypeView<TakeFromApplicantsViewModel, TakeFromApplicantsView>();
+            _serviceView.RegisterTypeView<AddStudentViewModel, AddStudentView>();
+            _serviceView.RegisterTypeView<ProfileStudentViewModel, ProfileStudentView>();
 
             //Модуль "Администрирование"
             _serviceView.RegisterTypeView<AddUserViewModel, WindowAddUser>();
@@ -108,10 +107,6 @@ namespace EducationERP
             _serviceView.RegisterTypeView<UserViewModel, SettingUsersView>();
             _serviceView.RegisterTypeView<SettingAdmissionCampaignViewModel, SettingAdmissionCampaignView>();
             _serviceView.RegisterTypeView<SettingBDViewModel, SettingBDView>();
-
-            //Модуль "Администрирование" - "Деканат"
-            _serviceView.RegisterTypeView<SettingDeanRoomViewModel, SettingDeanRoomView>();
-            _serviceView.RegisterTypeView<InputPasswordSettingFacultyViewModel, InputPasswordFacultyWindow>();
 
         }
         void RegisterDependency()

@@ -338,8 +338,6 @@
                     IsEnabled="{Binding Visual.Department}" Command="{Binding SettingDepartmentCommand}"/>
             <Button Content="Настройка модуля - Приёмная кампания" Style="{DynamicResource defaultButton}" FontSize="16" HorizontalAlignment="Left" Margin="10,10,0,0"
                     IsEnabled="{Binding Visual.AdmissionCampaign}" Command="{Binding SettingAdmissionCampaignCommand}"/>
-            <Button Content="Настройка модуля - Деканат" Style="{DynamicResource defaultButton}" FontSize="16" HorizontalAlignment="Left" Margin="10,10,0,0"
-                    IsEnabled="{Binding Visual.DeanRoom}" Command="{Binding SettingDeanRoomCommand}"/>
             <Button Content="Настройка базы данных" Style="{DynamicResource defaultButton}" FontSize="16" HorizontalAlignment="Left" Margin="10,10,0,0"
                     IsEnabled="{Binding Visual.SettingBD}" Command="{Binding SettingBDCommand}"/>
             

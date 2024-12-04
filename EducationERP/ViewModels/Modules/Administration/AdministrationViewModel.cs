@@ -4,7 +4,6 @@ using EducationERP.Common.Components.Services;
 using EducationERP.Common.ToolsDev;
 using EducationERP.ViewModels.LoginSetting;
 using EducationERP.ViewModels.Modules.Administration.SettingAdmissionCampaign;
-using EducationERP.ViewModels.Modules.Administration.SettingDeanRoom;
 using EducationERP.ViewModels.Modules.Administration.SettingStructEducational;
 using Raketa;
 
@@ -14,13 +13,12 @@ namespace EducationERP.ViewModels.Modules.Administration
     {
         public VisualAdministration Visual { get; set; }
 
-        public RaketaCommand ExitCommand { get; set; }
+        public RaketaCommand ExitCommand { get; }
 
         public RaketaCommand SettingStructCommand { get; }
         public RaketaCommand SettingUsersCommand { get; }
         public RaketaCommand SettingDepartmentCommand { get; }
         public RaketaCommand SettingAdmissionCampaignCommand { get; }
-        public RaketaCommand SettingDeanRoomCommand { get; }
         public RaketaCommand SettingBDCommand { get; }
 
         IServiceView _serviceView;
@@ -39,15 +37,15 @@ namespace EducationERP.ViewModels.Modules.Administration
             SettingUsersCommand = RaketaCommand.Launch(SettingUsers);
             SettingDepartmentCommand = RaketaCommand.Launch(SettingDepartment);
             SettingAdmissionCampaignCommand = RaketaCommand.Launch(SettingAdmissionCampaign);
-            SettingDeanRoomCommand = RaketaCommand.Launch(SettingDeanRoom);
             SettingBDCommand = RaketaCommand.Launch(SettingBD);
         }
+
         void CloseTab() => _tabControl.RemoveTab();
+
         void SettingStruct() => _tabControl.CreateTab<SettingStructEducationalViewModel>("Структура учебного заведения");
         void SettingUsers() => _tabControl.CreateTab<UserViewModel>("Управление пользователями");
         void SettingDepartment() => Dev.NotReady();
         void SettingAdmissionCampaign() => _tabControl.CreateTab<SettingAdmissionCampaignViewModel>("Настройка приёмной кампании");
-        void SettingDeanRoom() => _serviceView.Window<InputPasswordSettingFacultyViewModel>().Modal();
         void SettingBD() => _tabControl.CreateTab<SettingBDViewModel>("Настройка базы данных");
     }
 }

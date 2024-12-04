@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EducationERP.Views.Modules.Administration.SettingDeanRoom
+namespace EducationERP.Views.Modules.DeanRoom
 {
     /// <summary>
-    /// Логика взаимодействия для SettingDeanRoomView.xaml
+    /// Логика взаимодействия для ProfileStudentView.xaml
     /// </summary>
-    public partial class SettingDeanRoomView : UserControl
+    public partial class ProfileStudentView : UserControl
     {
-        public SettingDeanRoomView()
+        public ProfileStudentView()
         {
             InitializeComponent();
         }
