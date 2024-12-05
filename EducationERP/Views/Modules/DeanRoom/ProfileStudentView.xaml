@@ -97,7 +97,7 @@
                         <TextBlock Text="Фамилия" Foreground="Gray" FontSize="13" Margin="10,5" VerticalAlignment="Center"/>
                     </Border>
                     <TextBox Grid.Column="1" Text="{Binding StudentVM.SurName}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,2" FontSize="14"
-                        VerticalAlignment="Bottom"/>
+                        VerticalAlignment="Bottom" IsEnabled="False"/>
                 </Grid>
 
                 <Grid Grid.Row="2" Background="White" Margin="20,10,0,0">
@@ -113,7 +113,7 @@
                         <TextBlock Text="Имя" Foreground="Gray" FontSize="13" Margin="10,5" VerticalAlignment="Center"/>
                     </Border>
                     <TextBox Grid.Column="1" Text="{Binding StudentVM.Name}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,2" FontSize="14"
-                    VerticalAlignment="Bottom"/>
+                        VerticalAlignment="Bottom" IsEnabled="False"/>
                 </Grid>
 
                 <Grid Grid.Row="3" Background="White" Margin="20,10,0,0">
@@ -129,7 +129,7 @@
                         <TextBlock Text="Отчество" Foreground="Gray" FontSize="13" Margin="10,5" VerticalAlignment="Center"/>
                     </Border>
                     <TextBox Grid.Column="1" Text="{Binding StudentVM.MiddleName}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,2" FontSize="14"
-                    VerticalAlignment="Bottom"/>
+                        VerticalAlignment="Bottom" IsEnabled="False"/>
                 </Grid>
 
                 <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="10,0,0,0">
@@ -147,7 +147,7 @@
                             <TextBlock Grid.Column="0" Text="Дата рождения" Foreground="Gray" FontSize="13" Margin="10,5" VerticalAlignment="Center"/>
                         </Border>
                         <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="10,0,10,2" FontSize="14" VerticalAlignment="Bottom"
-                        Text="{Binding StudentVM.DateOfBirth, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}"/>
+                            Text="{Binding StudentVM.DateOfBirth, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}" IsEnabled="False"/>
                     </Grid>
 
                     <Grid Background="White" Margin="10,10,10,0" Width="110" HorizontalAlignment="Left">
@@ -159,12 +159,11 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="Пол" Foreground="Gray" FontSize="13" Margin="10,5,0,5" VerticalAlignment="Center"/>
-                        <ComboBox Grid.Column="1" Style="{StaticResource ComboBoxCustom}" ItemContainerStyle="{StaticResource ComboBoxItemCustom}"
-                        Text="{Binding StudentVM.Gender}">
-                            <ComboBoxItem Content="Муж"/>
-                            <ComboBoxItem Content="Жен"/>
-                        </ComboBox>
+                        <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,0.7,0">
+                            <TextBlock Text="Пол" Foreground="Gray" FontSize="13" Margin="10,5" VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBox Grid.Column="1" Text="{Binding StudentVM.Gender}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,2" FontSize="14"
+                            VerticalAlignment="Bottom" IsEnabled="False"/>
                     </Grid>
 
                 </StackPanel>
@@ -182,7 +181,7 @@
                         <TextBlock Text="Место рождения" Foreground="Gray" FontSize="13" Margin="10,5" VerticalAlignment="Center"/>
                     </Border>
                     <TextBox Grid.Column="1" Text="{Binding StudentVM.PlaceOfBirth}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,2" FontSize="14"
-                    VerticalAlignment="Bottom"/>
+                        VerticalAlignment="Bottom" IsEnabled="False"/>
                 </Grid>
 
                 <Grid Grid.Row="6" Margin="10,0,0,0">
@@ -204,7 +203,7 @@
                             <TextBlock Text="Гражданство" Foreground="Gray" FontSize="13" Margin="10,5" VerticalAlignment="Center"/>
                         </Border>
                         <TextBox Grid.Column="1" Text="{Binding StudentVM.Citizenship}" Style="{StaticResource CustomTextBox}" Margin="10,0,10,2" FontSize="14"
-                        VerticalAlignment="Bottom"/>
+                            VerticalAlignment="Bottom" IsEnabled="False"/>
                     </Grid>
 
                     <Grid Grid.Column="1" Background="White" Margin="10,10,0,0" Width="185" HorizontalAlignment="Left">
@@ -220,7 +219,7 @@
                             <TextBlock Grid.Column="0" Text="Действует с" Foreground="Gray" FontSize="13" Margin="10,5" VerticalAlignment="Center"/>
                         </Border>
                         <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="10,0,10,2" FontSize="14" VerticalAlignment="Bottom"
-                        Text="{Binding StudentVM.CitizenshipValidFrom, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}"/>
+                            Text="{Binding StudentVM.CitizenshipValidFrom, StringFormat='dd.MM.yyyy', Converter={StaticResource DateOnlyToDateOnly}}" IsEnabled="False"/>
                     </Grid>
 
                 </Grid>
@@ -238,8 +237,8 @@
                     <Border BorderBrush="Gray" BorderThickness="0,0,1,0">
                         <TextBlock Grid.Column="0" Text="Нуждаемость в общежитии" Foreground="Gray" FontSize="13" Margin="10,5"/>
                     </Border>
-                    <RadioButton Grid.Column="1" Content="Да" VerticalAlignment="Center" Margin="10,0,0,0" IsChecked="{Binding StudentVM.IsNeedHostel}"/>
-                    <RadioButton Grid.Column="2" Content="Нет" VerticalAlignment="Center" Margin="10,0" IsChecked="{Binding StudentVM.IsNotNeedHostel}"/>
+                    <RadioButton Grid.Column="1" Content="Да" VerticalAlignment="Center" Margin="10,0,0,0" IsChecked="{Binding StudentVM.IsNeedHostel}" IsEnabled="False"/>
+                    <RadioButton Grid.Column="2" Content="Нет" VerticalAlignment="Center" Margin="10,0" IsChecked="{Binding StudentVM.IsNotNeedHostel}" IsEnabled="False"/>
 
                 </Grid>
 
@@ -257,7 +256,7 @@
                     <Border Grid.Column="0"  BorderBrush="Gray" BorderThickness="0,0,1,0">
                         <TextBlock Text="Адрес места проживания" Foreground="Gray" FontSize="13" Margin="10,5" VerticalAlignment="Center"/>
                     </Border>
-                    <TextBox Grid.Column="1" Text="{Binding StudentVM.ResidentialAddress}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,2" FontSize="14"/>
+                    <TextBox Grid.Column="1" Text="{Binding StudentVM.ResidentialAddress}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,2" FontSize="14" IsEnabled="False"/>
                 </Grid>
 
                 <Grid Grid.Row="10" Background="White" Margin="20,10,0,0">
@@ -272,7 +271,7 @@
                     <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,1,0">
                         <TextBlock Text="Адрес по прописке" Foreground="Gray" FontSize="13" Margin="10,5" VerticalAlignment="Center"/>
                     </Border>
-                    <TextBox Grid.Column="1" Text="{Binding StudentVM.AddressOfRegistration}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,2" FontSize="14"/>
+                    <TextBox Grid.Column="1" Text="{Binding StudentVM.AddressOfRegistration}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,2" FontSize="14" IsEnabled="False"/>
                 </Grid>
 
                 <Grid Grid.Row="11" Background="White" Margin="20,10,0,0">
@@ -287,7 +286,7 @@
                     <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,1,0">
                         <TextBlock Text="Домашний телефон" Foreground="Gray" FontSize="13" Margin="10,5" VerticalAlignment="Center"/>
                     </Border>
-                    <TextBox Grid.Column="1" Text="{Binding StudentVM.HomePhone}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,2" FontSize="14"/>
+                    <TextBox Grid.Column="1" Text="{Binding StudentVM.HomePhone}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,2" FontSize="14" IsEnabled="False"/>
                 </Grid>
 
                 <Grid Grid.Row="12" Background="White" Margin="20,10,0,0">
@@ -302,7 +301,7 @@
                     <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,1,0">
                         <TextBlock Text="Мобильный телефон" Foreground="Gray" FontSize="13" Margin="10,5" VerticalAlignment="Center"/>
                     </Border>
-                    <TextBox Grid.Column="1" Text="{Binding StudentVM.MobilePhone}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,2" FontSize="14"/>
+                    <TextBox Grid.Column="1" Text="{Binding StudentVM.MobilePhone}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,2" FontSize="14" IsEnabled="False"/>
                 </Grid>
 
                 <Grid Grid.Row="13" Background="White" Margin="20,10,0,0">
@@ -317,7 +316,7 @@
                     <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,1,0">
                         <TextBlock Text="Почта" Foreground="Gray" FontSize="13" Margin="10,5" VerticalAlignment="Center"/>
                     </Border>
-                    <TextBox Grid.Column="1" Text="{Binding StudentVM.Mail}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,2" FontSize="14"/>
+                    <TextBox Grid.Column="1" Text="{Binding StudentVM.Mail}" Style="{StaticResource CustomTextBox}" Margin="10,5,10,2" FontSize="14" IsEnabled="False"/>
                 </Grid>
 
                 <Grid Grid.Row="14" Background="White" Margin="20,10,0,0">
@@ -331,7 +330,7 @@
 
                     <TextBlock Grid.Row="0" Text="Дополнительная контактная информация" Foreground="Gray" FontSize="13" Margin="10,0,0,0"/>
                     <TextBox Grid.Row="1" Text="{Binding StudentVM.AdditionalContactInformation}" Style="{StaticResource CustomTextBox}" 
-                    Margin="10,5,10,2" FontSize="14" TextWrapping="Wrap"/>
+                        Margin="10,5,10,2" FontSize="14" TextWrapping="Wrap" IsEnabled="False"/>
                 </Grid>
 
             </Grid>
@@ -345,8 +344,6 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="15" Text="Документы" Foreground="Gray" VerticalAlignment="Center" Margin="0,10,0,0"/>
-                <Button Grid.Row="1" Content="Добавить документ" Style="{StaticResource defaultAdd}" Margin="10,10,0,0" HorizontalAlignment="Left"
-                    Command="{Binding AddDocumentCommand}" CommandParameter="{Binding StudentVM.Documents}" FontSize="13"/>
                 <ListView Grid.Row="2" Margin="10,5,100,0" MaxHeight="160" ItemsSource="{Binding StudentVM.Documents}">
                     <ListView.Style>
                         <Style TargetType="ListView">
@@ -386,22 +383,7 @@
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Margin="5">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock Grid.Column="0" Text="{Binding TypeDocument}" FontSize="13" VerticalAlignment="Center"/>
-                                <Button Grid.Column="1" Content="изменить" Style="{StaticResource ButtonChange}"
-                                HorizontalAlignment="Right" Margin="0,0,5,0"
-                                Command="{Binding DataContext.ChangeDocumentCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
-                                CommandParameter="{Binding}"/>
-                                <Button Grid.Column="2" Content="удалить" Style="{StaticResource ButtonDelete}" Margin="5,0" VerticalAlignment="Center"
-                                Command="{Binding DataContext.DeleteDocumentCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
-                                CommandParameter="{Binding}"/>
-                            </Grid>
+                            <TextBlock Margin="5" Text="{Binding TypeDocument}" FontSize="13" VerticalAlignment="Center"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -424,7 +406,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="Ответственный за принятие студента:" FontSize="14" Margin="5" FontWeight="DemiBold"/>
-                    <TextBlock Grid.Column="1" Text="{Binding UserSystem.FullName}" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    <TextBlock Grid.Column="1" Text="{Binding StudentVM.Accepted}" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0"/>
 
                 </Grid>
 

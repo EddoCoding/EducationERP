@@ -168,9 +168,76 @@ namespace EducationERP.ViewModels.Modules.DeanRoom
                             var passportStudentVM = new PassportStudentVM
                             {
                                 Id = passportStudent.Id,
-                                
+                                TypeDocument = passportStudent.TypeDocument,
+                                SurName = passportStudent.SurName,
+                                Name = passportStudent.Name,
+                                MiddleName = passportStudent.MiddleName,
+                                DateOfBirth = passportStudent.DateOfBirth,
+                                Gender = passportStudent.Gender,
+                                PlaceOfBirth = passportStudent.PlaceOfBirth,
+                                IssuedBy = passportStudent.IssuedBy,
+                                DateOfIssue = passportStudent.DateOfIssue,
+                                DepartmentCode = passportStudent.DepartmentCode,
+                                SeriesNumber = passportStudent.SeriesNumber,
+                                AdditionalInformation = passportStudent.AdditionalInformation
                             };
                             studentVM.Documents.Add(passportStudentVM);
+                        }
+                        else if (document is SnilsStudent snilsStudent)
+                        {
+                            var snilsStudentVM = new SnilsStudentVM
+                            {
+                                Id = snilsStudent.Id,
+                                TypeDocument = snilsStudent.TypeDocument,
+                                SurName = snilsStudent.SurName,
+                                Name = snilsStudent.Name,
+                                MiddleName = snilsStudent.MiddleName,
+                                DateOfBirth = snilsStudent.DateOfBirth,
+                                Gender = snilsStudent.Gender,
+                                PlaceOfBirth = snilsStudent.PlaceOfBirth,
+                                Number = snilsStudent.Number,
+                                RegistrationDate = snilsStudent.RegistrationDate,
+                                AdditionalInformation = snilsStudent.AdditionalInformation
+                            };
+                            studentVM.Documents.Add(snilsStudentVM);
+                        }
+                        else if (document is InnStudent innStudent)
+                        {
+                            var innStudentVM = new InnStudentVM
+                            {
+                                Id = innStudent.Id,
+                                TypeDocument = innStudent.TypeDocument,
+                                SurName = innStudent.SurName,
+                                Name = innStudent.Name,
+                                MiddleName = innStudent.MiddleName,
+                                DateOfBirth = innStudent.DateOfBirth,
+                                Gender = innStudent.Gender,
+                                PlaceOfBirth = innStudent.PlaceOfBirth,
+                                NumberINN = innStudent.NumberINN,
+                                SeriesNumber = innStudent.SeriesNumber,
+                                DateAssigned = innStudent.DateAssigned,
+                                AdditionalInformation = innStudent.AdditionalInformation
+                            };
+                            studentVM.Documents.Add(innStudentVM);
+                        }
+                        else if (document is ForeignPassportStudent fpStudent)
+                        {
+                            var fpStudentVM = new ForeignPassportStudentVM
+                            {
+                                Id = fpStudent.Id,
+                                TypeDocument = fpStudent.TypeDocument,
+                                SurName = fpStudent.SurName,
+                                Name = fpStudent.Name,
+                                MiddleName = fpStudent.MiddleName,
+                                DateOfBirth = fpStudent.DateOfBirth,
+                                Gender = fpStudent.Gender,
+                                PlaceOfBirth = fpStudent.PlaceOfBirth,
+                                IssuedBy = fpStudent.IssuedBy,
+                                DateOfIssue = fpStudent.DateOfIssue,
+                                SeriesNumber = fpStudent.SeriesNumber,
+                                AdditionalInformation = fpStudent.AdditionalInformation
+                            };
+                            studentVM.Documents.Add(fpStudentVM);
                         }
                     }
                     educationGroupVM.Students.Add(studentVM);
